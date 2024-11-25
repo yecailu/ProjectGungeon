@@ -50,7 +50,6 @@ public class Player : MonoBehaviour
         //设置给Weapon
         Weapon.localRotation = Quaternion.Euler(0, 0, eulerAngles);
 
-        Debug.Log(Weapon.localRotation);
 
         //武器翻转
         if (shootDirection.x > 0)
@@ -69,12 +68,12 @@ public class Player : MonoBehaviour
         var vertical = Input.GetAxisRaw("Vertical");
 
         Rigidbody2D.velocity = new Vector2(horizontal, vertical).normalized * 5;
-         
-        if(horizontal < 0)
+
+        if (horizontal < 0)
         {
             Sprite.flipX = true;
         }
-        else if (horizontal > 0) 
+        else if (horizontal > 0)
         {
             Sprite.flipX = false;
         }
@@ -82,6 +81,18 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0))//按左键发射子弹
         {
             CurrentGun.ShootDown(shootDirection);//调用子弹发射方法
+
+        }
+
+        if (Input.GetMouseButton(0))//按左键发射子弹
+        {
+            CurrentGun.Shooting(shootDirection);//调用子弹发射方法
+
+        }
+
+        if (Input.GetMouseButtonUp(0))//按左键发射子弹
+        {
+            CurrentGun.ShootUp(shootDirection);//调用子弹发射方法
 
         }
     }
