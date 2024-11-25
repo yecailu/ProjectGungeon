@@ -123,6 +123,107 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &29499733
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 29499736}
+  - component: {fileID: 29499734}
+  - component: {fileID: 29499735}
+  m_Layer: 3
+  m_Name: CanShootSprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!212 &29499734
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29499733}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300000, guid: c1446a42c8badfe4a8dab98893caa7b0, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &29499735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29499733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: CanShootSprite
+  CustomComment: 
+  mComponentName: SpriteRenderer
+--- !u!4 &29499736
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29499733}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.029, y: -0.053, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 910205255}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &44715153
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,7 +804,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &233460103
 Transform:
   m_ObjectHideFlags: 0
@@ -1053,7 +1154,7 @@ MonoBehaviour:
   Rigidbody2D: {fileID: 330987077}
   Sprite: {fileID: 1922339987}
   Weapon: {fileID: 623180789}
-  CurrentGun: {fileID: 233460105}
+  CurrentGun: {fileID: 910205257}
 --- !u!4 &330987075
 Transform:
   m_ObjectHideFlags: 0
@@ -2389,15 +2490,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 910205255}
-  - component: {fileID: 910205257}
   - component: {fileID: 910205256}
+  - component: {fileID: 910205257}
+  - component: {fileID: 910205258}
   m_Layer: 3
   m_Name: Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &910205255
 Transform:
   m_ObjectHideFlags: 0
@@ -2413,6 +2515,7 @@ Transform:
   m_Children:
   - {fileID: 788170108}
   - {fileID: 1304556521}
+  - {fileID: 29499736}
   m_Father: {fileID: 623180789}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &910205256
@@ -2520,7 +2623,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 910205254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e5b2b30a396f6143b62604d0012a054, type: 3}
+  m_Script: {fileID: 11500000, guid: e51788a93e8502b46997b1d487d540fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Namespace: QFramework.ProjectGungeon
@@ -2531,11 +2634,32 @@ MonoBehaviour:
   ArchitectureFullTypeName: 
   ViewControllerFullTypeName: 
   ShootSounds:
-  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
-  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
-  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
+  - {fileID: 8300000, guid: 705c323b34e8ae240a29b015dee8f28a, type: 3}
+  - {fileID: 8300000, guid: 3ee8f02dce6b97c478ea09cdfa268a28, type: 3}
+  - {fileID: 8300000, guid: 31bd0c5019ee902409dbf4973de453f9, type: 3}
+  - {fileID: 8300000, guid: 7fd351047847b644594847af898d79fb, type: 3}
+  - {fileID: 8300000, guid: d25917a687849824589e74a02918b488, type: 3}
+  - {fileID: 8300000, guid: 5a6f8ac34cd095642b792e3cbf40017c, type: 3}
+  - {fileID: 8300000, guid: b89b39e8b1b2fcc4495c62ee261d3e8b, type: 3}
+  - {fileID: 8300000, guid: 331b3342cd68a724fb86a1f65d5565ef, type: 3}
   Bullet: {fileID: 1304556524}
-  SelfAudioSource: {fileID: 0}
+  CanShootSprite: {fileID: 29499734}
+  SelfAudioSource: {fileID: 910205256}
+--- !u!114 &910205258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 910205254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411e729afed24c62a04e2b99d9122e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Binds:
+  - MemberName: SelfAudioSource
+    Object: {fileID: 910205256}
 --- !u!1 &981864637
 GameObject:
   m_ObjectHideFlags: 0
@@ -3497,6 +3621,7 @@ GameObject:
   - component: {fileID: 1304556524}
   - component: {fileID: 1304556523}
   - component: {fileID: 1304556522}
+  - component: {fileID: 1304556526}
   m_Layer: 6
   m_Name: Bullet
   m_TagString: PlayerBullet
@@ -3545,7 +3670,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &1304556523
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3636,7 +3761,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c22e5e4ee41cd304a98596b4ed9a546f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c1446a42c8badfe4a8dab98893caa7b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3647,6 +3772,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1304556526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1304556520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: Bullet
+  CustomComment: 
+  mComponentName: PlayerBullet
 --- !u!1 &1364117847
 GameObject:
   m_ObjectHideFlags: 0
