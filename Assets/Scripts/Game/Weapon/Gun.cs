@@ -6,13 +6,13 @@ namespace QFramework.ProjectGungeon
 {
     [ViewControllerChild]
 
-public abstract class Gun : ViewController
+public class Gun : ViewController
     {
         public List<AudioClip> ShootSounds = new List<AudioClip>();
 
-        public abstract PlayerBullet BulletPrefab { get; }
+        public virtual PlayerBullet BulletPrefab { get; }
 
-        public abstract AudioSource AudioPlayer { get; }
+        public virtual AudioSource AudioPlayer { get; }
 
         public virtual void ShootDown(Vector2 direction)
         {
