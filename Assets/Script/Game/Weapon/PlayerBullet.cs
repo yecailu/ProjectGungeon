@@ -27,8 +27,7 @@ public class PlayerBullet : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false);
-
+            Destroy(gameObject);
         }
     }
 }

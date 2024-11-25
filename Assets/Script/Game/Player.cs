@@ -1,3 +1,4 @@
+using QFramework.ProjectGungeon;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,7 @@ public class Player : MonoBehaviour
 
     public Transform Weapon;
 
-    public Pistol CurrentGun;
+    public Gun CurrentGun;
 
     void Start()
     {
@@ -47,7 +48,9 @@ public class Player : MonoBehaviour
         //欧拉角
         var eulerAngles = radius * Mathf.Rad2Deg;
         //设置给Weapon
-        Weapon.localRotation = UnityEngine.Quaternion.Euler(0, 0, eulerAngles);
+        Weapon.localRotation = Quaternion.Euler(0, 0, eulerAngles);
+
+        Debug.Log(Weapon.localRotation);
 
         //武器翻转
         if (shootDirection.x > 0)

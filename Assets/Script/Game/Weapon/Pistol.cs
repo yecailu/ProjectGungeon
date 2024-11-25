@@ -3,35 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Pistol : MonoBehaviour
+namespace QFramework.ProjectGungeon
 {
-
-    public PlayerBullet Bullet;
-
-    public List<AudioClip> ShootSounds = new List<AudioClip>();
-
-    public AudioSource ShootSoundPlayer;
-
-    public void ShootDown(Vector2 direction)
+    public partial class Pistol : Gun
     {
 
-        var playerBullet = Instantiate(Bullet);
-        playerBullet.transform.position = Bullet.transform.position;
-        playerBullet.Direction = direction;
-        playerBullet.gameObject.SetActive(true);
+        public override PlayerBullet BulletPrefab => Bullet;
 
-        var soundIndex = Random.Range(0, ShootSounds.Count);
-        ShootSoundPlayer.clip = ShootSounds[soundIndex];
-        ShootSoundPlayer.Play();
+        public override AudioSource AudioPlayer => SelfAudioSource;
 
+        public override void ShootDown(Vector2 direction)
+        {
+
+            var playerBullet = Instantiate(Bullet);
+            playerBullet.transform.position = Bullet.transform.position;
+            playerBullet.Direction = direction;
+            playerBullet.gameObject.SetActive(true);
+
+            var soundIndex = Random.Range(0, ShootSounds.Count);
+            SelfAudioSource.clip = ShootSounds[soundIndex];
+            SelfAudioSource.Play();
+
+        }
+
+        public override void Shooting(Vector2 direction)
+        {
+
+        }
+        public override void ShootUp(Vector2 direction)
+        {
+
+        }
     }
 
-    public void Shooting(Vector2 direction)
-    {
-
-    }
-    public void ShootUp(Vector2 direction)
-    {
-
-    }
 }

@@ -266,12 +266,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5b2b30a396f6143b62604d0012a054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 435081118}
+  Namespace: 
+  ScriptName: 
+  ScriptsFolder: 
+  GeneratePrefab: 0
+  PrefabFolder: 
+  ArchitectureFullTypeName: 
+  ViewControllerFullTypeName: 
   ShootSounds:
   - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
   - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
   - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
-  ShootSoundPlayer: {fileID: 44715155}
+  ShootSounds:
+  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
+  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
+  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
+  Bullet: {fileID: 435081118}
+  SelfAudioSource: {fileID: 0}
 --- !u!1 &134889348
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,7 +585,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: f3b79e13800d4b2448f687380f18a636, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 334b63ea74a3ee945bb50373907b9421, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -805,12 +816,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5b2b30a396f6143b62604d0012a054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 1172621200}
+  Namespace: 
+  ScriptName: 
+  ScriptsFolder: 
+  GeneratePrefab: 0
+  PrefabFolder: 
+  ArchitectureFullTypeName: 
+  ViewControllerFullTypeName: 
   ShootSounds:
   - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
   - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
   - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
-  ShootSoundPlayer: {fileID: 233460104}
+  ShootSounds:
+  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
+  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
+  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
+  Bullet: {fileID: 1172621200}
+  SelfAudioSource: {fileID: 0}
+--- !u!115 &245178788
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 7
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_Type: 0
+  m_ExecutionOrder: 0
+  m_ClassName: Pistol
+  m_Namespace: QFramework.ProjectGungeon
+  m_AssemblyName: Assembly-CSharp
 --- !u!1 &294700427
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,7 +1030,7 @@ MonoBehaviour:
   Rigidbody2D: {fileID: 330987077}
   Sprite: {fileID: 1922339987}
   Weapon: {fileID: 1041651969}
-  CurrentGun: {fileID: 1041651970}
+  CurrentGun: {fileID: 0}
 --- !u!4 &330987075
 Transform:
   m_ObjectHideFlags: 0
@@ -1794,7 +1831,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: f3b79e13800d4b2448f687380f18a636, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b837016a8a9185e42b38e361a68a0873, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1878,7 +1915,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: f3b79e13800d4b2448f687380f18a636, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cbd640766cb4bbb43bf56a6a3b866bac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2152,12 +2189,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5b2b30a396f6143b62604d0012a054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 1622031941}
+  Namespace: 
+  ScriptName: 
+  ScriptsFolder: 
+  GeneratePrefab: 0
+  PrefabFolder: 
+  ArchitectureFullTypeName: 
+  ViewControllerFullTypeName: 
   ShootSounds:
   - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
   - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
   - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
-  ShootSoundPlayer: {fileID: 886221815}
+  ShootSounds:
+  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
+  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
+  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
+  Bullet: {fileID: 1622031941}
+  SelfAudioSource: {fileID: 0}
 --- !u!1 &891307039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2422,12 +2470,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5b2b30a396f6143b62604d0012a054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 1304556524}
+  Namespace: 
+  ScriptName: 
+  ScriptsFolder: 
+  GeneratePrefab: 0
+  PrefabFolder: 
+  ArchitectureFullTypeName: 
+  ViewControllerFullTypeName: 
   ShootSounds:
   - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
   - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
   - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
-  ShootSoundPlayer: {fileID: 910205256}
+  ShootSounds:
+  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
+  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
+  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
+  Bullet: {fileID: 1304556524}
+  SelfAudioSource: {fileID: 0}
 --- !u!1 &981864637
 GameObject:
   m_ObjectHideFlags: 0
@@ -2501,7 +2560,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: f3b79e13800d4b2448f687380f18a636, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 64a17ba036e6d3947867c1556f934938, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2521,8 +2580,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1041651969}
-  - component: {fileID: 1041651970}
   - component: {fileID: 1041651971}
+  - component: {fileID: 1041651973}
+  - component: {fileID: 1041651972}
   m_Layer: 3
   m_Name: Pistol
   m_TagString: Untagged
@@ -2547,24 +2607,6 @@ Transform:
   - {fileID: 1613781892}
   m_Father: {fileID: 623180789}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1041651970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1041651968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e5b2b30a396f6143b62604d0012a054, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Bullet: {fileID: 1613781893}
-  ShootSounds:
-  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
-  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
-  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
-  ShootSoundPlayer: {fileID: 1041651971}
 --- !u!82 &1041651971
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2661,6 +2703,50 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1041651972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041651968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 245178788}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Namespace: QFramework.ProjectGungeon
+  ScriptName: Pistol
+  ScriptsFolder: Assets/Script/Game/Weapon
+  GeneratePrefab: 0
+  PrefabFolder: Assets/Art/Prefab
+  ArchitectureFullTypeName: 
+  ViewControllerFullTypeName: 
+  ShootSounds:
+  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
+  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
+  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
+  ShootSounds:
+  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
+  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
+  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
+  Bullet: {fileID: 1613781893}
+  SelfAudioSource: {fileID: 1041651971}
+--- !u!114 &1041651973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1041651968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411e729afed24c62a04e2b99d9122e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Binds:
+  - MemberName: SelfAudioSource
+    Object: {fileID: 1041651971}
 --- !u!1 &1144551392
 GameObject:
   m_ObjectHideFlags: 0
@@ -2975,7 +3061,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: f3b79e13800d4b2448f687380f18a636, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 520d820455688b048a375f1585755742, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3129,12 +3215,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5b2b30a396f6143b62604d0012a054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 1647773869}
+  Namespace: 
+  ScriptName: 
+  ScriptsFolder: 
+  GeneratePrefab: 0
+  PrefabFolder: 
+  ArchitectureFullTypeName: 
+  ViewControllerFullTypeName: 
   ShootSounds:
   - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
   - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
   - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
-  ShootSoundPlayer: {fileID: 1192051592}
+  ShootSounds:
+  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
+  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
+  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
+  Bullet: {fileID: 1647773869}
+  SelfAudioSource: {fileID: 0}
 --- !u!1 &1214413781
 GameObject:
   m_ObjectHideFlags: 0
@@ -3303,7 +3400,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: f3b79e13800d4b2448f687380f18a636, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 54029dd6c08fa2748b8a999c26918090, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3619,12 +3716,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e5b2b30a396f6143b62604d0012a054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 1777967213}
+  Namespace: 
+  ScriptName: 
+  ScriptsFolder: 
+  GeneratePrefab: 0
+  PrefabFolder: 
+  ArchitectureFullTypeName: 
+  ViewControllerFullTypeName: 
   ShootSounds:
   - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
   - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
   - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
-  ShootSoundPlayer: {fileID: 1364117849}
+  ShootSounds:
+  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
+  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
+  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
+  Bullet: {fileID: 1777967213}
+  SelfAudioSource: {fileID: 0}
 --- !u!1 &1396813902
 GameObject:
   m_ObjectHideFlags: 0
@@ -3967,7 +4075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Binds:
-  - MemberName: SelfAudioSource
+  - MemberName: ShootSoundPlayer
     Object: {fileID: 1509650880}
 --- !u!114 &1509650882
 MonoBehaviour:
@@ -3988,12 +4096,8 @@ MonoBehaviour:
   PrefabFolder: Assets/Art/Prefab
   ArchitectureFullTypeName: 
   ViewControllerFullTypeName: 
-  hpp: 1
-  shootSpeed: 10
-  ShootSounds:
-  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
-  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
-  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
+  ShootSounds: []
+  ShootSounds: []
   Bullet: {fileID: 596034102}
   SelfAudioSource: {fileID: 1509650880}
 --- !u!1 &1613781891
@@ -4009,6 +4113,7 @@ GameObject:
   - component: {fileID: 1613781893}
   - component: {fileID: 1613781896}
   - component: {fileID: 1613781895}
+  - component: {fileID: 1613781897}
   m_Layer: 6
   m_Name: Bullet
   m_TagString: PlayerBullet
@@ -4158,6 +4263,22 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.27
+--- !u!114 &1613781897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613781891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: Bullet
+  CustomComment: 
+  mComponentName: PlayerBullet
 --- !u!1 &1622031937
 GameObject:
   m_ObjectHideFlags: 0
@@ -5400,7 +5521,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: f3b79e13800d4b2448f687380f18a636, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f2870a2630cacb468ddad2dbee725d5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

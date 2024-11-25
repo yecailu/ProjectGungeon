@@ -6,15 +6,13 @@ using System.Collections.Generic;
 // 2.命名空间更改后，生成代码之后，需要把逻辑代码文件（非 Designer）的命名空间手动更改
 namespace QFramework.ProjectGungeon
 {
-	public partial class MP5 : ViewController
+    public partial class MP5 : Gun
     {
-        public int hpp = 1;
+        public override PlayerBullet BulletPrefab => Bullet;
 
-        public float shootSpeed = 10f;
+        public override AudioSource AudioPlayer => SelfAudioSource;
 
-        public List<AudioClip> ShootSounds = new List<AudioClip>();
-
-        public void ShootDown(Vector2 direction)
+        public override void ShootDown(Vector2 direction)
         {
 
             var playerBullet = Instantiate(Bullet);
@@ -28,13 +26,15 @@ namespace QFramework.ProjectGungeon
 
         }
 
-        public void Shooting(Vector2 direction)
+        public override void Shooting(Vector2 direction)
         {
 
         }
-        public void ShootUp(Vector2 direction)
+        public override void ShootUp(Vector2 direction)
         {
 
         }
     }
+
 }
+
