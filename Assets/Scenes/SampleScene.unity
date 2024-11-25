@@ -132,15 +132,16 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 44715154}
-  - component: {fileID: 44715156}
   - component: {fileID: 44715155}
+  - component: {fileID: 44715157}
+  - component: {fileID: 44715156}
   m_Layer: 3
   m_Name: ShotGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &44715154
 Transform:
   m_ObjectHideFlags: 0
@@ -263,26 +264,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 44715153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e5b2b30a396f6143b62604d0012a054, type: 3}
+  m_Script: {fileID: 11500000, guid: 411e729afed24c62a04e2b99d9122e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Namespace: 
-  ScriptName: 
-  ScriptsFolder: 
+  Binds:
+  - MemberName: SelfAudioSource
+    Object: {fileID: 44715155}
+--- !u!114 &44715157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44715153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 146479c8ea61fb64bb2f94fedc34da5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Namespace: QFramework.ProjectGungeon
+  ScriptName: ShotGun
+  ScriptsFolder: Assets/Scripts/Game/Weapon
   GeneratePrefab: 0
-  PrefabFolder: 
+  PrefabFolder: Assets/Art/Prefab
   ArchitectureFullTypeName: 
   ViewControllerFullTypeName: 
   ShootSounds:
-  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
-  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
-  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
-  ShootSounds:
-  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
-  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
-  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
+  - {fileID: 8300000, guid: d5b6f0d46c8a46d4b85a641d87df0737, type: 3}
   Bullet: {fileID: 435081118}
-  SelfAudioSource: {fileID: 0}
+  SelfAudioSource: {fileID: 44715155}
 --- !u!1 &134889348
 GameObject:
   m_ObjectHideFlags: 0
@@ -827,10 +837,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
   - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
   - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
-  ShootSounds:
-  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
-  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
-  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
   Bullet: {fileID: 1172621200}
   SelfAudioSource: {fileID: 0}
 --- !u!115 &245178788
@@ -1029,8 +1035,8 @@ MonoBehaviour:
   PlayerBullet: {fileID: 1613781893}
   Rigidbody2D: {fileID: 330987077}
   Sprite: {fileID: 1922339987}
-  Weapon: {fileID: 1041651969}
-  CurrentGun: {fileID: 0}
+  Weapon: {fileID: 623180789}
+  CurrentGun: {fileID: 1509650882}
 --- !u!4 &330987075
 Transform:
   m_ObjectHideFlags: 0
@@ -1286,6 +1292,7 @@ GameObject:
   - component: {fileID: 435081118}
   - component: {fileID: 435081117}
   - component: {fileID: 435081116}
+  - component: {fileID: 435081120}
   m_Layer: 6
   m_Name: Bullet
   m_TagString: PlayerBullet
@@ -1435,6 +1442,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &435081120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435081114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: Bullet
+  CustomComment: 
+  mComponentName: PlayerBullet
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2200,10 +2223,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
   - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
   - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
-  ShootSounds:
-  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
-  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
-  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
   Bullet: {fileID: 1622031941}
   SelfAudioSource: {fileID: 0}
 --- !u!1 &891307039
@@ -2481,10 +2500,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
   - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
   - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
-  ShootSounds:
-  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
-  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
-  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
   Bullet: {fileID: 1304556524}
   SelfAudioSource: {fileID: 0}
 --- !u!1 &981864637
@@ -2589,7 +2604,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1041651969
 Transform:
   m_ObjectHideFlags: 0
@@ -2717,15 +2732,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Namespace: QFramework.ProjectGungeon
   ScriptName: Pistol
-  ScriptsFolder: Assets/Script/Game/Weapon
+  ScriptsFolder: Assets\Scripts\Game\Weapon
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
   ArchitectureFullTypeName: 
   ViewControllerFullTypeName: 
-  ShootSounds:
-  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
-  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
-  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
   ShootSounds:
   - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
   - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
@@ -3222,10 +3233,6 @@ MonoBehaviour:
   PrefabFolder: 
   ArchitectureFullTypeName: 
   ViewControllerFullTypeName: 
-  ShootSounds:
-  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
-  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
-  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
   ShootSounds:
   - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
   - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
@@ -3727,10 +3734,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
   - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
   - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
-  ShootSounds:
-  - {fileID: 8300000, guid: 5bbe1a5762034a24b9ad016f0198418c, type: 3}
-  - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
-  - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
   Bullet: {fileID: 1777967213}
   SelfAudioSource: {fileID: 0}
 --- !u!1 &1396813902
@@ -3980,7 +3983,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 0.04
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -4091,15 +4094,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Namespace: QFramework.ProjectGungeon
   ScriptName: MP5
-  ScriptsFolder: Assets/Script/Game/Weapon
+  ScriptsFolder: Assets\Scripts\Game\Weapon
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
   ArchitectureFullTypeName: 
   ViewControllerFullTypeName: 
-  ShootSounds: []
-  ShootSounds: []
+  ShootSounds:
+  - {fileID: 8300000, guid: d5b6f0d46c8a46d4b85a641d87df0737, type: 3}
   Bullet: {fileID: 596034102}
-  SelfAudioSource: {fileID: 1509650880}
+  ShootSoundPlayer: {fileID: 1509650880}
 --- !u!1 &1613781891
 GameObject:
   m_ObjectHideFlags: 0
