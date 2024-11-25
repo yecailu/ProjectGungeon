@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 0bf06d827080d8b44a922d146c084cdd
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - GroundTile: {instanceID: 0}
+  - GroundTilemap: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
