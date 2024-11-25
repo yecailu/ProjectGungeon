@@ -6,6 +6,8 @@ public class PlayerBullet : MonoBehaviour
 {
     public Vector2 Direction;
 
+    public float ShootSpeed = 15;
+
 
     void Start()
     {
@@ -16,7 +18,7 @@ public class PlayerBullet : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Direction * Time.deltaTime * 15);//子弹速度
+        transform.Translate(Direction * Time.deltaTime * ShootSpeed);//子弹速度
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
