@@ -8,6 +8,11 @@ public class PlayerBullet : MonoBehaviour
 
     public float ShootSpeed = 15;
 
+    private Rigidbody2D mSelfRigidbody2D;
+    private void Awake()
+    {
+        mSelfRigidbody2D = GetComponent<Rigidbody2D>();
+    }
 
     void Start()
     {
@@ -16,9 +21,9 @@ public class PlayerBullet : MonoBehaviour
 
 
 
-    void Update()
+    void FixedUpdate()
     {
-        transform.Translate(Direction * Time.deltaTime * ShootSpeed);//×Óµ¯ËÙ¶È
+        mSelfRigidbody2D.velocity = Direction * ShootSpeed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
