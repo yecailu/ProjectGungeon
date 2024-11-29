@@ -9,8 +9,18 @@ namespace QFramework.ProjectGungeon
 
         public override AudioSource AudioPlayer => SelfAudioSource;
 
+        public GunClip Clip = new GunClip(1);
 
-        
+        private void Start()
+        {
+            Clip.UpdateUI();
+        }
+
+        public override void Reload()
+        {
+            Clip.Reload();
+        }
+
 
 
         void Shoot(Vector2 position, Vector2 direction, bool playSound = true)
@@ -25,13 +35,15 @@ namespace QFramework.ProjectGungeon
             var soundIndex = Random.Range(0, ShootSounds.Count);
             AudioPlayer.clip = ShootSounds[soundIndex];
             AudioPlayer.Play();
+
+            Clip.UseBullet();
         }
 
 
         public ShootDuration ShootDuration = new ShootDuration(2);
         public override void ShootDown(Vector2 direction)
         {
-            if (ShootDuration.CanShoot)
+            if (ShootDuration.CanShoot && Clip.CanShoot)
             {
                 ShootDuration.RecordShootTime();
                 Shoot(BulletPrefab.Position2D(), direction);

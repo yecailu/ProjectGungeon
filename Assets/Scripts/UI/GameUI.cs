@@ -1,59 +1,71 @@
+using QFramework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameUI : MonoBehaviour
+
+namespace QFramework.ProjectGungeon
 {
-    public static GameUI Default;//单例
 
-    public GameObject GamePass;//通关界面
-    public GameObject GameOver;//失败界面
-
-    public Text HP;
-
-    private void Awake()
+    public partial class GameUI : ViewController
     {
-        Default = this;
-    }
+        public static GameUI Default;//单例
 
-    private void OnDestroy()
-    {
-        Default = null;
+        public GameObject GamePass;//通关界面
+        public GameObject GameOver;//失败界面
 
-        Global.HPChangedEvent -= UpdateHP;//注销HP事件
-    }
+        public Text HP;
 
-
-
-    void Start()
-    {
-        GamePass.transform.Find("BtnRestart").GetComponent<Button>().onClick.AddListener(() =>
+        public static void UpdateGunInfo(GunClip gunClip)
         {
-            Global.ResetData();//重置数据
-            SceneManager.LoadScene("SampleScene");//重新加载场景
-            
-        });
+            Default.GunInfo.text = $"Bullet:({gunClip.CurrentBulletCount}/{gunClip.ClipBulletCount})";
+        }
 
-        GameOver.transform.Find("BtnRestart").GetComponent<Button>().onClick.AddListener(() =>
+        private void Awake()
         {
-            Global.ResetData();//重置数据
-            SceneManager.LoadScene("SampleScene");
+            Default = this;
+        }
 
-        });
+        private void OnDestroy()
+        {
+            Default = null;
 
-        UpdateHP();
-        Global.HPChangedEvent += UpdateHP;//注册HP事件
+            Global.HPChangedEvent -= UpdateHP;//注销HP事件
+        }
+
+
+
+        void Start()
+        {
+            GamePass.transform.Find("BtnRestart").GetComponent<Button>().onClick.AddListener(() =>
+            {
+                Global.ResetData();//重置数据
+                SceneManager.LoadScene("SampleScene");//重新加载场景
+
+            });
+
+            GameOver.transform.Find("BtnRestart").GetComponent<Button>().onClick.AddListener(() =>
+            {
+                Global.ResetData();//重置数据
+                SceneManager.LoadScene("SampleScene");
+
+            });
+
+            UpdateHP();
+            Global.HPChangedEvent += UpdateHP;//注册HP事件
+
+        }
+
+
+
+        void UpdateHP()
+        {
+            HP.text = "HP:" + Global.HP;
+        }
+
 
     }
-
-
-
-    void UpdateHP()
-    {
-        HP.text = "HP:" + Global.HP;
-    }
-
 
 }

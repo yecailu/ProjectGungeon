@@ -9,21 +9,37 @@ namespace QFramework.ProjectGungeon
 
         public override AudioSource AudioPlayer => SelfAudioSource;
 
+        public GunClip Clip = new GunClip(3);
 
+        private void Start()
+        {
+            Clip.UpdateUI();
+        }
+
+        public override void Reload()
+        {
+            Clip.Reload();
+        }
 
         void Shoot(Vector2 position, Vector2 direction, bool playSound = true)
         {
-            Bullet.ShootSpeed = 40f;
-            var playerBullet = Instantiate(BulletPrefab);
-            playerBullet.transform.position = position;
-            playerBullet.Direction = direction.normalized;
-            playerBullet.gameObject.SetActive(true);
+            if (Clip.CanShoot)
+            {
+                Bullet.ShootSpeed = 40f;
+                var playerBullet = Instantiate(BulletPrefab);
+                playerBullet.transform.position = position;
+                playerBullet.Direction = direction.normalized;
+                playerBullet.gameObject.SetActive(true);
 
-            playerBullet.transform.right = direction;//ÐÞ¸´¹­¼ý³¯Ïò
+                playerBullet.transform.right = direction;//ÐÞ¸´¹­¼ý³¯Ïò
 
-            var soundIndex = Random.Range(0, ShootSounds.Count);
-            AudioPlayer.clip = ShootSounds[soundIndex];
-            AudioPlayer.Play();
+                var soundIndex = Random.Range(0, ShootSounds.Count);
+                AudioPlayer.clip = ShootSounds[soundIndex];
+                AudioPlayer.Play();
+
+                Clip.UseBullet();
+
+            }
         }
 
 
@@ -31,6 +47,7 @@ namespace QFramework.ProjectGungeon
         private bool mPressing = false;
         public override void ShootDown(Vector2 direction)
         {
+            if (!Clip.CanShoot) return;
 
             mPressing = true;
             mCurrentSeconds = 0;
@@ -40,6 +57,7 @@ namespace QFramework.ProjectGungeon
         private float mCurrentSeconds = 0;//¼ÆÊ±Æ÷
         public override void Shooting(Vector2 direction)
         {
+            if (!Clip.CanShoot) return;
             if (mPressing == true)
             {
                 mCurrentSeconds += Time.deltaTime;
@@ -63,6 +81,7 @@ namespace QFramework.ProjectGungeon
 
         public override void ShootUp(Vector2 direction)
         {
+            if (!Clip.CanShoot) return;
             if (mPressing == true && mCurrentSeconds >= 0.5f)
             {
                 Shoot(BulletPrefab.Position2D(), direction);

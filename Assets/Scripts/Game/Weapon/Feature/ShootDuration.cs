@@ -3,6 +3,7 @@
 namespace QFramework.ProjectGungeon
 {
     /// <summary>
+    /// 武器攻击间隔特性
     /// 用法:在需要进行开枪间隔的地方序列化改方法
     /// public ShootDuration shootDuration = new ShootDuration(0.25f);
     /// 

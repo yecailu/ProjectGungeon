@@ -6,7 +6,7 @@ namespace QFramework.ProjectGungeon
 {
     [ViewControllerChild]
 
-public class Gun : ViewController
+    public class Gun : ViewController
     {
         public List<AudioClip> ShootSounds = new List<AudioClip>();
 
@@ -32,6 +32,11 @@ public class Gun : ViewController
 
         }
         public virtual void ShootUp(Vector2 direction)
+        {
+
+        }
+
+        public virtual void Reload()
         {
 
         }
