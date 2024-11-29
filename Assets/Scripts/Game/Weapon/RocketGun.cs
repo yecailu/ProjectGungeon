@@ -27,17 +27,13 @@ namespace QFramework.ProjectGungeon
             AudioPlayer.Play();
         }
 
-        public float ShootDuration => 2;//每间隔2秒射击一次
-        private float mLastShootTime = 0;
 
-
-
+        public ShootDuration ShootDuration = new ShootDuration(2);
         public override void ShootDown(Vector2 direction)
         {
-            if (mLastShootTime == 0 || Time.time - mLastShootTime >= ShootDuration)
+            if (ShootDuration.CanShoot)
             {
-                mLastShootTime = Time.time;
-
+                ShootDuration.RecordShootTime();
                 Shoot(BulletPrefab.Position2D(), direction);
 
             }

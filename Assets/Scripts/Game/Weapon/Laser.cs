@@ -36,14 +36,14 @@ namespace QFramework.ProjectGungeon
             SelfLineRenderer.enabled = true;//打开射线渲染
         }
 
-        private float mCurrentSeconds = 0f;//计时器
+        public ShootDuration ShootDuration = new ShootDuration(0.1f);
         public override void Shooting(Vector2 direction)
         {
-            mCurrentSeconds += Time.deltaTime;
 
-            if (mCurrentSeconds >= 0.15f)//每隔0.15秒发射一次子弹
+            if (ShootDuration.CanShoot)//每隔0.15秒发射一次子弹
             {
-                mCurrentSeconds = 0f;
+                ShootDuration.RecordShootTime();
+    
                 Shoot(direction);
             }
 

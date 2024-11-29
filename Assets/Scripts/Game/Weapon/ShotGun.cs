@@ -24,14 +24,16 @@ namespace QFramework.ProjectGungeon
             AudioPlayer.Play();
         }
 
-        public float ShootDuration => 1;//每间隔1秒射击一次
-        private float mLastShootTime = 0;
+
+        public ShootDuration ShootDuration = new ShootDuration(1);
+
 
         public override void ShootDown(Vector2 direction)
         {
-            if (mLastShootTime == 0 || Time.time - mLastShootTime >= ShootDuration)
+            if (ShootDuration.CanShoot)
             {
-                mLastShootTime = Time.time;
+                ShootDuration.RecordShootTime();
+
                 var angle = direction.ToAngle();//得到欧拉角
                 var originPos = transform.parent.Position2D();//得到ShotGun父类Weapon的2D坐标
                 var radius = (BulletPrefab.Position2D() - originPos).magnitude;//得到子弹的半径

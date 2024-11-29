@@ -13,8 +13,20 @@ public class Enemy : MonoBehaviour
     public List<AudioClip> ShootSounds = new List<AudioClip>();
 
     public AudioSource ShootSoundPlayer;
-    
+
     public Rigidbody2D Rigidbody2D;
+
+    public float HP { get; set; } = 5;
+
+
+    public void hurt(float damage)
+    {
+        HP -= damage;
+        if (HP <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     //µÐÈË×´Ì¬
     public enum States

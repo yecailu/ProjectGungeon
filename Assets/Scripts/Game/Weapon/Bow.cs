@@ -26,8 +26,6 @@ namespace QFramework.ProjectGungeon
             AudioPlayer.Play();
         }
 
-        public float ShootDuration => 2;//每间隔2秒射击一次
-        private float mLastShootTime = 0;
 
 
         private bool mPressing = false;
