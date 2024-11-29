@@ -21,8 +21,11 @@ namespace QFramework.ProjectGungeon
 
         public List<Gun> GunList = new List<Gun>();
 
+        public static Player Default;
+
         private void Awake()
         {
+            Default = this;
             GunList.Add(Pistol);
             GunList.Add(AK);
             GunList.Add(AWP);
@@ -30,8 +33,14 @@ namespace QFramework.ProjectGungeon
             GunList.Add(MP5);
             GunList.Add(RocketGun);
             GunList.Add(Bow);
+            GunList.Add(Laser);
 
             UseGun(0);
+        }
+
+        private void OnDestroy()
+        {
+            Default = null;
         }
 
         void UseGun(int index)
@@ -39,8 +48,8 @@ namespace QFramework.ProjectGungeon
             CurrentGun.Hide();
             CurrentGun = GunList[index];
             CurrentGun.Show();
+            CurrentGun.OnGunUsed();
 
-            
         }
 
         void Start()
@@ -131,29 +140,39 @@ namespace QFramework.ProjectGungeon
 
             if (Input.GetKeyDown(KeyCode.Q))//切换上一把武器
             {
-                var index = GunList.FindIndex(gun => gun == CurrentGun);//遍历GUN列表，获得当前武器的索引
-                index--;
-
-                if (index < 0)
+                if (!CurrentGun.Reloading)
                 {
-                    index = GunList.Count - 1;
+                    var index = GunList.FindIndex(gun => gun == CurrentGun);//遍历GUN列表，获得当前武器的索引
+                    index--;
+
+                    if (index < 0)
+                    {
+                        index = GunList.Count - 1;
+                    }
+
+                    UseGun(index);
+
                 }
 
-                UseGun(index);
+
 
             }
 
             if (Input.GetKeyDown(KeyCode.E))//切换下一把武器
             {
-                var index = GunList.FindIndex(gun => gun == CurrentGun);
-                index++;
-
-                if (index > GunList.Count - 1)
+                if (!CurrentGun.Reloading)
                 {
-                    index = 0;
-                }
+                    var index = GunList.FindIndex(gun => gun == CurrentGun);
+                    index++;
 
-                UseGun(index);
+                    if (index > GunList.Count - 1)
+                    {
+                        index = 0;
+                    }
+
+                    UseGun(index);
+
+                }
             }
         }
     }

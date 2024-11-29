@@ -1,4 +1,6 @@
-﻿namespace QFramework.ProjectGungeon
+﻿using UnityEngine;
+
+namespace QFramework.ProjectGungeon
 {
     /// <summary>
     /// 弹夹/换弹特性
@@ -9,7 +11,7 @@
 
         public int ClipBulletCount;
 
-        public bool CanShoot => CurrentBulletCount > 0;
+        public bool CanShoot => CurrentBulletCount > 0 &&!Reloading;
 
         public GunClip(int clipBulletCount)
         {
@@ -23,10 +25,19 @@
             GameUI.UpdateGunInfo(this);//刷新武器UI信息
         }
 
-        public void Reload()
+
+        public bool Reloading = false;
+        public void Reload(AudioClip reloadSound)
         {
-            CurrentBulletCount = ClipBulletCount;
-            UpdateUI();
+            Reloading = true;
+            ActionKit.Sequence().PlaySound(reloadSound).Callback(() =>
+            {
+                CurrentBulletCount = ClipBulletCount;
+                UpdateUI();
+                Reloading = false;
+            }).StartCurrentScene();
+
+            
         }
 
         public void UseBullet()

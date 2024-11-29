@@ -10,21 +10,23 @@ namespace QFramework.ProjectGungeon
     {
         public List<AudioClip> ShootSounds = new List<AudioClip>();
 
+        public AudioClip ReloadSound;
+
         public virtual PlayerBullet BulletPrefab { get; }
 
         public virtual AudioSource AudioPlayer { get; }
 
+        public virtual bool Reloading { get; }
+
+        public virtual void OnGunUsed()
+        {
+
+        }
+
+
         public virtual void ShootDown(Vector2 direction)
         {
 
-            var playerBullet = Instantiate(BulletPrefab);
-            playerBullet.transform.position = BulletPrefab.transform.position;
-            playerBullet.Direction = direction;
-            playerBullet.gameObject.SetActive(true);
-
-            var soundIndex = Random.Range(0, ShootSounds.Count);
-            AudioPlayer.clip = ShootSounds[soundIndex];
-            AudioPlayer.Play();
         }
 
         public virtual void Shooting(Vector2 direction)
@@ -39,6 +41,16 @@ namespace QFramework.ProjectGungeon
         public virtual void Reload()
         {
 
+        }
+
+        public void TryPlayShootSound(bool loop = false)
+        {
+            if (!AudioPlayer.isPlaying)
+            {
+                AudioPlayer.clip = ShootSounds[0];
+                AudioPlayer.loop = true;
+                AudioPlayer.Play();
+            }
         }
     }
 

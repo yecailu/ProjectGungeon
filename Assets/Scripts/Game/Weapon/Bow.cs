@@ -11,14 +11,16 @@ namespace QFramework.ProjectGungeon
 
         public GunClip Clip = new GunClip(3);
 
-        private void Start()
+        public override bool Reloading => Clip.Reloading;
+
+        public override void OnGunUsed()
         {
             Clip.UpdateUI();
         }
 
         public override void Reload()
         {
-            Clip.Reload();
+            Clip.Reload(ReloadSound);
         }
 
         void Shoot(Vector2 position, Vector2 direction, bool playSound = true)

@@ -14,17 +14,19 @@ namespace QFramework.ProjectGungeon
 
         public GunClip Clip = new GunClip(10);
 
+        public ShootLight ShootLight = new ShootLight();
 
+        public override bool Reloading => Clip.Reloading;
 
-        private void Start()
+        public void Start()
         {
-            Clip.UpdateUI();//刷新武器UI信息
+            Clip.UpdateUI();
         }
 
 
         public override void Reload()
         {
-            Clip.Reload();
+            Clip.Reload(ReloadSound);
         }
 
 
@@ -45,6 +47,8 @@ namespace QFramework.ProjectGungeon
                 AudioPlayer.Play();
 
                 Clip.UseBullet();//减少子弹数量
+
+                ShootLight.ShowLight(BulletPrefab.Position2D(), direction);
             }
         }
 

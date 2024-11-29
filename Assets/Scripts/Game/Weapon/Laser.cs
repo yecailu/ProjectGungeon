@@ -13,16 +13,18 @@ namespace QFramework.ProjectGungeon
 
         public override AudioSource AudioPlayer => ShootSoundPlayer;
 
-        public GunClip Clip = new GunClip(100);
+        public GunClip Clip = new GunClip(50);
 
-        private void Start()
+        public override bool Reloading => Clip.Reloading;
+
+        public override void OnGunUsed()
         {
             Clip.UpdateUI();
         }
 
         public override void Reload()
         {
-            Clip.Reload();
+            Clip.Reload(ReloadSound);
         }
 
         void Shoot(Vector2 direction)
@@ -43,9 +45,7 @@ namespace QFramework.ProjectGungeon
 
             Shoot(direction);
 
-            AudioPlayer.clip = ShootSounds[0];
-            AudioPlayer.Play();
-            mShooting = true;
+            TryPlayShootSound(true);
 
             SelfLineRenderer.enabled = true;//打开射线渲染
         }
@@ -56,11 +56,24 @@ namespace QFramework.ProjectGungeon
 
             if (ShootDuration.CanShoot && Clip.CanShoot)//每隔0.15秒发射一次子弹
             {
+                mShooting = true;
+
                 ShootDuration.RecordShootTime();
 
                 Shoot(direction);
 
                 Clip.UseBullet();
+
+                TryPlayShootSound(true);
+              
+            }
+            else if (!Clip.CanShoot)
+            {
+                AudioPlayer.Stop();
+
+                mShooting = false;
+
+                SelfLineRenderer.enabled = false;//关闭射线渲染
             }
 
             if (mShooting)
@@ -75,7 +88,6 @@ namespace QFramework.ProjectGungeon
 
         public override void ShootUp(Vector2 direction)
         {
-            if (!Clip.CanShoot) return;
             AudioPlayer.Stop();
 
             mShooting = false;

@@ -11,14 +11,19 @@ namespace QFramework.ProjectGungeon
 
         public GunClip Clip = new GunClip(10);
 
-        private void Start()
+        public ShootLight ShootLight = new ShootLight();
+
+        public override bool Reloading => Clip.Reloading;
+
+
+        public override void OnGunUsed()
         {
             Clip.UpdateUI();
         }
 
         public override void Reload()
         {
-            Clip.Reload();
+            Clip.Reload(ReloadSound);
         }
 
 
@@ -33,6 +38,8 @@ namespace QFramework.ProjectGungeon
             var soundIndex = Random.Range(0, ShootSounds.Count);
             AudioPlayer.clip = ShootSounds[soundIndex];
             AudioPlayer.Play();
+
+            ShootLight.ShowLight(BulletPrefab.Position2D(), direction);
         }
 
 
@@ -47,6 +54,8 @@ namespace QFramework.ProjectGungeon
                 Shoot(BulletPrefab.Position2D(), direction);
 
                 Clip.UseBullet();
+
+
 
             }
         }
