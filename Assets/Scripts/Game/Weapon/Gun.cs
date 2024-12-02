@@ -18,6 +18,8 @@ namespace QFramework.ProjectGungeon
 
         public virtual bool Reloading { get; }
 
+        public virtual BulletBag BulletBag { get; set; }
+
         public virtual void OnGunUsed()
         {
 

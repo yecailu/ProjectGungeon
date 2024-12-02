@@ -26,19 +26,29 @@ namespace QFramework.ProjectGungeon
         }
 
 
+        public bool Full => CurrentBulletCount == ClipBulletCount;//弹夹是否已满
+
         public bool Reloading = false;
-        public void Reload(AudioClip reloadSound)
+
+        public int NeedCount => ClipBulletCount - CurrentBulletCount;//需要多少弹夹
+
+        public void Reload(AudioClip reloadSound, int reloadBulletCount = -1)
         {
+            if (reloadBulletCount == -1)
+            {
+                reloadBulletCount = NeedCount;
+            }
             Reloading = true;
             ActionKit.Sequence().PlaySound(reloadSound).Callback(() =>
             {
-                CurrentBulletCount = ClipBulletCount;
+                CurrentBulletCount += reloadBulletCount;
                 UpdateUI();
                 Reloading = false;
             }).StartCurrentScene();
 
             
         }
+
 
         public void UseBullet()
         {

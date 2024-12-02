@@ -9,6 +9,9 @@ public class PlayerBullet : MonoBehaviour
     public float ShootSpeed = 15;
 
     private Rigidbody2D mSelfRigidbody2D;
+
+    public float Damage { get; set; } = 1;
+
     private void Awake()
     {
         mSelfRigidbody2D = GetComponent<Rigidbody2D>();
@@ -31,7 +34,7 @@ public class PlayerBullet : MonoBehaviour
         var enemy = collision.gameObject.GetComponent<Enemy>();
         if (enemy)
         {
-            enemy.hurt(1);//敌人受伤方法
+            enemy.hurt(Damage);//敌人受伤方法
             Destroy(gameObject);//销毁子弹
         }
         else

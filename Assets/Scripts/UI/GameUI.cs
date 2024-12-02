@@ -20,9 +20,17 @@ namespace QFramework.ProjectGungeon
 
         public static void UpdateGunInfo(GunClip gunClip)
         {
-            Default.GunInfo.text = $"Bullet:({gunClip.CurrentBulletCount}/{gunClip.ClipBulletCount})";
+            var bulletBag = (Player.Default.CurrentGun).BulletBag;
+            if(bulletBag.MaxBulletCount == -1)
+            {
+                Default.GunInfo.text = $"Bullet:({gunClip.CurrentBulletCount}/{gunClip.ClipBulletCount}) (\u221e)";
+            }
+            else
+            {
+                Default.GunInfo.text = $"Bullet:({gunClip.CurrentBulletCount}/{gunClip.ClipBulletCount}) ({bulletBag.RemainBulletCount}/{bulletBag.MaxBulletCount})";
+            }
         }
-
+         
         private void Awake()
         {
             Default = this;

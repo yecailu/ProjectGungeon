@@ -17,6 +17,8 @@ namespace QFramework.ProjectGungeon
 
         public override bool Reloading => Clip.Reloading;
 
+        public override BulletBag BulletBag { get; set; } = new BulletBag(500,500);
+
         public override void OnGunUsed()
         {
             Clip.UpdateUI();
@@ -24,7 +26,7 @@ namespace QFramework.ProjectGungeon
 
         public override void Reload()
         {
-            Clip.Reload(ReloadSound);
+            BulletBag.Reload(Clip, ReloadSound);
         }
 
         void Shoot(Vector2 direction)
@@ -33,6 +35,9 @@ namespace QFramework.ProjectGungeon
             playerBullet.transform.position = BulletPrefab.transform.position;
             playerBullet.Direction = direction;
             playerBullet.gameObject.SetActive(true);
+
+            playerBullet.Damage = Random.Range(0.5f, 1.5f);//Ëæ»úÉËº¦ÅÐ¶¨
+
 
         }
 

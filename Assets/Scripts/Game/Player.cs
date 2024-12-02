@@ -15,13 +15,15 @@ namespace QFramework.ProjectGungeon
 
         public SpriteRenderer Sprite;
 
-        public Transform Weapon;
+        public Transform Weapon;//武器位置
 
-        public Gun CurrentGun;
+        public Gun CurrentGun;//当前武器
 
-        public List<Gun> GunList = new List<Gun>();
+        public List<Gun> GunList = new List<Gun>();//武器列表
 
-        public static Player Default;
+        public static Player Default;//单例
+
+        public List<AudioClip> GunTakeSfxs = new List<AudioClip>();//切枪音效
 
         private void Awake()
         {
@@ -34,6 +36,12 @@ namespace QFramework.ProjectGungeon
             GunList.Add(RocketGun);
             GunList.Add(Bow);
             GunList.Add(Laser);
+
+            GunTakeSfxs.Add(GunTake1);
+            GunTakeSfxs.Add(GunTake2);
+            GunTakeSfxs.Add(GunTake3);
+            GunTakeSfxs.Add(GunTake4);
+            GunTakeSfxs.Add(GunTake5);
 
             UseGun(0);
         }
@@ -50,6 +58,9 @@ namespace QFramework.ProjectGungeon
             CurrentGun.Show();
             CurrentGun.OnGunUsed();
 
+            var gunTakeSfx =  GunTakeSfxs.GetRandomItem();//随机获取一个切枪音效
+            SelfAudioSource.clip = gunTakeSfx;
+            SelfAudioSource.Play(); 
         }
 
         void Start()
@@ -88,14 +99,16 @@ namespace QFramework.ProjectGungeon
             Weapon.localRotation = Quaternion.Euler(0, 0, eulerAngles);
 
 
-            //武器翻转
+            //武器翻转,人物朝向随武器方向
             if (shootDirection.x > 0)
             {
                 Weapon.transform.localScale = new Vector3(1, 1, 1);
+                Sprite.flipX = false;
             }
-            else
+            else if (shootDirection.x < 0) 
             {
                 Weapon.transform.localScale = new Vector3(1, -1, 1);
+                Sprite.flipX = true;
             }
 
 
@@ -106,14 +119,7 @@ namespace QFramework.ProjectGungeon
 
             Rigidbody2D.velocity = new Vector2(horizontal, vertical).normalized * 5;
 
-            if (horizontal < 0)
-            {
-                Sprite.flipX = true;
-            }
-            else if (horizontal > 0)
-            {
-                Sprite.flipX = false;
-            }
+
 
             if (Input.GetMouseButtonDown(0))//按左键发射子弹
             {
