@@ -77,7 +77,7 @@ namespace QFramework.ProjectGungeon
 
         public override void Shooting(Vector2 direction)
         {
-            if (Clip.CanShoot)
+            if (Clip.CanShoot) 
             {
                 Shoot(direction);//³¤°´Éä»÷
 

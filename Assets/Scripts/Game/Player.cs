@@ -9,6 +9,19 @@ namespace QFramework.ProjectGungeon
 
     public partial class Player : ViewController
     {
+        public static void DisplayText(string text, float duration)
+        {
+            Default.StartCoroutine(Default.DoDisplayText(text, duration));
+        }
+
+        IEnumerator DoDisplayText(string text, float duration)
+        {
+            Text.text = text;
+            Text.Show();
+            yield return new WaitForSeconds(duration);//ÑÓ³Ù
+            Text.Hide();
+        }
+
         public PlayerBullet PlayerBullet;//×Óµ¯
 
         public Rigidbody2D Rigidbody2D;
@@ -27,6 +40,8 @@ namespace QFramework.ProjectGungeon
 
         private void Awake()
         {
+            Text.Hide();
+
             Default = this;
             GunList.Add(Pistol);
             GunList.Add(AK);

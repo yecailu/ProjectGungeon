@@ -53,6 +53,12 @@ namespace QFramework.ProjectGungeon
         public void UseBullet()
         {
             CurrentBulletCount--;
+
+            if(CurrentBulletCount == 0)
+            {
+                Player.DisplayText("没子弹了",2);
+            }
+
             UpdateUI();
         }
     }
