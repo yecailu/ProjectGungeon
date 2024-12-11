@@ -35,7 +35,7 @@ namespace QFramework.ProjectGungeon
         {
             var playerBullet = Instantiate(BulletPrefab);
             playerBullet.transform.position = BulletPrefab.transform.position;
-            playerBullet.Direction = direction;
+            playerBullet.Velocity = direction.normalized * 20;
             playerBullet.gameObject.SetActive(true);
             Clip.UseBullet();
 

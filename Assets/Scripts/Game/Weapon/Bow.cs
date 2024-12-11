@@ -29,10 +29,9 @@ namespace QFramework.ProjectGungeon
         {
             if (Clip.CanShoot)
             {
-                Bullet.ShootSpeed = 40f;
                 var playerBullet = Instantiate(BulletPrefab);
                 playerBullet.transform.position = position;
-                playerBullet.Direction = direction.normalized;
+                playerBullet.Velocity = direction.normalized * 30;
                 playerBullet.gameObject.SetActive(true);
 
                 playerBullet.Damage = Random.Range(5, 10);//Ëæ»úÉËº¦ÅÐ¶¨

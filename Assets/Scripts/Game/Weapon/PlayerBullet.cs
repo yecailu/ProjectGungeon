@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    public Vector2 Direction;
-
-    public float ShootSpeed = 15;
+    public Vector2 Velocity;
 
     private Rigidbody2D mSelfRigidbody2D;
 
@@ -26,7 +24,7 @@ public class PlayerBullet : MonoBehaviour
 
     void FixedUpdate()
     {
-        mSelfRigidbody2D.velocity = Direction * ShootSpeed;
+        mSelfRigidbody2D.velocity = Velocity;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -31,10 +31,9 @@ namespace QFramework.ProjectGungeon
 
         void Shoot(Vector2 position, Vector2 direction, bool playSound = true)
         {
-            Bullet.ShootSpeed = 40f;
             var playerBullet = Instantiate(BulletPrefab);
             playerBullet.transform.position = position;
-            playerBullet.Direction = direction.normalized;
+            playerBullet.Velocity = direction.normalized * 50;
             playerBullet.gameObject.SetActive(true);
 
             playerBullet.Damage = Random.Range(5, 10);//Ëæ»úÉËº¦ÅÐ¶¨

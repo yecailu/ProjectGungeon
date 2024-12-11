@@ -43,7 +43,7 @@ namespace QFramework.ProjectGungeon
                 ShootDuration.RecordShootTime();
                 var playerBullet = Instantiate(BulletPrefab);
                 playerBullet.transform.position = BulletPrefab.transform.position;
-                playerBullet.Direction = direction;
+                playerBullet.Velocity = direction.normalized * 15;
                 playerBullet.gameObject.SetActive(true);
 
                 playerBullet.Damage = Random.Range(1f, 1.5f);//Ëæ»úÉËº¦ÅÐ¶¨

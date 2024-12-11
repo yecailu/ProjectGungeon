@@ -32,7 +32,7 @@ namespace QFramework.ProjectGungeon
         {
             var playerBullet = Instantiate(BulletPrefab);
             playerBullet.transform.position = position;
-            playerBullet.Direction = direction.normalized;
+            playerBullet.Velocity = direction.normalized * 10;
             playerBullet.gameObject.SetActive(true);
 
             playerBullet.Damage = Random.Range(3f, 8f);//Ëæ»úÉËº¦ÅÐ¶¨
