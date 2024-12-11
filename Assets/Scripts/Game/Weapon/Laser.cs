@@ -26,6 +26,7 @@ namespace QFramework.ProjectGungeon
 
         public override void Reload()
         {
+            if (Reloading) return;
             BulletBag.Reload(Clip, ReloadSound);
         }
 
@@ -46,13 +47,20 @@ namespace QFramework.ProjectGungeon
 
         public override void ShootDown(Vector2 direction)
         {
-            if(!Clip.CanShoot) return;
+            if (Clip.CanShoot)
+            {
 
-            Shoot(direction);
+                Shoot(direction);
 
-            TryPlayShootSound(true);
+                TryPlayShootSound(true);
 
-            SelfLineRenderer.enabled = true;//打开射线渲染
+                SelfLineRenderer.enabled = true;//打开射线渲染
+
+            }
+            else
+            {
+                Reload();
+            }
         }
 
         public ShootDuration ShootDuration = new ShootDuration(0.1f);

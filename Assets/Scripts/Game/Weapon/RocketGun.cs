@@ -23,6 +23,7 @@ namespace QFramework.ProjectGungeon
 
         public override void Reload()
         {
+            if (Reloading) return;
             BulletBag.Reload(Clip, ReloadSound);
         }
 
@@ -51,12 +52,19 @@ namespace QFramework.ProjectGungeon
         public ShootDuration ShootDuration = new ShootDuration(2);
         public override void ShootDown(Vector2 direction)
         {
-            if (ShootDuration.CanShoot && Clip.CanShoot)
+            if (Clip.CanShoot)
             {
-                ShootDuration.RecordShootTime();
-                Shoot(BulletPrefab.Position2D(), direction);
-
+                if (ShootDuration.CanShoot)
+                {
+                    ShootDuration.RecordShootTime();
+                    Shoot(BulletPrefab.Position2D(), direction);
+                }
             }
+            else
+            {
+                Reload();
+            }
+
         }
 
         public override void Shooting(Vector2 direction)

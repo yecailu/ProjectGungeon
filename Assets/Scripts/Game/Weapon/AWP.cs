@@ -25,6 +25,7 @@ namespace QFramework.ProjectGungeon
 
         public override void Reload()
         {
+            if (Reloading) return;
             BulletBag.Reload(Clip, ReloadSound);
         }
 
@@ -58,9 +59,10 @@ namespace QFramework.ProjectGungeon
                 Shoot(BulletPrefab.Position2D(), direction);
 
                 Clip.UseBullet();
-
-
-
+            }
+            else
+            {
+                Reload();
             }
         }
 

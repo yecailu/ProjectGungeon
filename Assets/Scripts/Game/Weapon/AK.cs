@@ -31,6 +31,7 @@ namespace QFramework.ProjectGungeon
 
         public override void Reload()
         {
+            if(Reloading) return;
             BulletBag.Reload(Clip, ReloadSound);
         }
 
@@ -64,6 +65,10 @@ namespace QFramework.ProjectGungeon
                 Clip.UseBullet();
 
                 TryPlayShootSound(true);
+            }
+            else
+            {
+                Reload();
             }
         }
 

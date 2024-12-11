@@ -28,18 +28,19 @@ namespace QFramework.ProjectGungeon
         }
 
 
+
         public override void Reload()
         {
+            if (Reloading) return;
             BulletBag.Reload(Clip, ReloadSound);
         }
 
-
-        public ShootDuration ShootDuration = new ShootDuration(0.25f);
-
-        public override void ShootDown(Vector2 direction)
+        void Shoot(Vector2 direction)
         {
-            if (ShootDuration.CanShoot && Clip.CanShoot)
+            if (ShootDuration.CanShoot)
             {
+
+
                 ShootDuration.RecordShootTime();
                 var playerBullet = Instantiate(BulletPrefab);
                 playerBullet.transform.position = BulletPrefab.transform.position;
@@ -59,9 +60,28 @@ namespace QFramework.ProjectGungeon
             }
         }
 
+        public ShootDuration ShootDuration = new ShootDuration(0.25f);
+
+        public override void ShootDown(Vector2 direction)
+        {
+            if (Clip.CanShoot)
+            {
+               Shoot(direction);
+            }
+            else
+            {
+                Reload();
+            }
+
+        }
+
         public override void Shooting(Vector2 direction)
         {
-            ShootDown(direction);//长按射击
+            if (Clip.CanShoot)
+            {
+                Shoot(direction);//长按射击
+
+            }
         }
         public override void ShootUp(Vector2 direction)
         {
