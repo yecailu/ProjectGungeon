@@ -55,6 +55,7 @@ namespace QFramework.ProjectGungeon
             {
                 ShootDuration.RecordShootTime();
                 Shoot(direction);
+ 
 
                 AudioPlayer.clip = ShootSounds[0];
                 AudioPlayer.loop = true;
