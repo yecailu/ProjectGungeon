@@ -95,9 +95,14 @@ namespace QFramework.ProjectGungeon
             var currentRoomStartPosx = 0;//记录当前房间起始位置
             GenerateRoom(currentRoomStartPosx, Config.InitRoom);
             currentRoomStartPosx += Config.InitRoom.Codes.First().Length + 2;//加上房间宽度，作为下一个房间的起始位置
-            GenerateRoom(currentRoomStartPosx, Config.NormalRoom);
+            GenerateRoom(currentRoomStartPosx, Config.NormalRooms.GetRandomItem());
+            currentRoomStartPosx += Config.InitRoom.Codes.First().Length + 2;//加上房间宽度，作为下一个房间的起始位置
+            GenerateRoom(currentRoomStartPosx, Config.NormalRooms.GetRandomItem());
+            currentRoomStartPosx += Config.InitRoom.Codes.First().Length + 2;//加上房间宽度，作为下一个房间的起始位置
+            GenerateRoom(currentRoomStartPosx, Config.NormalRooms.GetRandomItem());
             currentRoomStartPosx += Config.InitRoom.Codes.First().Length + 2;//加上房间宽度，作为下一个房间的起始位置
             GenerateRoom(currentRoomStartPosx, Config.FinalRoom);
+
 
         }
 

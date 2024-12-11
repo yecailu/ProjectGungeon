@@ -13,6 +13,15 @@ namespace QFramework.ProjectGungeon
 
         private HashSet<Enemy> mEnemies = new HashSet<Enemy>();
 
+        //敌人波次配置，new EnemyWaveConfig(),每多一个波次就加一个
+        private List<EnemyWaveConfig> mWaves = new List<EnemyWaveConfig>()
+        {
+            new EnemyWaveConfig(),
+
+        };
+
+        private EnemyWaveConfig mCurrentWave = null;
+
         public enum RoomStates
         {
             Close,
@@ -35,15 +44,24 @@ namespace QFramework.ProjectGungeon
             {
                 mEnemies.RemoveWhere(e => !e);
 
-                if (mEnemies.Count == 0)
+                if (mEnemies.Count == 0)//敌人全部死亡
                 {
-                    if(State == RoomStates.PlayerIn)
+                    if (State == RoomStates.PlayerIn)//房间状态为玩家已进入
                     {
-                        State = RoomStates.Unlocked;
 
-                        foreach (var door in mDoors)
+                        if (mWaves.Count > 0)//有剩余波次继续生成敌人
                         {
-                            door.Hide();
+                            GenerateEnemies();
+                        }
+                        else//没有波次 开门
+                        {
+
+                            State = RoomStates.Unlocked;
+
+                            foreach (var door in mDoors)
+                            {
+                                door.Hide();
+                            }
                         }
                     }
 
@@ -55,6 +73,7 @@ namespace QFramework.ProjectGungeon
 		{
 			// Code Here
 		}
+
 
 		public void AddEnemyGeneratePos(Vector3 enemyGeneratePos)
 		{
@@ -72,15 +91,7 @@ namespace QFramework.ProjectGungeon
                     {
                         State = RoomStates.PlayerIn;
 
-
-                        foreach (var enemyGeneratePos in mEnemyGeneratePoses)
-                        {
-                            var enemy = Instantiate(LevelController.Default.Enemy);
-                            enemy.transform.position = enemyGeneratePos;
-                            enemy.gameObject.SetActive(true);
-
-                            mEnemies.Add(enemy);//每一个敌人都记录下来
-                        }
+                        GenerateEnemies();
 
                         foreach (var door in mDoors)
                         {
@@ -89,6 +100,21 @@ namespace QFramework.ProjectGungeon
                     }
 
                 }
+            }
+        }
+
+        //生成敌人方法
+        void GenerateEnemies()
+        {
+            mWaves.RemoveAt(0);
+
+            foreach (var enemyGeneratePos in mEnemyGeneratePoses)
+            {
+                var enemy = Instantiate(LevelController.Default.Enemy);
+                enemy.transform.position = enemyGeneratePos;
+                enemy.gameObject.SetActive(true);
+
+                mEnemies.Add(enemy);//每一个敌人都记录下来
             }
         }
 
