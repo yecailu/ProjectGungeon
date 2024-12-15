@@ -40,6 +40,8 @@ namespace QFramework.ProjectGungeon
 
         private void Awake()
         {
+            Application.targetFrameRate = 60;//…Ë÷√÷°¬ 60
+
             Text.Hide();
 
             Default = this;

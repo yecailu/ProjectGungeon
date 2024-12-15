@@ -2,6 +2,7 @@ using UnityEngine;
 using QFramework;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace QFramework.ProjectGungeon
 {
@@ -17,6 +18,10 @@ namespace QFramework.ProjectGungeon
         private List<EnemyWaveConfig> mWaves = new List<EnemyWaveConfig>()
         {
             new EnemyWaveConfig(),
+            new EnemyWaveConfig(),
+            new EnemyWaveConfig(),
+
+
 
         };
 
@@ -108,14 +113,22 @@ namespace QFramework.ProjectGungeon
         {
             mWaves.RemoveAt(0);
 
-            foreach (var enemyGeneratePos in mEnemyGeneratePoses)
+
+            var enemyCount = UnityEngine.Random.Range(3, 5 + 1);
+
+            var pos2Gen = mEnemyGeneratePoses
+                .OrderByDescending(p => (Player.Default.Position2D() - p.ToVector2()).magnitude)
+                .Take(enemyCount).ToList();//在mEnemyGeneratePoses敌人位置列表中，选取离玩家位置最远的enemyCount个位置的敌人
+
+            for (int i = 0; i < enemyCount; i++)
             {
                 var enemy = Instantiate(LevelController.Default.Enemy);
-                enemy.transform.position = enemyGeneratePos;
+                enemy.transform.position = pos2Gen[i];
                 enemy.gameObject.SetActive(true);
-
+                    
                 mEnemies.Add(enemy);//每一个敌人都记录下来
             }
+
         }
 
         public void AddDoor(Door door)

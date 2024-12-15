@@ -93,6 +93,15 @@ namespace QFramework.ProjectGungeon
                 AudioPlayer.Stop();
             }
 
+            if (!Clip.CanShoot)//没有弹药了
+            {
+                if(Time.frameCount % 30 == 0)//每0.5秒播放一次空子弹声音
+                {
+                    AudioKit.PlaySound("resources://EmptyBulletSound");
+
+                }
+            }
+
         }
 
         public override void ShootUp(Vector2 direction)
