@@ -15,7 +15,7 @@ namespace QFramework.ProjectGungeon
 
         public ShootDuration ShootDuration = new ShootDuration(0.1f);
 
-        public GunClip Clip = new GunClip(30);
+        public override GunClip Clip { get; set; } = new GunClip(30);
 
         public ShootLight ShootLight = new ShootLight();
 
@@ -91,16 +91,9 @@ namespace QFramework.ProjectGungeon
             else if (!Clip.CanShoot)
             {
                 AudioPlayer.Stop();
+                TryPlayEmptyShootSound();
             }
 
-            if (!Clip.CanShoot)//没有弹药了
-            {
-                if(Time.frameCount % 30 == 0)//每0.5秒播放一次空子弹声音
-                {
-                    AudioKit.PlaySound("resources://EmptyBulletSound");
-
-                }
-            }
 
         }
 

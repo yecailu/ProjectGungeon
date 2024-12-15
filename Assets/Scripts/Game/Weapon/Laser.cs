@@ -13,7 +13,7 @@ namespace QFramework.ProjectGungeon
 
         public override AudioSource AudioPlayer => ShootSoundPlayer;
 
-        public GunClip Clip = new GunClip(50);
+        public override GunClip Clip { get; set; } = new GunClip(50);
 
         public override bool Reloading => Clip.Reloading;
 
@@ -87,6 +87,8 @@ namespace QFramework.ProjectGungeon
                 mShooting = false;
 
                 SelfLineRenderer.enabled = false;//πÿ±’…‰œﬂ‰÷»æ
+
+                TryPlayEmptyShootSound();
             }
 
             if (mShooting)

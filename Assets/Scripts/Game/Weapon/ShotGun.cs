@@ -12,7 +12,7 @@ namespace QFramework.ProjectGungeon
 
         public override AudioSource AudioPlayer => SelfAudioSource;
 
-        public GunClip Clip = new GunClip(5);
+        public override GunClip Clip { get; set; } = new GunClip(5);
 
         public ShootLight ShootLight = new ShootLight();
 
@@ -99,7 +99,15 @@ namespace QFramework.ProjectGungeon
 
         public override void Shooting(Vector2 direction)
         {
-            ShootDown(direction);
+            if (Clip.CanShoot)
+            {
+                ShootDown(direction);
+
+            }
+            else
+            {
+                TryPlayEmptyShootSound();
+            }
         }
     }
 }

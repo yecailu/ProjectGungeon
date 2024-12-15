@@ -18,6 +18,8 @@ namespace QFramework.ProjectGungeon
 
         public virtual bool Reloading { get; }
 
+        public virtual GunClip Clip { get; set; }
+
         public virtual BulletBag BulletBag { get; set; }
 
         public virtual void OnGunUsed()
@@ -54,6 +56,19 @@ namespace QFramework.ProjectGungeon
                 AudioPlayer.Play();
             }
         }
+
+        public void TryPlayEmptyShootSound()
+        {
+            if (!Clip.CanShoot)//没有弹药了
+            {
+                if (Time.frameCount % 30 == 0)//每0.5秒播放一次空子弹声音
+                {
+                    AudioKit.PlaySound("resources://EmptyBulletSound");
+
+                }
+            }
+        }
+
     }
 
 }

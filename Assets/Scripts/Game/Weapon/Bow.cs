@@ -9,7 +9,7 @@ namespace QFramework.ProjectGungeon
 
         public override AudioSource AudioPlayer => SelfAudioSource;
 
-        public GunClip Clip = new GunClip(3);
+        public override GunClip Clip { get; set; } = new GunClip(3);
 
         public override bool Reloading => Clip.Reloading;
 
