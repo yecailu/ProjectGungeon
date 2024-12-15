@@ -96,6 +96,7 @@ namespace QFramework.ProjectGungeon
             var layout = new RoomNode(RoomTypes.Init);
                 layout.Next(RoomTypes.Normal)
                 .Next(RoomTypes.Normal)
+                .Next(RoomTypes.Chest)
                 .Next(RoomTypes.Normal)
                 .Next(RoomTypes.Normal)
                 .Next(RoomTypes.Final);
@@ -114,6 +115,12 @@ namespace QFramework.ProjectGungeon
                 {
                     GenerateRoom(currentRoomStartPosx, Config.NormalRooms.GetRandomItem());
                     currentRoomStartPosx += Config.InitRoom.Codes.First().Length + 2;//加上房间宽度，作为下一个房间的起始位置
+                }
+                else if (node.RoomType == RoomTypes.Chest)
+                {
+                    GenerateRoom(currentRoomStartPosx, Config.ChestRoom);
+                    currentRoomStartPosx += Config.InitRoom.Codes.First().Length + 2;//加上房间宽度，作为下一个房间的起始位置
+
                 }
                 else if (node.RoomType == RoomTypes.Final)
                 {
@@ -150,7 +157,7 @@ namespace QFramework.ProjectGungeon
             }
 
             GenerateRoomByNode(layout);
-            GenerateCorridor(6);
+            GenerateCorridor(7);
 
 
           
@@ -228,6 +235,13 @@ namespace QFramework.ProjectGungeon
                             .Hide();
 
                         room.AddDoor(door);
+                    }
+                    else if (code == 'c')
+                    {
+                        Chest.InstantiateWithParent(room)
+                       .Position2D(new Vector3(x, y, 0))
+                       .Show();
+
                     }
                 }
 

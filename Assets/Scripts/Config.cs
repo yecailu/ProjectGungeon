@@ -6,7 +6,9 @@ namespace QFramework.ProjectGungeon
     {
         Init,
         Normal,
+        Chest,
         Final,
+        
 
     }
 
@@ -23,6 +25,7 @@ namespace QFramework.ProjectGungeon
         @ 主角
         e 敌人
         d 门
+        c 宝箱
         # 终点
         */
 
@@ -147,5 +150,29 @@ namespace QFramework.ProjectGungeon
         .L("1                 1")
         .L("1111111111111111111");
 
+        public static RoomConfig ChestRoom { get; set; } = new RoomConfig()
+        .Type(RoomTypes.Chest)
+        .L("1111111111111111111")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("d                 d")
+        .L("d        c        d")
+        .L("d                 d")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1111111111111111111");
+
     }
+
+
 } 
