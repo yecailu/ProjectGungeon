@@ -19,10 +19,6 @@ namespace QFramework.ProjectGungeon
         {
             new EnemyWaveConfig(),
             new EnemyWaveConfig(),
-            new EnemyWaveConfig(),
-
-
-
         };
 
         private EnemyWaveConfig mCurrentWave = null;

@@ -103,7 +103,26 @@ namespace QFramework.ProjectGungeon
             currentRoomStartPosx += Config.InitRoom.Codes.First().Length + 2;//加上房间宽度，作为下一个房间的起始位置
             GenerateRoom(currentRoomStartPosx, Config.FinalRoom);
 
+            var roomWidth = Config.InitRoom.Codes.First().Length;
+            var roomHeight = Config.InitRoom.Codes.Count;
 
+            for(int index = 0; index < 4; index++)
+            {
+                currentRoomStartPosx = index * (roomWidth + 2);
+                var doorStartPosX = currentRoomStartPosx + roomWidth - 1;
+                var doorStartPosY = 0 + roomHeight / 2 + 1;
+                for (int i = 0; i < 2; i++)
+                {
+                    FloorTilemap.SetTile(new Vector3Int(doorStartPosX + i + 1, doorStartPosY, 0), Floor);
+                    FloorTilemap.SetTile(new Vector3Int(doorStartPosX + i + 1, doorStartPosY + 1, 0), Floor);
+                    FloorTilemap.SetTile(new Vector3Int(doorStartPosX + i + 1, doorStartPosY - 1, 0), Floor);
+                    WallTilemap.SetTile(new Vector3Int(doorStartPosX + i + 1, doorStartPosY + 2, 0), wall);
+                    WallTilemap.SetTile(new Vector3Int(doorStartPosX + i + 1, doorStartPosY - 2, 0), wall);
+
+                }
+            }
+
+           
         }
 
         void GenerateRoom(int startPosX, RoomConfig roomConfig)
