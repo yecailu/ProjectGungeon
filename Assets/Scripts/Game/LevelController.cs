@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static QFramework.ProjectGungeon.RoomConfig;
 
 namespace QFramework.ProjectGungeon
 {
@@ -92,37 +93,71 @@ namespace QFramework.ProjectGungeon
         {
             Room.Hide();
 
+            var layout = new RoomNode(RoomTypes.Init);
+                layout.Next(RoomTypes.Normal)
+                .Next(RoomTypes.Normal)
+                .Next(RoomTypes.Normal)
+                .Next(RoomTypes.Normal)
+                .Next(RoomTypes.Final);
+
             var currentRoomStartPosx = 0;//记录当前房间起始位置
-            GenerateRoom(currentRoomStartPosx, Config.InitRoom);
-            currentRoomStartPosx += Config.InitRoom.Codes.First().Length + 2;//加上房间宽度，作为下一个房间的起始位置
-            GenerateRoom(currentRoomStartPosx, Config.NormalRooms.GetRandomItem());
-            currentRoomStartPosx += Config.InitRoom.Codes.First().Length + 2;//加上房间宽度，作为下一个房间的起始位置
-            GenerateRoom(currentRoomStartPosx, Config.NormalRooms.GetRandomItem());
-            currentRoomStartPosx += Config.InitRoom.Codes.First().Length + 2;//加上房间宽度，作为下一个房间的起始位置
-            GenerateRoom(currentRoomStartPosx, Config.NormalRooms.GetRandomItem());
-            currentRoomStartPosx += Config.InitRoom.Codes.First().Length + 2;//加上房间宽度，作为下一个房间的起始位置
-            GenerateRoom(currentRoomStartPosx, Config.FinalRoom);
 
-            var roomWidth = Config.InitRoom.Codes.First().Length;
-            var roomHeight = Config.InitRoom.Codes.Count;
-
-            for(int index = 0; index < 4; index++)
+            
+            void GenerateRoomByNode(RoomNode node)
             {
-                currentRoomStartPosx = index * (roomWidth + 2);
-                var doorStartPosX = currentRoomStartPosx + roomWidth - 1;
-                var doorStartPosY = 0 + roomHeight / 2 + 1;
-                for (int i = 0; i < 2; i++)
+                if (node.RoomType == RoomTypes.Init)
                 {
-                    FloorTilemap.SetTile(new Vector3Int(doorStartPosX + i + 1, doorStartPosY, 0), Floor);
-                    FloorTilemap.SetTile(new Vector3Int(doorStartPosX + i + 1, doorStartPosY + 1, 0), Floor);
-                    FloorTilemap.SetTile(new Vector3Int(doorStartPosX + i + 1, doorStartPosY - 1, 0), Floor);
-                    WallTilemap.SetTile(new Vector3Int(doorStartPosX + i + 1, doorStartPosY + 2, 0), wall);
-                    WallTilemap.SetTile(new Vector3Int(doorStartPosX + i + 1, doorStartPosY - 2, 0), wall);
+                    GenerateRoom(currentRoomStartPosx, Config.InitRoom);
+                    currentRoomStartPosx += Config.InitRoom.Codes.First().Length + 2;//加上房间宽度，作为下一个房间的起始位置
+                }
+                else if (node.RoomType == RoomTypes.Normal)
+                {
+                    GenerateRoom(currentRoomStartPosx, Config.NormalRooms.GetRandomItem());
+                    currentRoomStartPosx += Config.InitRoom.Codes.First().Length + 2;//加上房间宽度，作为下一个房间的起始位置
+                }
+                else if (node.RoomType == RoomTypes.Final)
+                {
+                    GenerateRoom(currentRoomStartPosx, Config.FinalRoom);
+                }
 
+                foreach(var child in node.Children)
+                {
+                    GenerateRoomByNode(child);//递归
                 }
             }
 
-           
+            void GenerateCorridor(int roomCount)
+            {
+                //房间宽高
+                var roomWidth = Config.InitRoom.Codes.First().Length;
+                var roomHeight = Config.InitRoom.Codes.Count;
+
+                for (int index = 0; index < roomCount - 1; index++)//生成四个房间连通的瓷砖
+                {
+                    currentRoomStartPosx = index * (roomWidth + 2);
+                    var doorStartPosX = currentRoomStartPosx + roomWidth - 1;
+                    var doorStartPosY = 0 + roomHeight / 2 + 1;
+                    for (int i = 0; i < 2; i++)
+                    {
+                        FloorTilemap.SetTile(new Vector3Int(doorStartPosX + i + 1, doorStartPosY, 0), Floor);
+                        FloorTilemap.SetTile(new Vector3Int(doorStartPosX + i + 1, doorStartPosY + 1, 0), Floor);
+                        FloorTilemap.SetTile(new Vector3Int(doorStartPosX + i + 1, doorStartPosY - 1, 0), Floor);
+                        WallTilemap.SetTile(new Vector3Int(doorStartPosX + i + 1, doorStartPosY + 2, 0), wall);
+                        WallTilemap.SetTile(new Vector3Int(doorStartPosX + i + 1, doorStartPosY - 2, 0), wall);
+
+                    }
+                }
+            }
+
+            GenerateRoomByNode(layout);
+            GenerateCorridor(6);
+
+
+          
+
+
+
+
         }
 
         void GenerateRoom(int startPosX, RoomConfig roomConfig)
