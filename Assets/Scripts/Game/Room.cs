@@ -14,6 +14,8 @@ namespace QFramework.ProjectGungeon
 
         private HashSet<Enemy> mEnemies = new HashSet<Enemy>();
 
+        public LevelController.RoomGenerateNode GenerateNode { get; set; }
+
         //敌人波次配置，new EnemyWaveConfig(),每多一个波次就加一个
         private List<EnemyWaveConfig> mWaves = new List<EnemyWaveConfig>()
         {

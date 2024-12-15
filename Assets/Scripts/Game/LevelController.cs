@@ -88,10 +88,29 @@ namespace QFramework.ProjectGungeon
             Default = null;
         }
 
+        public class RoomGenerateNode
+        {
+            public int X { get; set; }
+            public int Y { get; set; }
+
+            public HashSet<DoorDirections> Directions { get; set; }
+
+            public RoomNode Node;
+        }
+
+        public enum DoorDirections
+        {
+            Up,
+            Down,
+            Left,
+            Right
+        
+        }
 
         void Start()
         {
             Room.Hide();
+
 
             var layout = new RoomNode(RoomTypes.Init);
                 layout.Next(RoomTypes.Normal)
@@ -101,36 +120,148 @@ namespace QFramework.ProjectGungeon
                 .Next(RoomTypes.Normal)
                 .Next(RoomTypes.Final);
 
+            var layoutGrid = new DynaGrid<RoomGenerateNode>();
+
+
+            void GenerateLayoutBFS(RoomNode roomNode, DynaGrid<RoomGenerateNode> layoutGrid)
+            {
+                //广度优先遍历
+                var queue = new Queue<RoomGenerateNode>();
+                queue.Enqueue(new RoomGenerateNode()
+                {
+                    X = 0,
+                    Y = 0,
+                    Node = roomNode,
+                    Directions = new HashSet<DoorDirections>(),
+
+                });
+
+                while (queue.Count > 0)
+                {
+                    var generateNode = queue.Dequeue();
+
+                    layoutGrid[generateNode.X, generateNode.Y] = generateNode;
+
+                    //获取扩散的方向
+
+                    var availabelDirections = new List<DoorDirections>();
+                    if (layoutGrid[generateNode.X + 1, generateNode.Y] == null)
+                    {
+                        availabelDirections.Add(DoorDirections.Right);
+                    }
+                    if (layoutGrid[generateNode.X - 1, generateNode.Y] == null)
+                    {
+                        availabelDirections.Add(DoorDirections.Left);
+                    }
+                    if (layoutGrid[generateNode.X, generateNode.Y + 1] == null)
+                    {
+                        availabelDirections.Add(DoorDirections.Up);
+                    }
+                    if (layoutGrid[generateNode.X, generateNode.Y - 1] == null)
+                    {
+                        availabelDirections.Add(DoorDirections.Down);
+                    }
+
+                    foreach(var roomNodeChild in generateNode.Node.Children)
+                    {
+                        //随机选择一个扩散方向
+                        var nextRoomDirection = availabelDirections.GetRandomItem();
+
+                        //生成房间
+                        if (nextRoomDirection == DoorDirections.Right)
+                        {
+                            generateNode.Directions.Add(DoorDirections.Right);
+                            queue.Enqueue(new RoomGenerateNode()
+                            {
+                                X = generateNode.X + 1,
+                                Y = generateNode.Y,
+                                Node = roomNodeChild,
+                                Directions = new HashSet<DoorDirections>()
+                                { 
+                                    DoorDirections.Left,
+                                }
+                            });
+                        }
+                        else if (nextRoomDirection == DoorDirections.Left)
+                        {
+                            generateNode.Directions.Add(DoorDirections.Left);
+                            queue.Enqueue(new RoomGenerateNode()
+                            {
+                                X = generateNode.X - 1,
+                                Y = generateNode.Y,
+                                Node = roomNodeChild,
+                                Directions = new HashSet<DoorDirections>()
+                                {
+                                    DoorDirections.Right,
+                                }
+                            });
+                        }
+                        else if (nextRoomDirection == DoorDirections.Up)
+                        {
+                            generateNode.Directions.Add(DoorDirections.Up);
+                            queue.Enqueue(new RoomGenerateNode()
+                            {
+                                X = generateNode.X,
+                                Y = generateNode.Y + 1,
+                                Node = roomNodeChild,
+                                Directions = new HashSet<DoorDirections>()
+                                {
+                                    DoorDirections.Down,
+                                }
+                            });
+                        }
+                        else if (nextRoomDirection == DoorDirections.Down)
+                        {
+                            generateNode.Directions.Add(DoorDirections.Down);
+                            queue.Enqueue(new RoomGenerateNode()
+                            {
+                                X = generateNode.X,
+                                Y = generateNode.Y - 1,
+                                Node = roomNodeChild,
+                                Directions = new HashSet<DoorDirections>()
+                                {
+                                    DoorDirections.Up,
+                                }
+                            });
+                        }
+                    }
+                    
+                }
+            }
+
+            GenerateLayoutBFS(layout, layoutGrid);
+
+            layoutGrid.ForEach((x, y, generateNode) =>
+            {
+                GenerateRoomByNode(x, y, generateNode);
+
+            });
+
             var currentRoomStartPosx = 0;//记录当前房间起始位置
 
             
-            void GenerateRoomByNode(RoomNode node)
+            void GenerateRoomByNode(int x, int y, RoomGenerateNode node)
             {
-                if (node.RoomType == RoomTypes.Init)
+                var roomPosX = x * (Config.InitRoom.Codes.First().Length + 2);
+                var roomPosY = y * (Config.InitRoom.Codes.Count + 2); 
+                if (node.Node.RoomType == RoomTypes.Init)
                 {
-                    GenerateRoom(currentRoomStartPosx, Config.InitRoom);
-                    currentRoomStartPosx += Config.InitRoom.Codes.First().Length + 2;//加上房间宽度，作为下一个房间的起始位置
+                    GenerateRoom(roomPosX, roomPosY, Config.InitRoom, node);
                 }
-                else if (node.RoomType == RoomTypes.Normal)
+                else if (node.Node.RoomType == RoomTypes.Normal)
                 {
-                    GenerateRoom(currentRoomStartPosx, Config.NormalRooms.GetRandomItem());
-                    currentRoomStartPosx += Config.InitRoom.Codes.First().Length + 2;//加上房间宽度，作为下一个房间的起始位置
+                    GenerateRoom(roomPosX, roomPosY, Config.NormalRooms.GetRandomItem(), node);
                 }
-                else if (node.RoomType == RoomTypes.Chest)
+                else if (node.Node.RoomType == RoomTypes.Chest)
                 {
-                    GenerateRoom(currentRoomStartPosx, Config.ChestRoom);
-                    currentRoomStartPosx += Config.InitRoom.Codes.First().Length + 2;//加上房间宽度，作为下一个房间的起始位置
+                    GenerateRoom(roomPosX, roomPosY, Config.ChestRoom, node);
 
                 }
-                else if (node.RoomType == RoomTypes.Final)
+                else if (node.Node.RoomType == RoomTypes.Final)
                 {
-                    GenerateRoom(currentRoomStartPosx, Config.FinalRoom);
+                    GenerateRoom(roomPosX, roomPosY, Config.FinalRoom, node);
                 }
 
-                foreach(var child in node.Children)
-                {
-                    GenerateRoomByNode(child);//递归
-                }
             }
 
             void GenerateCorridor(int roomCount)
@@ -156,8 +287,7 @@ namespace QFramework.ProjectGungeon
                 }
             }
 
-            GenerateRoomByNode(layout);
-            GenerateCorridor(7);
+            //GenerateCorridor(7);
 
 
           
@@ -167,7 +297,7 @@ namespace QFramework.ProjectGungeon
 
         }
 
-        void GenerateRoom(int startPosX, RoomConfig roomConfig)
+        void GenerateRoom(int startPosX, int startPosY, RoomConfig roomConfig, RoomGenerateNode node)
         {
             var roomCode = roomConfig.Codes;
 
@@ -177,13 +307,15 @@ namespace QFramework.ProjectGungeon
 
             //房间中心点
             var roomPosX = startPosX + roomWidth * 0.5f;
-            var roomPosY = 0.5f + roomHeight * 0.5f;
+            var roomPosY = startPosY + 0.5f + roomHeight * 0.5f;
 
-            //生成房间
+            //生成房间 
             var room = Room.InstantiateWithParent(this)
                 .WithConfig(roomConfig)
                 .Position(roomPosX, roomPosY)
                 .Show();
+
+            room.GenerateNode = node;
 
             room.SelfBoxCollider2D.size = new Vector2(roomWidth - 2, roomHeight - 2);//Collider2D适配房间大小
 
@@ -198,7 +330,7 @@ namespace QFramework.ProjectGungeon
                     var code = rowCode[j];
 
                     var x = startPosX + j;
-                    var y = roomCode.Count - i;
+                    var y = startPosY + roomCode.Count - i;
 
                     FloorTilemap.SetTile(new Vector3Int(x, y, 0), Floor);//绘制地面
 
@@ -230,11 +362,83 @@ namespace QFramework.ProjectGungeon
                     }
                     else if (code == 'd')
                     {
-                        var door = Door.InstantiateWithParent(room)
-                            .Position2D(new Vector3(x, y, 0))
-                            .Hide();
+                        if (node.Directions.Contains(DoorDirections.Right))
+                        {
 
-                        room.AddDoor(door);
+                        }
+                        var doorDistance = new Vector2(x + 0.5f, y + 0.5f) - new Vector2(roomPosX, roomPosY);
+
+                        if (doorDistance.x.Abs() > doorDistance.y.Abs())//不是在左边就是在右边
+                        {
+                            if (doorDistance.x > 0)//在右边
+                            {
+                                if (node.Directions.Contains(DoorDirections.Right))
+                                {
+                                    var door = Door.InstantiateWithParent(room)
+                                                        .Position2D(new Vector3(x, y, 0))
+                                                        .Hide();
+
+                                    room.AddDoor(door);
+                                }
+                                else
+                                {
+                                    WallTilemap.SetTile(new Vector3Int(x, y, 0), wall);//绘制墙壁
+                                }
+                            }
+                            else
+                            {
+                                if (node.Directions.Contains(DoorDirections.Left))
+                                {
+                                    var door = Door.InstantiateWithParent(room)
+                                                        .Position2D(new Vector3(x, y, 0))
+                                                        .Hide();
+
+                                    room.AddDoor(door);
+                                }
+                                else
+                                {
+                                    WallTilemap.SetTile(new Vector3Int(x, y, 0), wall);//绘制墙壁
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            if (doorDistance.y > 0)//在右边
+                            {
+                                if (node.Directions.Contains(DoorDirections.Up))
+                                {
+                                    var door = Door.InstantiateWithParent(room)
+                                                        .Position2D(new Vector3(x, y, 0))
+                                                        .Hide();
+
+                                    room.AddDoor(door);
+                                }
+                                else
+                                {
+                                    WallTilemap.SetTile(new Vector3Int(x, y, 0), wall);//绘制墙壁
+                                }
+                            }
+                            else
+                            {
+                                if (node.Directions.Contains(DoorDirections.Down))
+                                {
+                                    var door = Door.InstantiateWithParent(room)
+                                                        .Position2D(new Vector3(x, y, 0))
+                                                        .Hide();
+
+                                    room.AddDoor(door);
+                                }
+                                else
+                                {
+                                    WallTilemap.SetTile(new Vector3Int(x, y, 0), wall);//绘制墙壁
+                                }
+                            }
+                        }
+
+
+
+
                     }
                     else if (code == 'c')
                     {
