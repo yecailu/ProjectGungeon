@@ -1165,10 +1165,10 @@ GameObject:
   m_Component:
   - component: {fileID: 330987075}
   - component: {fileID: 330987073}
-  - component: {fileID: 330987080}
   - component: {fileID: 330987077}
   - component: {fileID: 330987079}
   - component: {fileID: 330987078}
+  - component: {fileID: 330987080}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1384,8 +1384,8 @@ MonoBehaviour:
     Object: {fileID: 8300000, guid: cc2b02b2660c8bb4784e3e818b38d038, type: 3}
   - MemberName: SelfAudioSource
     Object: {fileID: 330987078}
---- !u!61 &330987080
-BoxCollider2D:
+--- !u!58 &330987080
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1416,19 +1416,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.018576205, y: 0.26935622}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: 0.07507396}
   serializedVersion: 2
-  m_Size: {x: 1.1114577, y: 1.4644072}
-  m_EdgeRadius: 0
+  m_Radius: 0.42492604
 --- !u!1 &369177072
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,7 +1617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Namespace: QFramework.ProjectGungeon
   ScriptName: Room
-  ScriptsFolder: Assets/Scripts/Game/Weapon
+  ScriptsFolder: Assets\Scripts\Game
   GeneratePrefab: 0
   PrefabFolder: Assets/Art/Prefab
   ArchitectureFullTypeName: 
@@ -5284,6 +5274,7 @@ GameObject:
   - component: {fileID: 1520179739}
   - component: {fileID: 1520179738}
   - component: {fileID: 1520179737}
+  - component: {fileID: 1520179742}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -5310,6 +5301,8 @@ MonoBehaviour:
   PrefabFolder: Assets/Art/Prefab
   ArchitectureFullTypeName: 
   ViewControllerFullTypeName: 
+  DoorClose: {fileID: 21300000, guid: ddd46543f6a35c44f81395de34854e0b, type: 3}
+  DoorOpen: {fileID: 21300000, guid: 3ea89a5a2921a4b44a420ad8b02b4d3d, type: 3}
 --- !u!114 &1520179738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5438,6 +5431,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1995000335}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1520179742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520179736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411e729afed24c62a04e2b99d9122e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Binds:
+  - MemberName: DoorClose
+    Object: {fileID: 21300000, guid: ddd46543f6a35c44f81395de34854e0b, type: 3}
+  - MemberName: DoorOpen
+    Object: {fileID: 21300000, guid: 3ea89a5a2921a4b44a420ad8b02b4d3d, type: 3}
 --- !u!1 &1613781891
 GameObject:
   m_ObjectHideFlags: 0

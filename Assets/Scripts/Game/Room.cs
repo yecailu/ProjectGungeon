@@ -12,6 +12,8 @@ namespace QFramework.ProjectGungeon
 
         private List<Door> mDoors = new List<Door>();
 
+        public List<Door> Doors => mDoors;
+
         private HashSet<Enemy> mEnemies = new HashSet<Enemy>();
 
         public LevelController.RoomGenerateNode GenerateNode { get; set; }
@@ -63,7 +65,7 @@ namespace QFramework.ProjectGungeon
 
                             foreach (var door in mDoors)
                             {
-                                door.Hide();
+                                door.State.ChangeState(Door.States.Open);
                             }
                         }
                     }
@@ -98,7 +100,7 @@ namespace QFramework.ProjectGungeon
 
                         foreach (var door in mDoors)
                         {
-                            door.Show();
+                            door.State.ChangeState(Door.States.Close);
                         }
                     }
 
