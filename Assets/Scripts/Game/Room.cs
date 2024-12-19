@@ -3,6 +3,8 @@ using QFramework;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using Unity.VisualScripting;
+using Random = UnityEngine.Random;
 
 namespace QFramework.ProjectGungeon
 {
@@ -19,11 +21,7 @@ namespace QFramework.ProjectGungeon
         public LevelController.RoomGenerateNode GenerateNode { get; set; }
 
         //敌人波次配置，new EnemyWaveConfig(),每多一个波次就加一个
-        private List<EnemyWaveConfig> mWaves = new List<EnemyWaveConfig>()
-        {
-            new EnemyWaveConfig(),
-
-        };
+        private List<EnemyWaveConfig> mWaves = new List<EnemyWaveConfig>();
 
         private EnemyWaveConfig mCurrentWave = null;
 
@@ -36,11 +34,32 @@ namespace QFramework.ProjectGungeon
 
         public RoomStates State { get; set; } = RoomStates.Close;
 
-        public RoomConfig Config { get; private set; }
+        public RoomConfig Config { get; private set; } = new RoomConfig();
         public Room WithConfig(RoomConfig roomConfig)
         {
             Config = roomConfig;
             return this;
+        }
+
+
+        private void Start()
+        {
+            if (Config.RoomType == RoomTypes.Init)
+            {
+                foreach (var door in mDoors)
+                {
+                    door.State.ChangeState(Door.States.IdleOpen);
+                }
+            }
+            else if (Config.RoomType == RoomTypes.Normal)
+            {
+                var wavesCount = Random.Range(1, 3 + 1);
+
+                for (int i = 0; i < wavesCount; i++)
+                {
+                    mWaves.Add(new EnemyWaveConfig());
+                }
+            }
         }
 
         private void Update()
@@ -74,11 +93,6 @@ namespace QFramework.ProjectGungeon
             }
         }
 
-        void Start()
-		{
-			// Code Here
-		}
-
 
 		public void AddEnemyGeneratePos(Vector3 enemyGeneratePos)
 		{
@@ -100,7 +114,7 @@ namespace QFramework.ProjectGungeon
 
                         foreach (var door in mDoors)
                         {
-                            door.State.ChangeState(Door.States.Close);
+                            door.State.ChangeState(Door.States.BattleClose);
                         }
                     }
 

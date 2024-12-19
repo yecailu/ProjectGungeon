@@ -1,4 +1,4 @@
-// Generate Id:4f72360f-7c2d-480e-9699-be598c8e497a
+// Generate Id:183861c9-db06-4a16-aace-0a97f0022364
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -10,6 +10,9 @@ namespace QFramework.ProjectGungeon
 
 		public UnityEngine.Sprite DoorOpen;
 
+		public UnityEngine.BoxCollider2D SelfBoxCollider2D;
+
+		public UnityEngine.SpriteRenderer SelfSpriteRenderer;
 
 	}
 }

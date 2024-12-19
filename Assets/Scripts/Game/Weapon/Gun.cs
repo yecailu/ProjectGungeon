@@ -59,7 +59,7 @@ namespace QFramework.ProjectGungeon
 
         public void TryPlayEmptyShootSound()
         {
-            if (!Clip.CanShoot)//没有弹药了
+            if (!Clip.CanShoot && !Reloading)//没有弹药了
             {
                 if (Time.frameCount % 30 == 0)//每0.5秒播放一次空子弹声音
                 {

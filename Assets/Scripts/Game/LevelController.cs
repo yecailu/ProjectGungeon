@@ -114,53 +114,14 @@ namespace QFramework.ProjectGungeon
 
             var layout = new RoomNode(RoomTypes.Init);
                 layout.Next(RoomTypes.Normal)
-                .Next(RoomTypes.Normal, n =>
-                {
-                    n.Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Chest);
-                })
-                .Next(RoomTypes.Chest, n =>
-                {
-                    n.Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Chest);
-                })
-                .Next(RoomTypes.Normal, n =>
-                {
-                    n.Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Chest);
-                })
-                .Next(RoomTypes.Normal, n =>
-                {
-                    n.Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Normal)
-                    .Next(RoomTypes.Chest);
-                })
+                .Next(RoomTypes.Normal)
+                .Next(RoomTypes.Normal)
+                //.Next(RoomTypes.Normal, n =>
+                //{
+                //    n.Next(RoomTypes.Normal)
+                //    .Next(RoomTypes.Chest);
+                //})
+                .Next(RoomTypes.Chest)
                 .Next(RoomTypes.Final);
 
             var layoutGrid = new DynaGrid<RoomGenerateNode>();
@@ -183,16 +144,25 @@ namespace QFramework.ProjectGungeon
                 {
                     var generateNode = queue.Dequeue();
 
-                    layoutGrid[generateNode.X, generateNode.Y] = generateNode;
+                    if (layoutGrid[generateNode.X, generateNode.Y] == null)
+                    {
+                        layoutGrid[generateNode.X, generateNode.Y] = generateNode;
+                    }
+                    else
+                    { 
+                        Debug.Log("房间生成冲突");
+                        return false;
+                    }
 
                     //获取扩散的方向
 
-                    var availabelDirections = LevelGenHelper.GetAvailableDirections(layoutGrid, generateNode.X, generateNode.Y);
+                    var availabelDirections = 
+                        LevelGenHelper.GetAvailableDirections(layoutGrid, generateNode.X, generateNode.Y);
                     
 
                     if(generateNode.Node.Children.Count > availabelDirections.Count)
                     {
-                        Debug.Log("房间生成失败");
+                        Debug.Log("房间生成冲突");
                         return false;
                     }
 
@@ -217,7 +187,8 @@ namespace QFramework.ProjectGungeon
                     foreach(var roomNodeChild in generateNode.Node.Children)
                     {
                         //随机选择一个扩散方向
-                        var nextRoomDirection = predictGenerate ? directions.First().Direction : availabelDirections.GetAndRemoveRandomItem();
+                        var nextRoomDirection = predictGenerate 
+                            ? directions.First().Direction : availabelDirections.GetAndRemoveRandomItem();
                         if (predictGenerate)
                         {
                             directions.RemoveAt(0);
@@ -291,8 +262,8 @@ namespace QFramework.ProjectGungeon
             var predictWeight = 0;
 
             print(predictWeight + ":generate");
-            while(GenerateLayoutBFS(layout, layoutGrid, predictWeight))
-            {
+            while(!GenerateLayoutBFS(layout, layoutGrid, predictWeight))
+            {  
                 print("重新生成");
                 predictWeight++;
                 print(predictWeight + ":generate");

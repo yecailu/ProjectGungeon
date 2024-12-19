@@ -1,3 +1,4 @@
+using QFramework;
 using QFramework.ProjectGungeon;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,8 +13,6 @@ public class Enemy : MonoBehaviour
     public SpriteRenderer Sprite;
 
     public List<AudioClip> ShootSounds = new List<AudioClip>();
-
-    public AudioSource ShootSoundPlayer;
 
     public Rigidbody2D Rigidbody2D;
 
@@ -106,8 +105,8 @@ public class Enemy : MonoBehaviour
 
                     //≤•∑≈…‰ª˜“Ù–ß
                     var soundIndex = Random.Range(0, ShootSounds.Count);
-                    ShootSoundPlayer.clip = ShootSounds[soundIndex];
-                    ShootSoundPlayer.Play();
+                    AudioKit.PlaySound(ShootSounds[soundIndex]);
+
                 }
 
             }
