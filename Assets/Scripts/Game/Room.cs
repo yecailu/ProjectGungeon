@@ -18,6 +18,8 @@ namespace QFramework.ProjectGungeon
 
         private HashSet<Enemy> mEnemies = new HashSet<Enemy>();
 
+        public HashSet<Enemy> Enemies => mEnemies;
+
         public LevelController.RoomGenerateNode GenerateNode { get; set; }
 
         //敌人波次配置，new EnemyWaveConfig(),每多一个波次就加一个
@@ -104,6 +106,7 @@ namespace QFramework.ProjectGungeon
         {
             if (collision.CompareTag("Player"))
             {
+                Global.currentRoom = this;
                 if (Config.RoomType == RoomTypes.Normal)//进入普通房间时才出现门
                 {
                     if (State == RoomStates.Close)

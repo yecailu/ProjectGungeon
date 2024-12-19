@@ -114,12 +114,22 @@ namespace QFramework.ProjectGungeon
 
             var layout = new RoomNode(RoomTypes.Init);
                 layout.Next(RoomTypes.Normal)
+                .Next(RoomTypes.Normal)
+                .Next(RoomTypes.Chest)
                 //.Next(RoomTypes.Normal, n =>
                 //{
                 //    n.Next(RoomTypes.Normal)
+                //    .Next(RoomTypes.Normal)
+                //    .Next(RoomTypes.Normal)
                 //    .Next(RoomTypes.Chest);
                 //})
-                .Next(RoomTypes.Chest)
+                //.Next(RoomTypes.Chest, n =>
+                //{
+                //    n.Next(RoomTypes.Normal)
+                //    .Next(RoomTypes.Normal)
+                //    .Next(RoomTypes.Normal)
+                //    .Next(RoomTypes.Chest);
+                //})
                 .Next(RoomTypes.Final);
 
             var layoutGrid = new DynaGrid<RoomGenerateNode>();
@@ -142,14 +152,14 @@ namespace QFramework.ProjectGungeon
                 {
                     var generateNode = queue.Dequeue();
 
-                    if (layoutGrid[generateNode.X, generateNode.Y] == null)
+                    if (layoutGrid[generateNode.X, generateNode.Y] != null)
                     {
-                        layoutGrid[generateNode.X, generateNode.Y] = generateNode;
+                        Debug.Log("冲突了");
+                        return false;
                     }
                     else
-                    { 
-                        Debug.Log("房间生成冲突");
-                        return false;
+                    {
+                        layoutGrid[generateNode.X, generateNode.Y] = generateNode;
                     }
 
                     //获取扩散的方向

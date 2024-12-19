@@ -1,4 +1,4 @@
-// Generate Id:031664ce-1d3e-4d7d-93ff-2f9edf87f005
+// Generate Id:e516f804-c6c1-4356-b159-f1c75830770e
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -25,6 +25,8 @@ namespace QFramework.ProjectGungeon
 		public SpriteRenderer GunShootLight;
 
 		public UnityEngine.UI.Text Text;
+
+		public SpriteRenderer Aim;
 
 		public UnityEngine.AudioClip GunTake1;
 

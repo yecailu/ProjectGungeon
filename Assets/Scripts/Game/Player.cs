@@ -2,6 +2,7 @@ using QFramework;
 using QFramework.ProjectGungeon;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -98,6 +99,8 @@ namespace QFramework.ProjectGungeon
             Global.HPChangedEvent();//调用HP改变方法   
         }
 
+        private Enemy mTargetEmeny = null;
+
         void Update()
         {
 
@@ -108,13 +111,47 @@ namespace QFramework.ProjectGungeon
             //得到主角朝向鼠标的方向
             var shootDirection = (mouseWorldPoint - transform.position).normalized;
 
+
+            if (Global.currentRoom && Global.currentRoom.Enemies.Count > 0)
+            {
+                mTargetEmeny = Global.currentRoom.Enemies
+                    .Where(e => e)//判断是否有敌人
+                    .OrderBy(e => (e.Position2D() - mouseWorldPoint.ToVector2()).magnitude)//根据距离远近排序
+                    .FirstOrDefault(e =>
+                    {
+                        var direction = this.Direction2DTo(e);
+
+                        if (Physics2D.Raycast(this.Position2D(), direction.normalized, direction.magnitude,
+                            LayerMask.GetMask("Wall")))
+                        {
+                            return false;
+                        }
+                        return true;
+                    });
+
+                if (mTargetEmeny)
+                {
+                    shootDirection = this.NormalizedDirection2DTo(mTargetEmeny);
+                    Aim.Position2D(mTargetEmeny.Position2D());
+                    Aim.Show();
+                }
+                else
+                {
+                    Aim.Hide();
+                }
+            }
+            else
+            {
+                Aim.Hide();
+            }
+
+
             //弧度
             var radius = Mathf.Atan2(shootDirection.y, shootDirection.x);
             //欧拉角
             var eulerAngles = radius * Mathf.Rad2Deg;
             //设置给Weapon
             Weapon.localRotation = Quaternion.Euler(0, 0, eulerAngles);
-
 
             //武器翻转,人物朝向随武器方向
             if (shootDirection.x > 0)
