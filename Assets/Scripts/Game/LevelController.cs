@@ -114,16 +114,59 @@ namespace QFramework.ProjectGungeon
 
             var layout = new RoomNode(RoomTypes.Init);
                 layout.Next(RoomTypes.Normal)
-                .Next(RoomTypes.Normal)
-                .Next(RoomTypes.Chest)
-                .Next(RoomTypes.Normal)
-                .Next(RoomTypes.Normal)
+                .Next(RoomTypes.Normal, n =>
+                {
+                    n.Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Chest);
+                })
+                .Next(RoomTypes.Chest, n =>
+                {
+                    n.Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Chest);
+                })
+                .Next(RoomTypes.Normal, n =>
+                {
+                    n.Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Chest);
+                })
+                .Next(RoomTypes.Normal, n =>
+                {
+                    n.Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Normal)
+                    .Next(RoomTypes.Chest);
+                })
                 .Next(RoomTypes.Final);
 
             var layoutGrid = new DynaGrid<RoomGenerateNode>();
 
 
-            void GenerateLayoutBFS(RoomNode roomNode, DynaGrid<RoomGenerateNode> layoutGrid)
+            bool GenerateLayoutBFS(RoomNode roomNode, DynaGrid<RoomGenerateNode> layoutGrid, int predictWeight = 0)
             {
                 //广度优先遍历
                 var queue = new Queue<RoomGenerateNode>();
@@ -144,28 +187,41 @@ namespace QFramework.ProjectGungeon
 
                     //获取扩散的方向
 
-                    var availabelDirections = new List<DoorDirections>();
-                    if (layoutGrid[generateNode.X + 1, generateNode.Y] == null)
+                    var availabelDirections = LevelGenHelper.GetAvailableDirections(layoutGrid, generateNode.X, generateNode.Y);
+                    
+
+                    if(generateNode.Node.Children.Count > availabelDirections.Count)
                     {
-                        availabelDirections.Add(DoorDirections.Right);
+                        Debug.Log("房间生成失败");
+                        return false;
                     }
-                    if (layoutGrid[generateNode.X - 1, generateNode.Y] == null)
+
+                    var directions = LevelGenHelper.Predict(layoutGrid, generateNode.X, generateNode.Y);
+                    //大到小排序
+                    directions.Sort((a, b) =>{ return b.Count - a.Count; });
+
+                    var predictGenerate = false;
+
+                    if(Random.Range(0, 100) < predictWeight)
                     {
-                        availabelDirections.Add(DoorDirections.Left);
+                        //进行最优解生成
+                        predictGenerate = true;
                     }
-                    if (layoutGrid[generateNode.X, generateNode.Y + 1] == null)
+                    else
                     {
-                        availabelDirections.Add(DoorDirections.Up);
+                        //随机选择扩散方向
+                        predictGenerate = false;
                     }
-                    if (layoutGrid[generateNode.X, generateNode.Y - 1] == null)
-                    {
-                        availabelDirections.Add(DoorDirections.Down);
-                    }
+
 
                     foreach(var roomNodeChild in generateNode.Node.Children)
                     {
                         //随机选择一个扩散方向
-                        var nextRoomDirection = availabelDirections.GetRandomItem();
+                        var nextRoomDirection = predictGenerate ? directions.First().Direction : availabelDirections.GetAndRemoveRandomItem();
+                        if (predictGenerate)
+                        {
+                            directions.RemoveAt(0);
+                        }
 
                         //生成房间
                         if (nextRoomDirection == DoorDirections.Right)
@@ -227,9 +283,23 @@ namespace QFramework.ProjectGungeon
                     }
                     
                 }
+
+                return true;
+
             }
 
-            GenerateLayoutBFS(layout, layoutGrid);
+            var predictWeight = 0;
+
+            print(predictWeight + ":generate");
+            while(GenerateLayoutBFS(layout, layoutGrid, predictWeight))
+            {
+                print("重新生成");
+                predictWeight++;
+                print(predictWeight + ":generate");
+                layoutGrid.Clear();
+            }
+
+           
 
             var roomGrid = new DynaGrid<Room>();
             layoutGrid.ForEach((x, y, generateNode) =>

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine.Rendering;
 
 namespace QFramework.ProjectGungeon
@@ -31,11 +32,12 @@ namespace QFramework.ProjectGungeon
                 RoomType = type;
             }
 
-            public RoomNode Next(RoomTypes type)
+            public RoomNode Next(RoomTypes type, Action<RoomNode> branch = null)
             {
                 var roomNode = new RoomNode(type);
 
                 Children.Add(roomNode);
+                branch?.Invoke(roomNode);
                 return roomNode;
             }
 
