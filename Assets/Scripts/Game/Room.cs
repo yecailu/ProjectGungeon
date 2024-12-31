@@ -16,9 +16,9 @@ namespace QFramework.ProjectGungeon
 
         public List<Door> Doors => mDoors;
 
-        private HashSet<Enemy> mEnemies = new HashSet<Enemy>();
+        private HashSet<IEnemy> mEnemies = new HashSet<IEnemy>();
 
-        public HashSet<Enemy> Enemies => mEnemies;
+        public HashSet<IEnemy> Enemies => mEnemies;
 
         public LevelController.RoomGenerateNode GenerateNode { get; set; }
 
@@ -68,7 +68,7 @@ namespace QFramework.ProjectGungeon
         {
             if(Time.frameCount % 30 == 0)
             {
-                mEnemies.RemoveWhere(e => !e);
+                mEnemies.RemoveWhere(e => !e.GameObject);
 
                 if (mEnemies.Count == 0)//敌人全部死亡
                 {
@@ -139,11 +139,11 @@ namespace QFramework.ProjectGungeon
 
             for (int i = 0; i < enemyCount; i++)
             {
-                var enemy = Instantiate(LevelController.Default.Enemy);
+                var enemy = Instantiate(LevelController.Default.Enemy.GameObject);
                 enemy.transform.position = pos2Gen[i];
                 enemy.gameObject.SetActive(true);
                     
-                mEnemies.Add(enemy);//每一个敌人都记录下来
+                mEnemies.Add(enemy.GetComponent<IEnemy>());//每一个敌人都记录下来
             }
 
         }

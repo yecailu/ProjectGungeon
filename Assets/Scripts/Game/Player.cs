@@ -99,7 +99,7 @@ namespace QFramework.ProjectGungeon
             Global.HPChangedEvent();//调用HP改变方法   
         }
 
-        private Enemy mTargetEmeny = null;
+        private IEnemy mTargetEmeny = null;
 
         void Update()
         {
@@ -115,11 +115,11 @@ namespace QFramework.ProjectGungeon
             if (Global.currentRoom && Global.currentRoom.Enemies.Count > 0)
             {
                 mTargetEmeny = Global.currentRoom.Enemies
-                    .Where(e => e)//判断是否有敌人
-                    .OrderBy(e => (e.Position2D() - mouseWorldPoint.ToVector2()).magnitude)//根据距离远近排序
+                    .Where(e => e.GameObject)//判断是否有敌人
+                    .OrderBy(e => (e.GameObject.Position2D() - mouseWorldPoint.ToVector2()).magnitude)//根据距离远近排序
                     .FirstOrDefault(e =>
                     {
-                        var direction = this.Direction2DTo(e);
+                        var direction = this.Direction2DTo(e.GameObject);
 
                         if (Physics2D.Raycast(this.Position2D(), direction.normalized, direction.magnitude,
                             LayerMask.GetMask("Wall")))
@@ -129,10 +129,10 @@ namespace QFramework.ProjectGungeon
                         return true;
                     });
 
-                if (mTargetEmeny)
+                if (mTargetEmeny != null && mTargetEmeny.GameObject)
                 {
-                    shootDirection = this.NormalizedDirection2DTo(mTargetEmeny);
-                    Aim.Position2D(mTargetEmeny.Position2D());
+                    shootDirection = this.NormalizedDirection2DTo(mTargetEmeny.GameObject);
+                    Aim.Position2D(mTargetEmeny.GameObject.Position2D());
                     Aim.Show();
                 }
                 else

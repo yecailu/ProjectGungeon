@@ -6,12 +6,7 @@ using UnityEngine;
 
 namespace QFramework.ProjectGungeon
 {
-    public interface IEnemy
-    {
-        GameObject GameObject { get; }
-    }
-
-    public class Enemy : MonoBehaviour, IEnemy
+    public class EnemyB : MonoBehaviour, IEnemy
     {
         public Player player;
 
@@ -55,7 +50,7 @@ namespace QFramework.ProjectGungeon
                     FollowPlayerSeconds = Random.Range(0.5f, 3f);//进入跟随状态时随机设置跟随时间
 
                 })
-                .OnUpdate(() => 
+                .OnUpdate(() =>
                 {
 
                     if (Global.Player)
@@ -94,11 +89,25 @@ namespace QFramework.ProjectGungeon
                         {
                             //敌人到玩家的方向
                             var directionToPlayer = (Global.Player.transform.position - transform.position).normalized;
-                            //敌人子弹逻辑
-                            var enemyBullet = Instantiate(EnemyBullet);
-                            enemyBullet.transform.position = transform.position;
-                            enemyBullet.Velocity = directionToPlayer.normalized * 5;
-                            enemyBullet.gameObject.SetActive(true);
+
+                            var count = 3;
+                            var durationAngle = 15;
+
+                            var mainAngle = directionToPlayer.ToVector2().ToAngle();//将敌人朝向设置成Vector2再变成欧拉角
+                            for (int i = 0; i < count; i++)
+                            {
+                                var angle = mainAngle + i * durationAngle - count * durationAngle * 0.5f;
+                                var direction = angle.AngleToDirection2D();
+                                var pos = transform.Position2D() + 0.5f * direction;//子弹出现位置
+
+
+                                //敌人子弹逻辑
+                                var enemyBullet = Instantiate(EnemyBullet);
+                                enemyBullet.transform.position = pos;
+                                enemyBullet.Velocity = direction * 5;
+                                enemyBullet.gameObject.SetActive(true);
+
+                            }
 
                             //播放射击音效
                             var soundIndex = Random.Range(0, ShootSounds.Count);
@@ -130,6 +139,7 @@ namespace QFramework.ProjectGungeon
 
         void Update() => State.Update();
         public GameObject GameObject => gameObject;
+
 
     }
 }

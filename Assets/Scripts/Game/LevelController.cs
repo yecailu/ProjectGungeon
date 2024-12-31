@@ -67,7 +67,7 @@ namespace QFramework.ProjectGungeon
 
 
         public Player Player;
-        public Enemy Enemy;
+        public IEnemy Enemy => EnemyB.GetComponent<IEnemy>();
 
         public Final Final;
 
@@ -78,7 +78,7 @@ namespace QFramework.ProjectGungeon
         private void Awake()
         {
             Player.gameObject.SetActive(false);
-            Enemy.gameObject.SetActive(false);
+            Enemy.GameObject.SetActive(false);
 
             Default = this;
         }
