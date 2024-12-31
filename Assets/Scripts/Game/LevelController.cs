@@ -114,7 +114,6 @@ namespace QFramework.ProjectGungeon
 
             var layout = new RoomNode(RoomTypes.Init);
                 layout.Next(RoomTypes.Normal)
-                .Next(RoomTypes.Normal)
                 .Next(RoomTypes.Chest)
                 //.Next(RoomTypes.Normal, n =>
                 //{

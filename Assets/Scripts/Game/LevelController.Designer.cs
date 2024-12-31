@@ -1,4 +1,4 @@
-// Generate Id:125fdbeb-4f17-4763-92c1-4869782d9e2d
+// Generate Id:c5fd4f52-f659-4b6d-adf2-463cb478fa09
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -13,6 +13,22 @@ namespace QFramework.ProjectGungeon
 		public QFramework.ProjectGungeon.HP1 HP1;
 
 		public QFramework.ProjectGungeon.Chest Chest;
+
+		public UnityEngine.GameObject EnemyA;
+
+		public UnityEngine.GameObject EnemyB;
+
+		public UnityEngine.GameObject EnemyC;
+
+		public UnityEngine.GameObject EnemyD;
+
+		public UnityEngine.GameObject EnemyE;
+
+		public UnityEngine.GameObject EnemyF;
+
+		public UnityEngine.GameObject EnemyG;
+
+		public UnityEngine.GameObject EnemyH;
 
 	}
 }
