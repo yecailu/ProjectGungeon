@@ -15,7 +15,7 @@ namespace QFramework.ProjectGungeon
         void Hurt(float damage);
     }
 
-    public class Enemy : MonoBehaviour, IEnemy
+    public class EnemyA : MonoBehaviour, IEnemy
     {
         public Player player;
 

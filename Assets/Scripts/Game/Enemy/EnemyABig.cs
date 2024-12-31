@@ -6,7 +6,8 @@ using UnityEngine;
 
 namespace QFramework.ProjectGungeon
 {
-    public class EnemyB : MonoBehaviour, IEnemy
+
+    public class EnemyABig : MonoBehaviour, IEnemy
     {
         public Player player;
 
@@ -18,7 +19,7 @@ namespace QFramework.ProjectGungeon
 
         public Rigidbody2D Rigidbody2D;
 
-        public float HP { get; set; } = 5;
+        public float HP { get; set; } = 10;
 
 
         public void Hurt(float damage)
@@ -50,7 +51,7 @@ namespace QFramework.ProjectGungeon
                     FollowPlayerSeconds = Random.Range(0.5f, 3f);//进入跟随状态时随机设置跟随时间
 
                 })
-                .OnUpdate(() =>
+                .OnUpdate(() => 
                 {
 
                     if (Global.Player)
@@ -89,9 +90,11 @@ namespace QFramework.ProjectGungeon
                         {
                             //敌人到玩家的方向
                             var directionToPlayer = (Global.Player.transform.position - transform.position).normalized;
-
-                            BulletHelper.ShootSpread(3, 15, transform.position, directionToPlayer, 0.5f, EnemyBullet);
-                            
+                            //敌人子弹逻辑
+                            var enemyBullet = Instantiate(EnemyBullet);
+                            enemyBullet.transform.position = transform.position;
+                            enemyBullet.Velocity = directionToPlayer.normalized * 10;
+                            enemyBullet.gameObject.SetActive(true);
 
                             //播放射击音效
                             var soundIndex = Random.Range(0, ShootSounds.Count);
@@ -118,11 +121,11 @@ namespace QFramework.ProjectGungeon
             State.StartState(States.FollowPlayer);
         }
 
+
         private void Start()
         {
             Application.targetFrameRate = 60;
         }
-
 
         void Update() => State.Update();
         public Room Room { get; set; }
@@ -134,5 +137,4 @@ namespace QFramework.ProjectGungeon
         }
 
     }
-
 }

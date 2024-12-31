@@ -87,24 +87,7 @@ namespace QFramework.ProjectGungeon
 
                         if (Global.Player)
                         {
-                            var count = 18;
-                            var durationAngle = 360 / count;
-
-                            var angleOffset = Random.Range(0, 360);
-                            for (int i = 0; i < count; i++)
-                            {
-                                var angle = angleOffset + i * durationAngle;
-                                var direction = angle.AngleToDirection2D();
-                                var pos = transform.Position2D() + 0.5f * direction;//子弹出现位置
-
-
-                                //敌人子弹逻辑
-                                var enemyBullet = Instantiate(EnemyBullet);
-                                enemyBullet.transform.position = pos;
-                                enemyBullet.Velocity = direction * 5;
-                                enemyBullet.gameObject.SetActive(true);
-
-                            }
+                            BulletHelper.ShootAround(18, transform.position, 0.5f, EnemyBullet);
 
                             //播放射击音效
                             var soundIndex = Random.Range(0, ShootSounds.Count);

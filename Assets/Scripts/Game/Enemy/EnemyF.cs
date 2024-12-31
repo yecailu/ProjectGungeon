@@ -3,10 +3,11 @@ using QFramework.ProjectGungeon;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 namespace QFramework.ProjectGungeon
 {
-    public class EnemyB : MonoBehaviour, IEnemy
+    public class EnemyF : MonoBehaviour, IEnemy
     {
         public Player player;
 
@@ -90,12 +91,36 @@ namespace QFramework.ProjectGungeon
                             //敌人到玩家的方向
                             var directionToPlayer = (Global.Player.transform.position - transform.position).normalized;
 
-                            BulletHelper.ShootSpread(3, 15, transform.position, directionToPlayer, 0.5f, EnemyBullet);
-                            
+                            ActionKit.Sequence()
+                            .Callback(() =>
+                            {
+                                //敌人子弹逻辑
+                                BulletHelper.ShootAround(18, transform.position, 0.5f, EnemyBullet);
 
-                            //播放射击音效
-                            var soundIndex = Random.Range(0, ShootSounds.Count);
-                            AudioKit.PlaySound(ShootSounds[soundIndex]);
+                                var soundIndex = Random.Range(0, ShootSounds.Count);
+                                AudioKit.PlaySound(ShootSounds[soundIndex]);
+                            })
+                            .Delay(0.2f)
+                            .Callback(() =>
+                            {
+                                //敌人子弹逻辑
+                                BulletHelper.ShootAround(18, transform.position, 0.5f, EnemyBullet);
+
+                                var soundIndex = Random.Range(0, ShootSounds.Count);
+                                AudioKit.PlaySound(ShootSounds[soundIndex]);
+                            })
+                            .Delay(0.2f)
+                            .Callback(() =>
+                            {
+                                //敌人子弹逻辑
+                                BulletHelper.ShootAround(18, transform.position, 0.5f, EnemyBullet);
+
+                                var soundIndex = Random.Range(0, ShootSounds.Count);
+                                AudioKit.PlaySound(ShootSounds[soundIndex]);
+                            })
+                            .Start(this);
+
+
 
                         }
 
@@ -118,11 +143,11 @@ namespace QFramework.ProjectGungeon
             State.StartState(States.FollowPlayer);
         }
 
+
         private void Start()
         {
             Application.targetFrameRate = 60;
         }
-
 
         void Update() => State.Update();
         public Room Room { get; set; }
@@ -132,7 +157,5 @@ namespace QFramework.ProjectGungeon
         {
             Room.Enemies.Remove(this);
         }
-
     }
-
 }

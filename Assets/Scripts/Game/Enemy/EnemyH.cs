@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace QFramework.ProjectGungeon
 {
-    public class EnemyB : MonoBehaviour, IEnemy
+    public class EnemyH : MonoBehaviour, IEnemy
     {
         public Player player;
 
@@ -78,36 +78,38 @@ namespace QFramework.ProjectGungeon
 
                 });
 
+            var shootSeconds = Random.Range(1.0f, 6.0f);
             State.State(States.Shoot)
                 .OnEnter(() =>
                 {
-                    Rigidbody2D.velocity = Vector2.zero; //开枪时，敌人停止移动
-                    if (State.SecondsOfCurrentState <= Time.deltaTime * 1.5f)
-                    {
 
+                    Rigidbody2D.velocity = Vector2.zero; //开枪时，敌人停止移动
+
+                    shootSeconds = Random.Range(1.0f, 6.0f);
+
+                })
+                .OnUpdate(() =>
+                {
+                    if(State.FrameCountOfCurrentState % 12 == 0)
+                    {
                         if (Global.Player)
                         {
-                            //敌人到玩家的方向
-                            var directionToPlayer = (Global.Player.transform.position - transform.position).normalized;
+                            var directionToPlayer = this.NormalizedDirection2DTo(Global.Player);
 
-                            BulletHelper.ShootSpread(3, 15, transform.position, directionToPlayer, 0.5f, EnemyBullet);
-                            
+
+                            //敌人子弹逻辑
+                            BulletHelper.ShootSpread(8, 15, transform.position, directionToPlayer, 0.5f, EnemyBullet);
+
 
                             //播放射击音效
                             var soundIndex = Random.Range(0, ShootSounds.Count);
                             AudioKit.PlaySound(ShootSounds[soundIndex]);
 
                         }
-
-
                     }
-                })
-                .OnUpdate(() =>
-                {
 
 
-
-                    if (State.SecondsOfCurrentState >= 1.0f)//时间大于1后开始射击，并且赋予敌人随机跟随时间
+                    if (State.SecondsOfCurrentState >= shootSeconds)//时间大于1后开始射击，并且赋予敌人随机跟随时间
                     {
                         State.ChangeState(States.FollowPlayer);
                     }
