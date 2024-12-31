@@ -3,19 +3,11 @@ using QFramework.ProjectGungeon;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 namespace QFramework.ProjectGungeon
 {
-    public interface IEnemy
-    {
-        Room Room { get; set; }
-
-        GameObject GameObject { get; }
-
-        void Hurt(float damage);
-    }
-
-    public class Enemy : MonoBehaviour, IEnemy
+    public class EnemyC : MonoBehaviour, IEnemy
     {
         public Player player;
 
@@ -59,7 +51,7 @@ namespace QFramework.ProjectGungeon
                     FollowPlayerSeconds = Random.Range(0.5f, 3f);//进入跟随状态时随机设置跟随时间
 
                 })
-                .OnUpdate(() => 
+                .OnUpdate(() =>
                 {
 
                     if (Global.Player)
@@ -98,15 +90,46 @@ namespace QFramework.ProjectGungeon
                         {
                             //敌人到玩家的方向
                             var directionToPlayer = (Global.Player.transform.position - transform.position).normalized;
-                            //敌人子弹逻辑
-                            var enemyBullet = Instantiate(EnemyBullet);
-                            enemyBullet.transform.position = transform.position;
-                            enemyBullet.Velocity = directionToPlayer.normalized * 5;
-                            enemyBullet.gameObject.SetActive(true);
 
-                            //播放射击音效
-                            var soundIndex = Random.Range(0, ShootSounds.Count);
-                            AudioKit.PlaySound(ShootSounds[soundIndex]);
+                            ActionKit.Sequence()
+                            .Callback(() =>
+                            {
+                                //敌人子弹逻辑
+                                var enemyBullet = Instantiate(EnemyBullet);
+                                enemyBullet.transform.position = transform.position;
+                                enemyBullet.Velocity = directionToPlayer * 5;
+                                enemyBullet.gameObject.SetActive(true);
+
+                                var soundIndex = Random.Range(0, ShootSounds.Count);
+                                AudioKit.PlaySound(ShootSounds[soundIndex]);
+                            })
+                            .Delay(0.2f)
+                            .Callback(() =>
+                            {
+                                //敌人子弹逻辑
+                                var enemyBullet = Instantiate(EnemyBullet);
+                                enemyBullet.transform.position = transform.position;
+                                enemyBullet.Velocity = directionToPlayer * 5;
+                                enemyBullet.gameObject.SetActive(true);
+
+                                var soundIndex = Random.Range(0, ShootSounds.Count);
+                                AudioKit.PlaySound(ShootSounds[soundIndex]);
+                            })
+                            .Delay(0.2f)
+                            .Callback(() =>
+                            {
+                                //敌人子弹逻辑
+                                var enemyBullet = Instantiate(EnemyBullet);
+                                enemyBullet.transform.position = transform.position;
+                                enemyBullet.Velocity = directionToPlayer * 5;
+                                enemyBullet.gameObject.SetActive(true);
+
+                                var soundIndex = Random.Range(0, ShootSounds.Count);
+                                AudioKit.PlaySound(ShootSounds[soundIndex]);
+                            })
+                            .Start(this);
+
+
 
                         }
 
@@ -143,6 +166,5 @@ namespace QFramework.ProjectGungeon
         {
             Room.Enemies.Remove(this);
         }
-
     }
 }

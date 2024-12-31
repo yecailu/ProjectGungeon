@@ -67,7 +67,7 @@ namespace QFramework.ProjectGungeon
 
 
         public Player Player;
-        public IEnemy Enemy => EnemyB.GetComponent<IEnemy>();
+        public IEnemy Enemy => EnemyE.GetComponent<IEnemy>();
 
         public Final Final;
 

@@ -68,7 +68,6 @@ namespace QFramework.ProjectGungeon
         {
             if(Time.frameCount % 30 == 0)
             {
-                mEnemies.RemoveWhere(e => !e.GameObject);
 
                 if (mEnemies.Count == 0)//敌人全部死亡
                 {
@@ -139,11 +138,13 @@ namespace QFramework.ProjectGungeon
 
             for (int i = 0; i < enemyCount; i++)
             {
-                var enemy = Instantiate(LevelController.Default.Enemy.GameObject);
-                enemy.transform.position = pos2Gen[i];
-                enemy.gameObject.SetActive(true);
+                var enemyGameObject = Instantiate(LevelController.Default.Enemy.GameObject);
+                var enemy = enemyGameObject.GetComponent<IEnemy>();
+                enemyGameObject.transform.position = pos2Gen[i];
+                enemyGameObject.gameObject.SetActive(true);
+                enemy.Room = this;
                     
-                mEnemies.Add(enemy.GetComponent<IEnemy>());//每一个敌人都记录下来
+                mEnemies.Add(enemy);//每一个敌人都记录下来
             }
 
         }

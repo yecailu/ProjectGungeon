@@ -30,10 +30,10 @@ public class PlayerBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        var enemy = collision.gameObject.GetComponent<Enemy>();
-        if (enemy)
+        var enemy = collision.gameObject.GetComponent<IEnemy>();
+        if (enemy != null)
         {
-            enemy.hurt(Damage);//敌人受伤方法
+            enemy.Hurt(Damage);//敌人受伤方法
             Destroy(gameObject);//销毁子弹
         }
         else

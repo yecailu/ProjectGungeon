@@ -42,6 +42,8 @@ namespace QFramework.ProjectGungeon
         private void Awake()
         {
             Application.targetFrameRate = 60;//设置帧率60
+            //同一个音效要大于一定帧数才能播放，默认10帧
+            AudioKit.PlaySoundMode = AudioKit.PlaySoundModes.IgnoreSameSoundInSoundFrames;
 
             Text.Hide();
 
@@ -115,7 +117,6 @@ namespace QFramework.ProjectGungeon
             if (Global.currentRoom && Global.currentRoom.Enemies.Count > 0)
             {
                 mTargetEmeny = Global.currentRoom.Enemies
-                    .Where(e => e.GameObject)//判断是否有敌人
                     .OrderBy(e => (e.GameObject.Position2D() - mouseWorldPoint.ToVector2()).magnitude)//根据距离远近排序
                     .FirstOrDefault(e =>
                     {

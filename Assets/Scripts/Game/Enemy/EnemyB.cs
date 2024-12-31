@@ -21,7 +21,7 @@ namespace QFramework.ProjectGungeon
         public float HP { get; set; } = 5;
 
 
-        public void hurt(float damage)
+        public void Hurt(float damage)
         {
             HP -= damage;
             if (HP <= 0)
@@ -134,12 +134,21 @@ namespace QFramework.ProjectGungeon
             State.StartState(States.FollowPlayer);
         }
 
-
+        private void Start()
+        {
+            Application.targetFrameRate = 60;
+        }
 
 
         void Update() => State.Update();
+        public Room Room { get; set; }
         public GameObject GameObject => gameObject;
 
+        private void OnDestroy()
+        {
+            Room.Enemies.Remove(this);
+        }
 
     }
+
 }
