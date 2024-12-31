@@ -8,8 +8,6 @@ namespace QFramework.ProjectGungeon
     public partial class ShotGun : QFramework.ProjectGungeon.Gun
     {
 
-        public override PlayerBullet BulletPrefab => Bullet;
-
         public override AudioSource AudioPlayer => SelfAudioSource;
 
         public override GunClip Clip { get; set; } = new GunClip(5);
@@ -33,13 +31,8 @@ namespace QFramework.ProjectGungeon
 
         void Shoot(Vector2 position, Vector2 direction, bool playSound = true)
         {
-            var playerBullet = Instantiate(BulletPrefab);
-            playerBullet.transform.position = position;
-            playerBullet.Velocity = direction.normalized * 20;
-            playerBullet.gameObject.SetActive(true);
+            BulletHelper.Shoot(position, direction, 20, Random.Range(1f, 2f));
 
-            playerBullet.Damage = Random.Range(1f, 2f);//随机伤害判定
-            
 
             var soundIndex = Random.Range(0, ShootSounds.Count);
             AudioPlayer.clip = ShootSounds[soundIndex];
@@ -61,7 +54,7 @@ namespace QFramework.ProjectGungeon
 
                     var angle = direction.ToAngle();//得到欧拉角
                     var originPos = transform.parent.Position2D();//得到ShotGun父类Weapon的2D坐标
-                    var radius = (BulletPrefab.Position2D() - originPos).magnitude;//得到子弹的半径
+                    var radius = (BulletPos.Position2D() - originPos).magnitude;//得到子弹的半径
 
                     var angle1 = angle + 2;//根据中间的角度计算第二颗子弹的欧拉角
                     var direction1 = angle1.AngleToDirection2D();//得到第二颗子弹的方向
@@ -80,7 +73,7 @@ namespace QFramework.ProjectGungeon
                     var pos4 = originPos + direction4 * radius;
 
 
-                    Shoot(BulletPrefab.Position2D(), direction);
+                    Shoot(BulletPos.Position2D(), direction);
                     Shoot(pos1, direction1, false);
                     Shoot(pos2, direction2, false);
                     Shoot(pos3, direction3, false);
@@ -88,7 +81,7 @@ namespace QFramework.ProjectGungeon
 
                     Clip.UseBullet();
 
-                    ShootLight.ShowLight(BulletPrefab.Position2D(), direction);
+                    ShootLight.ShowLight(BulletPos.Position2D(), direction);
                 }
             }
             else

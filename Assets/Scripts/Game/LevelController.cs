@@ -67,7 +67,7 @@ namespace QFramework.ProjectGungeon
 
 
         public Player Player;
-        public IEnemy Enemy => RandomUtility.Choose(EnemyABig).GetComponent<IEnemy>();
+        public IEnemy Enemy => RandomUtility.Choose(EnemyABig, EnemyBBig, EnemyCBig, EnemyDBig).GetComponent<IEnemy>();
 
         public Final Final;
 

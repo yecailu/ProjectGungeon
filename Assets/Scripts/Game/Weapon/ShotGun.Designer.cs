@@ -1,4 +1,4 @@
-// Generate Id:74dbf6a3-6d3b-4753-8b43-d868a48ca1ca
+// Generate Id:86f6dc75-7f33-4df0-99bb-c952d6e36242
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -6,7 +6,7 @@ namespace QFramework.ProjectGungeon
 	public partial class ShotGun
 	{
 
-		public PlayerBullet Bullet;
+		public Transform BulletPos;
 
 		public UnityEngine.AudioSource SelfAudioSource;
 

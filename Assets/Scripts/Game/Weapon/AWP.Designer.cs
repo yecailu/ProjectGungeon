@@ -1,4 +1,4 @@
-// Generate Id:a76e7e8c-5eec-4d45-9a3f-0a590db57267
+// Generate Id:22ecfb63-7445-414f-b5a2-4ffa43cea3a1
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -6,7 +6,7 @@ namespace QFramework.ProjectGungeon
 	public partial class AWP
 	{
 
-		public PlayerBullet Bullet;
+		public Transform BulletPos;
 
 		public UnityEngine.AudioSource SelfAudioSource;
 

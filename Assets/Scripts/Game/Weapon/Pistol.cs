@@ -8,7 +8,6 @@ namespace QFramework.ProjectGungeon
     public partial class Pistol : Gun
     {
 
-        public override PlayerBullet BulletPrefab => Bullet;
 
         public override AudioSource AudioPlayer => SelfAudioSource;
 
@@ -39,15 +38,9 @@ namespace QFramework.ProjectGungeon
         {
             if (ShootDuration.CanShoot)
             {
-
-
                 ShootDuration.RecordShootTime();
-                var playerBullet = Instantiate(BulletPrefab);
-                playerBullet.transform.position = BulletPrefab.transform.position;
-                playerBullet.Velocity = direction.normalized * 15;
-                playerBullet.gameObject.SetActive(true);
 
-                playerBullet.Damage = Random.Range(1f, 1.5f);//随机伤害判定
+                BulletHelper.Shoot(BulletPos.Position2D(), direction, 15, Random.Range(1f, 1.5f));
 
 
                 var soundIndex = Random.Range(0, ShootSounds.Count);
@@ -56,7 +49,7 @@ namespace QFramework.ProjectGungeon
 
                 Clip.UseBullet();//减少子弹数量
 
-                ShootLight.ShowLight(BulletPrefab.Position2D(), direction);
+                ShootLight.ShowLight(BulletPos.Position2D(), direction);
             }
         }
 

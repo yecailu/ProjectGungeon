@@ -5,11 +5,7 @@ namespace QFramework.ProjectGungeon
 {
 	public partial class AK : QFramework.ProjectGungeon.Gun
 	{
-        public PlayerBullet Bullet;
-
         public UnityEngine.AudioSource ShootSoundPlayer;
-
-        public override PlayerBullet BulletPrefab => Bullet;
 
         public override AudioSource AudioPlayer => ShootSoundPlayer;
 
@@ -37,15 +33,9 @@ namespace QFramework.ProjectGungeon
 
         void Shoot(Vector2 direction)
         {
-            var playerBullet = Instantiate(BulletPrefab);
-            playerBullet.transform.position = BulletPrefab.transform.position;
-            playerBullet.Velocity = direction.normalized * 30;
-            playerBullet.gameObject.SetActive(true);
+            BulletHelper.Shoot(BulletPos.Position2D(), direction, 30, Random.Range(1.5f, 2.0f));
 
-            playerBullet.Damage = Random.Range(1.5f, 2.0f);//Ëæ»úÉËº¦ÅÐ¶¨
-
-
-            ShootLight.ShowLight(BulletPrefab.Position2D(), direction);
+            ShootLight.ShowLight(BulletPos.Position2D(), direction);
 
         }
 
