@@ -6,16 +6,9 @@ using UnityEngine;
 
 namespace QFramework.ProjectGungeon
 {
-    public interface IEnemy
-    {
-        Room Room { get; set; }
+    
 
-        GameObject GameObject { get; }
-
-        void Hurt(float damage, Vector2 hitDirection);
-    }
-
-    public class EnemyA : MonoBehaviour, IEnemy
+    public class EnemyA : Enemy, IEnemy
     {
         public Player player;
 
@@ -38,16 +31,12 @@ namespace QFramework.ProjectGungeon
             HP -= damage;
             if (HP <= 0)
             {
-                //生成尸体
-                FxFactory.PlayEnemyDieBody(transform.Position2D(), hitDirection, "EnemyADie", 1.5f);
-
-                AudioKit.PlaySound("resources://EnemyDie");
-
-
-
-                Destroy(gameObject);
+                OnDeath(hitDirection, "EnemyADie", 1.5f);
             }
+
         }
+
+       
 
         //敌人状态
         public enum States

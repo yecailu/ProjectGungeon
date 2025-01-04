@@ -7,7 +7,7 @@ using static UnityEditor.PlayerSettings;
 
 namespace QFramework.ProjectGungeon
 {
-    public class EnemyF : MonoBehaviour, IEnemy
+    public class EnemyF : Enemy, IEnemy
     {
         public Player player;
 
@@ -30,11 +30,8 @@ namespace QFramework.ProjectGungeon
             HP -= damage;
             if (HP <= 0)
             {
-                FxFactory.PlayEnemyDieBody(transform.Position2D(), hitDirection, "EnemyFDie", 1.5f);
-                AudioKit.PlaySound("resources://EnemyDie");
+                OnDeath(hitDirection, "EnemyFDie", 1.5f);
 
-
-                Destroy(gameObject);
             }
         }
 

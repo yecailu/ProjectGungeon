@@ -64,6 +64,12 @@ namespace QFramework.ProjectGungeon
             UpdateHP();
             Global.HPChangedEvent += UpdateHP;//注册HP事件
 
+            //注册Coin 变更后调用{方法}.销毁后取消注册
+            Global.Coin.RegisterWithInitValue((coin) =>
+            {
+                CoinText.text = coin.ToString();
+
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
 
