@@ -23,6 +23,9 @@ namespace QFramework.ProjectGungeon
 
         public void Hurt(float damage)
         {
+            FxFactory.PlayHurtFx(transform.Position2D());
+            FxFactory.PlayEnemyBlood(transform.Position2D());
+
             HP -= damage;
             if (HP <= 0)
             {
