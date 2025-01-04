@@ -37,6 +37,8 @@ namespace QFramework.ProjectGungeon
 
             ShootLight.ShowLight(BulletPos.Position2D(), direction);
 
+            //ÉãÏñ»úÕð¶¯
+            CameraController.Shake.Trigger(0.07f, 5);
         }
 
 

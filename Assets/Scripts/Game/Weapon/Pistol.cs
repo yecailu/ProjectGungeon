@@ -50,6 +50,9 @@ namespace QFramework.ProjectGungeon
                 Clip.UseBullet();//减少子弹数量
 
                 ShootLight.ShowLight(BulletPos.Position2D(), direction);
+
+                //摄像机震动
+                CameraController.Shake.Trigger(0.05f, 2);
             }
         }
 

@@ -51,6 +51,9 @@ namespace QFramework.ProjectGungeon
                 Shoot(BulletPos.Position2D(), direction);
 
                 Clip.UseBullet();
+
+                //ÉãÏñ»úÕð¶¯
+                CameraController.Shake.Trigger(0.12f, 7);
             }
             else if (!Clip.CanShoot)
             {

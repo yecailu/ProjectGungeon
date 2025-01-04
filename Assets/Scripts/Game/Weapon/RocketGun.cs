@@ -46,6 +46,9 @@ namespace QFramework.ProjectGungeon
             AudioPlayer.Play();
 
             Clip.UseBullet();
+
+            //ÉãÏñ»úÕð¶¯
+            CameraController.Shake.Trigger(0.14f, 8);
         }
 
 
