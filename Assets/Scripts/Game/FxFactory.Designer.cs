@@ -1,4 +1,4 @@
-// Generate Id:1950699b-b32b-438c-8f8d-bf4cdc505343
+// Generate Id:66e88c34-8e17-442f-96c0-9ead4afd7d9e
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -11,6 +11,22 @@ namespace QFramework.ProjectGungeon
 		public SpriteRenderer EnemyBlood;
 
 		public SpriteRenderer PlayerBlood;
+
+		public SpriteRenderer EnemyADie;
+
+		public SpriteRenderer EnemyBDie;
+
+		public SpriteRenderer EnemyCDie;
+
+		public SpriteRenderer EnemyDDie;
+
+		public SpriteRenderer EnemyEDie ;
+		
+		public SpriteRenderer EnemyFDie;
+
+		public SpriteRenderer EnemyGDie;
+
+		public SpriteRenderer EnemyHDie;
 
 	}
 }

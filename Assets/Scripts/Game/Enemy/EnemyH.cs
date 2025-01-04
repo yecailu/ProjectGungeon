@@ -21,7 +21,7 @@ namespace QFramework.ProjectGungeon
         public float HP { get; set; } = 5;
 
 
-        public void Hurt(float damage)
+        public void Hurt(float damage, Vector2 hitDirection)
         {
             FxFactory.PlayHurtFx(transform.Position2D());
             FxFactory.PlayEnemyBlood(transform.Position2D());
@@ -29,6 +29,10 @@ namespace QFramework.ProjectGungeon
             HP -= damage;
             if (HP <= 0)
             {
+                FxFactory.PlayEnemyDieBody(transform.Position2D(), hitDirection, "EnemyHDie", 1.5f);
+                AudioKit.PlaySound("resources://EnemyDie");
+
+
                 Destroy(gameObject);
             }
         }
@@ -137,6 +141,7 @@ namespace QFramework.ProjectGungeon
         {
             Room.Enemies.Remove(this);
         }
+
 
     }
 
