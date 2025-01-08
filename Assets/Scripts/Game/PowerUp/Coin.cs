@@ -3,7 +3,7 @@ using QFramework;
 
 namespace QFramework.ProjectGungeon
 {
-	public partial class Coin : ViewController
+	public partial class Coin : ViewController,IPowerUp
 	{
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -15,5 +15,9 @@ namespace QFramework.ProjectGungeon
  
             }
         }
+
+        public Room Room { get; set; }
+        public SpriteRenderer SprirerRenderer => GetComponent<SpriteRenderer>();
+
     }
 }

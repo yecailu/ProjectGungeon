@@ -181,65 +181,68 @@ namespace QFramework.ProjectGungeon
             Rigidbody2D.velocity = new Vector2(horizontal, vertical).normalized * 5;
 
 
-
-            if (Input.GetMouseButtonDown(0))//按左键发射子弹
+            if (Global.CanShoot)
             {
-                CurrentGun.ShootDown(shootDirection);//调用子弹发射方法
-
-            }
-
-            if (Input.GetMouseButton(0))//按左键发射子弹
-            {
-                CurrentGun.Shooting(shootDirection);//调用子弹发射方法
-
-            }
-
-            if (Input.GetMouseButtonUp(0))//按左键发射子弹
-            {
-                CurrentGun.ShootUp(shootDirection);//调用子弹发射方法
-
-            }
-
-            if (Input.GetKeyDown(KeyCode.R))//换弹
-            {
-                CurrentGun.Reload();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Q))//切换上一把武器
-            {
-                if (!CurrentGun.Reloading)
+                if (Input.GetMouseButtonDown(0))//按左键发射子弹
                 {
-                    var index = GunList.FindIndex(gun => gun == CurrentGun);//遍历GUN列表，获得当前武器的索引
-                    index--;
-
-                    if (index < 0)
-                    {
-                        index = GunList.Count - 1;
-                    }
-
-                    UseGun(index);
+                    CurrentGun.ShootDown(shootDirection);//调用子弹发射方法
 
                 }
 
-
-
-            }
-
-            if (Input.GetKeyDown(KeyCode.E))//切换下一把武器
-            {
-                if (!CurrentGun.Reloading)
+                if (Input.GetMouseButton(0))//按左键发射子弹
                 {
-                    var index = GunList.FindIndex(gun => gun == CurrentGun);
-                    index++;
-
-                    if (index > GunList.Count - 1)
-                    {
-                        index = 0;
-                    }
-
-                    UseGun(index);
+                    CurrentGun.Shooting(shootDirection);//调用子弹发射方法
 
                 }
+
+                if (Input.GetMouseButtonUp(0))//按左键发射子弹
+                {
+                    CurrentGun.ShootUp(shootDirection);//调用子弹发射方法
+
+                }
+
+                if (Input.GetKeyDown(KeyCode.R))//换弹
+                {
+                    CurrentGun.Reload();
+                }
+
+                if (Input.GetKeyDown(KeyCode.Q))//切换上一把武器
+                {
+                    if (!CurrentGun.Reloading)
+                    {
+                        var index = GunList.FindIndex(gun => gun == CurrentGun);//遍历GUN列表，获得当前武器的索引
+                        index--;
+
+                        if (index < 0)
+                        {
+                            index = GunList.Count - 1;
+                        }
+
+                        UseGun(index);
+
+                    }
+
+
+
+                }
+
+                if (Input.GetKeyDown(KeyCode.E))//切换下一把武器
+                {
+                    if (!CurrentGun.Reloading)
+                    {
+                        var index = GunList.FindIndex(gun => gun == CurrentGun);
+                        index++;
+
+                        if (index > GunList.Count - 1)
+                        {
+                            index = 0;
+                        }
+
+                        UseGun(index);
+
+                    }
+                }
+
             }
         }
     }

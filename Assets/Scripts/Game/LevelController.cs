@@ -113,8 +113,9 @@ namespace QFramework.ProjectGungeon
 
 
             var layout = new RoomNode(RoomTypes.Init);
-                layout.Next(RoomTypes.Normal)
-                .Next(RoomTypes.Chest)
+                layout.Next(RoomTypes.Chest)
+                .Next(RoomTypes.Normal)
+                
                 //.Next(RoomTypes.Normal, n =>
                 //{
                 //    n.Next(RoomTypes.Normal)
@@ -575,10 +576,11 @@ namespace QFramework.ProjectGungeon
                     }
                     else if (code == 'c')
                     {
-                        Chest.InstantiateWithParent(room)
+                       var chest = Chest.InstantiateWithParent(room)
                        .Position2D(new Vector3(x, y, 0))
                        .Show();
 
+                        room.AddPowerUp(chest);
                     }
                 }
 

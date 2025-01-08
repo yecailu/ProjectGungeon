@@ -19,6 +19,9 @@ namespace QFramework.ProjectGungeon
 
 		public static DynaGrid<Room> RoomGrid { get; set; }
 
+		public static bool UIOpened = false;
+		public static bool CanShoot => !UIOpened;
+
 		public static void ResetData()
 		{
 			Coin.Value = 0;

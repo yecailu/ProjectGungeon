@@ -13,8 +13,9 @@ public interface IEnemy
 
     void Hurt(float damage, Vector2 hitDirection);
 }
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour,IEnemy
 {
+   
 
     protected void OnDeath(Vector2 hitDirection, string dieBodyName, float dieBodyScale)
     {
@@ -27,7 +28,14 @@ public class Enemy : MonoBehaviour
             .Position2D(gameObject.Position2D())
             .Show();
 
+
         Destroy(gameObject);
     }
+
+    public Room Room { get; set; }
+
+    public GameObject GameObject => gameObject;
+
+    public abstract void Hurt(float damage, Vector2 hitDirection);
 
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using QFramework;
+using System.Xml.Schema;
 
 namespace QFramework.ProjectGungeon
 {
@@ -7,7 +8,16 @@ namespace QFramework.ProjectGungeon
 	{
 		private Room mRoom;
 
-		public MapItem WithDate(Room room)
+        private void Start()
+        {
+			Button.onClick.AddListener(() =>
+			{
+				FindAnyObjectByType<UIMap>().Hide();//隐藏地图
+				Global.Player.Position2D(mRoom.Position2D() + Vector2.one);//传送
+			});
+        }
+
+        public MapItem WithDate(Room room)
 		{
 			mRoom = room;
 			UpdateView();
@@ -49,10 +59,6 @@ namespace QFramework.ProjectGungeon
 			{
 				TypeText.text = "起始";
 			}
-			else if (mRoom.GenerateNode.Node.RoomType == RoomTypes.Chest)
-            {
-                TypeText.text = "宝箱";
-            }
 			else
 			{
                 TypeText.Hide();
@@ -62,7 +68,28 @@ namespace QFramework.ProjectGungeon
 			IconGroup.Hide();
 			Icon.Hide();
 
-			if(Global.currentRoom == mRoom)
+
+            if (mRoom.GenerateNode.Node.RoomType == RoomTypes.Chest)
+            {
+				if (mRoom.PowerUps.Count > 0)
+				{
+					foreach (var roomPowerUp in mRoom.PowerUps)
+					{
+                        Icon.InstantiateWithParent(IconGroup)
+                        .Self(self =>
+                        {
+                            self.sprite = roomPowerUp.SprirerRenderer.sprite;
+                        })
+                        .Show();
+
+                        IconGroup.Show();
+                    }
+
+				}
+
+            }
+
+            if (Global.currentRoom == mRoom)
 			{
                 TypeText.text = "我";
                 TypeText.Show();

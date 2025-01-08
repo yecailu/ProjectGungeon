@@ -21,7 +21,7 @@ namespace QFramework.ProjectGungeon
         public float HP { get; set; } = 10;
 
 
-        public void Hurt(float damage, Vector2 hitDirection)
+        public override void Hurt(float damage, Vector2 hitDirection)
         {
             FxFactory.PlayHurtFx(transform.Position2D());
             FxFactory.PlayEnemyBlood(transform.Position2D());
@@ -125,8 +125,6 @@ namespace QFramework.ProjectGungeon
 
 
         void Update() => State.Update();
-        public Room Room { get; set; }
-        public GameObject GameObject => gameObject;
 
         private void OnDestroy()
         {

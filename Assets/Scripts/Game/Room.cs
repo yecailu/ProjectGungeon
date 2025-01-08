@@ -22,6 +22,8 @@ namespace QFramework.ProjectGungeon
 
         public LevelController.RoomGenerateNode GenerateNode { get; set; }
 
+        public HashSet<IPowerUp> PowerUps = new HashSet<IPowerUp>();
+
         //敌人波次配置，new EnemyWaveConfig(),每多一个波次就加一个
         private List<EnemyWaveConfig> mWaves = new List<EnemyWaveConfig>();
 
@@ -158,6 +160,12 @@ namespace QFramework.ProjectGungeon
         public void AddDoor(Door door)
         {
             mDoors.Add(door);
+        }
+
+        public void AddPowerUp(IPowerUp powerUp)
+        {
+            PowerUps.Add(powerUp);
+            powerUp.Room = this;
         }
     }
 }
