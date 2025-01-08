@@ -52,6 +52,8 @@ namespace QFramework.ProjectGungeon
                 {
                     door.State.ChangeState(Door.States.IdleOpen);
                 }
+
+                State = RoomStates.Unlocked;
             }
             else if (Config.RoomType == RoomTypes.Normal)
             {
@@ -120,6 +122,10 @@ namespace QFramework.ProjectGungeon
                         }
                     }
 
+                }
+                else
+                {
+                    State = RoomStates.Unlocked;
                 }
             }
         }

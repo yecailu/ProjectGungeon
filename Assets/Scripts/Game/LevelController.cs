@@ -279,11 +279,11 @@ namespace QFramework.ProjectGungeon
 
            
 
-            var roomGrid = new DynaGrid<Room>();
+            Global.RoomGrid = new DynaGrid<Room>();
             layoutGrid.ForEach((x, y, generateNode) =>
             {
                 var room = GenerateRoomByNode(x, y, generateNode);
-                roomGrid[x, y] = room;
+                Global.RoomGrid[x, y] = room;
 
             });
 
@@ -317,13 +317,13 @@ namespace QFramework.ProjectGungeon
 
             void GenerateCorridor()
             {
-                roomGrid.ForEach((x, y, room) =>
+                Global.RoomGrid.ForEach((x, y, room) =>
                 {
                     foreach(var door in room.Doors)
                     {
                         if (door.Direction == DoorDirections.Left)
                         {   
-                            var dstRoom = roomGrid[x - 1, y];
+                            var dstRoom = Global.RoomGrid[x - 1, y];
                             var dstDoor = dstRoom.Doors.First(d => d.Direction == DoorDirections.Right);
 
                             for(int i = door.X; i <= dstDoor.X; i++)
@@ -338,7 +338,7 @@ namespace QFramework.ProjectGungeon
                         }
                         else if (door.Direction == DoorDirections.Right)
                         {
-                            var dstRoom = roomGrid[x + 1, y];
+                            var dstRoom = Global.RoomGrid[x + 1, y];
                             var dstDoor = dstRoom.Doors.First(d => d.Direction == DoorDirections.Left);
 
                             for (int i = door.X; i <= dstDoor.X; i++)
@@ -352,7 +352,7 @@ namespace QFramework.ProjectGungeon
                         }
                         else if (door.Direction == DoorDirections.Up)
                         {
-                            var dstRoom = roomGrid[x, y + 1];
+                            var dstRoom = Global.RoomGrid[x, y + 1];
                             var dstDoor = dstRoom.Doors.First(d => d.Direction == DoorDirections.Down);
 
                             for (int i = door.Y; i <= dstDoor.Y; i++)
@@ -366,7 +366,7 @@ namespace QFramework.ProjectGungeon
                         }
                         else if (door.Direction == DoorDirections.Down)
                         {
-                            var dstRoom = roomGrid[x, y - 1];
+                            var dstRoom = Global.RoomGrid[x, y - 1];
                             var dstDoor = dstRoom.Doors.First(d => d.Direction == DoorDirections.Up);
 
                             for (int i = door.Y; i <= dstDoor.Y; i++)

@@ -79,6 +79,20 @@ namespace QFramework.ProjectGungeon
             HP.text = "HP:" + Global.HP;
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                if (UIMap.gameObject.activeSelf)
+                {
+                    UIMap.Hide();
+                }
+                else
+                {
+                    UIMap.Show();
+                }
+            }
+        }
 
     }
 
