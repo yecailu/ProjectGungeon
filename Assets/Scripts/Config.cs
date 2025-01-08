@@ -7,6 +7,7 @@ namespace QFramework.ProjectGungeon
         Init,
         Normal,
         Chest,
+        Shop,
         Final,
         
 
@@ -26,6 +27,7 @@ namespace QFramework.ProjectGungeon
         e 敌人
         d 门
         c 宝箱
+        s 商店摊位
         # 终点
         */
 
@@ -150,6 +152,8 @@ namespace QFramework.ProjectGungeon
         .L("1                 1")
         .L("111111111d111111111");
 
+
+
         public static RoomConfig ChestRoom { get; set; } = new RoomConfig()
         .Type(RoomTypes.Chest)
         .L("111111111d111111111")
@@ -162,6 +166,28 @@ namespace QFramework.ProjectGungeon
         .L("1                 1")
         .L("1                 1")
         .L("d        c        d")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("111111111d111111111");
+
+        public static RoomConfig ShopRoom { get; set; } = new RoomConfig()
+        .Type(RoomTypes.Shop)
+        .L("111111111d111111111")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("d        s        d")
         .L("1                 1")
         .L("1                 1")
         .L("1                 1")

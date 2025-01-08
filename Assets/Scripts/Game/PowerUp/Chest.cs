@@ -15,7 +15,7 @@ namespace QFramework.ProjectGungeon
 
             if (collision.CompareTag("Player"))
             {
-                var hp = PowerUpFactory.Default.AllGunHalfBullet.Instantiate()
+                var hp = PowerUpFactory.Default.SingleGunFullBullet.Instantiate()
                     .Position2D(transform.Position2D())
                     .Show();
 
@@ -27,7 +27,7 @@ namespace QFramework.ProjectGungeon
             }
         }
 
-        public SpriteRenderer SprirerRenderer => GetComponent<SpriteRenderer>();
+        public SpriteRenderer SpriteRenderer => GetComponent<SpriteRenderer>();
 
 
     }

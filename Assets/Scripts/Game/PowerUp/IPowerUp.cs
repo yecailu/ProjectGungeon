@@ -7,7 +7,7 @@ namespace QFramework.ProjectGungeon
     {
         public Room Room { get; set; }
 
-        public SpriteRenderer SprirerRenderer { get; }
+        public SpriteRenderer SpriteRenderer { get; }
 
 
     }

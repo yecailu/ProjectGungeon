@@ -18,6 +18,6 @@ namespace QFramework.ProjectGungeon
         }
 
         public Room Room { get; set; }
-        public SpriteRenderer SprirerRenderer => GetComponent<SpriteRenderer>();
+        public SpriteRenderer SpriteRenderer => GetComponent<SpriteRenderer>();
     }
 }

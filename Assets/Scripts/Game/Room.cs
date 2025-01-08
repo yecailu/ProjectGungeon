@@ -92,10 +92,10 @@ namespace QFramework.ProjectGungeon
                                     ActionKit.OnFixedUpdate.Register(() =>
                                     {
                                         //½ð±Ò³¯Íæ¼Ò·ÉÐÐ
-                                        cashedPowerUp.SprirerRenderer.transform.Translate(
-                                            cashedPowerUp.SprirerRenderer.NormalizedDirection2DTo(Player.Default) * 
+                                        cashedPowerUp.SpriteRenderer.transform.Translate(
+                                            cashedPowerUp.SpriteRenderer.NormalizedDirection2DTo(Player.Default) * 
                                             Time.fixedDeltaTime * 5);
-                                    }).UnRegisterWhenGameObjectDestroyed(cashedPowerUp.SprirerRenderer.gameObject);
+                                    }).UnRegisterWhenGameObjectDestroyed(cashedPowerUp.SpriteRenderer.gameObject);
                                 }
                             }
 

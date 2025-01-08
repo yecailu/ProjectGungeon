@@ -2,6 +2,7 @@ using QFramework.ProjectGungeon;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Schema;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using static QFramework.ProjectGungeon.RoomConfig;
@@ -113,7 +114,7 @@ namespace QFramework.ProjectGungeon
 
 
             var layout = new RoomNode(RoomTypes.Init);
-                layout.Next(RoomTypes.Chest)
+                layout.Next(RoomTypes.Shop)
                 .Next(RoomTypes.Normal)
                 
                 //.Next(RoomTypes.Normal, n =>
@@ -306,6 +307,11 @@ namespace QFramework.ProjectGungeon
                 else if (node.Node.RoomType == RoomTypes.Chest)
                 {
                     return GenerateRoom(roomPosX, roomPosY, Config.ChestRoom, node);
+
+                }
+                else if (node.Node.RoomType == RoomTypes.Shop)
+                {
+                    return GenerateRoom(roomPosX, roomPosY, Config.ShopRoom, node);
 
                 }
                 else if (node.Node.RoomType == RoomTypes.Final)
@@ -581,6 +587,20 @@ namespace QFramework.ProjectGungeon
                        .Show();
 
                         room.AddPowerUp(chest);
+                    }
+                    else if (code == 's')
+                    {
+                        ShopItem.InstantiateWithParent(room)
+                        .Position2D(new Vector3(x, y, 0))
+                        .Self(self =>
+                        {
+                            self.Room = room;
+                            self.PowerUp = LevelController.Default.HP1;
+                            self.ItemPrice = 5;
+                        })
+                        .UpdateView()
+                        .Show();
+
                     }
                 }
 

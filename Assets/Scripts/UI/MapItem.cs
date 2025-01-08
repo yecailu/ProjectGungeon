@@ -78,7 +78,7 @@ namespace QFramework.ProjectGungeon
                         Icon.InstantiateWithParent(IconGroup)
                         .Self(self =>
                         {
-                            self.sprite = roomPowerUp.SprirerRenderer.sprite;
+                            self.sprite = roomPowerUp.SpriteRenderer.sprite;
                         })
                         .Show();
 
