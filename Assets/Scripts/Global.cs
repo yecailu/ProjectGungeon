@@ -10,9 +10,9 @@ namespace QFramework.ProjectGungeon
 
 		public static Room currentRoom;
 
-		public static int HP = 3;
+		public static BindableProperty<int> HP = new BindableProperty<int>(6);
 
-		public static Action HPChangedEvent;
+        public static BindableProperty<int> Armor = new BindableProperty<int>(1);
 
         //BindableProperty<T> 是QFramework框架提供的属性，本身能储存数据，又能监听数据变换事件
         public static BindableProperty<int> Coin = new BindableProperty<int>(0);
@@ -25,7 +25,8 @@ namespace QFramework.ProjectGungeon
 		public static void ResetData()
 		{
 			Coin.Value = 0;
-			HP = 3;
+			HP.Value = 6;
+			Armor.Value = 1;
 			Time.timeScale = 1;//恢复时间
 		}
 	}

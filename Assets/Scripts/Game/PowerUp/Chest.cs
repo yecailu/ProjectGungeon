@@ -15,7 +15,7 @@ namespace QFramework.ProjectGungeon
 
             if (collision.CompareTag("Player"))
             {
-                var hp = LevelController.Default.HP1.Instantiate()
+                var hp = PowerUpFactory.Default.AllGunHalfBullet.Instantiate()
                     .Position2D(transform.Position2D())
                     .Show();
 

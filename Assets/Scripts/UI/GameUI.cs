@@ -40,7 +40,6 @@ namespace QFramework.ProjectGungeon
         {
             Default = null;
 
-            Global.HPChangedEvent -= UpdateHP;//注销HP事件
         }
 
 
@@ -60,9 +59,17 @@ namespace QFramework.ProjectGungeon
                 SceneManager.LoadScene("SampleScene");
 
             });
+;
 
-            UpdateHP();
-            Global.HPChangedEvent += UpdateHP;//注册HP事件
+            Global.HP.RegisterWithInitValue(hp =>
+            {
+                UpdateHP();
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+
+            Global.Armor.RegisterWithInitValue(armor =>
+            {
+                Armor.text = "护盾:" + armor;
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
 
             //注册Coin 变更后调用{方法}.销毁后取消注册
             Global.Coin.RegisterWithInitValue((coin) =>
@@ -76,7 +83,7 @@ namespace QFramework.ProjectGungeon
 
         void UpdateHP()
         {
-            HP.text = "HP:" + Global.HP;
+            HP.text = "HP:" + Global.HP.Value;
         }
 
         private void Update()

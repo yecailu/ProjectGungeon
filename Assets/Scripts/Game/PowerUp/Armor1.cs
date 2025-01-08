@@ -3,18 +3,17 @@ using QFramework;
 
 namespace QFramework.ProjectGungeon
 {
-	public partial class HP1 : ViewController,IPowerUp
+	public partial class Armor1 : ViewController,IPowerUp
 	{
-
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Player"))
             {
-                Room.PowerUps.Remove(this);//É¾³ýPowerUpsÀïµÄÔªËØ
+                Room.PowerUps.Remove(this);
+                Global.Armor.Value++;
+                this.DestroyGameObjGracefully();
+                AudioKit.PlaySound("resources://Armor1");
 
-                Global.HP.Value++;
-                AudioKit.PlaySound("resources://Hp1");
-                this.DestroyGameObjGracefully(); 
             }
         }
 

@@ -90,21 +90,46 @@ namespace QFramework.ProjectGungeon
 
         public void Hurt(int damage)
         {
-            //播放受伤特效
-            FxFactory.PlayHurtFx(transform.Position2D(),Color.green);
-            FxFactory.PlayPlayerBlood(transform.Position2D());
-            
-            AudioKit.PlaySound("resources://PlayerHurt");
 
-            Global.HP -= damage;
-            if (Global.HP <= 0)
+            if (Global.Armor.Value > 0)
             {
-                Global.HP = 0;
-                GameUI.Default.GameOver.SetActive(true);
-                Time.timeScale = 0;
+                if (Global.Armor.Value > damage)
+                {
+                    Global.Armor.Value -= damage;
+                    damage = 0;
+
+                    //播放Armor音效
+                    AudioKit.PlaySound("resources://UseArmor");
+                }
+                else
+                {
+                    damage -= Global.Armor.Value;
+                    Global.Armor.Value = 0;
+
+                    //播放Armor音效
+                    AudioKit.PlaySound("resources://UseArmor");
+
+                }
+            }
+
+            if (damage > 0)
+            {
+                //播放受伤特效
+                FxFactory.PlayHurtFx(transform.Position2D(), Color.green);
+                FxFactory.PlayPlayerBlood(transform.Position2D());
+
+                AudioKit.PlaySound("resources://PlayerHurt");
+
+                Global.HP.Value -= damage;
+                if (Global.HP.Value <= 0)
+                {
+                    Global.HP.Value = 0;
+                    GameUI.Default.GameOver.SetActive(true);
+                    Time.timeScale = 0;
+
+                }
 
             }
-            Global.HPChangedEvent();//调用HP改变方法   
         }
 
         private IEnemy mTargetEmeny = null;
