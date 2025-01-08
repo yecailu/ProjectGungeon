@@ -24,10 +24,11 @@ public abstract class Enemy : MonoBehaviour,IEnemy
         //µĞÈËËÀÍöÒôĞ§
         AudioKit.PlaySound("resources://EnemyDie");
         //µôÂä½ğ±Ò
-        PowerUpFactory.Default.Coin.Instantiate()
+        var coin = PowerUpFactory.Default.Coin.Instantiate()
             .Position2D(gameObject.Position2D())
             .Show();
 
+        Room.AddPowerUp(coin);
 
         Destroy(gameObject);
     }

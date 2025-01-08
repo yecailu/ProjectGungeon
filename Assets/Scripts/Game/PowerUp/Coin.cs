@@ -9,6 +9,7 @@ namespace QFramework.ProjectGungeon
         {
             if (collision.CompareTag("Player"))
             {
+                Room.PowerUps.Remove(this);
                 Global.Coin.Value++;
                 this.DestroyGameObjGracefully();
                 AudioKit.PlaySound("resources://Coin"); 

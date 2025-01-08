@@ -84,6 +84,20 @@ namespace QFramework.ProjectGungeon
                         }
                         else//没有波次 开门
                         {
+                            if(Config.RoomType == RoomTypes.Normal)
+                            {
+                                foreach (var powerUp in PowerUps.Where(p => p.GetType() == typeof(Coin)))
+                                {
+                                    var cashedPowerUp = powerUp;
+                                    ActionKit.OnFixedUpdate.Register(() =>
+                                    {
+                                        //金币朝玩家飞行
+                                        cashedPowerUp.SprirerRenderer.transform.Translate(
+                                            cashedPowerUp.SprirerRenderer.NormalizedDirection2DTo(Player.Default) * 
+                                            Time.fixedDeltaTime * 5);
+                                    }).UnRegisterWhenGameObjectDestroyed(cashedPowerUp.SprirerRenderer.gameObject);
+                                }
+                            }
 
                             State = RoomStates.Unlocked;
 
