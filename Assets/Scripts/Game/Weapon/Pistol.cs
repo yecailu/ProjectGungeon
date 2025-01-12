@@ -21,11 +21,11 @@ namespace QFramework.ProjectGungeon
 
         public float UnstableRate => 0.1f;
 
-        public void Start()
+
+        public override void OnGunUsed()
         {
             Clip.UpdateUI();
         }
-
 
 
         public override void Reload()
@@ -56,6 +56,8 @@ namespace QFramework.ProjectGungeon
 
                 //ÉãÏñ»úÕð¶¯
                 CameraController.Shake.Trigger(0.05f, 2);
+
+                BackForce.Shoot(0.05f, 2);
             }
         }
 

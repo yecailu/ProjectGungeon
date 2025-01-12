@@ -17,6 +17,8 @@ namespace QFramework.ProjectGungeon
 
         public float UnstableRate => 0.1f;
 
+
+
         public override void OnGunUsed()
         {
             Clip.UpdateUI();

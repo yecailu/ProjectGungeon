@@ -19,6 +19,8 @@ namespace QFramework.ProjectGungeon
 
         public override BulletBag BulletBag { get; set; } = new BulletBag(500,500);
 
+
+
         public override void OnGunUsed()
         {
             Clip.UpdateUI();

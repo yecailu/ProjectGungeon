@@ -3,7 +3,7 @@ using QFramework;
 
 namespace QFramework.ProjectGungeon
 {
-    public partial class RocketGun : QFramework.ProjectGungeon.Gun
+    public partial class RocketGun : Gun
     {
         public override PlayerBullet BulletPrefab => Bullet;
 
@@ -14,6 +14,7 @@ namespace QFramework.ProjectGungeon
         public override bool Reloading => Clip.Reloading;
 
         public override BulletBag BulletBag { get; set; } = new BulletBag(50, 50);
+
 
 
         public override void OnGunUsed()
@@ -49,6 +50,9 @@ namespace QFramework.ProjectGungeon
 
             //ÉãÏñ»úÕð¶¯
             CameraController.Shake.Trigger(0.14f, 8);
+
+            BackForce.Shoot(0.1f, 5);
+
         }
 
 

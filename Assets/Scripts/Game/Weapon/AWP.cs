@@ -37,6 +37,11 @@ namespace QFramework.ProjectGungeon
             AudioPlayer.Play();
 
             ShootLight.ShowLight(BulletPos.Position2D(), direction);
+            //摄像机震动
+            CameraController.Shake.Trigger(0.12f, 7);
+
+            BackForce.Shoot(0.1f, 5);
+
         }
 
 
@@ -52,8 +57,7 @@ namespace QFramework.ProjectGungeon
 
                 Clip.UseBullet();
 
-                //摄像机震动
-                CameraController.Shake.Trigger(0.12f, 7);
+
             }
             else if (!Clip.CanShoot)
             {

@@ -6,7 +6,7 @@ namespace QFramework.ProjectGungeon
 {
     [ViewControllerChild]
 
-    public class Gun : ViewController
+    public abstract class Gun : ViewController
     {
         public List<AudioClip> ShootSounds = new List<AudioClip>();
 
@@ -21,6 +21,24 @@ namespace QFramework.ProjectGungeon
         public virtual GunClip Clip { get; set; }
 
         public virtual BulletBag BulletBag { get; set; }
+
+
+        public ShootBackForce BackForce = new ShootBackForce();
+
+        public SpriteRenderer Sprite;
+
+
+        private void Start()
+        {
+            BackForce.Setup(Sprite);
+        }
+
+        private void Update()
+        {
+            BackForce.Update();
+        }
+
+
 
         public virtual void OnGunUsed()
         {
