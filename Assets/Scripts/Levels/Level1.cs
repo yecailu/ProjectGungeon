@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 
 namespace QFramework.ProjectGungeon 
@@ -6,6 +7,29 @@ namespace QFramework.ProjectGungeon
     public class Level1
     {
         public static LevelConfig Config = new LevelConfig()
+            .Self(self =>
+            {
+                //难度配置
+                self.PacingConfig = new List<int>()
+                {
+                    1,
+                    2,
+                    1,
+                    2,
+                    3,
+                    1,
+                    2,
+                    3,
+                    2,
+                    1,
+                    1,
+                    2,
+                    3,
+                    1,
+                    1,
+
+                };
+            })
             .Self(self =>
             {
                 var randomIndex = Random.Range(0, 2 + 1);

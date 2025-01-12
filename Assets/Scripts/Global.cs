@@ -1,5 +1,6 @@
 using QFramework.ProjectGungeon;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -22,12 +23,23 @@ namespace QFramework.ProjectGungeon
 		public static bool UIOpened = false;
 		public static bool CanShoot => !UIOpened;
 
+		public static Queue<int> CurrentPacing = null;
+
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+		public static void AutoInit()
+		{
+			ResetData();
+		}
+
 		public static void ResetData()
 		{
 			Coin.Value = 0;
 			HP.Value = 6;
 			Armor.Value = 1;
 			Time.timeScale = 1;//恢复时间
+
+            //将level1的PacingConfig配置赋值给此处CurrentPacing
+            CurrentPacing = new Queue<int>(Level1.Config.PacingConfig);
 		}
 	}
 }

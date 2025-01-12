@@ -15,7 +15,7 @@ namespace QFramework.ProjectGungeon
 
     public class EnemyWaveConfig
     {
-
+        public List<string> EnemyNames = new List<string>();
     }
 
     public class Config

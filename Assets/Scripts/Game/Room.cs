@@ -28,7 +28,7 @@ namespace QFramework.ProjectGungeon
         private List<EnemyWaveConfig> mWaves = new List<EnemyWaveConfig>();
 
         private EnemyWaveConfig mCurrentWave = null;
-
+         
         public enum RoomStates
         {
             Close,
@@ -57,15 +57,7 @@ namespace QFramework.ProjectGungeon
 
                 State = RoomStates.Unlocked;
             }
-            else if (Config.RoomType == RoomTypes.Normal)
-            {
-                var wavesCount = Random.Range(1, 3 + 1);
-
-                for (int i = 0; i < wavesCount; i++)
-                {
-                    mWaves.Add(new EnemyWaveConfig());
-                }
-            }
+            
         }
 
         private void Update()
@@ -80,7 +72,9 @@ namespace QFramework.ProjectGungeon
 
                         if (mWaves.Count > 0)//有剩余波次继续生成敌人
                         {
-                            GenerateEnemies();
+                            var wave = mWaves.First();
+                            mWaves.RemoveAt(0);
+                            GenerateEnemies(wave);
                         }
                         else//没有波次 开门
                         {
@@ -130,7 +124,41 @@ namespace QFramework.ProjectGungeon
                     {
                         State = RoomStates.PlayerIn;
 
-                        GenerateEnemies();
+
+
+                        //填充Waves
+                        var difficultyLevel = Global.CurrentPacing.Dequeue();
+                        var difficultyScore = 10 + difficultyLevel * 3;
+                        var waveCount = 0;
+                        if (difficultyLevel <= 3)
+                        {
+                            waveCount = Random.Range(1, difficultyLevel + 1);
+                        }
+                        else
+                        {
+                            waveCount = Random.Range(difficultyLevel / 3, difficultyLevel / 2);
+                        }
+
+                        for (int i = 0; i < waveCount; i++)
+                        {
+                            var targetScore = difficultyScore / waveCount + Random.Range(-difficultyScore / 10 * 2 + 1,
+                                difficultyScore / 20 * 2 + 1 + 1);
+                            var waveConfig = new EnemyWaveConfig();
+
+                            while(targetScore > 0 && waveConfig.EnemyNames.Count < mEnemyGeneratePoses.Count)
+                            {
+                                var enemyScore = Random.Range(2, 10 + 1);
+                                targetScore -= enemyScore;
+                                waveConfig.EnemyNames.Add(EnemyFactory.EnemyByScore(enemyScore));
+                            }
+
+                            mWaves.Add(waveConfig);
+                            
+                        }
+
+                        var wave = mWaves.First();
+                        mWaves.RemoveAt(0);
+                        GenerateEnemies(wave);
 
                         foreach (var door in mDoors)
                         {
@@ -147,27 +175,26 @@ namespace QFramework.ProjectGungeon
         }
 
         //生成敌人方法
-        void GenerateEnemies()
+        void GenerateEnemies(EnemyWaveConfig waveConfig)
         {
-            mWaves.RemoveAt(0);
-
-
-            var enemyCount = UnityEngine.Random.Range(3, 5 + 1);
-
             var pos2Gen = mEnemyGeneratePoses
                 .OrderByDescending(p => (Player.Default.Position2D() - p.ToVector2()).magnitude)
-                .Take(enemyCount).ToList();//在mEnemyGeneratePoses敌人位置列表中，选取离玩家位置最远的enemyCount个位置的敌人
+                .ToList();//在mEnemyGeneratePoses敌人位置列表中，选取离玩家位置最远的enemyCount个位置的敌人
 
-            for (int i = 0; i < enemyCount; i++)
+            foreach (var enemyName in waveConfig.EnemyNames)
             {
-                var enemyGameObject = Instantiate(LevelController.Default.Enemy.GameObject);
-                var enemy = enemyGameObject.GetComponent<IEnemy>();
-                enemyGameObject.transform.position = pos2Gen[i];
-                enemyGameObject.gameObject.SetActive(true);
+                //根据名字生成敌人
+                var enemy =EnemyFactory.EnemyByName(enemyName)
+                    .GameObject.Instantiate()
+                    .Position2D(pos2Gen.GetAndRemoveRandomItem())
+                    .Show()
+                    .GetComponent<IEnemy>();
+
                 enemy.Room = this;
-                    
                 mEnemies.Add(enemy);//每一个敌人都记录下来
             }
+
+           
 
         }
 

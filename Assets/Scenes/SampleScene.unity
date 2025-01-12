@@ -511,6 +511,7 @@ GameObject:
   - component: {fileID: 134889353}
   - component: {fileID: 134889354}
   - component: {fileID: 134889355}
+  - component: {fileID: 134889356}
   m_Layer: 8
   m_Name: EnemyA
   m_TagString: Enemy
@@ -724,6 +725,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.67264366, y: 0.99848515}
   m_EdgeRadius: 0
+--- !u!114 &134889356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134889348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: EnemyA
+  CustomComment: 
+  mComponentName: QFramework.ProjectGungeon.EnemyA
 --- !u!1 &136554192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,8 +1113,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 227014725}
+  - component: {fileID: 227014726}
   m_Layer: 0
-  m_Name: EnemyDB
+  m_Name: EnemyFactory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1130,6 +1148,37 @@ Transform:
   - {fileID: 323193657}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &227014726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227014724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e16cb82f2a2f5cc4faea9cf7aa90d24f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Namespace: QFramework.ProjectGungeon
+  ScriptName: EnemyFactory
+  ScriptsFolder: Assets/Scripts/Game/Enemy
+  GeneratePrefab: 0
+  PrefabFolder: Assets/Art/Prefab
+  ArchitectureFullTypeName: 
+  ViewControllerFullTypeName: 
+  EnemyA: {fileID: 134889349}
+  EnemyB: {fileID: 475542011}
+  EnemyC: {fileID: 704775650}
+  EnemyD: {fileID: 1256455700}
+  EnemyE: {fileID: 552097025}
+  EnemyF: {fileID: 1093421102}
+  EnemyG: {fileID: 387355716}
+  EnemyH: {fileID: 332946833}
+  EnemyABig: {fileID: 1796909795}
+  EnemyBBig: {fileID: 2105430786}
+  EnemyCBig: {fileID: 1100979032}
+  EnemyDBig: {fileID: 323193661}
 --- !u!1 &233460102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,6 +1565,7 @@ GameObject:
   - component: {fileID: 323193660}
   - component: {fileID: 323193659}
   - component: {fileID: 323193658}
+  - component: {fileID: 323193662}
   m_Layer: 8
   m_Name: EnemyDBig
   m_TagString: Enemy
@@ -1729,6 +1779,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d24675828c2e9834991cc9daa76b007a, type: 3}
   Rigidbody2D: {fileID: 323193659}
   FollowPlayerSeconds: 3
+--- !u!114 &323193662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323193656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: EnemyDBig
+  CustomComment: 
+  mComponentName: QFramework.ProjectGungeon.EnemyDBig
 --- !u!1 &327942687
 GameObject:
   m_ObjectHideFlags: 0
@@ -2259,6 +2325,7 @@ GameObject:
   - component: {fileID: 332946832}
   - component: {fileID: 332946831}
   - component: {fileID: 332946830}
+  - component: {fileID: 332946834}
   m_Layer: 8
   m_Name: EnemyH
   m_TagString: Enemy
@@ -2472,6 +2539,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d24675828c2e9834991cc9daa76b007a, type: 3}
   Rigidbody2D: {fileID: 332946831}
   FollowPlayerSeconds: 3
+--- !u!114 &332946834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332946828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: EnemyH
+  CustomComment: 
+  mComponentName: QFramework.ProjectGungeon.EnemyH
 --- !u!1 &358200399
 GameObject:
   m_ObjectHideFlags: 0
@@ -3170,6 +3253,7 @@ GameObject:
   - component: {fileID: 387355715}
   - component: {fileID: 387355714}
   - component: {fileID: 387355713}
+  - component: {fileID: 387355717}
   m_Layer: 8
   m_Name: EnemyG
   m_TagString: Enemy
@@ -3383,6 +3467,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d24675828c2e9834991cc9daa76b007a, type: 3}
   Rigidbody2D: {fileID: 387355714}
   FollowPlayerSeconds: 3
+--- !u!114 &387355717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387355711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: EnemyG
+  CustomComment: 
+  mComponentName: QFramework.ProjectGungeon.EnemyG
 --- !u!1 &414397425
 GameObject:
   m_ObjectHideFlags: 0
@@ -3871,6 +3971,7 @@ GameObject:
   - component: {fileID: 475542010}
   - component: {fileID: 475542009}
   - component: {fileID: 475542008}
+  - component: {fileID: 475542012}
   m_Layer: 8
   m_Name: EnemyB
   m_TagString: Enemy
@@ -4084,6 +4185,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d24675828c2e9834991cc9daa76b007a, type: 3}
   Rigidbody2D: {fileID: 475542009}
   FollowPlayerSeconds: 3
+--- !u!114 &475542012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475542006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: EnemyB
+  CustomComment: 
+  mComponentName: QFramework.ProjectGungeon.EnemyB
 --- !u!1 &485244181
 GameObject:
   m_ObjectHideFlags: 0
@@ -4594,6 +4711,7 @@ GameObject:
   - component: {fileID: 552097024}
   - component: {fileID: 552097023}
   - component: {fileID: 552097022}
+  - component: {fileID: 552097026}
   m_Layer: 8
   m_Name: EnemyE
   m_TagString: Enemy
@@ -4807,6 +4925,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d24675828c2e9834991cc9daa76b007a, type: 3}
   Rigidbody2D: {fileID: 552097023}
   FollowPlayerSeconds: 3
+--- !u!114 &552097026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552097020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: EnemyE
+  CustomComment: 
+  mComponentName: QFramework.ProjectGungeon.EnemyE
 --- !u!1 &560539418
 GameObject:
   m_ObjectHideFlags: 0
@@ -11011,6 +11145,7 @@ GameObject:
   - component: {fileID: 704775649}
   - component: {fileID: 704775648}
   - component: {fileID: 704775647}
+  - component: {fileID: 704775651}
   m_Layer: 8
   m_Name: EnemyC
   m_TagString: Enemy
@@ -11224,6 +11359,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d24675828c2e9834991cc9daa76b007a, type: 3}
   Rigidbody2D: {fileID: 704775648}
   FollowPlayerSeconds: 3
+--- !u!114 &704775651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 704775645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: EnemyC
+  CustomComment: 
+  mComponentName: QFramework.ProjectGungeon.EnemyC
 --- !u!1 &736448525
 GameObject:
   m_ObjectHideFlags: 0
@@ -13456,6 +13607,7 @@ GameObject:
   - component: {fileID: 1093421101}
   - component: {fileID: 1093421100}
   - component: {fileID: 1093421099}
+  - component: {fileID: 1093421103}
   m_Layer: 8
   m_Name: EnemyF
   m_TagString: Enemy
@@ -13669,6 +13821,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d24675828c2e9834991cc9daa76b007a, type: 3}
   Rigidbody2D: {fileID: 1093421100}
   FollowPlayerSeconds: 3
+--- !u!114 &1093421103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093421097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: EnemyF
+  CustomComment: 
+  mComponentName: QFramework.ProjectGungeon.EnemyF
 --- !u!1 &1100979027
 GameObject:
   m_ObjectHideFlags: 0
@@ -13682,6 +13850,7 @@ GameObject:
   - component: {fileID: 1100979031}
   - component: {fileID: 1100979030}
   - component: {fileID: 1100979029}
+  - component: {fileID: 1100979033}
   m_Layer: 8
   m_Name: EnemyCBig
   m_TagString: Enemy
@@ -13895,6 +14064,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d24675828c2e9834991cc9daa76b007a, type: 3}
   Rigidbody2D: {fileID: 1100979030}
   FollowPlayerSeconds: 3
+--- !u!114 &1100979033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100979027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: EnemyCBig
+  CustomComment: 
+  mComponentName: QFramework.ProjectGungeon.EnemyCBig
 --- !u!1 &1144551392
 GameObject:
   m_ObjectHideFlags: 0
@@ -14619,6 +14804,7 @@ GameObject:
   - component: {fileID: 1256455699}
   - component: {fileID: 1256455698}
   - component: {fileID: 1256455697}
+  - component: {fileID: 1256455701}
   m_Layer: 8
   m_Name: EnemyD
   m_TagString: Enemy
@@ -14832,6 +15018,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d24675828c2e9834991cc9daa76b007a, type: 3}
   Rigidbody2D: {fileID: 1256455698}
   FollowPlayerSeconds: 3
+--- !u!114 &1256455701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256455695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: EnemyD
+  CustomComment: 
+  mComponentName: QFramework.ProjectGungeon.EnemyD
 --- !u!1 &1261231676
 GameObject:
   m_ObjectHideFlags: 0
@@ -18821,6 +19023,7 @@ GameObject:
   - component: {fileID: 1796909794}
   - component: {fileID: 1796909793}
   - component: {fileID: 1796909792}
+  - component: {fileID: 1796909796}
   m_Layer: 8
   m_Name: EnemyABig
   m_TagString: Enemy
@@ -19034,6 +19237,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d24675828c2e9834991cc9daa76b007a, type: 3}
   Rigidbody2D: {fileID: 1796909793}
   FollowPlayerSeconds: 3
+--- !u!114 &1796909796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796909790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: EnemyABig
+  CustomComment: 
+  mComponentName: QFramework.ProjectGungeon.EnemyABig
 --- !u!1 &1823627666
 GameObject:
   m_ObjectHideFlags: 0
@@ -20816,6 +21035,7 @@ GameObject:
   - component: {fileID: 2105430785}
   - component: {fileID: 2105430784}
   - component: {fileID: 2105430783}
+  - component: {fileID: 2105430787}
   m_Layer: 8
   m_Name: EnemyBBig
   m_TagString: Enemy
@@ -21029,6 +21249,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d24675828c2e9834991cc9daa76b007a, type: 3}
   Rigidbody2D: {fileID: 2105430784}
   FollowPlayerSeconds: 3
+--- !u!114 &2105430787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105430781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 0
+  CustomComponentName: EnemyBBig
+  CustomComment: 
+  mComponentName: QFramework.ProjectGungeon.EnemyBBig
 --- !u!1 &2115699255
 GameObject:
   m_ObjectHideFlags: 0

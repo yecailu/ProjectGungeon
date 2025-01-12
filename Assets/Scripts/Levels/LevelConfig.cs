@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using static QFramework.ProjectGungeon.RoomConfig;
 
 namespace QFramework.ProjectGungeon
@@ -6,6 +7,7 @@ namespace QFramework.ProjectGungeon
     {
         public RoomNode InitRoom = new RoomNode(RoomTypes.Init);
 
+        public List<int> PacingConfig = new List<int>();
 
     }
 }
