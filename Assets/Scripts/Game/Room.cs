@@ -147,7 +147,7 @@ namespace QFramework.ProjectGungeon
 
                             while(targetScore > 0 && waveConfig.EnemyNames.Count < mEnemyGeneratePoses.Count)
                             {
-                                var enemyScore = Random.Range(2, 10 + 1);
+                                var enemyScore = EnemyFactory.GenTargetEnemyScore();
                                 targetScore -= enemyScore;
                                 waveConfig.EnemyNames.Add(EnemyFactory.EnemyByScore(enemyScore));
                             }

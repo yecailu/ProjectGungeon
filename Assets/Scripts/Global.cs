@@ -11,6 +11,8 @@ namespace QFramework.ProjectGungeon
 
 		public static Room currentRoom;
 
+		public static LevelConfig CurrentLevel;
+
 		public static BindableProperty<int> HP = new BindableProperty<int>(6);
 
         public static BindableProperty<int> Armor = new BindableProperty<int>(1);
@@ -22,6 +24,14 @@ namespace QFramework.ProjectGungeon
 
 		public static bool UIOpened = false;
 		public static bool CanShoot => !UIOpened;
+
+		public static List<LevelConfig> Levels = new List<LevelConfig>()
+		{
+			Level1.Config,
+			Level2.Config,
+			Level3.Config,
+			Level4.Config,
+		};
 
 		public static Queue<int> CurrentPacing = null;
 
@@ -38,8 +48,33 @@ namespace QFramework.ProjectGungeon
 			Armor.Value = 1;
 			Time.timeScale = 1;//恢复时间
 
+			CurrentLevel =Level1.Config;
+
             //将level1的PacingConfig配置赋值给此处CurrentPacing
-            CurrentPacing = new Queue<int>(Level1.Config.PacingConfig);
+            CurrentPacing = new Queue<int>(CurrentLevel.PacingConfig);
 		}
+
+		//true表示进入下一关，false表示通关
+		public static bool NextLevel()
+		{
+			var levelIndex = Global.Levels.FindIndex(l => l == Global.CurrentLevel);
+
+			levelIndex++;
+
+			if(levelIndex == Global.Levels.Count)
+			{
+				//游戏通关
+
+				return false;
+			}
+			else
+			{
+				CurrentLevel = Global.Levels[levelIndex];
+
+				
+			}
+
+            return true;
+        }
 	}
 }

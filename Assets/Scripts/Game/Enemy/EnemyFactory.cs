@@ -71,6 +71,29 @@ namespace QFramework.ProjectGungeon
             return null;
         }
 
+        public static int GenTargetEnemyScore()
+        {
+            if (Level1.Config == Global.CurrentLevel)
+            {
+                return RandomUtility.Choose(2, 2, 3, 3, 8);
+            }
+            if (Level2.Config == Global.CurrentLevel)
+            {
+                return RandomUtility.Choose(2, 2, 3, 3, 4, 4, 8, 9);
+            }
+            if (Level3.Config == Global.CurrentLevel)
+            {
+                return RandomUtility.Choose(2, 3, 4, 5, 9);
+            }
+            if (Level4.Config == Global.CurrentLevel)
+            {
+                return RandomUtility.Choose(3, 4, 5, 6, 7, 9, 10);
+            }
+
+
+            return RandomUtility.Choose(2, 3, 4, 5, 6, 7, 8, 9, 10);
+        }
+
         public static string EnemyByScore(int score)
         {
             if(score == 2)
