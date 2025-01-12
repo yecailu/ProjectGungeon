@@ -18,6 +18,8 @@ namespace QFramework.ProjectGungeon
 
         public override BulletBag BulletBag { get; set; } = new BulletBag(100, 100);
 
+        public float UnstableRate => 0.3f;
+
         public override void OnGunUsed()
         {
             Clip.UpdateUI();
@@ -52,7 +54,9 @@ namespace QFramework.ProjectGungeon
                 { 
                     ShootDuration.RecordShootTime();
 
-                    var angle = direction.ToAngle();//得到欧拉角
+                    var angle = direction.ToAngle() + Random.Range(0.05f, UnstableRate) * 30 * RandomUtility.Choose(-1, 1);
+
+
                     var originPos = transform.parent.Position2D();//得到ShotGun父类Weapon的2D坐标
                     var radius = (BulletPos.Position2D() - originPos).magnitude;//得到子弹的半径
 

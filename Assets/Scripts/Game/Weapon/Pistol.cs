@@ -17,9 +17,9 @@ namespace QFramework.ProjectGungeon
 
         public override BulletBag BulletBag { get; set; } = new BulletBag(100,100);
 
-
-
         public override bool Reloading => Clip.Reloading;
+
+        public float UnstableRate => 0.1f;
 
         public void Start()
         {
@@ -40,7 +40,10 @@ namespace QFramework.ProjectGungeon
             {
                 ShootDuration.RecordShootTime();
 
-                BulletHelper.Shoot(BulletPos.Position2D(), direction, 15, Random.Range(1f, 1.5f));
+                //×Óµ¯½Ç¶ÈËæ»úÆ«ÒÆ£¬
+                var angle = direction.ToAngle() + Random.Range(0.05f, UnstableRate) * 30 * RandomUtility.Choose(-1, 1);
+
+                BulletHelper.Shoot(BulletPos.Position2D(), angle.AngleToDirection2D(), 15, Random.Range(1f, 1.5f));
 
 
                 var soundIndex = Random.Range(0, ShootSounds.Count);

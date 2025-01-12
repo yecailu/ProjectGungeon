@@ -18,6 +18,8 @@ namespace QFramework.ProjectGungeon
 
         public override BulletBag BulletBag { get; set; } = new BulletBag(500, 500);
 
+        public float UnstableRate => 0.2f;
+
 
         public override void OnGunUsed()
         {
@@ -32,7 +34,10 @@ namespace QFramework.ProjectGungeon
 
         void Shoot(Vector2 direction)
         {
-            BulletHelper.Shoot(BulletPos.Position2D(), direction, 20, Random.Range(1f, 2f));
+            var angle = direction.ToAngle() + Random.Range(0.05f, UnstableRate) * 30 * RandomUtility.Choose(-1, 1);
+
+
+            BulletHelper.Shoot(BulletPos.Position2D(), angle.AngleToDirection2D(), 20, Random.Range(1f, 2f));
 
             Clip.UseBullet();
 

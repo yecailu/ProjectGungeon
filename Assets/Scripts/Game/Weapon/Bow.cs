@@ -15,6 +15,8 @@ namespace QFramework.ProjectGungeon
 
         public override BulletBag BulletBag { get; set; } = new BulletBag(100, 100);
 
+        public float UnstableRate => 0.1f;
+
         public override void OnGunUsed()
         {
             Clip.UpdateUI();
@@ -30,15 +32,18 @@ namespace QFramework.ProjectGungeon
         {
             if (Clip.CanShoot)
             {
+                var angle = direction.ToAngle() + Random.Range(0.05f, UnstableRate) * 30 * RandomUtility.Choose(-1, 1);
+
+
                 var playerBullet = Instantiate(BulletPrefab);
                 playerBullet.transform.position = position;
-                playerBullet.Velocity = direction.normalized * 30;
+                playerBullet.Velocity = angle.AngleToDirection2D().normalized * 30;
                 playerBullet.gameObject.SetActive(true);
 
+                playerBullet.transform.right = angle.AngleToDirection2D();//ÐÞ¸´¹­¼ý³¯Ïò
+
+
                 playerBullet.Damage = Random.Range(5, 10);//Ëæ»úÉËº¦ÅÐ¶¨
-
-
-                playerBullet.transform.right = direction;//ÐÞ¸´¹­¼ý³¯Ïò
 
                 var soundIndex = Random.Range(0, ShootSounds.Count);
                 AudioPlayer.clip = ShootSounds[soundIndex];

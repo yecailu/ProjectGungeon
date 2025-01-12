@@ -57,6 +57,7 @@ namespace QFramework.ProjectGungeon
                     else
                     {
                         //金币不足提示
+                        Player.DisplayText("金币不足",0.5f);
                     }
                 }
             }
