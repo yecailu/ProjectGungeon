@@ -212,7 +212,7 @@ namespace QFramework.ProjectGungeon
                 AnimationHelper.UpDownAnimation(Weapon, 0.1f, 10, Time.frameCount);
 
             }
-
+             
 
             if (Global.CanShoot)
             {

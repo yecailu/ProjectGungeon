@@ -396,6 +396,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1ff736cc0698a23418d9f3f58ead0367, type: 3}
   - {fileID: 8300000, guid: d635addcf1471a74198802c408efcaa1, type: 3}
   ReloadSound: {fileID: 8300000, guid: 0194bcd57d1baa242b29abac64569ae8, type: 3}
+  Sprite: {fileID: 136554194}
   BulletPos: {fileID: 435081115}
   SelfAudioSource: {fileID: 44715155}
 --- !u!114 &44715158
@@ -752,7 +753,7 @@ GameObject:
   - component: {fileID: 136554193}
   - component: {fileID: 136554194}
   m_Layer: 3
-  m_Name: Sprites
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1335,6 +1336,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3965b53f5291dc0429361f850c371b74, type: 3}
   - {fileID: 8300000, guid: 04834a673cd48f14e9392b4eca8cb70b, type: 3}
   ReloadSound: {fileID: 8300000, guid: 0194bcd57d1baa242b29abac64569ae8, type: 3}
+  Sprite: {fileID: 1962777587}
   Bullet: {fileID: 1172621200}
   SelfAudioSource: {fileID: 233460104}
 --- !u!114 &233460106
@@ -2778,7 +2780,7 @@ GameObject:
   - component: {fileID: 369177073}
   - component: {fileID: 369177074}
   m_Layer: 3
-  m_Name: Sprites
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11386,7 +11388,7 @@ GameObject:
   - component: {fileID: 736448526}
   - component: {fileID: 736448527}
   m_Layer: 3
-  m_Name: Sprites
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11470,7 +11472,7 @@ GameObject:
   - component: {fileID: 788170108}
   - component: {fileID: 788170109}
   m_Layer: 3
-  m_Name: Sprites
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12192,6 +12194,7 @@ MonoBehaviour:
   ShootSounds:
   - {fileID: 8300000, guid: 422873e6c493b7d439ab55715d2fae7c, type: 3}
   ReloadSound: {fileID: 8300000, guid: 5cc922cbd8643734fbf7cb1883a31209, type: 3}
+  Sprite: {fileID: 981864639}
   ShootSoundPlayer: {fileID: 886221815}
   BulletPos: {fileID: 1622031938}
   AKShootEnd: {fileID: 8300000, guid: d47cba12363501b4c8519fa4769fef1b, type: 3}
@@ -12510,6 +12513,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b89b39e8b1b2fcc4495c62ee261d3e8b, type: 3}
   - {fileID: 8300000, guid: 331b3342cd68a724fb86a1f65d5565ef, type: 3}
   ReloadSound: {fileID: 8300000, guid: ea0930fd9e6496a4bbe916faf5169772, type: 3}
+  Sprite: {fileID: 788170109}
   Bullet: {fileID: 1304556524}
   CanShootSprite: {fileID: 29499734}
   SelfAudioSource: {fileID: 910205256}
@@ -13026,7 +13030,7 @@ GameObject:
   - component: {fileID: 981864638}
   - component: {fileID: 981864639}
   m_Layer: 3
-  m_Name: Sprites
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13394,6 +13398,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6feef5ec0093d524ab625d509d03fd23, type: 3}
   - {fileID: 8300000, guid: 71d701d92a3399749b796f6fe2d8033f, type: 3}
   ReloadSound: {fileID: 8300000, guid: da2b70de244c7474a98cc9c2076f8413, type: 3}
+  Sprite: {fileID: 369177074}
   BulletPos: {fileID: 1613781892}
   SelfAudioSource: {fileID: 1041651971}
 --- !u!114 &1041651973
@@ -14435,7 +14440,7 @@ GameObject:
   - component: {fileID: 1189676655}
   - component: {fileID: 1189676656}
   m_Layer: 3
-  m_Name: Sprites
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14663,6 +14668,7 @@ MonoBehaviour:
   ShootSounds:
   - {fileID: 8300000, guid: 547ae47a61130f74ca699bfd64b59321, type: 3}
   ReloadSound: {fileID: 8300000, guid: c420fb49b73b2e64886c19d2407d573d, type: 3}
+  Sprite: {fileID: 1189676656}
   BulletPos: {fileID: 1647773866}
   SelfAudioSource: {fileID: 1192051592}
 --- !u!114 &1192051594
@@ -15249,7 +15255,7 @@ GameObject:
   - component: {fileID: 1283152840}
   - component: {fileID: 1283152841}
   m_Layer: 3
-  m_Name: Sprites
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16053,6 +16059,7 @@ MonoBehaviour:
   ShootSounds:
   - {fileID: 8300000, guid: 9e338ab7b8d9d514f87cc595730cc3a5, type: 3}
   ReloadSound: {fileID: 8300000, guid: c420fb49b73b2e64886c19d2407d573d, type: 3}
+  Sprite: {fileID: 736448527}
   Bullet: {fileID: 1777967213}
   ShootSoundPlayer: {fileID: 1364117849}
   SelfLineRenderer: {fileID: 1364117851}
@@ -17068,6 +17075,7 @@ MonoBehaviour:
   ShootSounds:
   - {fileID: 8300000, guid: d5b6f0d46c8a46d4b85a641d87df0737, type: 3}
   ReloadSound: {fileID: 8300000, guid: cff543fd0e188c54dbeddb17f24b30e6, type: 3}
+  Sprite: {fileID: 1283152841}
   BulletPos: {fileID: 596034099}
   ShootSoundPlayer: {fileID: 1509650880}
 --- !u!114 &1509650883
@@ -20517,7 +20525,7 @@ GameObject:
   - component: {fileID: 1962777586}
   - component: {fileID: 1962777587}
   m_Layer: 3
-  m_Name: Sprites
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
