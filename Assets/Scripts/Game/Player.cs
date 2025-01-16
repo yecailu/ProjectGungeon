@@ -205,11 +205,15 @@ namespace QFramework.ProjectGungeon
 
             Rigidbody2D.velocity = new Vector2(horizontal, vertical).normalized * 5;
 
-            //走路时人物上下轻微抖动
+            //走路时人物效果
             if(horizontal != 0 || vertical != 0)
             {
-                AnimationHelper.UpDownAnimation(Sprite, 0.1f, 10, Time.frameCount, 0.35f);
-                AnimationHelper.UpDownAnimation(Weapon, 0.1f, 10, Time.frameCount);
+                //人物上下轻微抖动
+                AnimationHelper.UpDownAnimation(Sprite, 0.05f, 10, Time.frameCount, 0.35f);
+                //武器轻微抖动
+                AnimationHelper.UpDownAnimation(Weapon, 0.05f, 10, Time.frameCount);
+                //人物左右轻微摆动
+                AnimationHelper.RotateAnimation(Sprite, 3, 30, Time.frameCount);
 
             }
              

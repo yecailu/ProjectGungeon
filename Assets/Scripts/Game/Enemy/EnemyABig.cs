@@ -40,6 +40,7 @@ namespace QFramework.ProjectGungeon
         public enum States
         {
             FollowPlayer,
+            PrepareToShoot,
             Shoot,
         }
 
@@ -63,6 +64,11 @@ namespace QFramework.ProjectGungeon
                     {
                         var directionToPlayer = (Global.Player.transform.position - transform.position).normalized;//敌人到玩家的方向
 
+
+                        //敌人移动时轻微抖动
+                        AnimationHelper.UpDownAnimation(Sprite, 0.05f, 10, State.FrameCountOfCurrentState);
+                        AnimationHelper.RotateAnimation(Sprite, 3, 30, State.FrameCountOfCurrentState);
+
                         Rigidbody2D.velocity = directionToPlayer; //敌人速度
 
                         //敌人朝向主角
@@ -79,9 +85,33 @@ namespace QFramework.ProjectGungeon
 
                     if (State.SecondsOfCurrentState >= FollowPlayerSeconds)
                     {
+                        State.ChangeState(States.PrepareToShoot);
+                    }
+
+                });
+
+            var originSpriteLocalPos = Sprite.LocalPosition2D();
+            State.State(States.PrepareToShoot)
+                .OnEnter(() =>
+                {
+                    originSpriteLocalPos = Sprite.LocalPosition2D();
+                })
+                .OnUpdate(() =>
+                {
+                    //抖动0.25秒
+                    var shakeRate = (State.SecondsOfCurrentState / 0.25f).Lerp(0.05f, 0.1f);
+                    Sprite.LocalPosition2D(originSpriteLocalPos + new Vector2(Random.Range(-shakeRate, shakeRate)
+                        , Random.Range(-shakeRate, shakeRate)));
+                    if (State.SecondsOfCurrentState > 0.25f)
+                    {
                         State.ChangeState(States.Shoot);
                     }
 
+
+                })
+                .OnExit(() =>
+                {
+                    Sprite.LocalPosition2D(originSpriteLocalPos);
                 });
 
             State.State(States.Shoot)
@@ -95,6 +125,8 @@ namespace QFramework.ProjectGungeon
                         {
                             //敌人到玩家的方向
                             var directionToPlayer = (Global.Player.transform.position - transform.position).normalized;
+
+
                             //敌人子弹逻辑
                             var enemyBullet = Instantiate(EnemyBullet);
                             enemyBullet.transform.position = transform.position;
