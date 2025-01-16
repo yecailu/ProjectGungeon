@@ -4,16 +4,16 @@ namespace QFramework.ProjectGungeon
 {
     public class BulletBag
     {
-        public BulletBag(int remanBulletCount, int maxBulletCount)
+        public BulletBag(int maxBulletCount)
         {
-            RemainBulletCount = remanBulletCount;
             MaxBulletCount = maxBulletCount;
         }
 
-        public int RemainBulletCount { get; set; }
         public int MaxBulletCount { get; set; }
 
-        public bool HasBullet => RemainBulletCount != 0;
+        public bool HasBullet => Data.GunBagRemainBulletCount != 0;
+
+        public GunDate Data { get; set; }
 
         public void Reload(GunClip clip, AudioClip reloadSound)
         {
@@ -33,17 +33,17 @@ namespace QFramework.ProjectGungeon
                 if (HasBullet)
                 {
                     var needCount = clip.NeedCount;
-                    if (needCount <= RemainBulletCount)
+                    if (needCount <= Data.GunBagRemainBulletCount)
                     {
                         //填满子弹
                         clip.Reload(reloadSound, needCount);
-                        RemainBulletCount -= needCount;
+                        Data.GunBagRemainBulletCount -= needCount;
                     }
                     else
                     {
                         //填满剩余子弹
-                        clip.Reload(reloadSound, RemainBulletCount);
-                        RemainBulletCount = 0;
+                        clip.Reload(reloadSound, Data.GunBagRemainBulletCount);
+                        Data.GunBagRemainBulletCount = 0;
                     }
 
                 }

@@ -12,24 +12,24 @@ namespace QFramework.ProjectGungeon
             {
                 Room.PowerUps.Remove(this);
 
-                foreach (var gun in Global.Player.GunList)
-                {
+                //foreach (var gun in GunSystem.GunList)
+                //{
                     
-                    var bag = gun.BulletBag;
-                    //道具将恢复的子弹数量为原来的一半
-                    var bulletCountToAdd = bag.MaxBulletCount / 2;
-                    //计算出需要添加的子弹数量
-                    var gunNeedBulletCount = bag.MaxBulletCount - bag.RemainBulletCount;
+                //    var bag = gun.BulletBag;
+                //    //道具将恢复的子弹数量为原来的一半
+                //    var bulletCountToAdd = bag.MaxBulletCount / 2;
+                //    //计算出需要添加的子弹数量
+                //    var gunNeedBulletCount = bag.MaxBulletCount - bag.RemainBulletCount;
 
-                    if (bulletCountToAdd <= gunNeedBulletCount)
-                    {
-                        bag.RemainBulletCount += bulletCountToAdd;
-                    }
-                    else
-                    {
-                        bag.RemainBulletCount = bag.MaxBulletCount;
-                    }
-                }
+                //    if (bulletCountToAdd <= gunNeedBulletCount)
+                //    {
+                //        bag.RemainBulletCount += bulletCountToAdd;
+                //    }
+                //    else
+                //    {
+                //        bag.RemainBulletCount = bag.MaxBulletCount;
+                //    }
+                //}
 
                 Global.Player.CurrentGun.Clip.UpdateUI();
 

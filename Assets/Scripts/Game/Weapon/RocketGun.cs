@@ -13,7 +13,7 @@ namespace QFramework.ProjectGungeon
 
         public override bool Reloading => Clip.Reloading;
 
-        public override BulletBag BulletBag { get; set; } = new BulletBag(50, 50);
+        public override BulletBag BulletBag { get; set; } = new BulletBag(50);
 
         public override float GunAdditionalCameraSize => 1.5f;
 

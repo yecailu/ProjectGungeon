@@ -120,7 +120,7 @@ namespace QFramework.ProjectGungeon
         {
             if (collision.CompareTag("Player"))
             {
-                Global.CurrentRoom = this;
+                Global.CurrentRoom = this;  
                 OnRoomEnter.Trigger(this);
                 if (Config.RoomType == RoomTypes.Normal)//进入普通房间时才出现门
                 {

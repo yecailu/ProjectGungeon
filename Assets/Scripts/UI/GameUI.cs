@@ -23,11 +23,11 @@ namespace QFramework.ProjectGungeon
             var bulletBag = (Player.Default.CurrentGun).BulletBag;
             if(bulletBag.MaxBulletCount == -1)
             {
-                Default.GunInfo.text = $"Bullet:({gunClip.CurrentBulletCount}/{gunClip.ClipBulletCount}) (\u221e)";
+                Default.GunInfo.text = $"Bullet:({gunClip.Data.CurrentBulletCount}/{gunClip.ClipBulletCount}) (\u221e)";
             }
             else
             {
-                Default.GunInfo.text = $"Bullet:({gunClip.CurrentBulletCount}/{gunClip.ClipBulletCount}) ({bulletBag.RemainBulletCount}/{bulletBag.MaxBulletCount})";
+                Default.GunInfo.text = $"Bullet:({gunClip.Data.CurrentBulletCount}/{gunClip.ClipBulletCount}) ({bulletBag.Data.GunBagRemainBulletCount}/{bulletBag.MaxBulletCount})";
             }
         }
          

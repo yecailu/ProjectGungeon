@@ -33,7 +33,6 @@ namespace QFramework.ProjectGungeon
 
         public Gun CurrentGun;//当前武器
 
-        public List<Gun> GunList = new List<Gun>();//武器列表
 
         public static Player Default;//单例
 
@@ -48,14 +47,7 @@ namespace QFramework.ProjectGungeon
             Text.Hide();
 
             Default = this;
-            GunList.Add(Pistol);
-            GunList.Add(AK);
-            GunList.Add(AWP);
-            GunList.Add(ShotGun);
-            GunList.Add(MP5);
-            GunList.Add(RocketGun);
-            GunList.Add(Bow);
-            GunList.Add(Laser);
+
 
             GunTakeSfxs.Add(GunTake1);
             GunTakeSfxs.Add(GunTake2);
@@ -71,10 +63,34 @@ namespace QFramework.ProjectGungeon
             Default = null;
         }
 
+        Gun GunWithKey(string key)
+        {
+            if(key == GunConfig.Pistol.Key)
+                return Pistol;
+            if (key == GunConfig.MP5.Key)
+                return MP5;
+            if(key == GunConfig.ShotGun.Key)
+                return ShotGun;
+            if(key == GunConfig.AK47.Key)
+                return AK;
+            if(key == GunConfig.Rocket.Key)
+                return RocketGun;
+            if(key == GunConfig.AWP.Key)
+                return AWP;
+            if(key == GunConfig.Laser.Key)
+                return Laser;
+            if(key == GunConfig.Bow.Key)
+                return Bow;
+
+            return null;
+        }
+
         void UseGun(int index)
         {
+            var gunData = GunSystem.GunList[index];
             CurrentGun.Hide();
-            CurrentGun = GunList[index];
+            CurrentGun = GunWithKey(gunData.Key);
+            CurrentGun.WithData(gunData);
             CurrentGun.Show();
             CurrentGun.OnGunUsed();
 
@@ -87,7 +103,11 @@ namespace QFramework.ProjectGungeon
 
         void Start()
         {
-
+            var gunDate = GunSystem.GunList.First();
+            if(gunDate.Key == GunConfig.Pistol.Key)
+            {
+                UseGun(0);
+            }
         }
 
         public void Hurt(int damage)
@@ -249,12 +269,12 @@ namespace QFramework.ProjectGungeon
                 {
                     if (!CurrentGun.Reloading)
                     {
-                        var index = GunList.FindIndex(gun => gun == CurrentGun);//遍历GUN列表，获得当前武器的索引
+                        var index = GunSystem.GunList.FindIndex(gun => gun == CurrentGun.Data);//遍历GUN列表，获得当前武器的索引
                         index--;
 
                         if (index < 0)
                         {
-                            index = GunList.Count - 1;
+                            index = GunSystem.GunList.Count - 1;
                         }
 
                         UseGun(index);
@@ -269,10 +289,10 @@ namespace QFramework.ProjectGungeon
                 {
                     if (!CurrentGun.Reloading)
                     {
-                        var index = GunList.FindIndex(gun => gun == CurrentGun);
+                        var index = GunSystem.GunList.FindIndex(gun => gun == CurrentGun.Data);
                         index++;
 
-                        if (index > GunList.Count - 1)
+                        if (index > GunSystem.GunList.Count - 1)
                         {
                             index = 0;
                         }

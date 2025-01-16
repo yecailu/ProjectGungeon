@@ -7,16 +7,14 @@ namespace QFramework.ProjectGungeon
     /// </summary>
     public class GunClip
     {
-        public int CurrentBulletCount;
 
         public int ClipBulletCount;
 
-        public bool CanShoot => CurrentBulletCount > 0 &&!Reloading;
+        public bool CanShoot => Data.CurrentBulletCount > 0 &&!Reloading;
 
         public GunClip(int clipBulletCount)
         {
             ClipBulletCount = clipBulletCount;
-            CurrentBulletCount = clipBulletCount;
 
         }
 
@@ -25,12 +23,26 @@ namespace QFramework.ProjectGungeon
             GameUI.UpdateGunInfo(this);//刷新武器UI信息
         }
 
+        public void UseBullet()
+        {
+            Data.CurrentBulletCount--;
 
-        public bool Full => CurrentBulletCount == ClipBulletCount;//弹夹是否已满
+            if (Data.CurrentBulletCount == 0)
+            {
+                Player.DisplayText("没子弹了", 2);
+            }
+
+            UpdateUI();
+        }
+
+
+        public bool Full => Data.CurrentBulletCount == ClipBulletCount;//弹夹是否已满
 
         public bool Reloading = false;
 
-        public int NeedCount => ClipBulletCount - CurrentBulletCount;//需要多少弹夹
+        public int NeedCount => ClipBulletCount - Data.CurrentBulletCount;//需要多少弹夹
+
+        public GunDate Data { get; set; }
 
         public void Reload(AudioClip reloadSound, int reloadBulletCount = -1)
         {
@@ -41,7 +53,7 @@ namespace QFramework.ProjectGungeon
             Reloading = true;
             ActionKit.Sequence().PlaySound(reloadSound).Callback(() =>
             {
-                CurrentBulletCount += reloadBulletCount;
+                Data.CurrentBulletCount += reloadBulletCount;
                 UpdateUI();
                 Reloading = false;
             }).StartCurrentScene();
@@ -50,16 +62,6 @@ namespace QFramework.ProjectGungeon
         }
 
 
-        public void UseBullet()
-        {
-            CurrentBulletCount--;
-
-            if(CurrentBulletCount == 0)
-            {
-                Player.DisplayText("没子弹了",2);
-            }
-
-            UpdateUI();
-        }
+        
     }
 }

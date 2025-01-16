@@ -13,7 +13,7 @@ namespace QFramework.ProjectGungeon
 
                 var gun = Global.Player.CurrentGun;
 
-                if (gun.BulletBag.MaxBulletCount == gun.BulletBag.RemainBulletCount)
+                if (gun.BulletBag.MaxBulletCount == gun.BulletBag.Data.GunBagRemainBulletCount)
                 {
 
                 }
@@ -21,7 +21,7 @@ namespace QFramework.ProjectGungeon
                 {
                     var bag = gun.BulletBag;
                     //加满子弹
-                    bag.RemainBulletCount = bag.MaxBulletCount;
+                    bag.Data.GunBagRemainBulletCount = bag.MaxBulletCount;
 
                     //更新UI
                     Global.Player.CurrentGun.Clip.UpdateUI();

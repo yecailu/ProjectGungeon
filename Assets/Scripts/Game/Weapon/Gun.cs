@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -89,6 +90,14 @@ namespace QFramework.ProjectGungeon
             }
         }
 
+
+        public GunDate Data { get; private set; }
+        internal void WithData(GunDate gunData)
+        {
+            Data = gunData;
+            Clip.Data = Data;
+            BulletBag.Data = Data;
+        }
     }
 
 }

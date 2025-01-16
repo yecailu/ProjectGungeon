@@ -15,7 +15,7 @@ namespace QFramework.ProjectGungeon
 
         public ShootLight ShootLight = new ShootLight();
 
-        public override BulletBag BulletBag { get; set; } = new BulletBag(100,100);
+        public override BulletBag BulletBag { get; set; } = new BulletBag(100);
 
         public override bool Reloading => Clip.Reloading;
 
