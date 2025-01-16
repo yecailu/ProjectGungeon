@@ -36,7 +36,7 @@ namespace QFramework.ProjectGungeon
         void Shoot(Vector2 direction)
         {
             var playerBullet = Instantiate(BulletPrefab);
-            playerBullet.transform.position = BulletPrefab.transform.position;
+            playerBullet.transform.position = mLaserHitPoint;
             playerBullet.Velocity = direction.normalized * 10;
             playerBullet.gameObject.SetActive(true);
 
@@ -54,10 +54,9 @@ namespace QFramework.ProjectGungeon
             {
 
                 Shoot(direction);
-
                 TryPlayShootSound(true);
+                mShooting = true;
 
-                SelfLineRenderer.enabled = true;//打开射线渲染
 
             }
             else
@@ -72,20 +71,20 @@ namespace QFramework.ProjectGungeon
 
             if (ShootDuration.CanShoot && Clip.CanShoot)//每隔0.15秒发射一次子弹
             {
-                mShooting = true;
-
                 ShootDuration.RecordShootTime();
 
                 Shoot(direction);
 
                 Clip.UseBullet();
 
+                mShooting = true;
+
                 TryPlayShootSound(true);
               
             }
             else if (!Clip.CanShoot)
             {
-                AudioPlayer.Stop();
+                AudioPlayer.Stop(); 
 
                 mShooting = false;
 
@@ -96,13 +95,21 @@ namespace QFramework.ProjectGungeon
 
             if (mShooting)
             {
-                var layers = LayerMask.GetMask("Default", "Enemy");
+                if (!SelfLineRenderer.enabled)
+                {
+                    SelfLineRenderer.enabled = true;//打开射线渲染
+                }
+
+                var layers = LayerMask.GetMask("Wall", "Enemy");
                 //射线:从子弹的位置发射一条射线,方向为direction,最大距离为无限,检测的层为"Default"和"Enemy"
                 var hit = Physics2D.Raycast(BulletPrefab.Position2D(), direction, float.MaxValue, layers);
+                mLaserHitPoint = hit.point;
                 SelfLineRenderer.SetPosition(0, BulletPrefab.Position2D());//第一个点为枪口位置
                 SelfLineRenderer.SetPosition(1, hit.point);//第二个点为射线与物体的交点
             }
         }
+
+        Vector2 mLaserHitPoint = Vector2.zero;
 
         public override void ShootUp(Vector2 direction)
         {
