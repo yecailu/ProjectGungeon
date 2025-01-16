@@ -8,15 +8,9 @@ namespace QFramework.ProjectGungeon
     public class GunClip
     {
 
-        public int ClipBulletCount;
-
         public bool CanShoot => Data.CurrentBulletCount > 0 &&!Reloading;
 
-        public GunClip(int clipBulletCount)
-        {
-            ClipBulletCount = clipBulletCount;
 
-        }
 
         public void UpdateUI()
         {
@@ -36,11 +30,11 @@ namespace QFramework.ProjectGungeon
         }
 
 
-        public bool Full => Data.CurrentBulletCount == ClipBulletCount;//弹夹是否已满
+        public bool Full => Data.CurrentBulletCount == Data.Config.ClipBulletCount;//弹夹是否已满
 
         public bool Reloading = false;
 
-        public int NeedCount => ClipBulletCount - Data.CurrentBulletCount;//需要多少弹夹
+        public int NeedCount => Data.Config.ClipBulletCount - Data.CurrentBulletCount;//需要多少弹夹
 
         public GunDate Data { get; set; }
 

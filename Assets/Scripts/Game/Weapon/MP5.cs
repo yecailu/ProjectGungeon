@@ -10,7 +10,7 @@ namespace QFramework.ProjectGungeon
     {
         public override AudioSource AudioPlayer => ShootSoundPlayer;
 
-        public override GunClip Clip { get; set; } = new GunClip(30);
+        public override GunClip Clip { get; set; } = new();
 
         public ShootLight ShootLight = new ShootLight();
 

@@ -85,7 +85,7 @@ namespace QFramework.ProjectGungeon
             return null;
         }
 
-        void UseGun(int index)
+        public void UseGun(int index)
         {
             var gunData = GunSystem.GunList[index];
             CurrentGun.Hide();

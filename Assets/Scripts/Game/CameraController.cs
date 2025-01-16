@@ -104,8 +104,8 @@ namespace QFramework.ProjectGungeon
                 {
                     //主角于房间的方向
                     var direction = Global.Player.Direction2DFrom(Global.CurrentRoom);
-                    //房间宽度
-                    var width = Global.CurrentRoom.Config.Width * 0.5f * 2;
+                    //房间宽度，最后一个数值可以更改摆动幅度
+                    var width = Global.CurrentRoom.Config.Width * 0.5f * 10;
                     if(direction.x < 0)
                     {
                         var originAngleZ = transform.localEulerAngles.z;

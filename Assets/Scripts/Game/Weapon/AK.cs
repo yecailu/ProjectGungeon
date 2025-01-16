@@ -11,7 +11,7 @@ namespace QFramework.ProjectGungeon
 
         public ShootDuration ShootDuration = new ShootDuration(0.1f);
 
-        public override GunClip Clip { get; set; } = new GunClip(30);
+        public override GunClip Clip { get; set; } = new();
 
         public ShootLight ShootLight = new ShootLight();
 

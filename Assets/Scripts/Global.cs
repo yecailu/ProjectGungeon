@@ -50,6 +50,10 @@ namespace QFramework.ProjectGungeon
 			Armor.Value = 1;
 			Time.timeScale = 1;//恢复时间
 
+			//清空武器库，并添加一把普通的手枪
+			GunSystem.GunList.Clear();
+			GunSystem.GunList.Add(GunConfig.Pistol.CreateData());
+
 			CurrentLevel =Level1.Config;
 
             //将level1的PacingConfig配置赋值给此处CurrentPacing
