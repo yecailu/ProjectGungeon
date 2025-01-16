@@ -20,6 +20,7 @@ namespace QFramework.ProjectGungeon
 
         public float UnstableRate => 0.2f;
 
+        public override float GunAdditionalCameraSize => 1;
 
         public override void OnGunUsed()
         {
@@ -38,7 +39,7 @@ namespace QFramework.ProjectGungeon
 
 
             BulletHelper.Shoot(BulletPos.Position2D(), angle.AngleToDirection2D(), 20, Random.Range(1f, 2f));
-
+ 
             Clip.UseBullet();
 
             ShootLight.ShowLight(BulletPos.Position2D(), direction);

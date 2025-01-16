@@ -17,6 +17,7 @@ namespace QFramework.ProjectGungeon
 
         public float UnstableRate => 0.1f;
 
+        public override float GunAdditionalCameraSize => 1.5f;
 
 
         public override void OnGunUsed()

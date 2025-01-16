@@ -19,6 +19,7 @@ namespace QFramework.ProjectGungeon
 
         public override BulletBag BulletBag { get; set; } = new BulletBag(500,500);
 
+        public override float GunAdditionalCameraSize => 1.5f;
 
 
         public override void OnGunUsed()

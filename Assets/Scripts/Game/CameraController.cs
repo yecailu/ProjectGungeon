@@ -15,8 +15,11 @@ namespace QFramework.ProjectGungeon
         public int ShakeFrames = 0;
         public bool Shaking = false; 
 
+        private Camera mCamera;
+
         private void Start()
         {
+            mCamera = GetComponent<Camera>();
             Shake.Register((a, frames) =>
             {
                 Shaking = true;
@@ -30,6 +33,8 @@ namespace QFramework.ProjectGungeon
 
         void Update()
         {
+            mCamera.orthographicSize = (1.0f - Mathf.Exp(-Time.deltaTime * 5))
+                .Lerp(mCamera.orthographicSize, Global.GunAdditionalCameraSize + 8);
             if (Global.Player)
             {
                 //Ä¿±êÎ»ÖÃ

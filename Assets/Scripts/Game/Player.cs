@@ -80,7 +80,9 @@ namespace QFramework.ProjectGungeon
 
             var gunTakeSfx =  GunTakeSfxs.GetRandomItem();//随机获取一个切枪音效
             SelfAudioSource.clip = gunTakeSfx;
-            SelfAudioSource.Play(); 
+            SelfAudioSource.Play();
+
+            Global.GunAdditionalCameraSize = CurrentGun.GunAdditionalCameraSize;
         }
 
         void Start()

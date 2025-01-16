@@ -27,6 +27,8 @@ namespace QFramework.ProjectGungeon
 
         public SpriteRenderer Sprite;
 
+        public abstract float GunAdditionalCameraSize { get; }
+
 
         private void Start()
         {

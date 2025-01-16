@@ -25,7 +25,9 @@ namespace QFramework.ProjectGungeon
 		public static bool UIOpened = false;
 		public static bool CanShoot => !UIOpened;
 
-		public static List<LevelConfig> Levels = new List<LevelConfig>()
+		public static float GunAdditionalCameraSize;
+
+        public static List<LevelConfig> Levels = new List<LevelConfig>()
 		{
 			Level1.Config,
 			Level2.Config,

@@ -21,6 +21,8 @@ namespace QFramework.ProjectGungeon
         
         public float UnstableRate => 0.2f;
 
+        public override float GunAdditionalCameraSize => 2;
+
         public override void OnGunUsed()
         {
             Clip.UpdateUI();
