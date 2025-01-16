@@ -21,7 +21,7 @@ namespace QFramework.ProjectGungeon
                     .Show();
                 }
 
-                if(room == Global.currentRoom)
+                if(room == Global.CurrentRoom)
                 {
                     MapItemRoot.LocalPosition(-x * 60, -y * 60);
                 }

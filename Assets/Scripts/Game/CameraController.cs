@@ -2,12 +2,18 @@ using QFramework.ProjectGungeon;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
+using UnityEditor.Timeline;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace QFramework.ProjectGungeon
 {
     public class CameraController : MonoBehaviour
     {
+        public List<Color> Colors;
+
         //EasyEvent是QFramework提供的事件系统，可以方便的进行事件的注销
         public static EasyEvent<float, int> Shake = new EasyEvent<float, int>();
 
@@ -27,6 +33,26 @@ namespace QFramework.ProjectGungeon
                 ShakeA = a;
 
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
+
+            Room.OnRoomEnter.Register((room) =>
+            {
+                if(room.ColorIndex == -1)
+                {
+                    room.ColorIndex = Random.Range(0, Colors.Count);
+                }
+                 
+                var currentColor = mCamera.backgroundColor;
+                var dstColor = Colors[room.ColorIndex];
+                ActionKit.Lerp(0, 1, 0.5f, (p) =>
+                {
+                    mCamera.backgroundColor = Color.Lerp(currentColor, dstColor, p);
+                }, () =>
+                {
+                    mCamera.backgroundColor = dstColor;
+                })  
+                .Start(this);
+
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
 
@@ -35,7 +61,7 @@ namespace QFramework.ProjectGungeon
         {
             mCamera.orthographicSize = (1.0f - Mathf.Exp(-Time.deltaTime * 5))
                 .Lerp(mCamera.orthographicSize, Global.GunAdditionalCameraSize + 8);
-            if (Global.Player)
+            if (Global.Player) 
             {
                 //目标位置
                 var targetPosition = new Vector2(Global.Player.transform.position.x, Global.Player.transform.position.y);
@@ -72,6 +98,36 @@ namespace QFramework.ProjectGungeon
                     currentPosition.z = -10;
                     //设置位置
                     transform.position = currentPosition;
+                }
+                //如果房间存在
+                if (Global.CurrentRoom)
+                {
+                    //主角于房间的方向
+                    var direction = Global.Player.Direction2DFrom(Global.CurrentRoom);
+                    //房间宽度
+                    var width = Global.CurrentRoom.Config.Width * 0.5f * 2;
+                    if(direction.x < 0)
+                    {
+                        var originAngleZ = transform.localEulerAngles.z;
+                        var targetAngleZ = (direction.x.Abs() / width).Lerp(0, 2.5f);
+                        if (originAngleZ >= 2.6f) originAngleZ -= 360;
+
+                        transform.LocalEulerAnglesZ((1.0f - Mathf.Exp(-Time.deltaTime * 5))
+                            .Lerp(originAngleZ, targetAngleZ));
+                    }
+                    else
+                    {
+
+                        var originAngleZ = transform.localEulerAngles.z;
+                        var targetAngleZ = (direction.x.Abs() / width).Lerp(0, -2.5f);
+                        if (originAngleZ >= 2.6f) originAngleZ -= 360;
+
+                        transform.LocalEulerAnglesZ((1.0f - Mathf.Exp(-Time.deltaTime * 5))
+                            .Lerp(originAngleZ, targetAngleZ));
+                    }
+
+
+
                 }
              
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.Rendering;
 
 namespace QFramework.ProjectGungeon
@@ -9,6 +10,9 @@ namespace QFramework.ProjectGungeon
         public RoomTypes RoomType;
 
         public List<string> Codes = new List<string>();
+
+        public int Width => Codes.First().Length;
+        public int Height => Codes.Count;
 
         public RoomConfig Type(RoomTypes type)
         {

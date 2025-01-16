@@ -9,7 +9,7 @@ namespace QFramework.ProjectGungeon
 	{
 		public static Player Player;
 
-		public static Room currentRoom;
+		public static Room CurrentRoom;
 
 		public static LevelConfig CurrentLevel;
 

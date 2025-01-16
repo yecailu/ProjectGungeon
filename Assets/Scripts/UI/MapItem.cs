@@ -89,7 +89,7 @@ namespace QFramework.ProjectGungeon
 
             }
 
-            if (Global.currentRoom == mRoom)
+            if (Global.CurrentRoom == mRoom)
 			{
                 TypeText.text = "Œ“";
                 TypeText.Show();

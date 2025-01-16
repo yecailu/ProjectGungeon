@@ -147,9 +147,9 @@ namespace QFramework.ProjectGungeon
             var shootDirection = (mouseWorldPoint - transform.position).normalized;
 
 
-            if (Global.currentRoom && Global.currentRoom.Enemies.Count > 0)
+            if (Global.CurrentRoom && Global.CurrentRoom.Enemies.Count > 0)
             {
-                mTargetEmeny = Global.currentRoom.Enemies
+                mTargetEmeny = Global.CurrentRoom.Enemies
                     .OrderBy(e => (e.GameObject.Position2D() - mouseWorldPoint.ToVector2()).magnitude)//¸ù¾Ý¾àÀëÔ¶½üÅÅÐò
                     .FirstOrDefault(e =>
                     {

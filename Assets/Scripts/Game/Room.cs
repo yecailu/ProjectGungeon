@@ -10,11 +10,14 @@ namespace QFramework.ProjectGungeon
 {
 	public partial class Room : ViewController
 	{
+        public static EasyEvent<Room> OnRoomEnter = new EasyEvent<Room>();
 		private List<Vector3> mEnemyGeneratePoses = new List<Vector3>();
 
         private List<Door> mDoors = new List<Door>();
 
         public List<Door> Doors => mDoors;
+
+        public int ColorIndex { get; set; } = -1;
 
         private HashSet<IEnemy> mEnemies = new HashSet<IEnemy>();
 
@@ -117,7 +120,8 @@ namespace QFramework.ProjectGungeon
         {
             if (collision.CompareTag("Player"))
             {
-                Global.currentRoom = this;
+                Global.CurrentRoom = this;
+                OnRoomEnter.Trigger(this);
                 if (Config.RoomType == RoomTypes.Normal)//进入普通房间时才出现门
                 {
                     if (State == RoomStates.Close)
