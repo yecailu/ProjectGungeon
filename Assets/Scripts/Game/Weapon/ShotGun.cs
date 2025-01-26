@@ -43,10 +43,7 @@ namespace QFramework.ProjectGungeon
             AudioPlayer.clip = ShootSounds[soundIndex];
             AudioPlayer.Play();
 
-            //摄像机震动
-            CameraController.Shake.Trigger(0.08f, 4);
-
-            BackForce.Shoot(0.08f, 4);
+            
 
 
         }
@@ -87,6 +84,14 @@ namespace QFramework.ProjectGungeon
 
 
                     Shoot(BulletPos.Position2D(), direction);
+
+                    BulletFactory.GenBulletShell(direction, BulletFactory.Default.ShotGunBulletShell);
+
+                    //摄像机震动
+                    CameraController.Shake.Trigger(0.08f, 4);
+
+                    BackForce.Shoot(0.08f, 4);
+
                     Shoot(pos1, direction1, false);
                     Shoot(pos2, direction2, false);
                     Shoot(pos3, direction3, false);

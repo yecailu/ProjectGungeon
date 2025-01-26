@@ -18,7 +18,7 @@ TagManager:
   - EnemyBullet
   - Enemy
   - Wall
-  - 
+  - OnlyWithWall
   - 
   - 
   - 

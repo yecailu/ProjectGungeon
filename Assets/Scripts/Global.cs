@@ -1,6 +1,7 @@
 using QFramework.ProjectGungeon;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -10,6 +11,8 @@ namespace QFramework.ProjectGungeon
 		public static Player Player;
 
 		public static Room CurrentRoom;
+
+		public static GunDate CurrentGun;
 
 		public static LevelConfig CurrentLevel;
 
@@ -53,6 +56,7 @@ namespace QFramework.ProjectGungeon
 			//清空武器库，并添加一把普通的手枪
 			GunSystem.GunList.Clear();
 			GunSystem.GunList.Add(GunConfig.Pistol.CreateData());
+			Global.CurrentGun = GunSystem.GunList.First();
 
 			CurrentLevel =Level1.Config;
 

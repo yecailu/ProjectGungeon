@@ -14,20 +14,29 @@ namespace QFramework.ProjectGungeon
 
                 foreach (var gun in GunSystem.GunList)
                 {
-
-                    //道具将恢复的子弹数量为原来的一半
-                    var bulletCountToAdd = gun.Config.GunBagMaxBulletCount / 2;
-                    //计算出需要添加的子弹数量
-                    var gunNeedBulletCount = gun.Config.GunBagMaxBulletCount - gun.GunBagRemainBulletCount;
-
-                    if (bulletCountToAdd <= gunNeedBulletCount)
+                    if(gun.Key == GunConfig.Pistol.Key)
                     {
-                        gun.GunBagRemainBulletCount += bulletCountToAdd;
+
                     }
                     else
                     {
-                        gun.GunBagRemainBulletCount = gun.Config.GunBagMaxBulletCount;
+                        //道具将恢复的子弹数量为原来的一半
+                        var bulletCountToAdd = gun.Config.GunBagMaxBulletCount / 2;
+                        //计算出需要添加的子弹数量
+                        var gunNeedBulletCount = gun.Config.GunBagMaxBulletCount - gun.GunBagRemainBulletCount;
+
+                        if (bulletCountToAdd <= gunNeedBulletCount)
+                        {
+                            gun.GunBagRemainBulletCount += bulletCountToAdd;
+                        }
+                        else
+                        {
+                            gun.GunBagRemainBulletCount = gun.Config.GunBagMaxBulletCount;
+                        }
                     }
+
+
+                   
                 }
 
                 Global.Player.CurrentGun.Clip.UpdateUI();

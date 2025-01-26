@@ -60,6 +60,9 @@ namespace QFramework.ProjectGungeon
                 CameraController.Shake.Trigger(0.05f, 2);
 
                 BackForce.Shoot(0.05f, 2);
+
+                BulletFactory.GenBulletShell(direction);
+
             }
         }
 

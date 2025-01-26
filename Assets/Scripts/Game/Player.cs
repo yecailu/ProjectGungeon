@@ -90,6 +90,7 @@ namespace QFramework.ProjectGungeon
             var gunData = GunSystem.GunList[index];
             CurrentGun.Hide();
             CurrentGun = GunWithKey(gunData.Key);
+            Global.CurrentGun = gunData;
             CurrentGun.WithData(gunData);
             CurrentGun.Show();
             CurrentGun.OnGunUsed();
@@ -103,11 +104,8 @@ namespace QFramework.ProjectGungeon
 
         void Start()
         {
-            var gunDate = GunSystem.GunList.First();
-            if(gunDate.Key == GunConfig.Pistol.Key)
-            {
-                UseGun(0);
-            }
+            var gunIndex = GunSystem.GunList.FindIndex(g => g == Global.CurrentGun);
+            UseGun(gunIndex);
         }
 
         public void Hurt(int damage)

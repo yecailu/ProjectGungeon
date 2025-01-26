@@ -49,13 +49,18 @@ namespace QFramework.ProjectGungeon
 
             BackForce.Shoot(0.05f, 2);
 
+            BulletFactory.GenBulletShell(direction);
+
         }
 
 
         public override void ShootDown(Vector2 direction)
         {
-            if (Clip.CanShoot)
+            if (ShootDuration.CanShoot && Clip.CanShoot)
             {
+
+                ShootDuration.RecordShootTime();
+
                 Shoot(direction);
 
                 TryPlayShootSound(true);

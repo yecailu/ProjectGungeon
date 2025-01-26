@@ -54,6 +54,7 @@ namespace QFramework.ProjectGungeon
 
             BackForce.Shoot(0.1f, 5);
 
+ 
         }
 
 
