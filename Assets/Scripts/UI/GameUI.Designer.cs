@@ -1,4 +1,4 @@
-// Generate Id:587215bb-258e-497c-b745-6c1ba5b2b699
+// Generate Id:014c2cd7-eac5-42ff-94de-acee2183d24d
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -15,6 +15,8 @@ namespace QFramework.ProjectGungeon
 		public UnityEngine.UI.Text GunInfo;
 
 		public QFramework.ProjectGungeon.UIMap UIMap;
+
+		public UnityEngine.UI.Image ScreenColor;
 
 	}
 }

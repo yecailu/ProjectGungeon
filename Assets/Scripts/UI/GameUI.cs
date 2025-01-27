@@ -18,6 +18,28 @@ namespace QFramework.ProjectGungeon
 
         public Text HP;
 
+        public static void PlayerHurtFlashScreen()
+        {
+            //透明度从0到1，然后从1到0，最后变为原来的颜色
+            ActionKit.Sequence()
+                .Lerp01(0.01f, p =>
+                {
+                    Default.ScreenColor.ColorAlpha(p);
+                }, () =>
+                {
+                    Default.ScreenColor.ColorAlpha(1);
+                })
+                .Lerp(1, 0, 0.3f, p =>
+                {
+                    Default.ScreenColor.ColorAlpha(p);
+                }, () =>
+                {
+                    Default.ScreenColor.ColorAlpha(0);
+                })
+                .StartCurrentScene()
+                .IgnoreTimeScale();
+        }
+
         public static void UpdateGunInfo(GunClip gunClip)
         {
             var bulletBag = (Player.Default.CurrentGun).BulletBag;

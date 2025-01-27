@@ -363,6 +363,8 @@ namespace QFramework.ProjectGungeon
 
                 }
 
+                GameUI.PlayerHurtFlashScreen();
+
             }
         }
 
