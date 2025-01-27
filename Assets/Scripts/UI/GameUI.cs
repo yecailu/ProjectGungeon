@@ -1,6 +1,8 @@
 using QFramework;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -41,14 +43,35 @@ namespace QFramework.ProjectGungeon
 
         public static void UpdateGunInfo(GunClip gunClip)
         {
-            var bulletBag = (Player.Default.CurrentGun).BulletBag;
-            if(bulletBag.MaxBulletCount == -1)
+            var data = Player.Default.CurrentGun.Data;
+            Default.Icon.sprite = Player.Default?.CurrentGun?.Sprite?.sprite;
+            if(data.Config.GunBagMaxBulletCount == -1)
             {
-                Default.GunInfo.text = $"Bullet:({gunClip.Data.CurrentBulletCount}/{gunClip.Data.Config.ClipBulletCount}) (\u221e)";
+                if (data.Reloading)
+                {
+
+                    Default.BulletText.text = "(<size=24>Reloading</size>)\u221e";
+                }
+                else
+                {
+
+                    Default.BulletText.text =
+                        $"({gunClip.Data.CurrentBulletCount}/{gunClip.Data.Config.ClipBulletCount})\u221e";
+                }
+
             }
             else
             {
-                Default.GunInfo.text = $"Bullet:({gunClip.Data.CurrentBulletCount}/{gunClip.Data.Config.ClipBulletCount}) ({bulletBag.Data.GunBagRemainBulletCount}/{bulletBag.MaxBulletCount})"; 
+                if (data.Reloading)
+                {
+                    Default.BulletText.text = $"(<size=24>Reloading</size>){data.GunBagRemainBulletCount}/{data.Config.GunBagMaxBulletCount}";
+                }
+                else
+                {
+                    Default.BulletText.text =
+                        $"({gunClip.Data.CurrentBulletCount}/{gunClip.Data.Config.ClipBulletCount}) {data.GunBagRemainBulletCount}/{data.Config.GunBagMaxBulletCount}";
+
+                }
             }
         }
          
@@ -67,6 +90,25 @@ namespace QFramework.ProjectGungeon
 
         void Start()
         {
+            //存储所有音乐资源路径
+            var list = new List<string>() 
+            {
+                "resources://Music/darkascent",
+                "resources://Music/DOS-88 - Automatav2",
+                "resources://Music/DOS-88 - Press Start",
+                "resources://Music/FlowState",
+                "resources://Music/Night Life",
+                "resources://Music/OnlyInDreams",
+                "resources://Music/Rest Easy",
+                "resources://Music/Smooth Sailing",
+                "resources://Music/UndergroundConcourse",
+                "resources://Music/Checking Instruments", 
+                "resources://Music/D0S-88 - Marathon Man",
+            };
+            //播放随机音乐
+            AudioKit.PlayMusic(list.GetRandomItem(),volume:0.2f);
+
+
             GamePass.transform.Find("BtnRestart").GetComponent<Button>().onClick.AddListener(() =>
             {
                 Global.ResetData();//重置数据

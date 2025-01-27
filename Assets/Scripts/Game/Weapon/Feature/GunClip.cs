@@ -8,7 +8,7 @@ namespace QFramework.ProjectGungeon
     public class GunClip
     {
 
-        public bool CanShoot => Data.CurrentBulletCount > 0 &&!Reloading;
+        public bool CanShoot => Data.CurrentBulletCount > 0 &&!Data.Reloading;
 
 
 
@@ -32,8 +32,6 @@ namespace QFramework.ProjectGungeon
 
         public bool Full => Data.CurrentBulletCount == Data.Config.ClipBulletCount;//弹夹是否已满
 
-        public bool Reloading = false;
-
         public int NeedCount => Data.Config.ClipBulletCount - Data.CurrentBulletCount;//需要多少弹夹
 
         public GunDate Data { get; set; }
@@ -44,13 +42,13 @@ namespace QFramework.ProjectGungeon
             {
                 reloadBulletCount = NeedCount;
             }
-            Reloading = true;
+            Data.Reloading = true;
             ActionKit.Sequence().PlaySound(reloadSound).Callback(() =>
             {
                 Data.CurrentBulletCount += reloadBulletCount;
+                Data.Reloading = false;
                 UpdateUI();
-                Reloading = false;
-            }).StartCurrentScene();
+            }).StartCurrentScene(); 
 
             
         }

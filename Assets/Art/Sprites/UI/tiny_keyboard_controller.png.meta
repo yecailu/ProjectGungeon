@@ -1727,7 +1727,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiny_keyboard_controller_77
+      name: MouseLeft
       rect:
         serializedVersion: 2
         x: 144
@@ -1895,7 +1895,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiny_keyboard_controller_85
+      name: Q
       rect:
         serializedVersion: 2
         x: 272
@@ -1937,7 +1937,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiny_keyboard_controller_87
+      name: E
       rect:
         serializedVersion: 2
         x: 304
@@ -1958,7 +1958,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiny_keyboard_controller_88
+      name: R
       rect:
         serializedVersion: 2
         x: 320
@@ -17256,8 +17256,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      E: -79783916
       KeyboardWhiteM: -1681834313
+      MouseLeft: -1746602897
       MouseRight: -717976471
+      Q: 1327937733
+      R: -1369329822
       tiny_keyboard_controller_0: 1829773509
       tiny_keyboard_controller_1: -1043202583
       tiny_keyboard_controller_10: 1757011254
@@ -18002,7 +18006,6 @@ TextureImporter:
       tiny_keyboard_controller_767: -1726709870
       tiny_keyboard_controller_768: 1832946712
       tiny_keyboard_controller_769: 196124821
-      tiny_keyboard_controller_77: -1746602897
       tiny_keyboard_controller_770: 1949548674
       tiny_keyboard_controller_771: -1476534163
       tiny_keyboard_controller_772: -513858980
@@ -18056,10 +18059,7 @@ TextureImporter:
       tiny_keyboard_controller_82: 625133933
       tiny_keyboard_controller_83: 1420058302
       tiny_keyboard_controller_84: -1961038777
-      tiny_keyboard_controller_85: 1327937733
       tiny_keyboard_controller_86: 1808001569
-      tiny_keyboard_controller_87: -79783916
-      tiny_keyboard_controller_88: -1369329822
       tiny_keyboard_controller_89: -1188045322
       tiny_keyboard_controller_9: 144599873
       tiny_keyboard_controller_90: 1949238134
