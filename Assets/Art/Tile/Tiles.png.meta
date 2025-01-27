@@ -278,7 +278,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles_8
+      name: Floor10
       rect:
         serializedVersion: 2
         x: 0
@@ -299,7 +299,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles_9
+      name: Floor11
       rect:
         serializedVersion: 2
         x: 16
@@ -320,7 +320,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles_10
+      name: Floor20
       rect:
         serializedVersion: 2
         x: 32
@@ -341,7 +341,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles_11
+      name: Floor21
       rect:
         serializedVersion: 2
         x: 48
@@ -362,7 +362,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles_12
+      name: Floor30
       rect:
         serializedVersion: 2
         x: 64
@@ -383,7 +383,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles_13
+      name: Floor31
       rect:
         serializedVersion: 2
         x: 80
@@ -404,7 +404,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles_14
+      name: Floor12
       rect:
         serializedVersion: 2
         x: 0
@@ -425,7 +425,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles_15
+      name: Floor13
       rect:
         serializedVersion: 2
         x: 16
@@ -446,7 +446,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles_16
+      name: Floor22
       rect:
         serializedVersion: 2
         x: 32
@@ -467,7 +467,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles_17
+      name: Floor23
       rect:
         serializedVersion: 2
         x: 48
@@ -488,7 +488,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles_18
+      name: Floor32
       rect:
         serializedVersion: 2
         x: 64
@@ -509,7 +509,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Tiles_19
+      name: Floor33
       rect:
         serializedVersion: 2
         x: 80
@@ -542,20 +542,20 @@ TextureImporter:
     nameFileIdTable:
       Floor0: 141784467
       Floor1: -501033473
+      Floor10: -1588702548
+      Floor11: 1326042773
+      Floor12: -49512327
+      Floor13: 2044507098
       Floor2: 642495690
+      Floor20: -407812579
+      Floor21: -1086290693
+      Floor22: 709861484
+      Floor23: 1341010909
       Floor3: -1247176636
-      Tiles_10: -407812579
-      Tiles_11: -1086290693
-      Tiles_12: 582104022
-      Tiles_13: -1360900881
-      Tiles_14: -49512327
-      Tiles_15: 2044507098
-      Tiles_16: 709861484
-      Tiles_17: 1341010909
-      Tiles_18: 914946066
-      Tiles_19: -906003146
-      Tiles_8: -1588702548
-      Tiles_9: 1326042773
+      Floor30: 582104022
+      Floor31: -1360900881
+      Floor32: 914946066
+      Floor33: -906003146
       Wall0: -605876860
       Wall1: 1146557714
       Wall2: 1969838737

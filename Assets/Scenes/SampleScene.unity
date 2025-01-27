@@ -2636,6 +2636,7 @@ MonoBehaviour:
   GunTake4: {fileID: 8300000, guid: cba230457b59d6344937af180344c17f, type: 3}
   GunTake5: {fileID: 8300000, guid: cc2b02b2660c8bb4784e3e818b38d038, type: 3}
   SelfAudioSource: {fileID: 330987078}
+  SelfCircleCollider2D: {fileID: 330987080}
 --- !u!4 &330987075
 Transform:
   m_ObjectHideFlags: 0
@@ -2653,6 +2654,7 @@ Transform:
   - {fileID: 623180789}
   - {fileID: 1627268941}
   - {fileID: 1634421084}
+  - {fileID: 1230438583}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &330987077
@@ -2803,6 +2805,8 @@ MonoBehaviour:
     Object: {fileID: 8300000, guid: cc2b02b2660c8bb4784e3e818b38d038, type: 3}
   - MemberName: SelfAudioSource
     Object: {fileID: 330987078}
+  - MemberName: SelfCircleCollider2D
+    Object: {fileID: 330987080}
 --- !u!58 &330987080
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15701,6 +15705,73 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
   m_EffectDistance: {x: 2, y: 2}
   m_UseGraphicAlpha: 1
+--- !u!1 &1230438582
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1230438583}
+  - component: {fileID: 1230438584}
+  m_Layer: 10
+  m_Name: WallCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1230438583
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230438582}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 330987075}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1230438584
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230438582}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.07507396}
+  serializedVersion: 2
+  m_Radius: 0.42492604
 --- !u!1 &1256455695
 GameObject:
   m_ObjectHideFlags: 0
@@ -18887,8 +18958,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -57249207
+  m_SortingLayer: 3
   m_SortingOrder: 100
   m_Sprite: {fileID: 21300000, guid: 3cb456e751982014a942bfc3f7a70321, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -21733,6 +21804,18 @@ MonoBehaviour:
   EnemyBBig: {fileID: 2105430781}
   EnemyCBig: {fileID: 1100979027}
   EnemyDBig: {fileID: 323193656}
+  Floor10: {fileID: 11400000, guid: d3c3c704125b8514fb6a8fc95c1fe2a0, type: 2}
+  Floor11: {fileID: 11400000, guid: d4f43b83c4ebf4b489588bb721ac5b5a, type: 2}
+  Floor12: {fileID: 11400000, guid: e3340bdef06967743a5d0e9b509f540e, type: 2}
+  Floor13: {fileID: 11400000, guid: a35d2aff85b70964298da708a57d36f3, type: 2}
+  Floor20: {fileID: 11400000, guid: 80c8acec55ecebd48afe96009909dd17, type: 2}
+  Floor21: {fileID: 11400000, guid: 855307acdae0e8c42b4ae551b04c103f, type: 2}
+  Floor22: {fileID: 11400000, guid: ef03b4787e68b2e4cbc138e2e7546e43, type: 2}
+  Floor23: {fileID: 11400000, guid: dafe2a35bb6cbf548a678ffcd7d0c15e, type: 2}
+  Floor30: {fileID: 11400000, guid: 6fd7e57dfb8ba6249b870ac3161a1f22, type: 2}
+  Floor31: {fileID: 11400000, guid: 40bd3b3d2553b4a479428b1a2ec480cf, type: 2}
+  Floor32: {fileID: 11400000, guid: bf727e91bd4ebbf488631984744d6b84, type: 2}
+  Floor33: {fileID: 11400000, guid: 0f21c4e65600e814698d34a179ed8ce5, type: 2}
 --- !u!4 &1995000335
 Transform:
   m_ObjectHideFlags: 0
@@ -21807,6 +21890,30 @@ MonoBehaviour:
     Object: {fileID: 1100979027}
   - MemberName: EnemyDBig
     Object: {fileID: 323193656}
+  - MemberName: Floor10
+    Object: {fileID: 11400000, guid: d3c3c704125b8514fb6a8fc95c1fe2a0, type: 2}
+  - MemberName: Floor11
+    Object: {fileID: 11400000, guid: d4f43b83c4ebf4b489588bb721ac5b5a, type: 2}
+  - MemberName: Floor12
+    Object: {fileID: 11400000, guid: e3340bdef06967743a5d0e9b509f540e, type: 2}
+  - MemberName: Floor13
+    Object: {fileID: 11400000, guid: a35d2aff85b70964298da708a57d36f3, type: 2}
+  - MemberName: Floor20
+    Object: {fileID: 11400000, guid: 80c8acec55ecebd48afe96009909dd17, type: 2}
+  - MemberName: Floor21
+    Object: {fileID: 11400000, guid: 855307acdae0e8c42b4ae551b04c103f, type: 2}
+  - MemberName: Floor22
+    Object: {fileID: 11400000, guid: ef03b4787e68b2e4cbc138e2e7546e43, type: 2}
+  - MemberName: Floor23
+    Object: {fileID: 11400000, guid: dafe2a35bb6cbf548a678ffcd7d0c15e, type: 2}
+  - MemberName: Floor30
+    Object: {fileID: 11400000, guid: 6fd7e57dfb8ba6249b870ac3161a1f22, type: 2}
+  - MemberName: Floor31
+    Object: {fileID: 11400000, guid: 40bd3b3d2553b4a479428b1a2ec480cf, type: 2}
+  - MemberName: Floor32
+    Object: {fileID: 11400000, guid: bf727e91bd4ebbf488631984744d6b84, type: 2}
+  - MemberName: Floor33
+    Object: {fileID: 11400000, guid: 0f21c4e65600e814698d34a179ed8ce5, type: 2}
 --- !u!1 &2005656879
 GameObject:
   m_ObjectHideFlags: 0

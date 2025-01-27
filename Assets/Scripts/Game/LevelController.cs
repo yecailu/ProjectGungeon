@@ -46,18 +46,79 @@ namespace QFramework.ProjectGungeon
         {
             get
             {
-                var wallIndex = Random.Range(0, 3 + 1);
+                if(Global.CurrentLevel == Level1.Config)
+                {
+                    return RandomUtility.Choose(
+                        Floor0,
+                        Floor0,
+                        Floor0,
+                        Floor0,
+                        Floor0,
+                        Floor0,
+                        Floor0,
+                        Floor1,
+                        Floor1,
+                        Floor2,
+                        Floor2,
+                        Floor3);
 
-                if (wallIndex == 0)
-                    return Floor0;
-                if (wallIndex == 1)
-                    return Floor1;
-                if (wallIndex == 2)
-                    return Floor2;
-                if (wallIndex == 3)
-                    return Floor3;
+                }
 
-                return Floor0;
+                if (Global.CurrentLevel == Level2.Config)
+                {
+                    return RandomUtility.Choose(
+                        Floor10,
+                        Floor10,
+                        Floor10,
+                        Floor10,
+                        Floor10,
+                        Floor10,
+                        Floor10,
+                        Floor11,
+                        Floor11,
+                        Floor12,
+                        Floor12,
+                        Floor13);
+
+                }
+
+                if (Global.CurrentLevel == Level3.Config)
+                {
+                    return RandomUtility.Choose(
+                        Floor20,
+                        Floor20,
+                        Floor20,
+                        Floor20,
+                        Floor20,
+                        Floor20,
+                        Floor20,
+                        Floor21,
+                        Floor21,
+                        Floor22,
+                        Floor22,
+                        Floor23);
+
+                }
+
+                if (Global.CurrentLevel == Level4.Config)
+                {
+                    return RandomUtility.Choose(
+                        Floor30,
+                        Floor30,
+                        Floor30,
+                        Floor30,
+                        Floor30,
+                        Floor30,
+                        Floor30,
+                        Floor31,
+                        Floor31,
+                        Floor32,
+                        Floor32,
+                        Floor33);
+
+                }
+
+                return Wall0;
 
             }
         }

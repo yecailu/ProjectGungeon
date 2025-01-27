@@ -62,6 +62,7 @@ namespace QFramework.ProjectGungeon
 			GunSystem.GunList.Add(GunConfig.Pistol.CreateData());
 			Global.CurrentGun = GunSystem.GunList.First();
 
+			//关卡设置 
 			CurrentLevel =Level1.Config;
 
             //将level1的PacingConfig配置赋值给此处CurrentPacing

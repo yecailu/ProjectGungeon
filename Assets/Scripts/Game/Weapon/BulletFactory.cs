@@ -24,6 +24,9 @@ namespace QFramework.ProjectGungeon
                     self.velocity = velocity;
                     self.angularVelocity = Random.Range(-720, 720);
 
+                    // 弹壳层级提高，在主角上方弹出
+                    spriteRenderer.sortingLayerName = "Fx";
+
                     ActionKit
                     .Sequence()
                     .Delay(Random.Range(0.5f, 1), () =>
@@ -32,6 +35,9 @@ namespace QFramework.ProjectGungeon
                             Vector2.up * Random.Range(0, 0.5f);
                         self.gravityScale = 0.1f;
                         self.angularVelocity = RandomUtility.Choose(-1, 1) * Random.Range(180, 720);
+
+                        //设置弹壳层级变低，不遮住主角
+                        spriteRenderer.sortingLayerName = "OnGround";
                     })
                     .Parallel(p =>
                     {
