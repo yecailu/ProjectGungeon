@@ -1,4 +1,4 @@
-// Generate Id:e2e9b3a6-d130-4aa0-99ce-bff3b6e95746
+// Generate Id:d62c9669-21eb-469b-bf98-4a3374539435
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -39,6 +39,8 @@ namespace QFramework.ProjectGungeon
 		public UnityEngine.AudioClip GunTake5;
 
 		public UnityEngine.AudioSource SelfAudioSource;
+
+		public UnityEngine.CircleCollider2D SelfCircleCollider2D;
 
 	}
 }

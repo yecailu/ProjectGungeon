@@ -27,7 +27,7 @@ namespace QFramework.ProjectGungeon
             }
             else
             {
-                Default.GunInfo.text = $"Bullet:({gunClip.Data.CurrentBulletCount}/{gunClip.Data.Config.ClipBulletCount}) ({bulletBag.Data.GunBagRemainBulletCount}/{bulletBag.MaxBulletCount})";
+                Default.GunInfo.text = $"Bullet:({gunClip.Data.CurrentBulletCount}/{gunClip.Data.Config.ClipBulletCount}) ({bulletBag.Data.GunBagRemainBulletCount}/{bulletBag.MaxBulletCount})"; 
             }
         }
          
