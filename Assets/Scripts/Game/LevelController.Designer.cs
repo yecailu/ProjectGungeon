@@ -1,4 +1,4 @@
-// Generate Id:d3779acb-d674-49ce-9003-b258d04db703
+// Generate Id:d64f5775-06d8-4928-8fd9-b14fcf5211ad
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -9,8 +9,6 @@ namespace QFramework.ProjectGungeon
 		public QFramework.ProjectGungeon.Room Room;
 
 		public QFramework.ProjectGungeon.Door Door;
-
-		public QFramework.ProjectGungeon.HP1 HP1;
 
 		public QFramework.ProjectGungeon.Chest Chest;
 

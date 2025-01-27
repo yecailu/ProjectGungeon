@@ -572,16 +572,7 @@ namespace QFramework.ProjectGungeon
                     }
                     else if (code == 's')
                     {
-                        ShopItem.InstantiateWithParent(room)
-                        .Position2D(new Vector3(x, y, 0))
-                        .Self(self =>
-                        {
-                            self.Room = room;
-                            self.PowerUp = LevelController.Default.HP1;
-                            self.ItemPrice = 5;
-                        })
-                        .UpdateView()
-                        .Show();
+                        room.AddShopItemGeneratePos(new Vector3(x, y, 0));
 
                     }
                 }

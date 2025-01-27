@@ -10,11 +10,19 @@ namespace QFramework.ProjectGungeon
         {
             if (collision.CompareTag("Player"))
             {
-                Room.PowerUps.Remove(this);//删除PowerUps里的元素
+                if (Global.HP.Value < Global.MaxHP.Value)
+                {
 
-                Global.HP.Value++;
-                AudioKit.PlaySound("resources://Hp1");
-                this.DestroyGameObjGracefully(); 
+                    Room.PowerUps.Remove(this);//删除PowerUps里的元素
+
+                    Global.HP.Value++;
+                    AudioKit.PlaySound("resources://Hp1");
+                    this.DestroyGameObjGracefully();
+                }
+                else
+                {
+                    Player.DisplayText("现在还不需要", 1.0f);
+                }
             }
         }
 

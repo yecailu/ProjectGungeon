@@ -17,13 +17,15 @@ namespace QFramework.ProjectGungeon
 		public static LevelConfig CurrentLevel;
 
 		public static BindableProperty<int> HP = new BindableProperty<int>(6);
+        public static BindableProperty<int> MaxHP = new BindableProperty<int>(6);
 
         public static BindableProperty<int> Armor = new BindableProperty<int>(1);
 
         //BindableProperty<T> 是QFramework框架提供的属性，本身能储存数据，又能监听数据变换事件
         public static BindableProperty<int> Coin = new BindableProperty<int>(0);
+        public static BindableProperty<int> Key = new BindableProperty<int>(0);
 
-		public static DynaGrid<Room> RoomGrid { get; set; }
+        public static DynaGrid<Room> RoomGrid { get; set; }
 
 		public static bool UIOpened = false;
 		public static bool CanShoot => !UIOpened;
@@ -48,9 +50,11 @@ namespace QFramework.ProjectGungeon
 
 		public static void ResetData()
 		{
-			Coin.Value = 0;
+			Coin.Value = 100;
 			HP.Value = 6;
+			MaxHP.Value = 6;
 			Armor.Value = 1;
+			Key.Value = 0;
 			Time.timeScale = 1;//恢复时间
 
 			//清空武器库，并添加一把普通的手枪

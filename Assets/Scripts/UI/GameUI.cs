@@ -77,13 +77,18 @@ namespace QFramework.ProjectGungeon
                 CoinText.text = coin.ToString();
 
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
+
+            Global.Key.RegisterWithInitValue((key) =>
+            {
+                KeyText.text = key.ToString();
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
         }
 
 
 
         void UpdateHP()
         {
-            HP.text = "HP:" + Global.HP.Value;
+            HP.text = $"HP:({Global.HP.Value}/{Global.MaxHP.Value})";
         }
 
         private void Update()

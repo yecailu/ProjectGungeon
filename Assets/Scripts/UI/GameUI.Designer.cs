@@ -1,4 +1,4 @@
-// Generate Id:49d03ec8-5bc3-4834-b962-3e43d1c806aa
+// Generate Id:587215bb-258e-497c-b745-6c1ba5b2b699
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -9,6 +9,8 @@ namespace QFramework.ProjectGungeon
 		public UnityEngine.UI.Text Armor;
 
 		public UnityEngine.UI.Text CoinText;
+
+		public UnityEngine.UI.Text KeyText;
 
 		public UnityEngine.UI.Text GunInfo;
 

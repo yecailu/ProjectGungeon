@@ -1,4 +1,4 @@
-// Generate Id:91378821-2952-45eb-95b9-b0b85300563b
+// Generate Id:32f57fe9-733a-46b6-b6fd-6e43100b7817
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -8,11 +8,15 @@ namespace QFramework.ProjectGungeon
 
 		public QFramework.ProjectGungeon.Coin Coin;
 
+		public QFramework.ProjectGungeon.Key Key;
+
 		public QFramework.ProjectGungeon.Armor1 Armor1;
 
 		public QFramework.ProjectGungeon.AllGunHalfBullet AllGunHalfBullet;
 
 		public QFramework.ProjectGungeon.SingleGunFullBullet SingleGunFullBullet;
+
+		public QFramework.ProjectGungeon.HP1 HP1;
 
 	}
 }

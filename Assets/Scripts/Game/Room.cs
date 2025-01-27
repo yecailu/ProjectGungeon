@@ -5,6 +5,8 @@ using System;
 using System.Linq;
 using Unity.VisualScripting;
 using Random = UnityEngine.Random;
+using static UnityEditor.PlayerSettings;
+using static UnityEditor.Progress;
 
 namespace QFramework.ProjectGungeon
 {
@@ -12,6 +14,8 @@ namespace QFramework.ProjectGungeon
 	{
         public static EasyEvent<Room> OnRoomEnter = new EasyEvent<Room>();
 		private List<Vector3> mEnemyGeneratePoses = new List<Vector3>();
+        private List<Vector3> mShopItemGeneratePoses = new List<Vector3>();
+
 
         private List<Door> mDoors = new List<Door>();
 
@@ -116,6 +120,12 @@ namespace QFramework.ProjectGungeon
 
         }
 
+        public void AddShopItemGeneratePos(Vector3 shopItemGeneratePos)
+        {
+            mShopItemGeneratePoses.Add(shopItemGeneratePos);
+
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Player"))
@@ -173,6 +183,45 @@ namespace QFramework.ProjectGungeon
                 }
                 else
                 {
+                    if(Config.RoomType == RoomTypes.Shop && State == RoomStates.Close)
+                    {
+                        var takeCount = Random.Range(2, 5 + 1);
+                        var normalShopItem = ShopSystem.CalculateNormalShopItems();
+
+                        for(int i = 0; i < takeCount; i++)
+                        {
+                            var item = normalShopItem.GetRandomItem();
+                            var pos = mShopItemGeneratePoses.GetAndRemoveRandomItem();
+
+                            LevelController.Default.ShopItem.Instantiate()
+                                .Position2D(pos)
+                                .Self(self =>
+                                {
+                                    self.Room = this;
+                                    self.ItemPrice = item.Item2;
+                                    self.PowerUp = item.Item1;
+                                    self.UpdateView();
+
+                                })
+                                .Show();
+                        }
+                          
+                        //必须生成一个钥匙
+                        var key = normalShopItem.First(i => 
+                        i.Item1.SpriteRenderer == PowerUpFactory.Default.Key.SpriteRenderer);
+                        LevelController.Default.ShopItem.Instantiate()
+                                .Position2D(mShopItemGeneratePoses.GetAndRemoveRandomItem())
+                        .Self(self =>
+                        {
+                            self.Room = this;
+                            self.ItemPrice = key.Item2;
+                            self.PowerUp = key.Item1;
+                            self.UpdateView();
+
+                        })
+                        .Show();
+
+                    }
                     State = RoomStates.Unlocked;
                 }
             }
