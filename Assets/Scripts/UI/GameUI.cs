@@ -16,7 +16,6 @@ namespace QFramework.ProjectGungeon
         public GameObject GamePass;//通关界面
         public GameObject GameOver;//失败界面
 
-        public Text HP;
 
         public static void PlayerHurtFlashScreen()
         {
@@ -81,17 +80,7 @@ namespace QFramework.ProjectGungeon
                 SceneManager.LoadScene("SampleScene");
 
             });
-;
 
-            Global.HP.RegisterWithInitValue(hp =>
-            {
-                UpdateHP();
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
-
-            Global.Armor.RegisterWithInitValue(armor =>
-            {
-                Armor.text = "护盾:" + armor;
-            }).UnRegisterWhenGameObjectDestroyed(gameObject);
 
             //注册Coin 变更后调用{方法}.销毁后取消注册
             Global.Coin.RegisterWithInitValue((coin) =>
@@ -104,13 +93,51 @@ namespace QFramework.ProjectGungeon
             {
                 KeyText.text = key.ToString();
             }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            //HP 、Armor 、MaxHP 任意一个值改变时调用{方法}
+            Global.Armor.Or(Global.HP).Or(Global.MaxHP).Register(() =>
+            {
+                UpdateHPAndArmorView();
+            }).UnRegisterWhenGameObjectDestroyed(gameObject);
+            UpdateHPAndArmorView();
+
         }
 
 
-
-        void UpdateHP()
+        //更新HP和Armor的显示
+        void UpdateHPAndArmorView()
         {
-            HP.text = $"HP:({Global.HP.Value}/{Global.MaxHP.Value})";
+            HPArmorBg.DestroyChildrenWithCondition(item => item != HP.transform && item != Armor.transform);
+
+            for (int i = 0; i < Global.MaxHP.Value / 2; i++)
+            {
+                var hp = HP.InstantiateWithParent(HPArmorBg)
+                    .Show();
+
+                var result = Global.HP.Value - i * 2;
+                var image = hp.transform.Find("Value").GetComponent<Image>();
+
+                if (result > 0)
+                {
+                    if (result == 1)
+                    {
+                        image.fillAmount = 0.5f;
+                    }
+                    else
+                    {
+                        image.fillAmount = 1;
+                    }
+                }
+                else
+                {
+                    image.fillAmount = 0;
+                }
+            }
+
+            for (int i = 0; i < Global.Armor.Value; i++)
+            {
+                Armor.InstantiateWithParent(HPArmorBg) 
+                    .Show();
+            }
         }
 
         private void Update()

@@ -1,4 +1,4 @@
-// Generate Id:014c2cd7-eac5-42ff-94de-acee2183d24d
+// Generate Id:e8f07d9a-9cf7-410f-a8b3-c7f06bb5fdfd
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -6,7 +6,11 @@ namespace QFramework.ProjectGungeon
 	public partial class GameUI
 	{
 
-		public UnityEngine.UI.Text Armor;
+		public RectTransform HPArmorBg;
+
+		public UnityEngine.UI.Image HP;
+
+		public UnityEngine.UI.Image Armor;
 
 		public UnityEngine.UI.Text CoinText;
 
