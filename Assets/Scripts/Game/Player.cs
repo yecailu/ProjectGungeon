@@ -200,6 +200,9 @@ namespace QFramework.ProjectGungeon
 
                     }
 
+                    //ÉãÏñ»úÆ«ÒÆ
+                    var offsetLength = (mouseWorldPoint - transform.position).magnitude;
+                    Global.CameraPosOffset = (shootDirection * (3 + Mathf.Clamp(offsetLength * 0.15f, 0, 3))).ToVector2();
 
                     if (Global.CanShoot)
                     {

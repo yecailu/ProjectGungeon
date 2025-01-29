@@ -64,7 +64,7 @@ namespace QFramework.ProjectGungeon
             if (Global.Player) 
             {
                 //Ä¿±êÎ»ÖÃ
-                var targetPosition = new Vector2(Global.Player.transform.position.x, Global.Player.transform.position.y);
+                var targetPosition = new Vector2(Global.Player.transform.position.x, Global.Player.transform.position.y) + Global.CameraPosOffset;
 
 
                 if (Shaking)

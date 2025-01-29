@@ -32,6 +32,8 @@ namespace QFramework.ProjectGungeon
 
 		public static float GunAdditionalCameraSize;
 
+		public static Vector2 CameraPosOffset { get; set; }
+
         public static List<LevelConfig> Levels = new List<LevelConfig>()
 		{
 			Level1.Config,
