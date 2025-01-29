@@ -15,7 +15,7 @@ namespace QFramework.ProjectGungeon
         {
             Key = "pistol",
             ClipBulletCount = 10,
-            GunBagMaxBulletCount = 100
+            GunBagMaxBulletCount = -1
         };
 
         public static GunConfig MP5 = new GunConfig()

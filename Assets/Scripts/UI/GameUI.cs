@@ -41,6 +41,7 @@ namespace QFramework.ProjectGungeon
                 .IgnoreTimeScale();
         }
 
+        //更新枪械UI信息
         public static void UpdateGunInfo(GunClip gunClip)
         {
             var data = Player.Default.CurrentGun.Data;
@@ -50,13 +51,13 @@ namespace QFramework.ProjectGungeon
                 if (data.Reloading)
                 {
 
-                    Default.BulletText.text = "(<size=24>Reloading</size>)\u221e";
+                    Default.BulletText.text = "(<size=24>Reloading</size>) \u221e";
                 }
                 else
                 {
 
                     Default.BulletText.text =
-                        $"({gunClip.Data.CurrentBulletCount}/{gunClip.Data.Config.ClipBulletCount})\u221e";
+                        $"({gunClip.Data.CurrentBulletCount}/{gunClip.Data.Config.ClipBulletCount}) \u221e";
                 }
 
             }
@@ -64,7 +65,7 @@ namespace QFramework.ProjectGungeon
             {
                 if (data.Reloading)
                 {
-                    Default.BulletText.text = $"(<size=24>Reloading</size>){data.GunBagRemainBulletCount}/{data.Config.GunBagMaxBulletCount}";
+                    Default.BulletText.text = $"(<size=24>Reloading</size>) {data.GunBagRemainBulletCount}/{data.Config.GunBagMaxBulletCount}";
                 }
                 else
                 {

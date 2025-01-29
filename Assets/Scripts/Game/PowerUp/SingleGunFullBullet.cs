@@ -13,7 +13,7 @@ namespace QFramework.ProjectGungeon
 
                 var gun = Global.Player.CurrentGun;
 
-                if (gun.BulletBag.MaxBulletCount == gun.BulletBag.Data.GunBagRemainBulletCount)
+                if (gun is Pistol || gun.BulletBag.MaxBulletCount == gun.BulletBag.Data.GunBagRemainBulletCount)
                 {
 
                 }

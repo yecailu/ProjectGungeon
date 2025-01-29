@@ -43,7 +43,10 @@ namespace QFramework.ProjectGungeon
                 reloadBulletCount = NeedCount;
             }
             Data.Reloading = true;
-            ActionKit.Sequence().PlaySound(reloadSound).Callback(() =>
+            UpdateUI();
+            ActionKit.Sequence()
+                .PlaySound(reloadSound)
+                .Callback(() =>
             {
                 Data.CurrentBulletCount += reloadBulletCount;
                 Data.Reloading = false;
