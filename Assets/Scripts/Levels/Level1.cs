@@ -7,6 +7,7 @@ namespace QFramework.ProjectGungeon
     public class Level1
     {
         public static LevelConfig Config = new LevelConfig()
+            .NormalRooms(Lv1Rooms.NormalRooms)
             .Self(self =>
             {
                 //难度配置

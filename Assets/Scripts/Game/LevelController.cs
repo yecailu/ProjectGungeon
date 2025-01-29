@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Schema;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using static QFramework.ProjectGungeon.RoomConfig;
@@ -158,6 +159,7 @@ namespace QFramework.ProjectGungeon
             public HashSet<DoorDirections> Directions { get; set; }
 
             public RoomNode Node;
+            public RoomConfig Config { get; set; }
         }
 
         public enum DoorDirections
@@ -189,8 +191,9 @@ namespace QFramework.ProjectGungeon
                     Y = 0,
                     Node = roomNode,
                     Directions = new HashSet<DoorDirections>(),
+                    Config = SharedRooms.InitRoom,
 
-                });
+                }); 
 
                 while (queue.Count > 0)
                 {
@@ -255,8 +258,9 @@ namespace QFramework.ProjectGungeon
                                 X = generateNode.X + 1,
                                 Y = generateNode.Y,
                                 Node = roomNodeChild,
+                                Config = RoomConfigByType(roomNodeChild.RoomType),
                                 Directions = new HashSet<DoorDirections>()
-                                { 
+                                {
                                     DoorDirections.Left,
                                 }
                             });
@@ -269,6 +273,7 @@ namespace QFramework.ProjectGungeon
                                 X = generateNode.X - 1,
                                 Y = generateNode.Y,
                                 Node = roomNodeChild,
+                                Config = RoomConfigByType(roomNodeChild.RoomType),
                                 Directions = new HashSet<DoorDirections>()
                                 {
                                     DoorDirections.Right,
@@ -283,6 +288,7 @@ namespace QFramework.ProjectGungeon
                                 X = generateNode.X,
                                 Y = generateNode.Y + 1,
                                 Node = roomNodeChild,
+                                Config = RoomConfigByType(roomNodeChild.RoomType),
                                 Directions = new HashSet<DoorDirections>()
                                 {
                                     DoorDirections.Down,
@@ -297,6 +303,7 @@ namespace QFramework.ProjectGungeon
                                 X = generateNode.X,
                                 Y = generateNode.Y - 1,
                                 Node = roomNodeChild,
+                                Config = RoomConfigByType(roomNodeChild.RoomType),
                                 Directions = new HashSet<DoorDirections>()
                                 {
                                     DoorDirections.Up,
@@ -325,6 +332,24 @@ namespace QFramework.ProjectGungeon
            
 
             Global.RoomGrid = new DynaGrid<Room>();
+
+            //解决不同尺寸房间中心点位置问题
+            var maxRoomWidth = 0;
+            var maxRoomHeigth = 0;
+            layoutGrid.ForEach(d =>
+            {
+                if(maxRoomWidth < d.Config.Width)
+                {
+                    maxRoomWidth = d.Config.Width;
+                }
+
+                if (maxRoomHeigth < d.Config.Height)
+                {
+                    maxRoomHeigth = d.Config.Height;
+                }
+            });
+
+
             layoutGrid.ForEach((x, y, generateNode) =>
             {
                 var room = GenerateRoomByNode(x, y, generateNode);
@@ -335,34 +360,12 @@ namespace QFramework.ProjectGungeon
             var currentRoomStartPosx = 0;//记录当前房间起始位置
 
             
+            
             Room GenerateRoomByNode(int x, int y, RoomGenerateNode node)
             {
-                var roomPosX = x * (Config.InitRoom.Codes.First().Length + 2);
-                var roomPosY = y * (Config.InitRoom.Codes.Count + 2); 
-                if (node.Node.RoomType == RoomTypes.Init)
-                {
-                    return GenerateRoom(roomPosX, roomPosY, Config.InitRoom, node);
-                }
-                else if (node.Node.RoomType == RoomTypes.Normal)
-                {
-                    return GenerateRoom(roomPosX, roomPosY, Config.NormalRooms.GetRandomItem(), node);
-                }
-                else if (node.Node.RoomType == RoomTypes.Chest)
-                {
-                    return GenerateRoom(roomPosX, roomPosY, Config.ChestRoom, node);
-
-                }
-                else if (node.Node.RoomType == RoomTypes.Shop)
-                {
-                    return GenerateRoom(roomPosX, roomPosY, Config.ShopRoom, node);
-
-                }
-                else if (node.Node.RoomType == RoomTypes.Final)
-                {
-                    return GenerateRoom(roomPosX, roomPosY, Config.FinalRoom, node);
-                }
-
-                return null;
+                var roomPosX = x * (maxRoomWidth + 2);
+                var roomPosY = y * (maxRoomHeigth + 2);
+                return GenerateRoom(roomPosX, roomPosY, node);
             }
 
             void GenerateCorridor()
@@ -444,21 +447,25 @@ namespace QFramework.ProjectGungeon
 
         }
 
-        Room GenerateRoom(int startPosX, int startPosY, RoomConfig roomConfig, RoomGenerateNode node)
+        Room GenerateRoom(int centerCellPosX, int centerCellPosY, RoomGenerateNode node)
         {
-            var roomCode = roomConfig.Codes;
+            var roomCode = node.Config.Codes;
              
             //房间宽高
-            var roomWidth = roomCode[0].Length;
-            var roomHeight = roomCode.Count;
+            var roomWidth = node.Config.Width;
+            var roomHeight = node.Config.Height;
 
+            var startCellPosX = centerCellPosX - roomWidth / 2;
+            var startCellPosY = centerCellPosY - roomHeight / 2;
+            var startPosX = startCellPosX + 0.5f;
+            var startPosY = startCellPosY + 0.5f;
             //房间中心点
-            var roomPosX = startPosX + roomWidth * 0.5f;
-            var roomPosY = startPosY + 0.5f + roomHeight * 0.5f;
+            var roomPosX = centerCellPosX + 0.5f;
+            var roomPosY = centerCellPosY + 0.5f;
 
             //生成房间 
             var room = Room.InstantiateWithParent(this)
-                .WithConfig(roomConfig)
+                .WithConfig(node.Config)
                 .Position(roomPosX, roomPosY)
                 .Show();
 
@@ -476,8 +483,8 @@ namespace QFramework.ProjectGungeon
                 {
                     var code = rowCode[j];
 
-                    var x = startPosX + j;
-                    var y = startPosY + roomCode.Count - i;
+                    var x = startCellPosX + j;
+                    var y = startCellPosY + roomCode.Count - i;
 
                     FloorTilemap.SetTile(new Vector3Int(x, y, 0), Floor);//绘制地面
 
@@ -642,9 +649,32 @@ namespace QFramework.ProjectGungeon
             return room;
         }
 
-        void Update()
+        public RoomConfig RoomConfigByType(RoomTypes roomType)
         {
+            if (roomType == RoomTypes.Init)
+            {
+                return SharedRooms.InitRoom;
+            }
+            else if (roomType == RoomTypes.Normal)
+            {
+                return Global.CurrentLevel.NormalRoomTemplates.GetRandomItem();
+            }
+            else if (roomType == RoomTypes.Chest)
+            {
+                return SharedRooms.ChestRoom;
 
+            }
+            else if (roomType == RoomTypes.Shop)
+            {
+                return SharedRooms.ShopRoom;
+
+            }
+            else if (roomType == RoomTypes.Final)
+            {
+                return SharedRooms.FinalRoom;
+            }
+
+            return null;
         }
     }
 }

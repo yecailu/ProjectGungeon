@@ -9,5 +9,13 @@ namespace QFramework.ProjectGungeon
 
         public List<int> PacingConfig = new List<int>();
 
+        public List<RoomConfig> NormalRoomTemplates { get; set; }
+
+        public LevelConfig NormalRooms(List<RoomConfig> normalRooms)
+        {
+            NormalRoomTemplates = normalRooms;
+            return this;
+        }
+
     }
 }
