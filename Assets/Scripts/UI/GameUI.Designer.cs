@@ -1,10 +1,14 @@
-// Generate Id:88266e15-8767-4e6a-8b04-6b742c89be6c
+// Generate Id:eee13506-384e-4ee9-9dc3-ba7dd5f1c993
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
 {
 	public partial class GameUI
 	{
+
+		public UnityEngine.UI.Image BossHpBarBG;
+
+		public UnityEngine.UI.Image BossHPBar;
 
 		public RectTransform HPArmorBg;
 

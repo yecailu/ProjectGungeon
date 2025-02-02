@@ -512,7 +512,8 @@ namespace QFramework.ProjectGungeon
                     {
                         var final = Instantiate(Final);
                         final.transform.position = new Vector3(x + 0.5f, y + 0.5f, 0);
-                        final.gameObject.SetActive(true);
+                        final.Hide();
+                        room.Final = final;
                     }
                     else if (code == 'd')
                     {

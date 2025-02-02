@@ -96,7 +96,6 @@ namespace QFramework.ProjectGungeon
             {
                 "resources://Music/darkascent",
                 "resources://Music/DOS-88 - Automatav2",
-                "resources://Music/DOS-88 - Press Start",
                 "resources://Music/FlowState",
                 "resources://Music/Night Life",
                 "resources://Music/OnlyInDreams",

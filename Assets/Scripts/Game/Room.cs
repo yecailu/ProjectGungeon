@@ -75,6 +75,8 @@ namespace QFramework.ProjectGungeon
         public RoomStates State { get; set; } = RoomStates.Close;
 
         public RoomConfig Config { get; private set; } = new RoomConfig();
+        public Final Final { get; set; }
+
         public Room WithConfig(RoomConfig roomConfig)
         {
             Config = roomConfig;
@@ -94,6 +96,10 @@ namespace QFramework.ProjectGungeon
                 State = RoomStates.Unlocked;
             }
             
+            if (Config.RoomType == RoomTypes.Final)
+            {
+                Final.Hide();
+            }
         }
 
         private void Update()
@@ -114,7 +120,7 @@ namespace QFramework.ProjectGungeon
                         }
                         else//没有波次 开门
                         {
-                            if(Config.RoomType == RoomTypes.Normal)
+                            if (Config.RoomType == RoomTypes.Normal)
                             {
                                 foreach (var powerUp in PowerUps.Where(p => p.GetType() == typeof(Coin)))
                                 {
@@ -123,17 +129,29 @@ namespace QFramework.ProjectGungeon
                                     {
                                         //金币朝玩家飞行
                                         cashedPowerUp.SpriteRenderer.transform.Translate(
-                                            cashedPowerUp.SpriteRenderer.NormalizedDirection2DTo(Player.Default) * 
+                                            cashedPowerUp.SpriteRenderer.NormalizedDirection2DTo(Player.Default) *
                                             Time.fixedDeltaTime * 5);
                                     }).UnRegisterWhenGameObjectDestroyed(cashedPowerUp.SpriteRenderer.gameObject);
                                 }
+
+                                State = RoomStates.Unlocked;
+
+                                foreach (var door in mDoors)
+                                {
+                                    door.State.ChangeState(Door.States.Open);
+                                }
+
                             }
-
-                            State = RoomStates.Unlocked;
-
-                            foreach (var door in mDoors)
+                            else if (Config.RoomType == RoomTypes.Final && mEnemies.Count == 0)
                             {
-                                door.State.ChangeState(Door.States.Open);
+                                Final.Show();
+
+                                State = RoomStates.Unlocked;
+
+                                foreach (var door in mDoors)
+                                {
+                                    door.State.ChangeState(Door.States.Open);
+                                }
                             }
                         }
                     }
@@ -209,6 +227,22 @@ namespace QFramework.ProjectGungeon
                         }
                     }
 
+                }
+                else if (Config.RoomType == RoomTypes.Final && State == RoomStates.Close)
+                {
+                    State = RoomStates.PlayerIn;
+
+                    var boss = EnemyFactory.Default.BoosA.Instantiate()
+                        .Position2D(mEnemyGeneratePoses.GetRandomItem())
+                        .Show();
+
+                    boss.Room = this;
+                    this.Enemies.Add(boss);
+
+                    foreach (var door in mDoors)
+                    {
+                        door.State.ChangeState(Door.States.BattleClose);
+                    }
                 }
                 else
                 {
