@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace QFramework.ProjectGungeon
 {
-    public class BoosA : Enemy, IEnemy
+    public class BoosB  : Enemy, IEnemy
     { 
         public Player player;
 
@@ -129,18 +129,18 @@ namespace QFramework.ProjectGungeon
                     //Ω◊∂Œ“ª
                     if (HP / mMaxHP > 0.7f)
                     {
-                        BulletHelper.ShootAround(30, transform.Position2D(), 1.5f, EnemyBullet);
+                        BulletHelper.ShootAround(24, transform.Position2D(), 1.5f, EnemyBullet, 10);
                         //≤•∑≈…‰ª˜“Ù–ß
                         var soundIndex = Random.Range(0, ShootSounds.Count);
                         AudioKit.PlaySound(ShootSounds[soundIndex]);
                         State.ChangeState(States.FollowPlayer);
                     }
-                    //Ω◊∂Œ∂˛
+                    //Ω◊∂Œ∂˛,49÷°≤•∑≈“ª¥Œ…‰ª˜
                     else if (HP / mMaxHP > 0.3f)
                     {
-                        if ((int)(State.SecondsOfCurrentState * 100) % 33 == 0)
+                        if ((int)(State.SecondsOfCurrentState * 100) % 49 == 0)
                         {
-                            BulletHelper.ShootAround(30, transform.Position2D(), 1.5f, EnemyBullet);
+                            BulletHelper.ShootAround(24, transform.Position2D(), 1.5f, EnemyBullet, 10);
                             //≤•∑≈…‰ª˜“Ù–ß
                             var soundIndex = Random.Range(0, ShootSounds.Count);
                             AudioKit.PlaySound(ShootSounds[soundIndex]);
@@ -155,9 +155,9 @@ namespace QFramework.ProjectGungeon
                     }
                     else
                     {
-                        if ((int)(State.SecondsOfCurrentState * 100) % 33 == 0)
+                        if ((int)(State.SecondsOfCurrentState * 100) % 50 == 0)
                         {
-                            BulletHelper.ShootAround(30, transform.Position2D(), 1.5f, EnemyBullet);
+                            BulletHelper.ShootAround(24, transform.Position2D(), 1.5f, EnemyBullet,10);
                             //≤•∑≈…‰ª˜“Ù–ß
                             var soundIndex = Random.Range(0, ShootSounds.Count);
                             AudioKit.PlaySound(ShootSounds[soundIndex]);

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace QFramework.ProjectGungeon
 {
-    public class BoosA : Enemy, IEnemy
+    public class BoosE : Enemy, IEnemy
     { 
         public Player player;
 
@@ -129,25 +129,44 @@ namespace QFramework.ProjectGungeon
                     //Ω◊∂Œ“ª
                     if (HP / mMaxHP > 0.7f)
                     {
-                        BulletHelper.ShootAround(30, transform.Position2D(), 1.5f, EnemyBullet);
-                        //≤•∑≈…‰ª˜“Ù–ß
-                        var soundIndex = Random.Range(0, ShootSounds.Count);
-                        AudioKit.PlaySound(ShootSounds[soundIndex]);
-                        State.ChangeState(States.FollowPlayer);
+                        if(State.FrameCountOfCurrentState <= 120)
+                        {
+                            if(State.FrameCountOfCurrentState % 10 == 0)
+                            {
+                                BulletHelper.ShootAround(3, transform.Position2D(), 1.5f, EnemyBullet, 10,
+                                    angleOffset: State.FrameCountOfCurrentState);
+                                //≤•∑≈…‰ª˜“Ù–ß
+                                if (State.FrameCountOfCurrentState % 20 == 0)
+                                {
+                                    var soundIndex = Random.Range(0, ShootSounds.Count);
+                                    AudioKit.PlaySound(ShootSounds[soundIndex]);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            State.ChangeState(States.FollowPlayer);
+
+                        }
+
                     }
                     //Ω◊∂Œ∂˛
                     else if (HP / mMaxHP > 0.3f)
                     {
-                        if ((int)(State.SecondsOfCurrentState * 100) % 33 == 0)
+                        if (State.FrameCountOfCurrentState % 6 == 0)
                         {
-                            BulletHelper.ShootAround(30, transform.Position2D(), 1.5f, EnemyBullet);
+                            BulletHelper.ShootAround(3, transform.Position2D(), 1.5f, EnemyBullet, 10,
+                                angleOffset: State.FrameCountOfCurrentState);
                             //≤•∑≈…‰ª˜“Ù–ß
-                            var soundIndex = Random.Range(0, ShootSounds.Count);
-                            AudioKit.PlaySound(ShootSounds[soundIndex]);
+                            if(State.FrameCountOfCurrentState % 12 == 0)
+                            {
+                                var soundIndex = Random.Range(0, ShootSounds.Count);
+                                AudioKit.PlaySound(ShootSounds[soundIndex]);
+                            }
 
                         }
 
-                        if (State.SecondsOfCurrentState > 1.0f)
+                        if (State.SecondsOfCurrentState > 5f)
                         {
                             State.ChangeState(States.FollowPlayer);
                         }
@@ -155,12 +174,16 @@ namespace QFramework.ProjectGungeon
                     }
                     else
                     {
-                        if ((int)(State.SecondsOfCurrentState * 100) % 33 == 0)
+                        if (State.FrameCountOfCurrentState % 6 == 0)
                         {
-                            BulletHelper.ShootAround(30, transform.Position2D(), 1.5f, EnemyBullet);
+                            BulletHelper.ShootAround(3, transform.Position2D(), 1.5f, EnemyBullet, 10,
+                                angleOffset: State.FrameCountOfCurrentState);
                             //≤•∑≈…‰ª˜“Ù–ß
-                            var soundIndex = Random.Range(0, ShootSounds.Count);
-                            AudioKit.PlaySound(ShootSounds[soundIndex]);
+                            if (State.FrameCountOfCurrentState % 12 == 0)
+                            {
+                                var soundIndex = Random.Range(0, ShootSounds.Count);
+                                AudioKit.PlaySound(ShootSounds[soundIndex]);
+                            }
 
                         }
 

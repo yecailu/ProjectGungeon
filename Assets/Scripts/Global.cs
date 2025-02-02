@@ -61,7 +61,8 @@ namespace QFramework.ProjectGungeon
 
 			//清空武器库，并添加一把普通的手枪
 			GunSystem.GunList.Clear();
-			GunSystem.GunList.Add(GunConfig.Pistol.CreateData());
+			//配置武器
+			GunSystem.GunList.Add(GunConfig.AK47.CreateData());
 			Global.CurrentGun = GunSystem.GunList.First();
 
 			//关卡设置 
@@ -74,11 +75,11 @@ namespace QFramework.ProjectGungeon
 		//true表示进入下一关，false表示通关
 		public static bool NextLevel()
 		{
-			var levelIndex = Global.Levels.FindIndex(l => l == Global.CurrentLevel);
+			var levelIndex = Levels.FindIndex(l => l == CurrentLevel);
 
 			levelIndex++;
 
-			if(levelIndex == Global.Levels.Count)
+			if(levelIndex == Levels.Count)
 			{
 				//游戏通关
 
@@ -86,9 +87,8 @@ namespace QFramework.ProjectGungeon
 			}
 			else
 			{
-				CurrentLevel = Global.Levels[levelIndex];
-
-				
+				CurrentLevel = Levels[levelIndex];
+				CurrentPacing = new Queue<int>(CurrentLevel.PacingConfig);
 			}
 
             return true;

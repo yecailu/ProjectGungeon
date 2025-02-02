@@ -232,7 +232,7 @@ namespace QFramework.ProjectGungeon
                 {
                     State = RoomStates.PlayerIn;
 
-                    var boss = EnemyFactory.Default.BoosA.Instantiate()
+                    var boss = EnemyFactory.Default.BoosE.Instantiate()
                         .Position2D(mEnemyGeneratePoses.GetRandomItem())
                         .Show();
 

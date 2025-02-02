@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace QFramework.ProjectGungeon
 {
-    public class BoosA : Enemy, IEnemy
+    public class BoosD : Enemy, IEnemy
     { 
         public Player player;
 
@@ -129,7 +129,16 @@ namespace QFramework.ProjectGungeon
                     //阶段一
                     if (HP / mMaxHP > 0.7f)
                     {
-                        BulletHelper.ShootAround(30, transform.Position2D(), 1.5f, EnemyBullet);
+                        //主角在左侧
+                        if(Player.Default.NormalizedDirection2DFrom(transform).x < 0)
+                        {
+                            BulletHelper.ShootSpread(30, 6.5f, transform.Position2D(), Vector2.left, 2, EnemyBullet, 8);
+                        }
+                        //在右侧
+                        else
+                        {
+                            BulletHelper.ShootSpread(30, 6.5f, transform.Position2D(), Vector2.right, 2, EnemyBullet, 8);
+                        }
                         //播放射击音效
                         var soundIndex = Random.Range(0, ShootSounds.Count);
                         AudioKit.PlaySound(ShootSounds[soundIndex]);
@@ -138,16 +147,26 @@ namespace QFramework.ProjectGungeon
                     //阶段二
                     else if (HP / mMaxHP > 0.3f)
                     {
-                        if ((int)(State.SecondsOfCurrentState * 100) % 33 == 0)
+                        //一秒内连续射击2下
+                        if (State.FrameCountOfCurrentState % 30 == 0)
                         {
-                            BulletHelper.ShootAround(30, transform.Position2D(), 1.5f, EnemyBullet);
+                            //主角在左侧
+                            if (Player.Default.NormalizedDirection2DFrom(transform).x < 0)
+                            {
+                                BulletHelper.ShootSpread(30, 6.5f, transform.Position2D(), Vector2.left, 2, EnemyBullet, 8);
+                            }
+                            //在右侧
+                            else
+                            {
+                                BulletHelper.ShootSpread(30, 6.5f, transform.Position2D(), Vector2.right, 2, EnemyBullet, 8);
+                            }
                             //播放射击音效
                             var soundIndex = Random.Range(0, ShootSounds.Count);
                             AudioKit.PlaySound(ShootSounds[soundIndex]);
 
                         }
 
-                        if (State.SecondsOfCurrentState > 1.0f)
+                        if (State.FrameCountOfCurrentState > 60)
                         {
                             State.ChangeState(States.FollowPlayer);
                         }
@@ -155,9 +174,18 @@ namespace QFramework.ProjectGungeon
                     }
                     else
                     {
-                        if ((int)(State.SecondsOfCurrentState * 100) % 33 == 0)
+                        if ((int)(State.SecondsOfCurrentState * 100) % 100 == 0)
                         {
-                            BulletHelper.ShootAround(30, transform.Position2D(), 1.5f, EnemyBullet);
+                            //主角在左侧
+                            if (Player.Default.NormalizedDirection2DFrom(transform).x < 0)
+                            {
+                                BulletHelper.ShootSpread(30, 6.5f, transform.Position2D(), Vector2.left, 2, EnemyBullet, 8);
+                            }
+                            //在右侧
+                            else
+                            {
+                                BulletHelper.ShootSpread(30, 6.5f, transform.Position2D(), Vector2.right, 2, EnemyBullet, 8);
+                            }
                             //播放射击音效
                             var soundIndex = Random.Range(0, ShootSounds.Count);
                             AudioKit.PlaySound(ShootSounds[soundIndex]);

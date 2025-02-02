@@ -5,10 +5,8 @@ using UnityEngine;
 
 namespace QFramework.ProjectGungeon
 {
-    public class EnemyBullet : MonoBehaviour
+    public class EnemyBullet : Bullet
     {
-        public Vector2 Velocity;
-
         public Rigidbody2D Rigidbody2D;
 
         void Start()
@@ -26,7 +24,7 @@ namespace QFramework.ProjectGungeon
         {
             if (collision.gameObject.GetComponent<Player>())
             {
-                collision.gameObject.GetComponent<Player>().Hurt(1);//调用玩家受伤方法
+                collision.gameObject.GetComponent<Player>().Hurt((int)Damage);//调用玩家受伤方法
                 Destroy(gameObject);//销毁子弹
             }
             else
@@ -35,5 +33,11 @@ namespace QFramework.ProjectGungeon
             }
 
         }
+    }
+
+    public class Bullet: MonoBehaviour
+    {
+        public Vector2 Velocity;
+        public float Damage = 1;
     }
 }

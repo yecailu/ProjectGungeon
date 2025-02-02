@@ -5,13 +5,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon {
-    public class PlayerBullet : MonoBehaviour
+    public class PlayerBullet : Bullet
     {
-        public Vector2 Velocity;
 
         private Rigidbody2D mSelfRigidbody2D;
 
-        public float Damage { get; set; } = 1;
 
 
 

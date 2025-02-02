@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace QFramework.ProjectGungeon
 {
     public class BulletHelper
     {
-        public static void Shoot(Vector2 pos, Vector2 direction, float speed, float damage)
+        public static void Shoot(Vector2 pos, Vector2 direction, float speed, float damage, Bullet bullet = null)
         {
-            var playerBullet = Object.Instantiate(BulletFactory.Default.PistolBullet);
-            playerBullet.transform.position = pos;
-            playerBullet.Velocity = direction.normalized * speed;
-            playerBullet.gameObject.SetActive(true);
+            if(bullet == null)
+            {
+                bullet = BulletFactory.Default.PistolBullet;
+            }
+            var bulletObj = Object.Instantiate(bullet);
+            bulletObj.transform.position = pos;
+            bulletObj.Velocity = direction.normalized * speed;
+            bulletObj.gameObject.SetActive(true);
 
-            playerBullet.Damage = damage;//随机伤害判定
+            bulletObj.Damage = damage;//随机伤害判定
         }
 
         public static void ShootSpread(int count, float durationAngle, Vector2 origin, Vector2 mainDirection, float radius, EnemyBullet bulletPrefab ,float speed = 5)
@@ -35,11 +38,15 @@ namespace QFramework.ProjectGungeon
 
             }
         }
-        public static void ShootAround(int count, Vector2 origin, float radius, EnemyBullet bulletPrefab, float speed = 5)
+        public static void ShootAround(int count, Vector2 origin, float radius, EnemyBullet bulletPrefab, float speed = 5, float angleOffset = -1)
         {
             var durationAngle = 360 / count;
 
-            var angleOffset = Random.Range(0, 360);
+            if (Mathf.Approximately(angleOffset, -1))
+            {
+                angleOffset = Random.Range(0, 360);
+            }
+
             for (int i = 0; i < count; i++)
             {
                 var angle = angleOffset + i * durationAngle;

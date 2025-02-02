@@ -176,7 +176,7 @@ namespace QFramework.ProjectGungeon
             Room.Hide();
 
 
-            var layout = Level1.Config.InitRoom;
+            var layout = Global.CurrentLevel.InitRoom;
 
             var layoutGrid = new DynaGrid<RoomGenerateNode>();
 
