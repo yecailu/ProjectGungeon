@@ -20,6 +20,7 @@ namespace QFramework.ProjectGungeon
 
         public float HP { get; set; } = 10;
 
+        protected override Rigidbody2D GetRigidbody2D => Rigidbody2D;
 
         public override void Hurt(float damage, Vector2 hitDirection)
         {
@@ -53,20 +54,20 @@ namespace QFramework.ProjectGungeon
                 .OnEnter(() =>
                 {
                     FollowPlayerSeconds = Random.Range(0.5f, 3f);//进入跟随状态时随机设置跟随时间
+                    MovementPath.Clear();
 
                 })
                 .OnUpdate(() =>
                 {
+                    TryInitMovementPath();
 
                     if (Global.Player)
                     {
-                        var directionToPlayer = (Global.Player.transform.position - transform.position).normalized;//敌人到玩家的方向
-
+                        var directionToPlayer = Move();
                         //敌人移动时轻微抖动
                         AnimationHelper.UpDownAnimation(Sprite, 0.05f, 10, State.FrameCountOfCurrentState);
                         AnimationHelper.RotateAnimation(Sprite, 3, 30, State.FrameCountOfCurrentState);
 
-                        Rigidbody2D.velocity = directionToPlayer; //敌人速度
 
                         //敌人朝向主角
                         if (directionToPlayer.x > 0)

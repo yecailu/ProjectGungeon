@@ -33,26 +33,27 @@ namespace QFramework.ProjectGungeon
             })
             .Self(self =>
             {
-                self.InitRoom
-                .Next(RoomTypes.Chest)
-                .Next(RoomTypes.Shop)
-                .Next(RoomTypes.Final)
-                .Next(RoomTypes.Chest)
-                .Next(RoomTypes.Chest)
-                .Next(RoomTypes.Chest)
-                .Next(RoomTypes.Chest)
-                .Next(RoomTypes.Chest)
-                .Next(RoomTypes.Chest)
-                .Next(RoomTypes.Chest)
-                .Next(RoomTypes.Chest)
-                .Next(RoomTypes.Chest)
-                .Next(RoomTypes.Chest)
-                .Next(RoomTypes.Chest)
-                .Next(RoomTypes.Chest)
-                .Next(RoomTypes.Chest)
-                .Next(RoomTypes.Chest);
+                //测试用
+                //self.InitRoom
+                //.Next(RoomTypes.Chest)
+                //.Next(RoomTypes.Shop)
+                //.Next(RoomTypes.Final)
+                //.Next(RoomTypes.Chest)
+                //.Next(RoomTypes.Chest)
+                //.Next(RoomTypes.Chest)
+                //.Next(RoomTypes.Chest)
+                //.Next(RoomTypes.Chest)
+                //.Next(RoomTypes.Chest)
+                //.Next(RoomTypes.Chest)
+                //.Next(RoomTypes.Chest)
+                //.Next(RoomTypes.Chest)
+                //.Next(RoomTypes.Chest)
+                //.Next(RoomTypes.Chest)
+                //.Next(RoomTypes.Chest)
+                //.Next(RoomTypes.Chest)
+                //.Next(RoomTypes.Chest);
 
-                return;
+                //return;
 
                 var randomIndex = Random.Range(0, 2 + 1);
 

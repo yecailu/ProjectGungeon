@@ -9,9 +9,38 @@ using static UnityEditor.PlayerSettings;
 using static UnityEditor.Progress;
 
 namespace QFramework.ProjectGungeon
-{
+{ 
 	public partial class Room : ViewController
 	{
+        public DynaGrid<PathFindingHelper.TileNode> PathFindingGrid;//寻路
+        public Vector3Int LB;
+        public Vector3Int RT;
+        //寻路方法
+        public void PrepareAStarNodes()
+        {
+            if(Config.RoomType == RoomTypes.Final || Config.RoomType == RoomTypes.Normal)
+            {
+                PathFindingGrid = new DynaGrid<PathFindingHelper.TileNode>();
+
+                for(var i = LB.x; i <= RT.x; i++)
+                {
+                    for(var j = LB.y; j <= RT.y; j++)
+                    {
+                        var walkable = LevelController.Default.WallTilemap.GetTile(new Vector3Int(i, j, 0)) == null;
+
+                        PathFindingGrid[i, j] = new PathFindingHelper.TileNode(PathFindingGrid);
+                        PathFindingGrid[i, j].Init(walkable, new PathFindingHelper.TileCoords()
+                        {
+                            Pos = new Vector3Int(i, j, 0)
+                        }) ;
+
+                    }
+                }
+
+                PathFindingGrid.ForEach(node => node.CacheNeighbors());
+            }
+        }
+
         public static EasyEvent<Room> OnRoomEnter = new EasyEvent<Room>();
 		private List<Vector3> mEnemyGeneratePoses = new List<Vector3>();
         private List<Vector3> mShopItemGeneratePoses = new List<Vector3>();

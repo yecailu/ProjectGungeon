@@ -646,6 +646,10 @@ namespace QFramework.ProjectGungeon
                 }
 
             }
+
+            room.LB = new Vector3Int(startCellPosX, startCellPosY, 0);
+            room.RT = new Vector3Int(startCellPosX + roomWidth, startCellPosY + roomHeight, 0);
+            room.PrepareAStarNodes();
             return room;
         }
 
