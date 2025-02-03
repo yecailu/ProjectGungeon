@@ -12,6 +12,7 @@ namespace QFramework.ProjectGungeon
         d 门
         c 宝箱
         s 商店摊位
+        y Color
         # 终点
         */
 
@@ -20,7 +21,7 @@ namespace QFramework.ProjectGungeon
         .Type(RoomTypes.Init)
         .L("111111111d111111111")
         .L("1                 1")
-        .L("1                 1")
+        .L("1  y   y  y  y    1")
         .L("1                 1")
         .L("1                 1")
         .L("1                 1")

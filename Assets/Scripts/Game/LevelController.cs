@@ -644,6 +644,15 @@ namespace QFramework.ProjectGungeon
                         room.AddShopItemGeneratePos(new Vector3(x, y, 0));
 
                     }
+                    else if (code == 'y')
+                    {
+                        var color = PowerUpFactory.Default.PowerUpColor.Instantiate()
+                            .Position2D(new Vector2(x, y))
+                            .Show();
+
+                        room.AddPowerUp(color);
+
+                    }
                 }
 
             }

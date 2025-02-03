@@ -19,6 +19,9 @@ namespace QFramework.ProjectGungeon
 		public static BindableProperty<int> HP = new BindableProperty<int>(6);
         public static BindableProperty<int> MaxHP = new BindableProperty<int>(6);
 
+        public static BindableProperty<int> Color = new BindableProperty<int>(0);
+
+
         public static BindableProperty<int> Armor = new BindableProperty<int>(1);
 
         //BindableProperty<T> 是QFramework框架提供的属性，本身能储存数据，又能监听数据变换事件
@@ -48,6 +51,19 @@ namespace QFramework.ProjectGungeon
 		public static void AutoInit()
 		{
 			ResetData();
+
+			//Color颜色存储
+			var globalObj = new GameObject("Global")
+				.DontDestroyOnLoad();
+
+			Color.SetValueWithoutEvent(PlayerPrefs.GetInt(nameof(Color), 0));
+			Color.Register(color =>
+			{
+				PlayerPrefs.SetInt(nameof(Color), color);
+			}).UnRegisterWhenGameObjectDestroyed(globalObj);
+
+
+
 		}
 
 		public static void ResetData()
