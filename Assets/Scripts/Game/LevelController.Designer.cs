@@ -1,4 +1,4 @@
-// Generate Id:5e07aa01-7d45-4795-aa57-9c18a7a1eedc
+// Generate Id:a6730280-2ff9-48fc-b85f-7c2903904202
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -13,6 +13,8 @@ namespace QFramework.ProjectGungeon
 		public QFramework.ProjectGungeon.Chest Chest;
 
 		public QFramework.ProjectGungeon.ShopItem ShopItem;
+
+		public QFramework.ProjectGungeon.GunBase GunBase;
 
 		public UnityEngine.GameObject EnemyA;
 

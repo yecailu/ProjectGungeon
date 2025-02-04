@@ -197,7 +197,10 @@ namespace QFramework.ProjectGungeon
                 }
                 else
                 {
-                    UIMap.Show();
+                    if (!Global.UIOpened)
+                    {
+                        UIMap.Show();
+                    }
                 }
             }
         }
