@@ -31,8 +31,17 @@ namespace QFramework.ProjectGungeon
         {
             foreach(var gunBaseItem in mGunBaseItems)
 			{
-				gunBaseItem.Unlocked = gunBaseItem.InitUnlockState;
+				gunBaseItem.Unlocked = 
+					PlayerPrefs.GetInt(gunBaseItem.Key + "_unlocked", gunBaseItem.InitUnlockState ? 1 : 0) == 1;
 			}
+        }
+
+		void Save()
+		{
+            foreach (var gunBaseItem in mGunBaseItems)
+            {
+                PlayerPrefs.SetInt(gunBaseItem.Key + "_unlocked", gunBaseItem.Unlocked ? 1 : 0);
+            }
         }
 
         private void OnEnable()
@@ -73,6 +82,7 @@ namespace QFramework.ProjectGungeon
                             cachedItemView.Icon.color = Color.gray;
 							Global.Color.Value -= cachedItem.Price;
 							AudioKit.PlaySound("resources://UnlockGun");
+							Save();
 						}
 						else
 						{
