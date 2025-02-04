@@ -70,8 +70,8 @@ namespace QFramework.ProjectGungeon
         {
             Default = null;
         }
-
-        Gun GunWithKey(string key)
+        
+        public Gun GunWithKey(string key)
         {
             if (key == GunConfig.Pistol.Key)
                 return Pistol;
@@ -92,7 +92,7 @@ namespace QFramework.ProjectGungeon
 
             return null;
         }
-
+        
         public void UseGun(int index)
         {
             var gunData = GunSystem.GunList[index];
