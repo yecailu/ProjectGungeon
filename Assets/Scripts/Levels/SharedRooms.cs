@@ -34,9 +34,9 @@ namespace QFramework.ProjectGungeon
         .L("1                 1")
         .L("1                 1")
         .L("1                 1")
-        .L("1                 1")
-        .L("1                 1")
-        .L("1                 1")
+        .L("1   cccccccccccc  1")
+        .L("1   cccccccccccc  1")
+        .L("1   cccccccccccc  1")
         .L("111111111d111111111");
 
 

@@ -72,7 +72,7 @@ namespace QFramework.ProjectGungeon
 			HP.Value = 6;
 			MaxHP.Value = 6;
 			Armor.Value = 1;
-			Key.Value = 0;
+			Key.Value = 20;
 			Time.timeScale = 1;//恢复时间
 
 			//清空武器库，并添加一把普通的手枪

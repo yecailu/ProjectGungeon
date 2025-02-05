@@ -21,18 +21,8 @@ namespace QFramework.ProjectGungeon
                 //如果有钥匙
                 if (Global.Key.Value > 0)
                 {
-                    var configs = new List<GunConfig>()
-                {
-                    GunConfig.Rocket,
-                    GunConfig.Bow,
-                    GunConfig.Laser,
-                    GunConfig.ShotGun,
-                    GunConfig.AK47,
-                    GunConfig.AWP,
-                    GunConfig.MP5
-                };
-                    //过滤掉已经拥有的枪械
-                    configs.RemoveAll(c => GunSystem.GunList.Any(g => g.Key == c.Key));
+                    var configs = GunSystem.GetAvailableGuns();
+
                     //随机获取一个没有的枪械
                     if (configs.Count > 0)
                     {
