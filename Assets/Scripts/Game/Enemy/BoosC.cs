@@ -192,6 +192,7 @@ namespace QFramework.ProjectGungeon
         {
             Room.Enemies.Remove(this);
             GameUI.Default.BossHpBarBG.Hide();
+
         }
 
 

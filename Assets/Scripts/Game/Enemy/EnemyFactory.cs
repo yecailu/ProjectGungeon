@@ -19,6 +19,9 @@ namespace QFramework.ProjectGungeon
 
         public static IEnemy EnemyByName(string enemyName)
         {
+            //µÐÈËÅäÖÃ
+            return Default.EnemyE;
+
             return enemyName switch
             {
                 Constant.EnemyA => Default.EnemyA,

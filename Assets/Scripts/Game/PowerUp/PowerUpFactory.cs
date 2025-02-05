@@ -66,7 +66,7 @@ namespace QFramework.ProjectGungeon
                     Default.AllGunHalfBullet,
                 };
 
-                var takeCount = Random.Range(2, 4 + 1);
+                var takeCount = Random.Range(1, 3 + 1);
                 for(var i = 0; i < takeCount; i++)
                 {
                     var angle = Random.Range(0, 360);

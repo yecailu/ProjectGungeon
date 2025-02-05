@@ -692,7 +692,7 @@ namespace QFramework.ProjectGungeon
             }
             else if (roomType == RoomTypes.Final)
             {
-                return SharedRooms.FinalRoom;
+                return SharedRooms.FinalRooms.GetRandomItem();
             }
             else if (roomType == RoomTypes.Next)
             {

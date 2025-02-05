@@ -35,10 +35,10 @@ namespace QFramework.ProjectGungeon
             {
                 //测试用
                 self.InitRoom
-                //.Next(RoomTypes.Chest)
-                //.Next(RoomTypes.Shop)
-                .Next(RoomTypes.Final)
-                .Next(RoomTypes.Next);
+                .Next(RoomTypes.Chest)
+                .Next(RoomTypes.Shop);
+                //.Next(RoomTypes.Final)
+                //.Next(RoomTypes.Next);
                 return;
                 //.Next(RoomTypes.Chest)
                 //.Next(RoomTypes.Chest)

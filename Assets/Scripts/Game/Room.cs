@@ -205,6 +205,12 @@ namespace QFramework.ProjectGungeon
                         })
                         .Show();
 
+                        State.ChangeState(RoomStates.Unlocked);
+                    }
+
+                    if (Config.RoomType == RoomTypes.Chest)
+                    {
+                        State.ChangeState(RoomStates.Unlocked);
                     }
 
                     if(Config.RoomType == RoomTypes.Next)

@@ -75,11 +75,11 @@ namespace QFramework.ProjectGungeon
             Time.timeScale = 1;//恢复时间
 
             //配置初始道具
-            Coin.Value = 100;
+            Coin.Value = 0;
 			HP.Value = 6;
 			MaxHP.Value = 6;
 			Armor.Value = 1;
-			Key.Value = 20;
+			Key.Value = 0;
 
 			var bosses = new List<string>()
 			{
@@ -99,7 +99,7 @@ namespace QFramework.ProjectGungeon
 			//清空武器库，并添加一把普通的手枪
 			GunSystem.GunList.Clear();
 			//配置武器
-			GunSystem.GunList.Add(GunConfig.Rocket.CreateData());
+			GunSystem.GunList.Add(GunConfig.AK47.CreateData());
 			Global.CurrentGun = GunSystem.GunList.First();
 
 			//关卡设置 

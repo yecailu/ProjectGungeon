@@ -36,10 +36,18 @@ namespace QFramework.ProjectGungeon
                     }
                     else//如果已经拥有所有枪械，则生成PowerUp
                     {
-                        var hp = PowerUpFactory.Default.SingleGunFullBullet.Instantiate()
+
+                        var powerUp = RandomUtility.Choose<IPowerUp>(
+                            PowerUpFactory.Default.SingleGunFullBullet,
+                            PowerUpFactory.Default.AllGunHalfBullet,
+                            PowerUpFactory.Default.Armor1)
+                            .SpriteRenderer.gameObject
+                            .Instantiate()
                             .Position2D(transform.Position2D())
-                            .Show();
-                        Room.AddPowerUp(hp);
+                            .Show()
+                            .GetComponent<IPowerUp>();
+
+                        Room.AddPowerUp(powerUp);
                     }
 
                     AudioKit.PlaySound("resources://Chest");
