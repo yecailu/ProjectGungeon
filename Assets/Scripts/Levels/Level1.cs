@@ -34,11 +34,12 @@ namespace QFramework.ProjectGungeon
             .Self(self =>
             {
                 //测试用
-                //self.InitRoom
-                ////.Next(RoomTypes.Chest)
-                ////.Next(RoomTypes.Shop)
-                //.Next(RoomTypes.Final);
-                //return;
+                self.InitRoom
+                //.Next(RoomTypes.Chest)
+                //.Next(RoomTypes.Shop)
+                .Next(RoomTypes.Final)
+                .Next(RoomTypes.Next);
+                return;
                 //.Next(RoomTypes.Chest)
                 //.Next(RoomTypes.Chest)
                 //.Next(RoomTypes.Chest)
@@ -70,7 +71,8 @@ namespace QFramework.ProjectGungeon
                         })
                         .Next(RoomTypes.Normal)
                         .Next(RoomTypes.Normal)
-                        .Next(RoomTypes.Final);
+                        .Next(RoomTypes.Final)
+                        .Next(RoomTypes.Next);
                 }
                 else if (randomIndex == 1)
                 {
@@ -85,7 +87,8 @@ namespace QFramework.ProjectGungeon
                         })
                         .Next(RoomTypes.Normal)
                         .Next(RoomTypes.Normal)
-                        .Next(RoomTypes.Final);
+                        .Next(RoomTypes.Final)
+                        .Next(RoomTypes.Next);
                 }
                 else if (randomIndex == 2)
                 {
@@ -100,7 +103,8 @@ namespace QFramework.ProjectGungeon
                         })
                         .Next(RoomTypes.Normal)
                         .Next(RoomTypes.Normal)
-                        .Next(RoomTypes.Final);
+                        .Next(RoomTypes.Final)
+                        .Next(RoomTypes.Next);
                 }
             });
         

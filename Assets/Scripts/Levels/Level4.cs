@@ -79,7 +79,7 @@ namespace QFramework.ProjectGungeon
                                 .Next(RoomTypes.Normal)
                                 .Next(RoomTypes.Normal)
                                 .Next(RoomTypes.Chest)
-                                .Next(RoomTypes.Final);
+                                .Next(RoomTypes.Final).Next(RoomTypes.Next);
                         })
                         .Next(RoomTypes.Normal)
                         .Next(RoomTypes.Normal)

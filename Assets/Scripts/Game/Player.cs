@@ -130,19 +130,7 @@ namespace QFramework.ProjectGungeon
 
                     if (Global.CurrentRoom && Global.CurrentRoom.Enemies.Count > 0)
                     {
-                        mTargetEmeny = Global.CurrentRoom.Enemies
-                            .OrderBy(e => (e.GameObject.Position2D() - mouseWorldPoint.ToVector2()).magnitude)//¸ù¾Ý¾àÀëÔ¶½üÅÅÐò
-                            .FirstOrDefault(e =>
-                            {
-                                var direction = this.Direction2DTo(e.GameObject);
-
-                                if (Physics2D.Raycast(this.Position2D(), direction.normalized, direction.magnitude,
-                                    LayerMask.GetMask("Wall")))
-                                {
-                                    return false;
-                                }
-                                return true;
-                            });
+                        mTargetEmeny = AimHelper.GetClosestVisibleEnemy(transform, mouseWorldPoint);
 
                         if (mTargetEmeny != null && mTargetEmeny.GameObject)
                         {

@@ -9,6 +9,7 @@ namespace QFramework.ProjectGungeon
         Chest,
         Shop,
         Final,
+        Next,
         
 
     }

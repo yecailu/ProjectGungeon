@@ -54,7 +54,7 @@ namespace QFramework.ProjectGungeon
          .L("1                         1")
          .L("1                         1")
          .L("1                         1")
-         .L("d            #e           d")
+         .L("d            e            d")
          .L("1                         1")
          .L("1                         1")
          .L("1                         1")
@@ -112,5 +112,27 @@ namespace QFramework.ProjectGungeon
         .L("1                 1")
         .L("111111111d111111111");
 
+
+        public static RoomConfig NextRoom { get; set; } = new RoomConfig()
+        .Type(RoomTypes.Next)
+        .L("111111111d111111111")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("d        #        d")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("1                 1")
+        .L("111111111d111111111");
     }
 }

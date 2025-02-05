@@ -1,4 +1,4 @@
-// Generate Id:c32ac9c3-bd93-468d-856e-b6c47a2b7907
+// Generate Id:ac1c55bd-8a97-48e8-9364-26b4d61b7a75
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -6,7 +6,7 @@ namespace QFramework.ProjectGungeon
 	public partial class RocketGun
 	{
 
-		public PlayerBullet Bullet;
+		public QFramework.ProjectGungeon.RocketBullet Bullet;
 
 		public UnityEngine.AudioSource SelfAudioSource;
 

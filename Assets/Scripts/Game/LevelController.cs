@@ -512,8 +512,7 @@ namespace QFramework.ProjectGungeon
                     {
                         var final = Instantiate(Final);
                         final.transform.position = new Vector3(x + 0.5f, y + 0.5f, 0);
-                        final.Hide();
-                        room.Final = final;
+                        final.Show();
                     }
                     else if (code == 'd')
                     {
@@ -694,6 +693,10 @@ namespace QFramework.ProjectGungeon
             else if (roomType == RoomTypes.Final)
             {
                 return SharedRooms.FinalRoom;
+            }
+            else if (roomType == RoomTypes.Next)
+            {
+                return SharedRooms.NextRoom;
             }
 
             return null;

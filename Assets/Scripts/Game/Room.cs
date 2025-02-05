@@ -7,6 +7,7 @@ using Unity.VisualScripting;
 using Random = UnityEngine.Random;
 using static UnityEditor.PlayerSettings;
 using static UnityEditor.Progress;
+using UnityEditorInternal;
 
 namespace QFramework.ProjectGungeon
 { 
@@ -72,10 +73,9 @@ namespace QFramework.ProjectGungeon
             Unlocked,
         }
 
-        public RoomStates State { get; set; } = RoomStates.Close;
+        public FSM<RoomStates> State = new FSM<RoomStates>();
 
         public RoomConfig Config { get; private set; } = new RoomConfig();
-        public Final Final { get; set; }
 
         public Room WithConfig(RoomConfig roomConfig)
         {
@@ -86,78 +86,200 @@ namespace QFramework.ProjectGungeon
 
         private void Start()
         {
-            if (Config.RoomType == RoomTypes.Init)
-            {
-                foreach (var door in mDoors)
+            State.State(RoomStates.Close)
+                .OnEnter(() =>
                 {
-                    door.State.ChangeState(Door.States.IdleOpen);
-                }
+                    if (Config.RoomType == RoomTypes.Init)
+                    {
+                        foreach (var door in mDoors)
+                        {
+                            door.State.ChangeState(Door.States.IdleOpen);
+                        }
 
-                State = RoomStates.Unlocked;
-            }
-            
-            if (Config.RoomType == RoomTypes.Final)
-            {
-                Final.Hide();
-            }
+                        State.ChangeState(RoomStates.Unlocked);
+
+
+                    }
+
+                });
+
+
+
+            State.State(RoomStates.PlayerIn)
+                .OnEnter(() =>
+                {
+                    if (Config.RoomType == RoomTypes.Normal)
+                    {
+                        //填充Waves
+                        var difficultyLevel = Global.CurrentPacing.Dequeue();
+                        var difficultyScore = 10 + difficultyLevel * 3;
+                        var waveCount = 0;
+                        if (difficultyLevel <= 3)
+                        {
+                            waveCount = Random.Range(1, difficultyLevel + 1);
+                        }
+                        else
+                        {
+                            waveCount = Random.Range(difficultyLevel / 3, difficultyLevel / 2);
+                        }
+
+                        for (int i = 0; i < waveCount; i++)
+                        {
+                            var targetScore = difficultyScore / waveCount + Random.Range(-difficultyScore / 10 * 2 + 1,
+                                difficultyScore / 20 * 2 + 1 + 1);
+                            var waveConfig = new EnemyWaveConfig();
+
+                            while (targetScore > 0 && waveConfig.EnemyNames.Count < mEnemyGeneratePoses.Count)
+                            {
+                                var enemyScore = EnemyFactory.GenTargetEnemyScore();
+                                targetScore -= enemyScore;
+                                waveConfig.EnemyNames.Add(EnemyFactory.EnemyByScore(enemyScore));
+                            }
+
+                            mWaves.Add(waveConfig);
+
+                        }
+
+                        var wave = mWaves.First();
+                        mWaves.RemoveAt(0);
+                        GenerateEnemies(wave);
+
+                        foreach (var door in mDoors)
+                        {
+                            door.State.ChangeState(Door.States.BattleClose);
+                        }
+                    }
+
+                    if (Config.RoomType == RoomTypes.Final)
+                    {
+                        var boss = EnemyFactory.EnemyByName(Global.BossList.GetAndRemoveRandomItem())
+                        .GameObject
+                        .Position2D(mEnemyGeneratePoses.GetRandomItem())
+                        .Show()
+                        .GetComponent<IEnemy>();
+
+                        boss.Room = this;
+                        this.Enemies.Add(boss);
+
+                        foreach (var door in mDoors)
+                        {
+                            door.State.ChangeState(Door.States.BattleClose);
+                        }
+                    }
+
+                    if (Config.RoomType == RoomTypes.Shop)
+                    {
+                        var takeCount = Random.Range(2, 5 + 1);
+                        var normalShopItem = ShopSystem.CalculateNormalShopItems();
+
+                        for (int i = 0; i < takeCount; i++)
+                        {
+                            var item = normalShopItem.GetRandomItem();
+                            var pos = mShopItemGeneratePoses.GetAndRemoveRandomItem();
+
+                            LevelController.Default.ShopItem.Instantiate()
+                                .Position2D(pos)
+                                .Self(self =>
+                                {
+                                    self.Room = this;
+                                    self.ItemPrice = item.Item2;
+                                    self.PowerUp = item.Item1;
+                                    self.UpdateView();
+
+                                })
+                                .Show();
+                        }
+
+                        //必须生成一个钥匙
+                        var key = normalShopItem.First(i =>
+                        i.Item1.SpriteRenderer == PowerUpFactory.Default.Key.SpriteRenderer);
+                        LevelController.Default.ShopItem.Instantiate()
+                                .Position2D(mShopItemGeneratePoses.GetAndRemoveRandomItem())
+                        .Self(self =>
+                        {
+                            self.Room = this;
+                            self.ItemPrice = key.Item2;
+                            self.PowerUp = key.Item1;
+                            self.UpdateView();
+
+                        })
+                        .Show();
+
+                    }
+
+                    if(Config.RoomType == RoomTypes.Next)
+                    {
+                        State.ChangeState(RoomStates.Unlocked);
+                    }
+
+                })
+                .OnUpdate(() =>
+                {
+                    if (Time.frameCount % 30 == 0)
+                    {
+
+                        if (mEnemies.Count == 0)//敌人全部死亡
+                        {
+
+
+                            if (mWaves.Count > 0)//有剩余波次继续生成敌人
+                            {
+                                var wave = mWaves.First();
+                                mWaves.RemoveAt(0);
+                                GenerateEnemies(wave);
+                            }
+                            else//没有波次 开门
+                            {
+                                if (Config.RoomType == RoomTypes.Normal)
+                                {
+                                    foreach (var powerUp in PowerUps.Where(p => p.GetType() == typeof(Coin)))
+                                    {
+                                        var cashedPowerUp = powerUp;
+                                        ActionKit.OnFixedUpdate.Register(() =>
+                                        {
+                                            //金币朝玩家飞行
+                                            cashedPowerUp.SpriteRenderer.transform.Translate(
+                                                cashedPowerUp.SpriteRenderer.NormalizedDirection2DTo(Player.Default) *
+                                                Time.fixedDeltaTime * 5);
+                                        }).UnRegisterWhenGameObjectDestroyed(cashedPowerUp.SpriteRenderer.gameObject);
+                                    }
+
+
+
+                                    State.ChangeState(RoomStates.Unlocked);
+
+                                    foreach (var door in mDoors)
+                                    {
+                                        door.State.ChangeState(Door.States.Open);
+                                    }
+
+                                }
+                                else if (Config.RoomType == RoomTypes.Final)
+                                {
+                                    State.ChangeState(RoomStates.Unlocked);
+
+                                    foreach (var door in mDoors)
+                                    {
+                                        door.State.ChangeState(Door.States.Open);
+                                    }
+                                }
+                            }
+
+
+                        }
+                    }
+                });
+
+
+
+            State.State(RoomStates.Unlocked);
+            State.StartState(RoomStates.Close);
+           
         }
 
         private void Update()
         {
-            if(Time.frameCount % 30 == 0)
-            {
-
-                if (mEnemies.Count == 0)//敌人全部死亡
-                {
-                    if (State == RoomStates.PlayerIn)//房间状态为玩家已进入
-                    {
-
-                        if (mWaves.Count > 0)//有剩余波次继续生成敌人
-                        {
-                            var wave = mWaves.First();
-                            mWaves.RemoveAt(0);
-                            GenerateEnemies(wave);
-                        }
-                        else//没有波次 开门
-                        {
-                            if (Config.RoomType == RoomTypes.Normal)
-                            {
-                                foreach (var powerUp in PowerUps.Where(p => p.GetType() == typeof(Coin)))
-                                {
-                                    var cashedPowerUp = powerUp;
-                                    ActionKit.OnFixedUpdate.Register(() =>
-                                    {
-                                        //金币朝玩家飞行
-                                        cashedPowerUp.SpriteRenderer.transform.Translate(
-                                            cashedPowerUp.SpriteRenderer.NormalizedDirection2DTo(Player.Default) *
-                                            Time.fixedDeltaTime * 5);
-                                    }).UnRegisterWhenGameObjectDestroyed(cashedPowerUp.SpriteRenderer.gameObject);
-                                }
-
-                                State = RoomStates.Unlocked;
-
-                                foreach (var door in mDoors)
-                                {
-                                    door.State.ChangeState(Door.States.Open);
-                                }
-
-                            }
-                            else if (Config.RoomType == RoomTypes.Final && mEnemies.Count == 0)
-                            {
-                                Final.Show();
-
-                                State = RoomStates.Unlocked;
-
-                                foreach (var door in mDoors)
-                                {
-                                    door.State.ChangeState(Door.States.Open);
-                                }
-                            }
-                        }
-                    }
-
-                }
-            }
+            State.Update();
         }
 
 
@@ -179,116 +301,14 @@ namespace QFramework.ProjectGungeon
             {
                 Global.CurrentRoom = this;  
                 OnRoomEnter.Trigger(this);
-                if (Config.RoomType == RoomTypes.Normal)//进入普通房间时才出现门
+
+                if (State.CurrentStateId == RoomStates.Close)
                 {
-                    if (State == RoomStates.Close)
-                    {
-                        State = RoomStates.PlayerIn;
-
-
-
-                        //填充Waves
-                        var difficultyLevel = Global.CurrentPacing.Dequeue();
-                        var difficultyScore = 10 + difficultyLevel * 3;
-                        var waveCount = 0;
-                        if (difficultyLevel <= 3)
-                        {
-                            waveCount = Random.Range(1, difficultyLevel + 1);
-                        }
-                        else
-                        {
-                            waveCount = Random.Range(difficultyLevel / 3, difficultyLevel / 2);
-                        }
-
-                        for (int i = 0; i < waveCount; i++)
-                        {
-                            var targetScore = difficultyScore / waveCount + Random.Range(-difficultyScore / 10 * 2 + 1,
-                                difficultyScore / 20 * 2 + 1 + 1);
-                            var waveConfig = new EnemyWaveConfig();
-
-                            while(targetScore > 0 && waveConfig.EnemyNames.Count < mEnemyGeneratePoses.Count)
-                            {
-                                var enemyScore = EnemyFactory.GenTargetEnemyScore();
-                                targetScore -= enemyScore;
-                                waveConfig.EnemyNames.Add(EnemyFactory.EnemyByScore(enemyScore));
-                            }
-
-                            mWaves.Add(waveConfig);
-                            
-                        }
-
-                        var wave = mWaves.First();
-                        mWaves.RemoveAt(0);
-                        GenerateEnemies(wave);
-
-                        foreach (var door in mDoors)
-                        {
-                            door.State.ChangeState(Door.States.BattleClose);
-                        }
-                    }
+                    State.ChangeState(RoomStates.PlayerIn);
 
                 }
-                else if (Config.RoomType == RoomTypes.Final && State == RoomStates.Close)
-                {
-                    State = RoomStates.PlayerIn;
 
-                    var boss = EnemyFactory.EnemyByName(Global.BossList.GetAndRemoveRandomItem())
-                        .GameObject
-                        .Position2D(mEnemyGeneratePoses.GetRandomItem())
-                        .Show()
-                        .GetComponent<IEnemy>();
-
-                    boss.Room = this;
-                    this.Enemies.Add(boss);
-
-                    foreach (var door in mDoors)
-                    {
-                        door.State.ChangeState(Door.States.BattleClose);
-                    }
-                }
-                else
-                {
-                    if(Config.RoomType == RoomTypes.Shop && State == RoomStates.Close)
-                    {
-                        var takeCount = Random.Range(2, 5 + 1);
-                        var normalShopItem = ShopSystem.CalculateNormalShopItems();
-
-                        for(int i = 0; i < takeCount; i++)
-                        {
-                            var item = normalShopItem.GetRandomItem();
-                            var pos = mShopItemGeneratePoses.GetAndRemoveRandomItem();
-
-                            LevelController.Default.ShopItem.Instantiate()
-                                .Position2D(pos)
-                                .Self(self =>
-                                {
-                                    self.Room = this;
-                                    self.ItemPrice = item.Item2;
-                                    self.PowerUp = item.Item1;
-                                    self.UpdateView();
-
-                                })
-                                .Show();
-                        }
-                          
-                        //必须生成一个钥匙
-                        var key = normalShopItem.First(i => 
-                        i.Item1.SpriteRenderer == PowerUpFactory.Default.Key.SpriteRenderer);
-                        LevelController.Default.ShopItem.Instantiate()
-                                .Position2D(mShopItemGeneratePoses.GetAndRemoveRandomItem())
-                        .Self(self =>
-                        {
-                            self.Room = this;
-                            self.ItemPrice = key.Item2;
-                            self.PowerUp = key.Item1;
-                            self.UpdateView();
-
-                        })
-                        .Show();
-
-                    }
-                    State = RoomStates.Unlocked;
-                }
+                
             }
         }
 

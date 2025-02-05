@@ -3064,7 +3064,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &330987073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15360,7 +15360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &910205255
 Transform:
   m_ObjectHideFlags: 0
@@ -15516,7 +15516,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: df2800a9ad38e3c4fba9b7177ae11f57, type: 3}
   - {fileID: 8300000, guid: 59d115486d2723840bf94c72f353c2c1, type: 3}
   - {fileID: 8300000, guid: 3729679d0cc7e7447a64508dfbf35d97, type: 3}
-  Bullet: {fileID: 0}
+  Bullet: {fileID: 1304556524}
   CanShootSprite: {fileID: 29499734}
   SelfAudioSource: {fileID: 910205256}
 --- !u!114 &910205258
@@ -18015,13 +18015,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1172621196}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df2be511b1369d349b4ac7eea48b4b6a, type: 3}
+  m_Script: {fileID: 11500000, guid: d4f527184c6dd3c4ebd2f1a7a8e365c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Velocity: {x: 0, y: 0}
   Damage: 1
-  HitWallSfxs: []
-  HitEnemySfx: []
+  HitWallSfxs:
+  - {fileID: 8300000, guid: 63c98a8c8ca067c498cb6d1517bc3f13, type: 3}
+  - {fileID: 8300000, guid: 6d11ee981e3877c4bb7222df1b17a38c, type: 3}
+  - {fileID: 8300000, guid: 30eaddef98c5e4f449d72a8d8f24a3eb, type: 3}
+  HitEnemySfx:
+  - {fileID: 8300000, guid: 63c98a8c8ca067c498cb6d1517bc3f13, type: 3}
+  - {fileID: 8300000, guid: 6d11ee981e3877c4bb7222df1b17a38c, type: 3}
+  - {fileID: 8300000, guid: 30eaddef98c5e4f449d72a8d8f24a3eb, type: 3}
 --- !u!212 &1172621201
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -18089,7 +18095,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: Bullet
   CustomComment: 
-  mComponentName: PlayerBullet
+  mComponentName: QFramework.ProjectGungeon.RocketBullet
 --- !u!1 &1176180111
 GameObject:
   m_ObjectHideFlags: 0
@@ -19344,7 +19350,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1304556521
 Transform:
   m_ObjectHideFlags: 0
@@ -19437,7 +19443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Velocity: {x: 0, y: 0}
   Damage: 1
-  ArrowHalf: {fileID: 0}
+  ArrowHalf: {fileID: 1501529058}
   HitWallSfxs:
   - {fileID: 8300000, guid: 5dd5fcf95623c7f4c8f3ee2cfba0a37d, type: 3}
   HitEnemySfx:
@@ -19509,7 +19515,7 @@ MonoBehaviour:
   MarkType: 0
   CustomComponentName: Bullet
   CustomComment: 
-  mComponentName: Rigidbody2D
+  mComponentName: QFramework.ProjectGungeon.ArrowBullet
 --- !u!1 &1317588750
 GameObject:
   m_ObjectHideFlags: 0

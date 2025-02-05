@@ -13,7 +13,7 @@ namespace QFramework.ProjectGungeon
 
             Global.RoomGrid.ForEach((x,y,room) =>
             {
-                if(room.State == Room.RoomStates.Unlocked)
+                if(room.State.CurrentStateId == Room.RoomStates.Unlocked)
                 {
                     MapItem.InstantiateWithParent(MapItemRoot)
                     .WithDate(room)
