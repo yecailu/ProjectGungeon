@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static QFramework.ProjectGungeon.UIGunList;
 
 namespace QFramework.ProjectGungeon
 {
@@ -99,7 +100,7 @@ namespace QFramework.ProjectGungeon
         public bool Reloading;
     }
 
-    public class GunSystem
+    public class GunSystem :AbstractSystem
     {
         public static List<GunDate> GunList = new List<GunDate>();
         //{
@@ -113,6 +114,36 @@ namespace QFramework.ProjectGungeon
         //    GunConfig.Rocket.CreateData()
         //};
 
+        public  List<GunBaseItem> GunBaseItems => mGunBaseItems;
+
+        void Load()
+        {
+            foreach (var gunBaseItem in mGunBaseItems)
+            {
+                gunBaseItem.Unlocked =
+                    PlayerPrefs.GetInt(gunBaseItem.Key + "_unlocked", gunBaseItem.InitUnlockState ? 1 : 0) == 1;
+            }
+        }
+
+        public void Save()
+        {
+            foreach (var gunBaseItem in mGunBaseItems)
+            {
+                PlayerPrefs.SetInt(gunBaseItem.Key + "_unlocked", gunBaseItem.Unlocked ? 1 : 0);
+            }
+        }
+
+        static List<GunBaseItem> mGunBaseItems = new List<GunBaseItem>()
+        {
+            new(){ Name = "Shotgun Åç×Ó", Price = 0, Key = GunConfig.ShotGun.Key, InitUnlockState = true },
+            new(){ Name = "MP5 ³å·æÇ¹", Price = 0, Key = GunConfig.MP5.Key, InitUnlockState = true },
+            new(){ Name = "AK47 ×Ô¶¯²½Ç¹", Price = 5, Key = GunConfig.AK47.Key, InitUnlockState = false },
+            new(){ Name = "AWP ¾Ñ»÷Ç¹", Price = 6, Key = GunConfig.AWP.Key, InitUnlockState = false },
+            new(){ Name = "Laser ¼¤¹âÇ¹", Price = 7, Key = GunConfig.Laser.Key, InitUnlockState = false },
+            new(){ Name = "Bow ¹­¼ý", Price = 10, Key = GunConfig.Bow.Key, InitUnlockState = false },
+            new(){ Name = "Rocket »ð¼ýÍ²", Price = 15, Key = GunConfig.Rocket.Key, InitUnlockState = false },
+        };
+
         public static List<GunConfig> GetAvailableGuns()
         {
             var availableGunConfigs = new List<GunConfig>();
@@ -120,7 +151,7 @@ namespace QFramework.ProjectGungeon
             foreach(var gunConfig in GunConfig.configs)
             {
 
-                var gunBaseItem = UIGunList.GunBaseItems.First(gun => gun.Key == gunConfig.Key);
+                var gunBaseItem = mGunBaseItems.First(gun => gun.Key == gunConfig.Key);
                 if (gunBaseItem.Unlocked && GunList.All(g => g.Key != gunConfig.Key))
                 {
                     availableGunConfigs.Add(gunConfig);
@@ -131,5 +162,9 @@ namespace QFramework.ProjectGungeon
             return availableGunConfigs;
         }
 
+        protected override void OnInit()
+        {
+            Load();
+        }
     }
 }

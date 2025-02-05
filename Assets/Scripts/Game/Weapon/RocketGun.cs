@@ -5,7 +5,7 @@ namespace QFramework.ProjectGungeon
 {
     public partial class RocketGun : Gun
     {
-        public override PlayerBullet BulletPrefab => Bullet;
+        public override Bullet BulletPrefab => Bullet;
 
         public override AudioSource AudioPlayer => SelfAudioSource;
 

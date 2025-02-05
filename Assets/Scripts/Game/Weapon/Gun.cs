@@ -13,7 +13,7 @@ namespace QFramework.ProjectGungeon
 
         public AudioClip ReloadSound;
 
-        public virtual PlayerBullet BulletPrefab { get; }
+        public virtual Bullet BulletPrefab { get; }
 
         public virtual AudioSource AudioPlayer { get; }
 

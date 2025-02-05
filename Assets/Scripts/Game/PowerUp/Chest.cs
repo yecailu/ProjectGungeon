@@ -2,6 +2,7 @@ using UnityEngine;
 using QFramework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Schema;
 
 namespace QFramework.ProjectGungeon
 {
@@ -23,12 +24,15 @@ namespace QFramework.ProjectGungeon
                 {
                     var configs = GunSystem.GetAvailableGuns();
 
-                    //随机获取一个没有的枪械
+                    //随机生成一个没有的枪械
                     if (configs.Count > 0)
                     {
-                        var gunData = configs.GetRandomItem().CreateData();
-                        GunSystem.GunList.Add(gunData);
-                        Global.Player.UseGun(GunSystem.GunList.Count - 1);
+                        var powerUpGun = PowerUpFactory.Default.PowerUpGun.Instantiate()
+                            .Position2D(transform.Position2D())
+                            .Self(self =>{ self.GunConfig = configs.GetRandomItem(); })
+                            .Show();
+
+                        Room.AddPowerUp(powerUpGun);
                     }
                     else//如果已经拥有所有枪械，则生成PowerUp
                     {

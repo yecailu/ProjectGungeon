@@ -50,11 +50,11 @@ TagManager:
   - name: OnGround
     uniqueID: 1869291163
     locked: 0
-  - name: Instances
-    uniqueID: 4237718089
-    locked: 0
   - name: Wall
     uniqueID: 3842461185
+    locked: 0
+  - name: Instances
+    uniqueID: 4237718089
     locked: 0
   - name: Fx
     uniqueID: 3710692903

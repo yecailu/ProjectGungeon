@@ -9,7 +9,7 @@ namespace QFramework.ProjectGungeon
 
         public UnityEngine.AudioSource ShootSoundPlayer;
 
-        public override PlayerBullet BulletPrefab => Bullet;
+        public override Bullet BulletPrefab => Bullet;
 
         public override AudioSource AudioPlayer => ShootSoundPlayer;
 

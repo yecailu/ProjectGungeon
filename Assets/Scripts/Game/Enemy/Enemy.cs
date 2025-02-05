@@ -19,13 +19,21 @@ public interface IEnemy
 public abstract class Enemy : MonoBehaviour,IEnemy
 {
    
+    public List<Transform> ArrowHalfs = new List<Transform>();
+
+
 
     protected void OnDeath(Vector2 hitDirection, string dieBodyName, float dieBodyScale)
     {
         if (dieBodyName.IsNotNullAndEmpty())
         {
             //生成尸体
-            FxFactory.PlayEnemyDieBody(transform.Position2D(), hitDirection, dieBodyName, dieBodyScale);
+            var dieBody = FxFactory.PlayEnemyDieBody(transform.Position2D(), hitDirection, dieBodyName, dieBodyScale);
+            //将尸体设置为箭矢的父类
+            foreach (var arrowHalf in ArrowHalfs)
+            {
+                arrowHalf.Parent(dieBody);
+            }
         }
         //敌人死亡音效
         AudioKit.PlaySound("resources://EnemyDie");

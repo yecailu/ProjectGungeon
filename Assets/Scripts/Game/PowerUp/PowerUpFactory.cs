@@ -38,6 +38,22 @@ namespace QFramework.ProjectGungeon
                 }
 
                 //枪械生成
+                var availableGuns = GunSystem.GetAvailableGuns();
+                if(availableGuns.Count > 0)
+                {
+                    var angle = Random.Range(0, 360);
+                    var powerUp = Default.PowerUpGun
+                        .Instantiate()
+                        .Self(self =>
+                        {
+                            self.GunConfig = availableGuns.GetRandomItem();
+                        })
+                        .Position2D(enemy.GameObject.Position2D() +
+                                    angle.AngleToDirection2D() * Random.Range(0.5f, 1.0f))
+                        .LocalPositionZ(0)
+                        .Show();
+                    enemy.Room.AddPowerUp(powerUp);
+                }
 
                 //生成补给
                 var powerUps = new List<IPowerUp>()

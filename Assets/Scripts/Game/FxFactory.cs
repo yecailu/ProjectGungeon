@@ -5,7 +5,7 @@ namespace QFramework.ProjectGungeon
 {
 	public partial class FxFactory : ViewController
 	{
-        public static void PlayEnemyDieBody(Vector2 pos, Vector2 flyDirection, string name, float scale)
+        public static Transform PlayEnemyDieBody(Vector2 pos, Vector2 flyDirection, string name, float scale)
         {
             var dieBody = Default.transform.Find(name).GetComponent<SpriteRenderer>()
                 .Instantiate()
@@ -28,6 +28,8 @@ namespace QFramework.ProjectGungeon
                     dieBodyOriginPos + dieBodyMoveToDistance * flyDirection, p));
 
             }).StartCurrentScene();
+
+            return dieBody.transform;
         }
 
         public static void PlayHurtFx(Vector2 pos, Color color = default)

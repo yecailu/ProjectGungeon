@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace QFramework.ProjectGungeon
 {
-	public class Global
+	public class Global : Architecture<Global>
 	{
 		public static Player Player;
 
@@ -52,6 +52,8 @@ namespace QFramework.ProjectGungeon
 		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
 		public static void AutoInit()
 		{
+			Interface.LogInfo();
+
 			ResetData();
 
 			//Color颜色存储
@@ -77,7 +79,7 @@ namespace QFramework.ProjectGungeon
 			HP.Value = 6;
 			MaxHP.Value = 6;
 			Armor.Value = 1;
-			Key.Value = 0;
+			Key.Value = 20;
 
 			var bosses = new List<string>()
 			{
@@ -97,7 +99,7 @@ namespace QFramework.ProjectGungeon
 			//清空武器库，并添加一把普通的手枪
 			GunSystem.GunList.Clear();
 			//配置武器
-			GunSystem.GunList.Add(GunConfig.AK47.CreateData());
+			GunSystem.GunList.Add(GunConfig.Bow.CreateData());
 			Global.CurrentGun = GunSystem.GunList.First();
 
 			//关卡设置 
@@ -129,5 +131,10 @@ namespace QFramework.ProjectGungeon
 
             return true;
         }
-	}
+
+        protected override void Init()
+        {
+			RegisterSystem(new GunSystem());
+        }
+    }
 }

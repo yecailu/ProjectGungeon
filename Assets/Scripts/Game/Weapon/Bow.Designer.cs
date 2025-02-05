@@ -1,4 +1,4 @@
-// Generate Id:97123db0-b9aa-45fc-80e0-c22c9327eac3
+// Generate Id:82529903-bb26-456d-b5ad-12e183d41c5d
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -6,7 +6,7 @@ namespace QFramework.ProjectGungeon
 	public partial class Bow
 	{
 
-		public PlayerBullet Bullet;
+		public QFramework.ProjectGungeon.ArrowBullet Bullet;
 
 		public SpriteRenderer CanShootSprite;
 
