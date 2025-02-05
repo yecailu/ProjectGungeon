@@ -282,6 +282,7 @@ namespace QFramework.ProjectGungeon
             State.State(States.Rolling)
                 .OnEnter(() =>
                 {
+                    CurrentGun.OnRoll();
                     SelfCircleCollider2D.Disable();//È¡ÏûÅö×²
 
                     var x = Input.GetAxis("Horizontal");
@@ -363,6 +364,8 @@ namespace QFramework.ProjectGungeon
                     Global.HP.Value = 0;
                     GameUI.Default.GameOver.SetActive(true);
                     Time.timeScale = 0;
+
+                    AudioKit.PlaySound("resources://PlayerDie");
 
                 }
 

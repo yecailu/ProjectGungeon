@@ -2083,11 +2083,11 @@ MonoBehaviour:
   EnemyBBig: {fileID: 2105430786}
   EnemyCBig: {fileID: 1100979032}
   EnemyDBig: {fileID: 323193661}
-  BoosA: {fileID: 1434939953}
-  BoosB: {fileID: 896746814}
-  BoosC: {fileID: 1336072939}
-  BoosD: {fileID: 1149775065}
-  BoosE: {fileID: 571976675}
+  BossA: {fileID: 1434939953}
+  BossB: {fileID: 896746814}
+  BossC: {fileID: 1336072939}
+  BossD: {fileID: 1149775065}
+  BossE: {fileID: 571976675}
 --- !u!1 &233460102
 GameObject:
   m_ObjectHideFlags: 0
@@ -22047,7 +22047,7 @@ GameObject:
   - component: {fileID: 1520179738}
   - component: {fileID: 1520179737}
   - component: {fileID: 1520179742}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}

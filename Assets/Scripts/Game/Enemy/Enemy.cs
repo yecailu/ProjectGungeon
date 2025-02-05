@@ -22,8 +22,11 @@ public abstract class Enemy : MonoBehaviour,IEnemy
 
     protected void OnDeath(Vector2 hitDirection, string dieBodyName, float dieBodyScale)
     {
-        //生成尸体
-        FxFactory.PlayEnemyDieBody(transform.Position2D(), hitDirection, dieBodyName, dieBodyScale);
+        if (dieBodyName.IsNotNullAndEmpty())
+        {
+            //生成尸体
+            FxFactory.PlayEnemyDieBody(transform.Position2D(), hitDirection, dieBodyName, dieBodyScale);
+        }
         //敌人死亡音效
         AudioKit.PlaySound("resources://EnemyDie");
 
@@ -72,7 +75,7 @@ public abstract class Enemy : MonoBehaviour,IEnemy
             }
         }
 
-        var directionToPlayer = Player.Default.NormalizedDirectionTo(transform);
+        var directionToPlayer = Player.Default.NormalizedDirectionFrom(transform);
         if (posToMove == null)
         {
             GetRigidbody2D.velocity = directionToPlayer;

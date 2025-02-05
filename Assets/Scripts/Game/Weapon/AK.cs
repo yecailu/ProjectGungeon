@@ -34,6 +34,11 @@ namespace QFramework.ProjectGungeon
             BulletBag.Reload(Clip, ReloadSound);
         }
 
+        public override void OnRoll()
+        {
+            AudioPlayer.Stop();
+        }
+
         void Shoot(Vector2 direction)
         {
             var angle = direction.ToAngle() + Random.Range(0.05f, UnstableRate) * 30 * RandomUtility.Choose(-1, 1);

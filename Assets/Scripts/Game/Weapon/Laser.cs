@@ -33,6 +33,11 @@ namespace QFramework.ProjectGungeon
             BulletBag.Reload(Clip, ReloadSound);
         }
 
+        public override void OnRoll()
+        {
+            AudioPlayer.Stop();
+        }
+
         void Shoot(Vector2 direction)
         {
             var playerBullet = Instantiate(BulletPrefab);

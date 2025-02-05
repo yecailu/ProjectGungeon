@@ -68,6 +68,11 @@ namespace QFramework.ProjectGungeon
 
         }
 
+        public virtual void OnRoll()
+        {
+
+        }
+
         public void TryPlayShootSound(bool loop = false)
         {
             if (!AudioPlayer.isPlaying)
