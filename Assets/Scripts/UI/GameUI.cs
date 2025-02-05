@@ -199,7 +199,7 @@ namespace QFramework.ProjectGungeon
                 {
                     if (!Global.UIOpened)
                     {
-                        UIMap.Show();
+                        UIMap.Show(); 
                     }
                 }
             }

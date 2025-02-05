@@ -12,7 +12,7 @@ namespace QFramework.ProjectGungeon
             public string Key;
 			public int Price;
 			public bool Unlocked = false;
-            public Sprite Icon;
+			public Sprite Icon => Player.Default.GunWithKey(Key).Sprite.sprite;
 			public bool InitUnlockState;
 		}
 
@@ -26,6 +26,8 @@ namespace QFramework.ProjectGungeon
 			new(){ Name = "Bow 弓箭", Price = 10, Key = GunConfig.Bow.Key, InitUnlockState = false },
 			new(){ Name = "Rocket 火箭筒", Price = 15, Key = GunConfig.Rocket.Key, InitUnlockState = false },
 		};
+
+		private static readonly int GrayValue = Shader.PropertyToID("_GrayValue");
 
         private void Awake()
         {
@@ -56,21 +58,25 @@ namespace QFramework.ProjectGungeon
 
 				gunItem.Name.text = gunBaseItem.Name;
 				gunItem.BtnUnlock.gameObject.SetActive(!gunBaseItem.Unlocked);
-				//gunItem.Icon.sprite = gunBaseItem.Icon;
-				
-                if (gunBaseItem.Unlocked)
+				gunItem.Icon.sprite = gunBaseItem.Icon;
+
+				if (gunBaseItem.Unlocked)
                 {
 					gunItem.PriceText.Hide();
 					gunItem.ColorIcon.Hide();
-					gunItem.Icon.color = Color.white;
+                    //设置灰度值0
+                    gunItem.Icon.material = gunItem.Icon.material.Instantiate();
+					gunItem.Icon.material.SetFloat(GrayValue, 0);
 
                 }
 				else
 				{
 					gunItem.PriceText.text = "x" + gunBaseItem.Price;
-					gunItem.Icon.color = Color.gray;
+					//设置灰度值1
+                    gunItem.Icon.material = gunItem.Icon.material.Instantiate();
+                    gunItem.Icon.material.SetFloat(GrayValue, 1);
 
-					var cachedItem = gunBaseItem;
+                    var cachedItem = gunBaseItem;
 					var cachedItemView = gunItem;	
 					gunItem.BtnUnlock.onClick.AddListener(() =>
                     {
@@ -79,8 +85,8 @@ namespace QFramework.ProjectGungeon
 							cachedItem.Unlocked = true;
 							Player.DisplayText("<color=yellow>" + cachedItem.Name + "</color> 已解锁", 3);
                             cachedItemView.BtnUnlock.Hide();
-                            cachedItemView.Icon.color = Color.gray;
-							Global.Color.Value -= cachedItem.Price;
+                            gunItem.Icon.material.SetFloat(GrayValue, 0);
+                            Global.Color.Value -= cachedItem.Price;
 							AudioKit.PlaySound("resources://UnlockGun");
 							Save();
 						}
