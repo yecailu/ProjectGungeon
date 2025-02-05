@@ -7,8 +7,8 @@ namespace QFramework.ProjectGungeon
 	{
         public static Transform PlayEnemyDieBody(Vector2 pos, Vector2 flyDirection, string name, float scale)
         {
-
-            var dieBody = Default.transform.Find(name).GetComponent<SpriteRenderer>()
+            var dieBody = Default.transform.Find(name)
+                .GetComponent<SpriteRenderer>()
                 .Instantiate()
                 .LocalScale(scale)
                 .LocalEulerAnglesZ(Random.Range(-45, 45))

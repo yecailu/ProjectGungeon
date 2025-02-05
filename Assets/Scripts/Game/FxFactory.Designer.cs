@@ -20,9 +20,9 @@ namespace QFramework.ProjectGungeon
 
 		public SpriteRenderer EnemyDDie;
 
-		public SpriteRenderer EnemyEDie ;
-		
-		public SpriteRenderer EnemyFDie;
+        public SpriteRenderer EnemyEDie;
+
+        public SpriteRenderer EnemyFDie;
 
 		public SpriteRenderer EnemyGDie;
 

@@ -20,7 +20,6 @@ namespace QFramework.ProjectGungeon
         public static IEnemy EnemyByName(string enemyName)
         {
             //µ–»À≈‰÷√
-            return Default.EnemyE;
 
             return enemyName switch
             {
@@ -85,7 +84,7 @@ namespace QFramework.ProjectGungeon
             }
             if(score == 4)
             {
-                return RandomUtility.Choose(Constant.EnemyD, Constant.EnemyE);
+                return RandomUtility.Choose(Constant.EnemyD);
             }
             if(score == 5)
             {
