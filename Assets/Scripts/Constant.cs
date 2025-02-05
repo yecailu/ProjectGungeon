@@ -15,6 +15,12 @@ namespace QFramework.ProjectGungeon
         public const string EnemyBBig = "enemy_b_big";
         public const string EnemyCBig = "enemy_c_big";
         public const string EnemyDBig = "enemy_d_big";
+        public const string BossA = "boss_a";
+        public const string BossB = "boss_b";
+        public const string BossC = "boss_c";
+        public const string BossD = "boss_d";
+        public const string BossE = "boss_e";
+
 
     }
 }

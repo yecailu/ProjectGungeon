@@ -8,6 +8,8 @@ using UnityEngine;
 
 public interface IEnemy
 {
+    bool IsBoss{get;}
+
     Room Room { get; set; }
 
     GameObject GameObject { get; }
@@ -39,6 +41,8 @@ public abstract class Enemy : MonoBehaviour,IEnemy
     public abstract void Hurt(float damage, Vector2 hitDirection);
 
     protected abstract Rigidbody2D GetRigidbody2D { get; }
+
+    public virtual bool IsBoss => false;
 
     Vector2? posToMove = null;
 

@@ -20,6 +20,51 @@ namespace QFramework.ProjectGungeon
 
         public static void GeneratePowerUp(IEnemy enemy)
         {
+            //Boos掉落
+            if (enemy.IsBoss)
+            {
+                //颜色生成
+                var colorCount = Random.Range(3, 5 + 1); 
+                for(int i = 0; i < colorCount; i++)
+                {
+                    var angle = Random.Range(0, 360);
+                    var powerUp = Default.PowerUpColor
+                        .Instantiate()
+                        .Position2D(enemy.GameObject.Position2D() +
+                                    angle.AngleToDirection2D() * Random.Range(0.5f, 1.0f))
+                        .LocalPositionZ(0)
+                        .Show();
+                    enemy.Room.AddPowerUp(powerUp);
+                }
+
+                //枪械生成
+
+                //生成补给
+                var powerUps = new List<IPowerUp>()
+                {
+                    PowerUpFactory.Default.HP1,
+                    PowerUpFactory.Default.HP1,
+                    Default.Armor1,
+                    Default.Armor1,
+                    Default.SingleGunFullBullet,
+                    Default.AllGunHalfBullet,
+                };
+
+                var takeCount = Random.Range(2, 4 + 1);
+                for(var i = 0; i < takeCount; i++)
+                {
+                    var angle = Random.Range(0, 360);
+                    var powerUpObj = powerUps.GetAndRemoveRandomItem()
+                        .SpriteRenderer.gameObject
+                        .Instantiate()
+                        .Position2D(enemy.GameObject.Position2D() +
+                                    angle.AngleToDirection2D() * Random.Range(0.5f, 1.0f))
+                        .LocalPositionZ(0)
+                        .Show();
+                    enemy.Room.AddPowerUp(powerUpObj.GetComponent<IPowerUp>());
+                }
+            }
+
             var list = new List<IPowerUp>();
             //{
             //    LevelController.Default.HP1,

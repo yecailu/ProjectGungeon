@@ -23,6 +23,9 @@ namespace QFramework.ProjectGungeon
 
         protected override Rigidbody2D GetRigidbody2D => Rigidbody2D;
 
+        public override bool IsBoss => true;
+
+
         public override void Hurt(float damage, Vector2 hitDirection)
         {
             FxFactory.PlayHurtFx(transform.Position2D());

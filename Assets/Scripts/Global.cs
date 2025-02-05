@@ -35,6 +35,8 @@ namespace QFramework.ProjectGungeon
 
 		public static float GunAdditionalCameraSize;
 
+		public static List<string> BossList = new List<string>();
+
 		public static Vector2 CameraPosOffset { get; set; }
 
         public static List<LevelConfig> Levels = new List<LevelConfig>()
@@ -68,12 +70,29 @@ namespace QFramework.ProjectGungeon
 
 		public static void ResetData()
 		{
-			Coin.Value = 100;
+            Time.timeScale = 1;//恢复时间
+
+            //配置初始道具
+            Coin.Value = 100;
 			HP.Value = 6;
 			MaxHP.Value = 6;
 			Armor.Value = 1;
-			Key.Value = 20;
-			Time.timeScale = 1;//恢复时间
+			Key.Value = 0;
+
+			var bosses = new List<string>()
+			{
+				Constant.BossA,
+				Constant.BossB,
+                Constant.BossC,
+                Constant.BossD,
+                Constant.BossE,
+			};
+
+			BossList.Clear();
+			for(var i = 0; i < Levels.Count; i++)
+			{
+                BossList.Add(bosses.GetAndRemoveRandomItem());
+			}
 
 			//清空武器库，并添加一把普通的手枪
 			GunSystem.GunList.Clear();
@@ -86,6 +105,7 @@ namespace QFramework.ProjectGungeon
 
             //将level1的PacingConfig配置赋值给此处CurrentPacing
             CurrentPacing = new Queue<int>(CurrentLevel.PacingConfig);
+
 		}
 
 		//true表示进入下一关，false表示通关
