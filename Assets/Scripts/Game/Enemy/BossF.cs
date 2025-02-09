@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace QFramework.ProjectGungeon
 {
-    public class BoosA : Enemy, IEnemy
+    public class BossF : Enemy, IEnemy
     { 
         public Player player;
 
@@ -18,13 +18,16 @@ namespace QFramework.ProjectGungeon
 
         public Rigidbody2D Rigidbody2D;
 
+        public Animator animator;
+
+        public CircleCollider2D SelfCircleCollider2D;
+
         public float HP { get; set; } = 150;
         public float mMaxHP { get; set; }
 
         protected override Rigidbody2D GetRigidbody2D => Rigidbody2D;
 
         public override bool IsBoss => true;
-
 
         public override void Hurt(float damage, Vector2 hitDirection)
         {
@@ -36,9 +39,27 @@ namespace QFramework.ProjectGungeon
             HP -= damage;
             if (HP <= 0)
             {
-                OnDeath(hitDirection, null, 1.5f);
+                //OnDeath(hitDirection, null, 1.5f);
+
+                SelfCircleCollider2D.Disable();//È¡ÏûÅö×²
+
+                animator.SetTrigger("isDie");
+
+
+
+                //µÐÈËËÀÍöÒôÐ§
+                AudioKit.PlaySound("resources://EnemyDie");
+
+                PowerUpFactory.GeneratePowerUp(this);
+
+                Invoke("Destroy", 2f);
+                
 
             }
+        }
+        private void Destroy()
+        {
+            Destroy(gameObject);
         }
 
         //µÐÈË×´Ì¬
@@ -63,6 +84,8 @@ namespace QFramework.ProjectGungeon
                     FollowPlayerSeconds = Random.Range(0.5f, 3f);//½øÈë¸úËæ×´Ì¬Ê±Ëæ»úÉèÖÃ¸úËæÊ±¼ä
                     MovementPath.Clear();
 
+                    animator.SetBool("isWalk", true);
+
                 })
                 .OnUpdate(() =>
                 {
@@ -70,12 +93,13 @@ namespace QFramework.ProjectGungeon
 
                     if (Global.Player)
                     {
-                        var directionToPlayer = Move();
+
                         //µÐÈËÒÆ¶¯Ê±ÇáÎ¢¶¶¶¯
-                        AnimationHelper.UpDownAnimation(Sprite, 0.05f, 10, State.FrameCountOfCurrentState);
-                        AnimationHelper.RotateAnimation(Sprite, 3, 30, State.FrameCountOfCurrentState);
+                        //AnimationHelper.UpDownAnimation(Sprite, 0.07f, 100, State.FrameCountOfCurrentState);
 
+                        //AnimationHelper.RotateAnimation(Sprite, 3, 30, State.FrameCountOfCurrentState);
 
+                        var directionToPlayer = Move();
                         //µÐÈË³¯ÏòÖ÷½Ç
                         if (directionToPlayer.x > 0)
                         {
@@ -89,10 +113,15 @@ namespace QFramework.ProjectGungeon
 
 
                     if (State.SecondsOfCurrentState >= FollowPlayerSeconds)
-                    {
+                    {                                               
                         State.ChangeState(States.PrepareToShoot);
+                        animator.SetBool("isWalk", false);
+                        animator.SetBool("isPreShoot", true);
                     }
 
+                }).OnExit(() =>
+                {
+                    
                 });
 
             var originSpriteLocalPos = Sprite.LocalPosition2D();
@@ -100,16 +129,20 @@ namespace QFramework.ProjectGungeon
                 .OnEnter(() =>
                 {
                     originSpriteLocalPos = Sprite.LocalPosition2D();
+                    Rigidbody2D.velocity = Vector2.zero; //µÐÈËÍ£Ö¹ÒÆ¶¯
+
+
                 })
                 .OnUpdate(() =>
                 {
                     //¶¶¶¯0.25Ãë
-                    var shakeRate = (State.SecondsOfCurrentState / 0.25f).Lerp(0.05f, 0.1f);
-                    Sprite.LocalPosition2D(originSpriteLocalPos + new Vector2(Random.Range(-shakeRate, shakeRate)
-                        , Random.Range(-shakeRate, shakeRate)));
-                    if (State.SecondsOfCurrentState > 0.25f)
+                    //var shakeRate = (State.SecondsOfCurrentState / 0.25f).Lerp(0.05f, 0.1f);
+                    //Sprite.LocalPosition2D(originSpriteLocalPos + new Vector2(Random.Range(-shakeRate, shakeRate)
+                    //    , Random.Range(-shakeRate, shakeRate)));
+                    if (State.SecondsOfCurrentState > 1.5f)
                     {
                         State.ChangeState(States.Shoot);
+                        animator.SetBool("isPreShoot", false);
                     }
 
 
@@ -117,12 +150,12 @@ namespace QFramework.ProjectGungeon
                 .OnExit(() =>
                 {
                     Sprite.LocalPosition2D(originSpriteLocalPos);
+
                 });
 
             State.State(States.Shoot)
                 .OnEnter(() =>
                 {
-
                     Rigidbody2D.velocity = Vector2.zero; //¿ªÇ¹Ê±£¬µÐÈËÍ£Ö¹ÒÆ¶¯
 
 
@@ -132,47 +165,27 @@ namespace QFramework.ProjectGungeon
                     //½×¶ÎÒ»
                     if (HP / mMaxHP > 0.7f)
                     {
-                        BulletHelper.ShootAround(30, transform.Position2D(), 1.5f, EnemyBullet);
-                        //²¥·ÅÉä»÷ÒôÐ§
-                        var soundIndex = Random.Range(0, ShootSounds.Count);
-                        AudioKit.PlaySound(ShootSounds[soundIndex]);
-                        State.ChangeState(States.FollowPlayer);
-                    }
-                    //½×¶Î¶þ
-                    else if (HP / mMaxHP > 0.3f)
-                    {
-                        if ((int)(State.SecondsOfCurrentState * 100) % 33 == 0)
+                        //¹¥»÷¼ä¸ô
+                        if(State.FrameCountOfCurrentState <= 120)
                         {
-                            BulletHelper.ShootAround(30, transform.Position2D(), 1.5f, EnemyBullet);
-                            //²¥·ÅÉä»÷ÒôÐ§
-                            var soundIndex = Random.Range(0, ShootSounds.Count);
-                            AudioKit.PlaySound(ShootSounds[soundIndex]);
+                           //¹¥»÷Âß¼­
+
 
                         }
-
-                        if (State.SecondsOfCurrentState > 1.0f)
+                        else
                         {
                             State.ChangeState(States.FollowPlayer);
-                        }
+                            animator.SetBool("isWalk", true);
+                        }   
 
                     }
-                    else
-                    {
-                        if ((int)(State.SecondsOfCurrentState * 100) % 33 == 0)
-                        {
-                            BulletHelper.ShootAround(30, transform.Position2D(), 1.5f, EnemyBullet);
-                            //²¥·ÅÉä»÷ÒôÐ§
-                            var soundIndex = Random.Range(0, ShootSounds.Count);
-                            AudioKit.PlaySound(ShootSounds[soundIndex]);
-
-                        }
-
-                    }
+                    
 
 
                 });
 
             State.StartState(States.FollowPlayer);
+            animator.SetBool("isWalk", true);
         }
 
         private void Start()
@@ -183,7 +196,12 @@ namespace QFramework.ProjectGungeon
         }
 
 
-        void Update() => State.Update();
+        void Update()
+        {
+            State.Update();
+
+            print("isWalk" + animator.GetBool("isWalk"));
+        }
 
         private void OnDestroy()
         {

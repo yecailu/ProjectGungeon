@@ -152,7 +152,7 @@ namespace QFramework.ProjectGungeon
 
                     if (Config.RoomType == RoomTypes.Final)
                     {
-                        var boss = EnemyFactory.EnemyByName(Global.BossList.GetAndRemoveRandomItem())
+                        var boss = EnemyFactory.Default.BossF/*EnemyByName(Global.BossList.GetAndRemoveRandomItem())*/
                         .GameObject
                         .Position2D(mEnemyGeneratePoses.GetRandomItem())
                         .Show()

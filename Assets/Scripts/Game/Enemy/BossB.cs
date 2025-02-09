@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace QFramework.ProjectGungeon
 {
-    public class BoosC : Enemy, IEnemy
+    public class BossB  : Enemy, IEnemy
     { 
         public Player player;
 
@@ -132,20 +132,18 @@ namespace QFramework.ProjectGungeon
                     //Ω◊∂Œ“ª
                     if (HP / mMaxHP > 0.7f)
                     {
-                        var directionToPlayer = transform.Direction2DTo(Player.Default);
-                        BulletHelper.Shoot(transform.Position2D(), directionToPlayer, 30, 2, EnemyBullet);
+                        BulletHelper.ShootAround(24, transform.Position2D(), 1.5f, EnemyBullet, 10);
                         //≤•∑≈…‰ª˜“Ù–ß
                         var soundIndex = Random.Range(0, ShootSounds.Count);
                         AudioKit.PlaySound(ShootSounds[soundIndex]);
                         State.ChangeState(States.FollowPlayer);
                     }
-                    //Ω◊∂Œ∂˛
+                    //Ω◊∂Œ∂˛,49÷°≤•∑≈“ª¥Œ…‰ª˜
                     else if (HP / mMaxHP > 0.3f)
                     {
-                        if ((int)(State.SecondsOfCurrentState * 100) % 33 == 0)
+                        if ((int)(State.SecondsOfCurrentState * 100) % 49 == 0)
                         {
-                            var directionToPlayer = transform.Direction2DTo(Player.Default);
-                            BulletHelper.Shoot(transform.Position2D(), directionToPlayer, 30, 2, EnemyBullet);
+                            BulletHelper.ShootAround(24, transform.Position2D(), 1.5f, EnemyBullet, 10);
                             //≤•∑≈…‰ª˜“Ù–ß
                             var soundIndex = Random.Range(0, ShootSounds.Count);
                             AudioKit.PlaySound(ShootSounds[soundIndex]);
@@ -160,10 +158,9 @@ namespace QFramework.ProjectGungeon
                     }
                     else
                     {
-                        if ((int)(State.SecondsOfCurrentState * 100) % 33 == 0)
+                        if ((int)(State.SecondsOfCurrentState * 100) % 50 == 0)
                         {
-                            var directionToPlayer = transform.Direction2DTo(Player.Default);
-                            BulletHelper.Shoot(transform.Position2D(), directionToPlayer, 30, 2, EnemyBullet);
+                            BulletHelper.ShootAround(24, transform.Position2D(), 1.5f, EnemyBullet,10);
                             //≤•∑≈…‰ª˜“Ù–ß
                             var soundIndex = Random.Range(0, ShootSounds.Count);
                             AudioKit.PlaySound(ShootSounds[soundIndex]);
@@ -192,7 +189,7 @@ namespace QFramework.ProjectGungeon
         {
             Room.Enemies.Remove(this);
             GameUI.Default.BossHpBarBG.Hide();
-
+            
         }
 
 
