@@ -246,7 +246,7 @@ namespace QFramework.ProjectGungeon
                                             //½ð±Ò³¯Íæ¼Ò·ÉÐÐ
                                             cashedPowerUp.SpriteRenderer.transform.Translate(
                                                 cashedPowerUp.SpriteRenderer.NormalizedDirection2DTo(Player.Default) *
-                                                Time.fixedDeltaTime * 5);
+                                                Time.fixedDeltaTime * 10);
                                         }).UnRegisterWhenGameObjectDestroyed(cashedPowerUp.SpriteRenderer.gameObject);
                                     }
 

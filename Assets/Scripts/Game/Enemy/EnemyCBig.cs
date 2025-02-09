@@ -31,7 +31,7 @@ namespace QFramework.ProjectGungeon
             HP -= damage;
             if (HP <= 0)
             {
-                OnDeath(hitDirection, "EnemyCDie", 3f);
+                OnDeath(hitDirection, "EnemyCBigDie", 1.3f);
 
             }
         }
@@ -54,7 +54,7 @@ namespace QFramework.ProjectGungeon
             State.State(States.FollowPlayer)
                 .OnEnter(() =>
                 {
-                    FollowPlayerSeconds = Random.Range(0.5f, 3f);//进入跟随状态时随机设置跟随时间
+                    FollowPlayerSeconds = Random.Range(0.5f, 1.5f);//进入跟随状态时随机设置跟随时间
                     MovementPath.Clear();
 
                 })
@@ -71,7 +71,7 @@ namespace QFramework.ProjectGungeon
 
 
                         //敌人朝向主角
-                        if (directionToPlayer.x > 0)
+                        if (directionToPlayer.x < 0)
                         {
                             Sprite.flipX = false;
                         }

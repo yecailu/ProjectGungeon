@@ -31,7 +31,7 @@ namespace QFramework.ProjectGungeon
             HP -= damage;
             if (HP <= 0)
             {
-                OnDeath(hitDirection, "EnemyBDie", 1.5f);
+                OnDeath(hitDirection, "EnemyBDie", 1.3f);
 
             }
         }
@@ -71,7 +71,7 @@ namespace QFramework.ProjectGungeon
 
 
                         //µÐÈË³¯ÏòÖ÷½Ç
-                        if (directionToPlayer.x > 0)
+                        if (directionToPlayer.x < 0)
                         {
                             Sprite.flipX = false;
                         }
