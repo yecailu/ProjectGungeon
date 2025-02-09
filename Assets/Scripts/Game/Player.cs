@@ -283,7 +283,7 @@ namespace QFramework.ProjectGungeon
 
             var faceDirection = Vector2.zero;
 
-            rollingCooldown = 2.0f;
+            rollingCooldown = 1.0f;
             isRollingCooldown = false;
             rollingTimer = 0.0f;
 
@@ -302,7 +302,7 @@ namespace QFramework.ProjectGungeon
                         faceDirection = new Vector2(x, y).normalized;//获取人物朝向
                     }
 
-                    ActionKit.Lerp(0, 1, 0.2f, (p) =>
+                    ActionKit.Lerp(0, 1, 0.3f, (p) =>
                     {
                         //冲刺动画
                         animator.SetBool("isSprint", true);
@@ -320,7 +320,7 @@ namespace QFramework.ProjectGungeon
                 })
                 .OnFixedUpdate(() =>
                 {
-                    Rigidbody2D.velocity = faceDirection * 12;
+                    Rigidbody2D.velocity = faceDirection * 10;
                 })
                 .OnExit(() =>
                 {
@@ -390,7 +390,7 @@ namespace QFramework.ProjectGungeon
 
         private IEnemy mTargetEmeny = null;
 
-        float rollingCooldown = 2.0f;
+        float rollingCooldown = 1.0f;
         bool isRollingCooldown = false;
         float rollingTimer = 0.0f;
         void Update()
