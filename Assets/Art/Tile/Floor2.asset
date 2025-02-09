@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Floor2
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: 642495690, guid: 1a39f0ec8fe6d9c41b4da5771755e719, type: 3}
+  - {fileID: 1535902174, guid: 6b5813bf26db6ae429bcda3e45fa22c4, type: 3}
   m_MinSpeed: 1
   m_MaxSpeed: 1
   m_AnimationStartTime: 0
