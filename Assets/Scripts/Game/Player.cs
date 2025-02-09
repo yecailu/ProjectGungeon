@@ -10,6 +10,9 @@ namespace QFramework.ProjectGungeon
 {
     public partial class Player : ViewController
     {
+
+        
+
         public enum States
         {
             Idle,
@@ -41,6 +44,8 @@ namespace QFramework.ProjectGungeon
 
         public Gun CurrentGun;//当前武器
 
+        public Animator animator;//动画
+
 
         public static Player Default;//单例
 
@@ -48,6 +53,7 @@ namespace QFramework.ProjectGungeon
 
         private void Awake()
         {
+
             Application.targetFrameRate = 60;//设置帧率60
             //同一个音效要大于一定帧数才能播放，默认10帧
             AudioKit.PlaySoundMode = AudioKit.PlaySoundModes.IgnoreSameSoundInSoundFrames;
@@ -179,13 +185,21 @@ namespace QFramework.ProjectGungeon
                     //走路时人物效果
                     if (horizontal != 0 || vertical != 0)
                     {
-                        //人物上下轻微抖动
-                        AnimationHelper.UpDownAnimation(Sprite, 0.05f, 10, Time.frameCount, 0.35f);
+                        //播放动画
+                        animator.SetBool("isWalk", true);
+
+                        ////人物上下轻微抖动
+                        //AnimationHelper.UpDownAnimation(Sprite, 0.05f, 10, Time.frameCount, 0.35f);
                         //武器轻微抖动
                         AnimationHelper.UpDownAnimation(Weapon, 0.05f, 10, Time.frameCount);
-                        //人物左右轻微摆动
-                        AnimationHelper.RotateAnimation(Sprite, 3, 30, Time.frameCount);
+                        ////人物左右轻微摆动
+                        //AnimationHelper.RotateAnimation(Sprite, 3, 30, Time.frameCount);
 
+                    }
+                    else
+                    {
+                        //停止动画
+                        animator.SetBool("isWalk", false);
                     }
 
                     //摄像机偏移
@@ -258,6 +272,8 @@ namespace QFramework.ProjectGungeon
                         {
                             if(horizontal != 0 || vertical != 0)
                             {
+
+                                if(!isRollingCooldown)
                                 State.ChangeState(States.Rolling);
                             }
                         }
@@ -267,11 +283,16 @@ namespace QFramework.ProjectGungeon
 
             var faceDirection = Vector2.zero;
 
+            rollingCooldown = 2.0f;
+            isRollingCooldown = false;
+            rollingTimer = 0.0f;
+
             State.State(States.Rolling)
                 .OnEnter(() =>
                 {
                     CurrentGun.OnRoll();
                     SelfCircleCollider2D.Disable();//取消碰撞
+
 
                     var x = Input.GetAxis("Horizontal");
                     var y = Input.GetAxis("Vertical");
@@ -281,39 +302,40 @@ namespace QFramework.ProjectGungeon
                         faceDirection = new Vector2(x, y).normalized;//获取人物朝向
                     }
 
-                    ActionKit.Lerp(0, 1, 0.4f, (p) =>
-                    { 
-                        p = EaseUtility.InCubic(0, 1, p);
+                    ActionKit.Lerp(0, 1, 0.2f, (p) =>
+                    {
+                        //冲刺动画
+                        animator.SetBool("isSprint", true);
 
-                        if (x > 0)
-                        {
-                            transform.LocalEulerAnglesZ(p * -360f);
-                        }
-                        else
-                        {
-                            transform.LocalEulerAnglesZ(p * 360f);
-                        }
+
+                        //稍微缩小
+                        var scale = Vector3.one + Vector3.one * p * 0.1f; // 稍微放大
+                        transform.localScale = scale;
 
                     }, () =>
                     {
-                        transform.LocalEulerAnglesZ(0);
                         State.ChangeState(States.Idle);
 
                     }).Start(this);
                 })
                 .OnFixedUpdate(() =>
                 {
-                    Rigidbody2D.velocity = faceDirection * 8;
+                    Rigidbody2D.velocity = faceDirection * 12;
                 })
                 .OnExit(() =>
                 {
                     SelfCircleCollider2D.Enable();//恢复碰撞
+
+                    rollingTimer = 0.0f;
+                    isRollingCooldown = true;
+
+                    animator.SetBool("isSprint", false);
                 });
 
             State.StartState(States.Idle);
-
+           
         }
-
+        
         public void Hurt(int damage)
         {
 
@@ -340,6 +362,10 @@ namespace QFramework.ProjectGungeon
 
             if (damage > 0)
             {
+                //播放受伤动画
+                animator.SetTrigger("isHurt");
+
+
                 //播放受伤特效
                 FxFactory.PlayHurtFx(transform.Position2D(), Color.green);
                 FxFactory.PlayPlayerBlood(transform.Position2D());
@@ -364,10 +390,22 @@ namespace QFramework.ProjectGungeon
 
         private IEnemy mTargetEmeny = null;
 
+        float rollingCooldown = 2.0f;
+        bool isRollingCooldown = false;
+        float rollingTimer = 0.0f;
         void Update()
         {
             //状态机更新
             State.Update();
+
+            if (isRollingCooldown)
+            {
+                rollingTimer += Time.deltaTime;
+                if (rollingTimer >= rollingCooldown)
+                {
+                    isRollingCooldown = false;
+                }
+            }
 
         }
 
