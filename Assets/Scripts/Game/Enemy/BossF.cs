@@ -22,7 +22,7 @@ namespace QFramework.ProjectGungeon
 
         public CircleCollider2D SelfCircleCollider2D;
 
-        public float HP { get; set; } = 150;
+        public float HP { get; set; } = 300;
         public float mMaxHP { get; set; }
 
         protected override Rigidbody2D GetRigidbody2D => Rigidbody2D;
@@ -30,6 +30,13 @@ namespace QFramework.ProjectGungeon
         public override bool IsBoss => true;
 
         public GameObject laserAttack;
+
+        public GameObject flyingFistAttack;
+
+        private bool isFacingRight = true;
+
+        public Transform fistPoint;
+
 
         public override void Hurt(float damage, Vector2 hitDirection)
         {
@@ -103,13 +110,13 @@ namespace QFramework.ProjectGungeon
 
                         var directionToPlayer = Move();
                         //µÐÈË³¯ÏòÖ÷½Ç
-                        if (directionToPlayer.x > 0)
+                        if (directionToPlayer.x > 0 && !isFacingRight)
                         {
-                            Sprite.flipX = false;
+                            Flip();
                         }
-                        else
+                        else if (directionToPlayer.x < 0 && isFacingRight)
                         {
-                            Sprite.flipX = true;
+                            Flip();
                         }
                     }
 
@@ -125,6 +132,14 @@ namespace QFramework.ProjectGungeon
                 {
                     
                 });
+
+            void Flip()
+            {
+                isFacingRight = !isFacingRight;
+                Vector3 scale = transform.localScale;
+                scale.x *= -1;
+                transform.localScale = scale;
+            }
 
             var originSpriteLocalPos = Sprite.LocalPosition2D();
             State.State(States.PrepareToShoot)
@@ -165,29 +180,72 @@ namespace QFramework.ProjectGungeon
                 .OnUpdate(() =>
                 {
 
-                    //½×¶ÎÒ»
                     if (HP / mMaxHP > 0.7f)
                     {
-                        //¹¥»÷¼ä¸ô
-                        if(State.FrameCountOfCurrentState <= 120)
+                        if (State.FrameCountOfCurrentState % 90 == 0)
                         {
-
+                            FlyingFistAttack();
+                        }
+                        //¹¥»÷¼ä¸ô
+                        if (State.FrameCountOfCurrentState <= 120)
+                        {
                             //¹¥»÷ÆµÂÊ
-                            if (State.FrameCountOfCurrentState % 30 == 0)
+                            if (State.FrameCountOfCurrentState % 40 == 0)
                             {
                                 LaserAttack();
                             }
-                           
-
                         }
                         else
                         {
                             State.ChangeState(States.FollowPlayer);
                             animator.SetBool("isWalk", true);
-                        }   
+                        }
 
                     }
-                    
+                    else if(HP / mMaxHP > 0.4f)
+                    {
+                        if (State.FrameCountOfCurrentState % 70 == 0)
+                        {
+                            FlyingFistAttack();
+                        }
+                        //¹¥»÷¼ä¸ô
+                        if (State.FrameCountOfCurrentState <= 120)
+                        {
+                            //¹¥»÷ÆµÂÊ
+                            if (State.FrameCountOfCurrentState % 30 == 0)
+                            {
+                                LaserAttack();
+                            }
+                        }
+                        else
+                        {
+                            State.ChangeState(States.FollowPlayer);
+                            animator.SetBool("isWalk", true);
+                        }
+                    }
+                    else
+                    {
+                        if (State.FrameCountOfCurrentState % 50 == 0)
+                        {
+                            FlyingFistAttack();
+                        }
+                        //¹¥»÷¼ä¸ô
+                        if (State.FrameCountOfCurrentState <= 120)
+                        {
+                            //¹¥»÷ÆµÂÊ
+                            if (State.FrameCountOfCurrentState % 20 == 0)
+                            {
+                                LaserAttack();
+                            }
+                        }
+                        else
+                        {
+                            State.ChangeState(States.FollowPlayer);
+                            animator.SetBool("isWalk", true);
+                        }
+
+                    }
+
 
 
                 });
@@ -203,6 +261,33 @@ namespace QFramework.ProjectGungeon
                 .Show();
         }
 
+        GameObject fist = null;
+        private void FlyingFistAttack()
+        {
+            fist = flyingFistAttack.Instantiate()
+                .Position2D(fistPoint.Position2D())
+                .Show();
+
+            Invoke("DestroyFist", 4f);
+        }
+
+        private void DestroyFist()
+        {
+            Destroy(fist.gameObject);
+
+            Boss_Fist.Default.PlayerSound();
+
+            BulletFactory.Default.Explosion
+                .Instantiate()
+                .Position2D(fist.transform.Position2D())
+                .Show();
+
+            
+
+        }
+
+
+
         private void Start()
         {
             Application.targetFrameRate = 60;
@@ -215,7 +300,6 @@ namespace QFramework.ProjectGungeon
         {
             State.Update();
 
-            print("isWalk" + animator.GetBool("isWalk"));
         }
 
         private void OnDestroy()

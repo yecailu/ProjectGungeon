@@ -11,17 +11,9 @@ namespace QFramework.ProjectGungeon
 
         private Rigidbody2D mSelfRigidbody2D;
 
-
-
-
         private void Awake()
         {
             mSelfRigidbody2D = GetComponent<Rigidbody2D>();
-        }
-
-        void Start()
-        {
-
         }
 
 

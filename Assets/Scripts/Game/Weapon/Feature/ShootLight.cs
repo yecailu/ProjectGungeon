@@ -11,7 +11,7 @@ namespace QFramework.ProjectGungeon
             Player.Default.GunShootLight.transform.right = direction;//设置方向
             Player.Default.GunShootLight.Show();//显示枪火光效
 
-            //延迟3帧隐藏枪火光效（在当前场景生效）
+
             ActionKit.DelayFrame(3, () =>
             {
                 Player.Default.GunShootLight.Hide();
