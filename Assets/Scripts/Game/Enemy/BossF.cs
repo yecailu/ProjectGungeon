@@ -29,6 +29,8 @@ namespace QFramework.ProjectGungeon
 
         public override bool IsBoss => true;
 
+        public GameObject laserAttack;
+
         public override void Hurt(float damage, Vector2 hitDirection)
         {
             FxFactory.PlayHurtFx(transform.Position2D());
@@ -162,14 +164,20 @@ namespace QFramework.ProjectGungeon
                 })
                 .OnUpdate(() =>
                 {
+
                     //½×¶ÎÒ»
                     if (HP / mMaxHP > 0.7f)
                     {
                         //¹¥»÷¼ä¸ô
                         if(State.FrameCountOfCurrentState <= 120)
                         {
-                           //¹¥»÷Âß¼­
 
+                            //¹¥»÷ÆµÂÊ
+                            if (State.FrameCountOfCurrentState % 30 == 0)
+                            {
+                                LaserAttack();
+                            }
+                           
 
                         }
                         else
@@ -186,6 +194,13 @@ namespace QFramework.ProjectGungeon
 
             State.StartState(States.FollowPlayer);
             animator.SetBool("isWalk", true);
+        }
+
+        private void LaserAttack()
+        {
+            laserAttack.Instantiate()
+                .Position2D(Player.Default.transform.Position2D())
+                .Show();
         }
 
         private void Start()
