@@ -10,9 +10,16 @@ namespace QFramework.ProjectGungeon
             {
                 bullet = BulletFactory.Default.PistolBullet;
             }
+            
             var bulletObj = Object.Instantiate(bullet);
             bulletObj.transform.position = pos;
+
+            //修正子弹朝向
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            bulletObj.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
             bulletObj.Velocity = direction.normalized * speed;
+
             bulletObj.gameObject.SetActive(true);
 
             bulletObj.Damage = damage;//随机伤害判定
@@ -33,6 +40,11 @@ namespace QFramework.ProjectGungeon
                 //敌人子弹逻辑
                 var enemyBullet = Object.Instantiate(bulletPrefab);
                 enemyBullet.transform.position = pos;
+
+                // 修正子弹朝向
+                float bulletAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                enemyBullet.transform.rotation = Quaternion.AngleAxis(bulletAngle, Vector3.forward);
+
                 enemyBullet.Velocity = direction * speed;
                 enemyBullet.gameObject.SetActive(true);
 
@@ -57,6 +69,11 @@ namespace QFramework.ProjectGungeon
                 //敌人子弹逻辑
                 var enemyBullet = Object.Instantiate(bulletPrefab);
                 enemyBullet.transform.position = pos;
+
+                // 修正子弹朝向
+                float bulletAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                enemyBullet.transform.rotation = Quaternion.AngleAxis(bulletAngle, Vector3.forward);
+
                 enemyBullet.Velocity = direction * speed;
                 enemyBullet.gameObject.SetActive(true);
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using QFramework;
+using DG.Tweening;
 
 namespace QFramework.ProjectGungeon
 {
@@ -38,9 +39,23 @@ namespace QFramework.ProjectGungeon
 
                         //设置弹壳层级变低，不遮住主角
                         spriteRenderer.sortingLayerName = "OnGround";
+
+                        // 在渐隐逻辑部分
+                        spriteRenderer.DOFade(0, 1.5f)  // 直接修改透明度
+                            .SetDelay(1.5f)               // 延迟1.5秒开始
+                            .SetEase(Ease.Linear)
+                            .OnComplete(() =>
+                            {
+                                if (self != null && self.gameObject != null)
+                                {
+                                    Object.Destroy(self.gameObject);
+                                }
+                            });
+
                     })
                     .Parallel(p =>
                     {
+                        
                         p.PlaySound($"resources://BulletShell/bullet_shell ({Random.Range(1, 72 + 1)})")
                         .Delay(Random.Range(0.1f, 0.3f), () =>
                         {
@@ -51,6 +66,7 @@ namespace QFramework.ProjectGungeon
 
                         });
                     }).Start(Default);
+
                 });
         }
 

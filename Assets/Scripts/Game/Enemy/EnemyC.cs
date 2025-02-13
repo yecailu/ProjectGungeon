@@ -133,6 +133,10 @@ namespace QFramework.ProjectGungeon
                                 //µÐÈË×Óµ¯Âß¼­
                                 var enemyBullet = Instantiate(EnemyBullet);
                                 enemyBullet.transform.position = transform.position;
+
+                                float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+                                enemyBullet.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
                                 enemyBullet.Velocity = directionToPlayer * 5;
                                 enemyBullet.gameObject.SetActive(true);
 
@@ -145,6 +149,10 @@ namespace QFramework.ProjectGungeon
                                 //µÐÈË×Óµ¯Âß¼­
                                 var enemyBullet = Instantiate(EnemyBullet);
                                 enemyBullet.transform.position = transform.position;
+
+                                float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+                                enemyBullet.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
                                 enemyBullet.Velocity = directionToPlayer * 5;
                                 enemyBullet.gameObject.SetActive(true);
 
@@ -157,6 +165,10 @@ namespace QFramework.ProjectGungeon
                                 //µÐÈË×Óµ¯Âß¼­
                                 var enemyBullet = Instantiate(EnemyBullet);
                                 enemyBullet.transform.position = transform.position;
+
+                                float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
+                                enemyBullet.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
                                 enemyBullet.Velocity = directionToPlayer * 5;
                                 enemyBullet.gameObject.SetActive(true);
 
