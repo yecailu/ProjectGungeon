@@ -94,7 +94,7 @@ namespace QFramework.ProjectGungeon
             //存储所有音乐资源路径
             var list = new List<string>() 
             {
-                "resources://Music/darkascent",
+                //"resources://music/darkascent",
                 "resources://Music/DOS-88 - Automatav2",
                 "resources://Music/FlowState",
                 "resources://Music/Night Life",
@@ -116,6 +116,15 @@ namespace QFramework.ProjectGungeon
 
             });
 
+            GamePass.transform.Find("BtnRestartMenu").GetComponent<Button>().onClick.AddListener(() =>
+            {
+                Global.ResetData();//重置数据
+                AudioKit.StopMusic();
+                SceneManager.LoadScene(0);
+
+            });
+
+
             GameOver.transform.Find("BtnRestart").GetComponent<Button>().onClick.AddListener(() =>
             {
                 Global.ResetData();//重置数据
@@ -123,6 +132,13 @@ namespace QFramework.ProjectGungeon
 
             });
 
+            GameOver.transform.Find("BtnRestartMenu").GetComponent<Button>().onClick.AddListener(() =>
+            {
+                Global.ResetData();//重置数据
+                AudioKit.StopMusic();
+                SceneManager.LoadScene(0);
+
+            });
 
             //注册Coin 变更后调用{方法}.销毁后取消注册
             Global.Coin.RegisterWithInitValue((coin) =>

@@ -21,8 +21,6 @@ public abstract class Enemy : MonoBehaviour,IEnemy
    
     public List<Transform> ArrowHalfs = new List<Transform>();
 
-
-
     protected void OnDeath(Vector2 hitDirection, string dieBodyName, float dieBodyScale)
     {
         if (dieBodyName.IsNotNullAndEmpty())
@@ -45,21 +43,20 @@ public abstract class Enemy : MonoBehaviour,IEnemy
         Destroy(gameObject);
     }
 
+    public virtual bool IsBoss => false;
     public Room Room { get; set; }
 
     public GameObject GameObject => gameObject;
 
     public abstract void Hurt(float damage, Vector2 hitDirection);
 
-    protected abstract Rigidbody2D GetRigidbody2D { get; }
-
-    public virtual bool IsBoss => false;
-
     Vector2? posToMove = null;
+
+    protected abstract Rigidbody2D GetRigidbody2D { get; }
 
     public List<PathFindingHelper.NodeBase<Vector3Int>> MovementPath = new List<PathFindingHelper.NodeBase<Vector3Int>>();
 
-    protected void TryInitMovementPath()
+    protected void TryPrepareMovementPath()
     {
         if (MovementPath.Count == 0)
         {
@@ -78,7 +75,7 @@ public abstract class Enemy : MonoBehaviour,IEnemy
             if (MovementPath.Count > 0)
             {
                 var pathPos = MovementPath.Last().Coords.Pos;
-                posToMove = new Vector2(pathPos.x + 0.5f, pathPos.y + 0.5f);
+                posToMove = new Vector2(pathPos.x, pathPos.y);
                 MovementPath.RemoveAt(MovementPath.Count - 1);
             }
         }

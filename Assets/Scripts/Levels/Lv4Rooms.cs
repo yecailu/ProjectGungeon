@@ -68,7 +68,7 @@ namespace QFramework.ProjectGungeon
                 .L("1                     1")
                 .L("1          e          1")
                 .L("1                     1")
-                .L("d       e  1  e       d")
+                .L("d      e   1   e      d")
                 .L("1                     1")
                 .L("1          e          1")
                 .L("1                     1")

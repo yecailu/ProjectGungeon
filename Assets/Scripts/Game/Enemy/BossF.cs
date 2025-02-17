@@ -98,7 +98,7 @@ namespace QFramework.ProjectGungeon
                 })
                 .OnUpdate(() =>
                 {
-                    TryInitMovementPath();
+                    TryPrepareMovementPath();
 
                     if (Global.Player)
                     {
