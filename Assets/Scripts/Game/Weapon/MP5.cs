@@ -22,6 +22,9 @@ namespace QFramework.ProjectGungeon
 
         public override float GunAdditionalCameraSize => 1;
 
+        public PlayerBullet MP5Bullet;
+
+
         public override void OnGunUsed()
         {
             Clip.UpdateUI();
@@ -43,7 +46,7 @@ namespace QFramework.ProjectGungeon
             var angle = direction.ToAngle() + Random.Range(0.05f, UnstableRate) * 30 * RandomUtility.Choose(-1, 1);
 
 
-            BulletHelper.Shoot(BulletPos.Position2D(), angle.AngleToDirection2D(), 20, Random.Range(1f, 2f));
+            BulletHelper.Shoot(BulletPos.Position2D(), angle.AngleToDirection2D(), 20, Random.Range(1f, 2f), MP5Bullet);
  
             Clip.UseBullet();
 

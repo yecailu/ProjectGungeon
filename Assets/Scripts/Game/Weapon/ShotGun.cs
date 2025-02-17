@@ -22,6 +22,8 @@ namespace QFramework.ProjectGungeon
 
         public override float GunAdditionalCameraSize => 1;
 
+        public PlayerBullet ShotBullet;
+
 
         public override void OnGunUsed()
         {
@@ -36,7 +38,7 @@ namespace QFramework.ProjectGungeon
 
         void Shoot(Vector2 position, Vector2 direction, bool playSound = true)
         {
-            BulletHelper.Shoot(position, direction, 20, Random.Range(1f, 2f));
+            BulletHelper.Shoot(position, direction, 20, Random.Range(1f, 2f), ShotBullet);
 
 
             var soundIndex = Random.Range(0, ShootSounds.Count);

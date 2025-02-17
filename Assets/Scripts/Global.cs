@@ -99,7 +99,7 @@ namespace QFramework.ProjectGungeon
 			//清空武器库，并添加一把普通的手枪
 			GunSystem.GunList.Clear();
 			//配置武器
-			GunSystem.GunList.Add(GunConfig.AK47.CreateData());
+			GunSystem.GunList.Add(GunConfig.ShotGun.CreateData());
 			Global.CurrentGun = GunSystem.GunList.First();
 
 			//关卡设置 

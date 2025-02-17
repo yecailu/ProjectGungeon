@@ -17,6 +17,8 @@ namespace QFramework.ProjectGungeon
 
         public override float GunAdditionalCameraSize => 3;
 
+        public PlayerBullet AWPBullet;
+
         public override void OnGunUsed()
         {
             Clip.UpdateUI();
@@ -31,7 +33,7 @@ namespace QFramework.ProjectGungeon
 
         void Shoot(Vector2 position, Vector2 direction, bool playSound = true)
         {
-            BulletHelper.Shoot(BulletPos.Position2D(), direction, 50, Random.Range(5, 10));
+            BulletHelper.Shoot(BulletPos.Position2D(), direction, 50, Random.Range(5, 10), AWPBullet);
 
             var soundIndex = Random.Range(0, ShootSounds.Count);
             AudioPlayer.clip = ShootSounds[soundIndex];
