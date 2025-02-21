@@ -7,7 +7,8 @@ using UnityEngine;
 namespace QFramework.ProjectGungeon
 {
 	public class Global : Architecture<Global>
-	{
+	{		
+
 		public static Player Player;
 
 		public static Room CurrentRoom;
@@ -103,17 +104,19 @@ namespace QFramework.ProjectGungeon
 			Global.CurrentGun = GunSystem.GunList.First();
 
 			//关卡设置 
-			CurrentLevel =Level1.Config;
+			CurrentLevel = Level1.Config;
 
             //将level1的PacingConfig配置赋值给此处CurrentPacing
             CurrentPacing = new Queue<int>(CurrentLevel.PacingConfig);
 
 		}
 
-		//true表示进入下一关，false表示通关
-		public static bool NextLevel()
+
+
+        //true表示进入下一关，false表示通关
+        public static bool NextLevel()
 		{
-			var levelIndex = Levels.FindIndex(l => l == CurrentLevel);
+            var levelIndex = Levels.FindIndex(l => l == CurrentLevel);
 
 			levelIndex++;
 
@@ -127,6 +130,7 @@ namespace QFramework.ProjectGungeon
 			{
 				CurrentLevel = Levels[levelIndex];
 				CurrentPacing = new Queue<int>(CurrentLevel.PacingConfig);
+				
 			}
 
             return true;

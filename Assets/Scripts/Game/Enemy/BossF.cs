@@ -22,7 +22,7 @@ namespace QFramework.ProjectGungeon
 
         public CircleCollider2D SelfCircleCollider2D;
 
-        public float HP { get; set; } = 300;
+        public float HP { get; set; } = 10;
         public float mMaxHP { get; set; }
 
         protected override Rigidbody2D GetRigidbody2D => Rigidbody2D;

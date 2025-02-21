@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,6 +88,7 @@ namespace QFramework.ProjectGungeon
         }
     }
 
+    [Serializable]
     public class GunDate
     {
         public string Key;

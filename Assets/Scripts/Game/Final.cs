@@ -6,14 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class Final : MonoBehaviour
 {
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             if (Global.NextLevel())
-            {
+            {             
                 //重新加载当前场景
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+                PlayerDate.Save();
 
             }
             else
