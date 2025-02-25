@@ -6,6 +6,9 @@ namespace QFramework.ProjectGungeon
     [System.Serializable]
     public class LevelConfig
     {
+        // 新增唯一标识字段
+        public string LevelID;
+
         public static string Name;
 
         public RoomNode InitRoom = new RoomNode(RoomTypes.Init);

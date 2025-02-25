@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
-{
+{   
     public GameObject MainCamera;
 
     public GameObject AudioManager;
@@ -13,8 +14,26 @@ public class MenuManager : MonoBehaviour
 
     public GameObject SettingPanel;
 
+    public GameObject ContinuePanel;
+
+    public static MenuManager Default;
+
+    private void Awake()
+    {
+        Default = this;
+
+    }
+
+    private void OnDestroy()
+    {
+        Default = null;
+
+    }
+
     void Start()
     {
+        PlayerDate.Load();
+
         Slider slider = AudioManager.GetComponent<Slider>();
 
         BGM = MainCamera.GetComponent<AudioSource>();
@@ -23,16 +42,16 @@ public class MenuManager : MonoBehaviour
     }
 
 
-    
-    void Update()
-    {
-        
-    }
-
     //开始游戏
     public void PlayGame()
-    {
+    {       
+        ContinuePanel.SetActive(true);
+
+        PlayerDate.Save();
+
         SceneManager.LoadScene(1);
+
+        PlayerDate.DeletePlayerDateSaveFile();
     }
 
     //打开设置 
@@ -52,5 +71,9 @@ public class MenuManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    
+
+
 
 }

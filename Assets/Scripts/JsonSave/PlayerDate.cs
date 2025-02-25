@@ -6,6 +6,22 @@ using UnityEngine;
 
 public class PlayerDate :MonoBehaviour
 {
+    public static PlayerDate Default;
+
+    private void Awake()
+    {
+        Default = this;
+    }
+
+    private void OnDestroy()
+    {
+        Default = null;
+
+    }
+
+    [Header("UI References")]
+    public GameObject ContinuePanel; 
+
     [System.Serializable]
     class SaveDate
     {
@@ -14,6 +30,12 @@ public class PlayerDate :MonoBehaviour
         public int Armor;
         public int Key;
 
+
+        public bool IsPanelActive = true;
+
+        // 新增关卡进度字段
+        public int CurrentLevelIndex;
+        public int[] CurrentPacingArray; // Queue 无法直接序列化，转为数组
 
 
     }
@@ -33,6 +55,13 @@ public class PlayerDate :MonoBehaviour
         saveDate.Armor = Global.Armor.Value;
         saveDate.Key = Global.Key.Value;
 
+        // 保存面板状态
+        if(Default.ContinuePanel != null)
+           saveDate.IsPanelActive = Default.ContinuePanel.activeSelf;
+
+        // 关卡进度
+        saveDate.CurrentLevelIndex = Global.Levels.IndexOf(Global.CurrentLevel);
+        saveDate.CurrentPacingArray = Global.CurrentPacing?.ToArray();
 
         return saveDate;
     }
@@ -46,6 +75,25 @@ public class PlayerDate :MonoBehaviour
         Global.Armor.Value = saveDate.Armor;
         Global.Key.Value = saveDate.Key;
 
+        // 加载面板状态
+        if (Default.ContinuePanel != null)
+            Default.ContinuePanel.SetActive(saveDate.IsPanelActive);
+
+        // 关卡进度
+        if (saveDate.CurrentLevelIndex >= 0 &&
+            saveDate.CurrentLevelIndex < Global.Levels.Count)
+        {
+            Global.CurrentLevel = Global.Levels[saveDate.CurrentLevelIndex];
+            Global.CurrentPacing = saveDate.CurrentPacingArray != null ?
+                new Queue<int>(saveDate.CurrentPacingArray) :
+                new Queue<int>(Global.CurrentLevel.PacingConfig);
+        }
+        else
+        {
+            Debug.LogError("Invalid level index, loading default level");
+            Global.CurrentLevel = Global.Levels[0];
+            Global.CurrentPacing = new Queue<int>(Global.CurrentLevel.PacingConfig);
+        }
     }
 
 
@@ -81,5 +129,5 @@ public class PlayerDate :MonoBehaviour
         SaveSystem.DeleteSaveFile(PLAYER_DATA_FILE_NAME);
     }
 
-
+    
 }

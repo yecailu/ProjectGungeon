@@ -12,10 +12,11 @@ public class Final : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             if (Global.NextLevel())
-            {             
+            {
                 //重新加载当前场景
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
+                //保存数据
                 PlayerDate.Save();
 
             }
@@ -25,6 +26,7 @@ public class Final : MonoBehaviour
                 Time.timeScale = 0;
 
             }
+            
         }
     }
 }

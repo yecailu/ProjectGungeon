@@ -7,9 +7,10 @@ using UnityEngine;
 namespace QFramework.ProjectGungeon
 {
 	public class Global : Architecture<Global>
-	{		
+	{
+       
 
-		public static Player Player;
+        public static Player Player;
 
 		public static Room CurrentRoom;
 
@@ -46,6 +47,7 @@ namespace QFramework.ProjectGungeon
 			Level2.Config,
 			Level3.Config,
 			Level4.Config,
+
 		};
 
 		public static Queue<int> CurrentPacing = null;
@@ -108,6 +110,7 @@ namespace QFramework.ProjectGungeon
 
             //将level1的PacingConfig配置赋值给此处CurrentPacing
             CurrentPacing = new Queue<int>(CurrentLevel.PacingConfig);
+
 
 		}
 
