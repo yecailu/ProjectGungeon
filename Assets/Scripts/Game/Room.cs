@@ -169,16 +169,24 @@ namespace QFramework.ProjectGungeon
 
                     if (Config.RoomType == RoomTypes.Shop)
                     {
-                        var takeCount = Random.Range(2, 5 + 1);
+                        var takeCount = Random.Range(5, 6 + 1);
                         var normalShopItem = ShopSystem.CalculateNormalShopItems();
 
-                        for (int i = 0; i < takeCount; i++)
+                        // 生成美观位置 ---------------------------
+                        var positions = GenerateBeautifulPositions(takeCount);
+
+                        var cenPos = transform.position;
+                        // 选择上述任一方案实现这个方法
+
+                        LevelController.Default.Booth.Instantiate()
+                        .Position2D(cenPos)
+                        .Show();
+
+                        foreach (var pos in positions)
                         {
                             var item = normalShopItem.GetRandomItem();
-                            var pos = mShopItemGeneratePoses.GetAndRemoveRandomItem();
-
                             LevelController.Default.ShopItem.Instantiate()
-                                .Position2D(pos)
+                                 .Position2D(pos)
                                 .Self(self =>
                                 {
                                     self.Room = this;
@@ -186,27 +194,79 @@ namespace QFramework.ProjectGungeon
                                     self.PowerUp = item.Item1;
                                     self.UpdateView();
 
-                                })
-                                .Show();
+                                }) .Show();
+                        }
+                    }
+
+                    // 位置生成方法示例（环形方案）
+                    List<Vector2> GenerateBeautifulPositions(int count)
+                    {
+                        var positions = new List<Vector2>();
+                        Vector2 center = transform.position;
+                        float radius = 4f;
+
+                        for (int i = 0; i < count; i++)
+                        {
+                            float angle = i * Mathf.PI * 2 / count;
+                            positions.Add(center + new Vector2(
+                                Mathf.Cos(angle) * radius,
+                                Mathf.Sin(angle) * radius
+                            ));
                         }
 
-                        //必须生成一个钥匙
-                        var key = normalShopItem.First(i =>
-                        i.Item1.SpriteRenderer == PowerUpFactory.Default.Key.SpriteRenderer);
-                        LevelController.Default.ShopItem.Instantiate()
-                                .Position2D(mShopItemGeneratePoses.GetAndRemoveRandomItem())
-                        .Self(self =>
-                        {
-                            self.Room = this;
-                            self.ItemPrice = key.Item2;
-                            self.PowerUp = key.Item1;
-                            self.UpdateView();
-
-                        })
-                        .Show();
-
-                        State.ChangeState(RoomStates.Unlocked);
+                        // 添加整体随机旋转
+                        float randomRot = Random.Range(0, 360f);
+                        return positions.Select(p => RotatePoint(p, center, randomRot)).ToList();
                     }
+
+                    // 辅助方法：旋转点
+                    Vector2 RotatePoint(Vector2 point, Vector2 center, float degrees)
+                    {
+                        Vector2 dir = point - center;
+                        dir = Quaternion.Euler(0, 0, degrees) * dir;
+                        return center + dir;
+                    }
+
+                    //if (Config.RoomType == RoomTypes.Shop)
+                    //{
+                    //    var takeCount = 8;/*Random.Range(2, 5 + 1);*/
+                    //    var normalShopItem = ShopSystem.CalculateNormalShopItems();
+
+                    //    for (int i = 0; i < takeCount; i++)
+                    //    {
+                    //        var item = normalShopItem.GetRandomItem();
+                    //        var pos = mShopItemGeneratePoses.GetAndRemoveRandomItem();
+
+                    //        LevelController.Default.ShopItem.Instantiate()
+                    //            .Position2D(pos)
+                    //            .Self(self =>
+                    //            {
+                    //                self.Room = this;
+                    //                self.ItemPrice = item.Item2;
+                    //                self.PowerUp = item.Item1;
+                    //                self.UpdateView();
+
+                    //            })
+                    //            .Show();
+                    //    }
+
+                    //    //必须生成一个钥匙
+                    //    var key = normalShopItem.First(i =>
+                    //    i.Item1.SpriteRenderer == PowerUpFactory.Default.Key.SpriteRenderer);
+                    //    LevelController.Default.ShopItem.Instantiate()
+                    //            .Position2D(mShopItemGeneratePoses.GetAndRemoveRandomItem())
+                    //    .Self(self =>
+                    //    {
+                    //        self.Room = this;
+                    //        self.ItemPrice = key.Item2;
+                    //        self.PowerUp = key.Item1;
+                    //        self.UpdateView();
+
+                    //    })
+                    //    .Show();
+
+                    //    State.ChangeState(RoomStates.Unlocked);
+                    //}
 
                     if (Config.RoomType == RoomTypes.Chest)
                     {

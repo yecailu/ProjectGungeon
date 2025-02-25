@@ -37,7 +37,7 @@ namespace QFramework.ProjectGungeon
                 self.InitRoom
                 //.Next(RoomTypes.Chest)
                 //.Next(RoomTypes.Shop);
-                .Next(RoomTypes.Final)
+                .Next(RoomTypes.Shop)
                 .Next(RoomTypes.Next);
                 return;
                 //.Next(RoomTypes.Chest)

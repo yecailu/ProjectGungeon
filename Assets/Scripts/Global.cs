@@ -78,7 +78,7 @@ namespace QFramework.ProjectGungeon
             Time.timeScale = 1;//恢复时间
 
             //配置初始道具
-            Coin.Value = 0;
+            Coin.Value = 100;
 			HP.Value = 6;
 			MaxHP.Value = 6;
 			Armor.Value = 1;

@@ -1,10 +1,12 @@
-// Generate Id:a6730280-2ff9-48fc-b85f-7c2903904202
+// Generate Id:4fc8f83c-5973-4cac-8b12-d3fd18a0c0b2
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
 {
 	public partial class LevelController
 	{
+
+		public BoxCollider2D Booth;
 
 		public QFramework.ProjectGungeon.Room Room;
 

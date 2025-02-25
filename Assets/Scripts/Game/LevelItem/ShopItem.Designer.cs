@@ -1,4 +1,4 @@
-// Generate Id:62f8fb1c-f8a7-477d-bc9d-c8689c1d1d0a
+// Generate Id:7a5af00d-084f-4dc4-a0ed-76375cf5a4f5
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -7,6 +7,8 @@ namespace QFramework.ProjectGungeon
 	{
 
 		public SpriteRenderer Icon;
+
+		public Canvas Canvas;
 
 		public UnityEngine.UI.Text Price;
 

@@ -52,7 +52,9 @@ namespace QFramework.ProjectGungeon
 
                         Room.AddPowerUp(powerUp.GetComponent<IPowerUp>());
 
-                        this.DestroyGameObjGracefully();
+                        Destroy(gameObject);
+
+
                     }
                     else
                     {
