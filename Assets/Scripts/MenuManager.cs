@@ -32,6 +32,7 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
+        
         PlayerDate.Load();
 
         Slider slider = AudioManager.GetComponent<Slider>();
@@ -71,6 +72,7 @@ public class MenuManager : MonoBehaviour
     {
         Application.Quit();
     }
+
 
     
 

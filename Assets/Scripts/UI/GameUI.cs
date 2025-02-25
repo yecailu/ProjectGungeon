@@ -127,7 +127,16 @@ namespace QFramework.ProjectGungeon
 
             GameOver.transform.Find("BtnRestart").GetComponent<Button>().onClick.AddListener(() =>
             {
-                Global.ResetData();//重置数据
+                
+                if (PlayerDate.DoesSaveFileExist())
+                {
+                    PlayerDate.Load();
+                    Time.timeScale = 1;//恢复时间
+                }
+                else
+                {
+                    Global.ResetData();//重置数据
+                }
                 SceneManager.LoadScene("SampleScene");
 
             });

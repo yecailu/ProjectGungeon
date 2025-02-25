@@ -1,6 +1,7 @@
 using QFramework.ProjectGungeon;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -104,7 +105,15 @@ public class PlayerDate :MonoBehaviour
 
     public static void Load()
     {
-        LoadFromJson();
+        if (DoesSaveFileExist())
+        {
+            LoadFromJson();
+        }
+        else
+        {
+            Debug.Log("无存档，初始化新数据");
+            Global.ResetData();
+        }
     }
 
     //存档方法
@@ -116,9 +125,22 @@ public class PlayerDate :MonoBehaviour
     //读取方法
     static void LoadFromJson()
     {
-        var saveDate = SaveSystem.LoadFromJson<SaveDate>(PLAYER_DATA_FILE_NAME);
-
-        LoadData(saveDate);
+        try
+        {
+            var saveData = SaveSystem.LoadFromJson<SaveDate>(PLAYER_DATA_FILE_NAME);
+            if (saveData == null)
+            {
+                Debug.Log("未找到存档，开始新游戏");
+                Global.ResetData();
+                return;
+            }
+            LoadData(saveData);
+        }
+        catch (FileNotFoundException)
+        {
+            Debug.Log("存档文件不存在，初始化新数据");
+            Global.ResetData();
+        }
     }
 
 
@@ -129,5 +151,10 @@ public class PlayerDate :MonoBehaviour
         SaveSystem.DeleteSaveFile(PLAYER_DATA_FILE_NAME);
     }
 
+    public static bool DoesSaveFileExist()
+{
+    string filePath = Path.Combine(Application.persistentDataPath, PLAYER_DATA_FILE_NAME);
+    return File.Exists(filePath);
+}
     
 }
