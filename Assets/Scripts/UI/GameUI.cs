@@ -17,6 +17,11 @@ namespace QFramework.ProjectGungeon
 
         public GameObject GamePass;//通关界面
         public GameObject GameOver;//失败界面
+        public GameObject CheatPanel;//作弊面板
+        public GameObject SettingPanel;//设置面板
+
+        public GameObject VolumePanel;//音量面板
+        public GameObject KeyPanel;//按键面板
 
 
         public static void PlayerHurtFlashScreen()
@@ -46,7 +51,7 @@ namespace QFramework.ProjectGungeon
         {
             var data = Player.Default.CurrentGun.Data;
             Default.Icon.sprite = Player.Default?.CurrentGun?.Sprite?.sprite;
-            if(data.Config.GunBagMaxBulletCount == -1)
+            if (data.Config.GunBagMaxBulletCount == -1)
             {
                 if (data.Reloading)
                 {
@@ -75,7 +80,7 @@ namespace QFramework.ProjectGungeon
                 }
             }
         }
-         
+
         private void Awake()
         {
             Default = this;
@@ -92,7 +97,7 @@ namespace QFramework.ProjectGungeon
         void Start()
         {
             //存储所有音乐资源路径
-            var list = new List<string>() 
+            var list = new List<string>()
             {
                 //"resources://music/darkascent",
                 "resources://Music/DOS-88 - Automatav2",
@@ -102,11 +107,11 @@ namespace QFramework.ProjectGungeon
                 "resources://Music/Rest Easy",
                 "resources://Music/Smooth Sailing",
                 "resources://Music/UndergroundConcourse",
-                "resources://Music/Checking Instruments", 
+                "resources://Music/Checking Instruments",
                 "resources://Music/D0S-88 - Marathon Man",
             };
             //播放随机音乐
-            AudioKit.PlayMusic(list.GetRandomItem(),volume:0.2f);
+            AudioKit.PlayMusic(list.GetRandomItem(), volume: 0.2f);
 
 
             GamePass.transform.Find("BtnRestart").GetComponent<Button>().onClick.AddListener(() =>
@@ -127,7 +132,7 @@ namespace QFramework.ProjectGungeon
 
             GameOver.transform.Find("BtnRestart").GetComponent<Button>().onClick.AddListener(() =>
             {
-                
+
                 if (PlayerDate.DoesSaveFileExist())
                 {
                     PlayerDate.Load();
@@ -207,7 +212,7 @@ namespace QFramework.ProjectGungeon
 
             for (int i = 0; i < Global.Armor.Value; i++)
             {
-                Armor.InstantiateWithParent(HPArmorBg) 
+                Armor.InstantiateWithParent(HPArmorBg)
                     .Show();
             }
         }
@@ -224,12 +229,47 @@ namespace QFramework.ProjectGungeon
                 {
                     if (!Global.UIOpened)
                     {
-                        UIMap.Show(); 
+                        UIMap.Show();
                     }
                 }
             }
+
+
+
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                if (CheatPanel.activeSelf)
+                {
+                    CheatPanel.SetActive(false);
+                    Global.UIOpened = false;
+                    Time.timeScale = 1;//恢复时间
+                }
+                else
+                {
+                    CheatPanel.SetActive(true);
+                    Global.UIOpened = true;
+                    Time.timeScale = 0;//暂停时间
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (SettingPanel.activeSelf)
+                {
+                    VolumePanel.SetActive(false);
+                    KeyPanel.SetActive(false);
+                    SettingPanel.SetActive(false);
+                    Global.UIOpened = false;
+                    Time.timeScale = 1;//恢复时间
+                }
+                else
+                {
+                    SettingPanel.SetActive(true);
+                    Global.UIOpened = true;
+                    Time.timeScale = 0;//暂停时间
+                }
+            }
+
         }
-
     }
-
 }

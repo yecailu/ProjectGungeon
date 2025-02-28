@@ -76,6 +76,7 @@ namespace QFramework.ProjectGungeon
 		public static void ResetData()
 		{
             Time.timeScale = 1;//恢复时间
+            UIOpened = false;
 
             //配置初始道具
             Coin.Value = 100;

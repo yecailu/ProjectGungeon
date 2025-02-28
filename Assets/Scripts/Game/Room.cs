@@ -169,7 +169,7 @@ namespace QFramework.ProjectGungeon
 
                     if (Config.RoomType == RoomTypes.Shop)
                     {
-                        var takeCount = Random.Range(5, 6 + 1);
+                        var takeCount = Random.Range(5, 7 + 1);
                         var normalShopItem = ShopSystem.CalculateNormalShopItems();
 
                         // 生成美观位置 ---------------------------
@@ -196,6 +196,8 @@ namespace QFramework.ProjectGungeon
 
                                 }) .Show();
                         }
+
+                        State.ChangeState(RoomStates.Unlocked);
                     }
 
                     // 位置生成方法示例（环形方案）
@@ -397,9 +399,7 @@ namespace QFramework.ProjectGungeon
                 enemy.Room = this;
                 mEnemies.Add(enemy);//每一个敌人都记录下来
             }
-
-           
-
+          
         }
 
         public void AddDoor(Door door)

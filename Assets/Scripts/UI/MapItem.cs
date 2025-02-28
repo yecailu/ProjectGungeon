@@ -59,6 +59,10 @@ namespace QFramework.ProjectGungeon
 			{
 				TypeText.text = "ÆðÊ¼";
 			}
+			else if (mRoom.GenerateNode.Node.RoomType == RoomTypes.Shop)
+			{
+				TypeText.text = "ÉÌµê";
+			}
 			else
 			{
                 TypeText.Hide();
@@ -88,6 +92,7 @@ namespace QFramework.ProjectGungeon
 				}
 
             }
+
 
             if (Global.CurrentRoom == mRoom)
 			{

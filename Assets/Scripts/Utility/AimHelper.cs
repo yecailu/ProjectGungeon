@@ -5,8 +5,14 @@ namespace QFramework.ProjectGungeon
 {
     public class AimHelper
     {
+        //是否自动瞄准
+        public static bool AutoAim = true;
+
         public static IEnemy GetClosestVisibleEnemy(Transform self, Vector2 worldPositon)
         {
+            if (!AutoAim)
+                return null;
+
             return Global.CurrentRoom.Enemies
                 .OrderBy(e => (e.GameObject.Position2D() - worldPositon).magnitude)//根据距离远近排序
                 .FirstOrDefault(e =>

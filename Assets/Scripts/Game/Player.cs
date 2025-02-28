@@ -116,6 +116,7 @@ namespace QFramework.ProjectGungeon
             Global.GunAdditionalCameraSize = CurrentGun.GunAdditionalCameraSize;
         }
 
+
         private void Start()
         {
             var gunIndex = GunSystem.GunList.FindIndex(g => g == Global.CurrentGun);
@@ -136,6 +137,7 @@ namespace QFramework.ProjectGungeon
 
                     if (Global.CurrentRoom && Global.CurrentRoom.Enemies.Count > 0)
                     {
+
                         mTargetEmeny = AimHelper.GetClosestVisibleEnemy(transform, mouseWorldPoint);
 
                         if (mTargetEmeny != null && mTargetEmeny.GameObject)

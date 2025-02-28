@@ -14,6 +14,9 @@ namespace QFramework.ProjectGungeon
 
         private SpriteRenderer mSpriteRenderer;
 
+        // 是否开启瞄准
+        public static bool isAimingEnabled = true; // 默认开启
+
         private void Awake()
         {
             mSpriteRenderer = GetComponent<SpriteRenderer>();
@@ -35,7 +38,11 @@ namespace QFramework.ProjectGungeon
 
         private void Update()
         {
-            if(mFrameCount % 6 == 0)
+            // 只有激活状态下才运行瞄准动画
+            if (!isAimingEnabled)
+                return;
+
+            if (mFrameCount % 6 == 0)
             {
                 mFrameIndex++;
 
