@@ -658,6 +658,14 @@ namespace QFramework.ProjectGungeon
                             .Position2D(new Vector2(x, y))
                             .Show();
                     }
+                    else if (code == 'b')
+                    {
+                        var box = Box.InstantiateWithParent(room)
+                        .Position2D(new Vector3(x, y, 0))
+                        .Show();
+
+                        room.AddPowerUp(box);
+                    }
 
 
                 }

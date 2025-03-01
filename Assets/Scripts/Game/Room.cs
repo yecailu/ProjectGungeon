@@ -169,7 +169,7 @@ namespace QFramework.ProjectGungeon
 
                     if (Config.RoomType == RoomTypes.Shop)
                     {
-                        var takeCount = Random.Range(5, 7 + 1);
+                        var takeCount = Random.Range(4, 6 + 1);
                         var normalShopItem = ShopSystem.CalculateNormalShopItems();
 
                         // 生成美观位置 ---------------------------

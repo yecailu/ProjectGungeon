@@ -319,6 +319,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Box
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 63
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c06285f5e72ba6d47ba2e4ac40793702
+      internalID: -1973944083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -331,6 +352,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Booth: 1303218928
+      Box: -1973944083
       Shop: -816666129
       World of Solaria Marketplace Update 05 DEMO_1: -1038213615
       World of Solaria Marketplace Update 05 DEMO_10: 226542185

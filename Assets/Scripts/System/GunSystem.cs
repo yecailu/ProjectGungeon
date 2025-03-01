@@ -10,12 +10,14 @@ namespace QFramework.ProjectGungeon
     public class GunConfig
     {
         public string Key;
+        public string Name;
 
         public int ClipBulletCount;
         public int GunBagMaxBulletCount;
 
         public static GunConfig Pistol = new GunConfig()
         {
+            Name = "ÊÖÇ¹",
             Key = "pistol",
             ClipBulletCount = 10,
             GunBagMaxBulletCount = -1
@@ -23,42 +25,49 @@ namespace QFramework.ProjectGungeon
 
         public static GunConfig MP5 = new GunConfig()
         {
+            Name = "MP5",
             Key = "mp5",
             ClipBulletCount = 30,
             GunBagMaxBulletCount = 500
         };
         public static GunConfig ShotGun = new GunConfig()
         {
+            Name = "ö±µ¯Ç¹",
             Key = "shotgun",
             ClipBulletCount = 5,
             GunBagMaxBulletCount = 100
         };
         public static GunConfig AK47 = new GunConfig()
         {
+            Name = "AK47",
             Key = "ak47",
             ClipBulletCount = 30,
             GunBagMaxBulletCount = 500
         };
         public static GunConfig AWP = new GunConfig()
         {
+            Name = "¾Ñ»÷Ç¹",
             Key = "awp",
             ClipBulletCount = 5,
             GunBagMaxBulletCount = 50
         };
         public static GunConfig Laser = new GunConfig()
         {
+            Name = "¼¤¹âÇ¹",
             Key = "laser",
             ClipBulletCount = 50,
             GunBagMaxBulletCount = 500
         };
         public static GunConfig Bow = new GunConfig()
         {
+            Name = "¹­¼ý",
             Key = "bow",
             ClipBulletCount = 3,
             GunBagMaxBulletCount = 100
         };
         public static GunConfig Rocket = new GunConfig()
         {
+            Name = "»ð¼ýÍ²",
             Key = "rocket",
             ClipBulletCount = 1,
             GunBagMaxBulletCount = 50
@@ -79,6 +88,7 @@ namespace QFramework.ProjectGungeon
         {
             return new GunDate()
             {
+                Name = "",
                 Key = Key,
                 Config = this,
                 CurrentBulletCount = this.ClipBulletCount,
@@ -91,6 +101,7 @@ namespace QFramework.ProjectGungeon
     [Serializable]
     public class GunDate
     {
+        public string Name;
         public string Key;
         //µ±Ç°×Óµ¯ÊýÁ¿
         public int CurrentBulletCount;

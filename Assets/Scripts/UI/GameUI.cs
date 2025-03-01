@@ -51,6 +51,7 @@ namespace QFramework.ProjectGungeon
         {
             var data = Player.Default.CurrentGun.Data;
             Default.Icon.sprite = Player.Default?.CurrentGun?.Sprite?.sprite;
+            Default.smallIcon.sprite = Player.Default?.CurrentGun?.Sprite?.sprite;
             if (data.Config.GunBagMaxBulletCount == -1)
             {
                 if (data.Reloading)
@@ -105,8 +106,7 @@ namespace QFramework.ProjectGungeon
                 "resources://Music/Night Life",
                 "resources://Music/OnlyInDreams",
                 "resources://Music/Rest Easy",
-                "resources://Music/Smooth Sailing",
-                "resources://Music/UndergroundConcourse",
+                "resources://Music/Smooth Sailing",               
                 "resources://Music/Checking Instruments",
                 "resources://Music/D0S-88 - Marathon Man",
             };

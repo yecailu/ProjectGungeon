@@ -1,4 +1,4 @@
-// Generate Id:8df8be53-da7b-4055-a850-b0c91516a0f9
+// Generate Id:10935fa8-19d3-48dd-8be9-f54367b13e19
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -23,6 +23,8 @@ namespace QFramework.ProjectGungeon
 		public UnityEngine.UI.Text ColorText;
 
 		public UnityEngine.UI.Image Icon;
+
+		public UnityEngine.UI.Image smallIcon;
 
 		public UnityEngine.UI.Text BulletText;
 

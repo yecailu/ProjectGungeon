@@ -11,6 +11,7 @@ namespace QFramework.ProjectGungeon
         e 敌人
         d 门
         c 宝箱
+        b 箱子
         s 商店摊位
         y Color
         # 终点
@@ -47,9 +48,9 @@ namespace QFramework.ProjectGungeon
             new RoomConfig()
                .Type(RoomTypes.Final)
                .L("1111111111111d1111111111111")
-               .L("1                         1")
-               .L("1                         1")
-               .L("1                         1")
+               .L("1bbbb                     1")
+               .L("1bbb                      1")
+               .L("1b                        1")
                .L("1                         1")
                .L("1                         1")
                .L("1                         1")
@@ -62,16 +63,16 @@ namespace QFramework.ProjectGungeon
                .L("1                         1")
                .L("1                         1")
                .L("1                         1")
-               .L("1                         1")
-               .L("1                         1")
-               .L("1                         1")
-               .L("1                         1")
+               .L("1                        b1")
+               .L("1                       bb1")
+               .L("1                      bbb1")
+               .L("1                     bbbb1")
                .L("1111111111111d1111111111111"),
 
             new RoomConfig()
                .Type(RoomTypes.Final)
                .L("1111111111111d1111111111111")
-               .L("1                         1")
+               .L("1bb                    bb1")
                .L("1                         1")
                .L("1                         1")
                .L("1     11           11     1")
@@ -88,15 +89,15 @@ namespace QFramework.ProjectGungeon
                .L("1         11111111        1")
                .L("1                         1")
                .L("1                         1")
-               .L("1                         1")
-               .L("1                         1")
+               .L("1b                       b1")
+               .L("1bb                     bb1")
                .L("1111111111111d1111111111111"),
 
             new RoomConfig()
                .Type(RoomTypes.Final)
                .L("1111111111111d1111111111111")
-               .L("1                         1")
-               .L("1                         1")
+               .L("1b                        1")
+               .L("1bb                       1")
                .L("1                         1")
                .L("1     1             1     1")
                .L("1     1             1     1")
@@ -112,8 +113,8 @@ namespace QFramework.ProjectGungeon
                .L("1     1             1     1")
                .L("1     1             1     1")
                .L("1                         1")
-               .L("1                         1")
-               .L("1                         1")
+               .L("1                        b1")
+               .L("1                       bb1")
                .L("1111111111111d1111111111111"),
         };
 

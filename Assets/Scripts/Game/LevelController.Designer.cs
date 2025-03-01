@@ -1,4 +1,4 @@
-// Generate Id:4fc8f83c-5973-4cac-8b12-d3fd18a0c0b2
+// Generate Id:b3ef34a4-ff62-412f-8fdc-a9ad43673eae
 using UnityEngine;
 
 namespace QFramework.ProjectGungeon
@@ -13,6 +13,8 @@ namespace QFramework.ProjectGungeon
 		public QFramework.ProjectGungeon.Door Door;
 
 		public QFramework.ProjectGungeon.Chest Chest;
+
+		public QFramework.ProjectGungeon.Box Box;
 
 		public QFramework.ProjectGungeon.ShopItem ShopItem;
 

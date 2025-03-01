@@ -85,6 +85,8 @@ namespace QFramework.ProjectGungeon
 			Armor.Value = 1;
 			Key.Value = 0;
 
+
+
 			var bosses = new List<string>()
 			{
 				Constant.BossA,
