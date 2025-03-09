@@ -18,7 +18,7 @@ namespace QFramework.ProjectGungeon
 
         public Rigidbody2D Rigidbody2D;
 
-        public float HP { get; set; } = 5;
+        public float HP { get; set; } = 15;
 
         protected override Rigidbody2D GetRigidbody2D => Rigidbody2D;
 
@@ -32,6 +32,7 @@ namespace QFramework.ProjectGungeon
             {
                 OnDeath(hitDirection, "EnemyEDie", 1.3f);
 
+            
             }
         }
 

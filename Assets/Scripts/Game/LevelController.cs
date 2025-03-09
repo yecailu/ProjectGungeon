@@ -320,12 +320,12 @@ namespace QFramework.ProjectGungeon
 
             var predictWeight = 0;
 
-            print(predictWeight + ":generate");
+            
             while(!GenerateLayoutBFS(layout, layoutGrid, predictWeight))
             {  
                 print("重新生成");
                 predictWeight++;
-                print(predictWeight + ":generate");
+                
                 layoutGrid.Clear();
             }
 

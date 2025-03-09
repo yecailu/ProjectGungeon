@@ -15,7 +15,7 @@ namespace QFramework.ProjectGungeon
             if (collision.collider.CompareTag("PlayerBullet") || collision.collider.CompareTag("EnemyBullet"))
             {
                 var randomValue = Random.Range(0, 100);
-                if(randomValue < 5)
+                if(randomValue < 3)
                 {
                     var powerUp = RandomUtility.Choose<IPowerUp>(
                            PowerUpFactory.Default.HP1,
@@ -28,7 +28,7 @@ namespace QFramework.ProjectGungeon
 
                     Room.AddPowerUp(powerUp);
                 }
-                else if(randomValue < 30)
+                else if(randomValue < 20)
                 {
                     var powerUp = RandomUtility.Choose<IPowerUp>(
                            PowerUpFactory.Default.Coin)

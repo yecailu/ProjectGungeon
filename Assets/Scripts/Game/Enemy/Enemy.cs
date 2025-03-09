@@ -32,12 +32,19 @@ public abstract class Enemy : MonoBehaviour,IEnemy
             {
                 arrowHalf.Parent(dieBody);
             }
-        }
-        //敌人死亡音效
-        AudioKit.PlaySound("resources://EnemyDie");
+        }       
 
         PowerUpFactory.GeneratePowerUp(this);
 
+        //存储所有音乐资源路径
+        var list = new List<string>()
+            {
+                "resources://EnemyDie",
+                "resources://EnemyDie3",
+
+            };
+        //播放随机音乐
+        AudioKit.PlaySound(list.GetRandomItem());
 
 
         Destroy(gameObject);

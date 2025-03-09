@@ -57,13 +57,13 @@ namespace QFramework.ProjectGungeon
 
 
                 //µ–»ÀÀ¿Õˆ“Ù–ß
-                AudioKit.PlaySound("resources://EnemyDie");
+                AudioKit.PlaySound("resources://EnemyDie2");
 
                 PowerUpFactory.GeneratePowerUp(this);
 
                 Invoke("Destroy", 2f);
-                
 
+                mMaxHP += 100;
             }
         }
         private void Destroy()

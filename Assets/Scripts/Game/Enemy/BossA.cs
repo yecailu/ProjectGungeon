@@ -38,6 +38,8 @@ namespace QFramework.ProjectGungeon
             {
                 OnDeath(hitDirection, null, 1.5f);
 
+                //µ–»ÀÀ¿Õˆ“Ù–ß
+                AudioKit.PlaySound("resources://EnemyDie2");
             }
         }
 

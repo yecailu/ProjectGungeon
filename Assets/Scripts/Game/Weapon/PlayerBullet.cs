@@ -54,7 +54,7 @@ namespace QFramework.ProjectGungeon {
                     this.DestroyGameObjGracefully();
                 }
             }
-            else if (collision.gameObject.CompareTag("Wall"))
+            else if (collision.gameObject.CompareTag("Wall") || collision.gameObject.CompareTag("Door"))
             {
                 this.Hide();
                 if (HitWallSfxs.Count > 0)
