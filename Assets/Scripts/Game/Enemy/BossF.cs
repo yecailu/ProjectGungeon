@@ -22,7 +22,7 @@ namespace QFramework.ProjectGungeon
 
         public CircleCollider2D SelfCircleCollider2D;
 
-        public float HP { get; set; } = 10;
+        public float HP { get; set; } = 200;
         public float mMaxHP { get; set; }
 
         protected override Rigidbody2D GetRigidbody2D => Rigidbody2D;
@@ -63,7 +63,7 @@ namespace QFramework.ProjectGungeon
 
                 Invoke("Destroy", 2f);
 
-                mMaxHP += 100;
+                
             }
         }
         private void Destroy()
@@ -273,16 +273,16 @@ namespace QFramework.ProjectGungeon
 
         private void DestroyFist()
         {
-            Destroy(fist.gameObject);
 
             Boss_Fist.Default.PlayerSound();
-
+       
+           
             BulletFactory.Default.Explosion
                 .Instantiate()
                 .Position2D(fist.transform.Position2D())
                 .Show();
 
-            
+            Destroy(fist.gameObject);
 
         }
 

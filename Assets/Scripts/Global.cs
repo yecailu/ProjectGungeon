@@ -79,7 +79,7 @@ namespace QFramework.ProjectGungeon
             UIOpened = false;
 
             //配置初始道具
-            Coin.Value = 100;
+            Coin.Value = 0;
 			HP.Value = 6;
 			MaxHP.Value = 6;
 			Armor.Value = 1;
@@ -105,7 +105,14 @@ namespace QFramework.ProjectGungeon
 			//清空武器库，并添加一把普通的手枪
 			GunSystem.GunList.Clear();
 			//配置武器
+			GunSystem.GunList.Add(GunConfig.Pistol.CreateData());
 			GunSystem.GunList.Add(GunConfig.AK47.CreateData());
+			GunSystem.GunList.Add(GunConfig.ShotGun.CreateData());
+			GunSystem.GunList.Add(GunConfig.AWP.CreateData());
+			GunSystem.GunList.Add(GunConfig.Bow.CreateData());
+			GunSystem.GunList.Add(GunConfig.Laser.CreateData());
+			GunSystem.GunList.Add(GunConfig.MP5.CreateData());
+			GunSystem.GunList.Add(GunConfig.Rocket.CreateData());
 			Global.CurrentGun = GunSystem.GunList.First();
 
 			//关卡设置 

@@ -72,7 +72,7 @@ namespace QFramework.ProjectGungeon
             new RoomConfig()
                .Type(RoomTypes.Final)
                .L("1111111111111d1111111111111")
-               .L("1bb                    bb1")
+               .L("1bb                     bb1")
                .L("1                         1")
                .L("1                         1")
                .L("1     11           11     1")

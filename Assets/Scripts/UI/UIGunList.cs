@@ -75,7 +75,7 @@ namespace QFramework.ProjectGungeon
 						}
 						else
 						{
-                            Player.DisplayText("颜色不足", 2);
+                            Player.DisplayText("钻石不足", 2);
 
                         }
                     });

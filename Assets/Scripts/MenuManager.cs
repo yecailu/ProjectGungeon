@@ -1,3 +1,4 @@
+using QFramework.ProjectGungeon;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.FullSerializer;
@@ -46,13 +47,27 @@ public class MenuManager : MonoBehaviour
     //开始游戏
     public void PlayGame()
     {       
+        ContinuePanel.SetActive(false);
+
+        Global.ResetData();
+        PlayerDate.Save();
+
+        SceneManager.LoadScene(1);
+
+        PlayerDate.DeletePlayerDateSaveFile();
+
+
+    }
+
+    public void ContinueGame()
+    {
         ContinuePanel.SetActive(true);
 
         PlayerDate.Save();
 
         SceneManager.LoadScene(1);
 
-        PlayerDate.DeletePlayerDateSaveFile();
+
     }
 
     //打开设置 

@@ -57,7 +57,7 @@ namespace QFramework.ProjectGungeon
                 if (data.Reloading)
                 {
 
-                    Default.BulletText.text = "(<size=24>Reloading</size>) \u221e";
+                    Default.BulletText.text = "(<size=30>»»µ¯ÖÐ</size>) \u221e";
                 }
                 else
                 {
@@ -71,7 +71,7 @@ namespace QFramework.ProjectGungeon
             {
                 if (data.Reloading)
                 {
-                    Default.BulletText.text = $"(<size=24>Reloading</size>) {data.GunBagRemainBulletCount}/{data.Config.GunBagMaxBulletCount}";
+                    Default.BulletText.text = $"(<size=30>»»µ¯ÖÐ</size>) {data.GunBagRemainBulletCount}/{data.Config.GunBagMaxBulletCount}";
                 }
                 else
                 {

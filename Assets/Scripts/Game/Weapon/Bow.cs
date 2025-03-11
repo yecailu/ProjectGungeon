@@ -68,10 +68,10 @@ namespace QFramework.ProjectGungeon
             {
                 mCurrentSeconds = 0;
                 mPressing = true;
-                AudioKit.PlaySound(PrepareSounds.GetRandomItem(), callBack: (p) =>
-                {
-                    mPullBowPlayer = null;
-                });
+                //AudioKit.PlaySound(PrepareSounds.GetRandomItem(), callBack: (p) =>
+                //{
+                //    mPullBowPlayer = null;
+                //});
 
             }
             else

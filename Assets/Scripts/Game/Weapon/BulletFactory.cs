@@ -41,7 +41,7 @@ namespace QFramework.ProjectGungeon
                         spriteRenderer.sortingLayerName = "OnGround";
 
                         // 在渐隐逻辑部分
-                        var tween = spriteRenderer.DOFade(0, 1.5f)  // 直接修改透明度
+                        spriteRenderer.DOFade(0, 1.5f)  // 直接修改透明度
                             .SetDelay(1.5f)               // 延迟1.5秒开始
                             .SetEase(Ease.Linear)
                             .OnComplete(() =>
@@ -52,7 +52,6 @@ namespace QFramework.ProjectGungeon
                                 }
                             });
 
-                        tween.OnKill(() => tween = null);
 
                     })
                     .Parallel(p =>

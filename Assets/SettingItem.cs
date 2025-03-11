@@ -17,8 +17,9 @@ namespace QFramework.ProjectGungeon
         {
             MainPanel.transform.Find("BtnRestart").GetComponent<Button>().onClick.AddListener(() =>
             {
-                gameObject.SetActive(false);
-                Global.ResetData();//重置数据
+                Time.timeScale = 1;//恢复时间
+                Global.UIOpened = false;
+
                 SceneManager.LoadScene("SampleScene");//重新加载场景
 
             });

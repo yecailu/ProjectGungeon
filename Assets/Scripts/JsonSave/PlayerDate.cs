@@ -56,9 +56,9 @@ public class PlayerDate :MonoBehaviour
         saveDate.Armor = Global.Armor.Value;
         saveDate.Key = Global.Key.Value;
 
-        // 保存面板状态
-        if(Default.ContinuePanel != null)
-           saveDate.IsPanelActive = Default.ContinuePanel.activeSelf;
+        
+            saveDate.IsPanelActive = true; // 根据需求调整
+        
 
         // 关卡进度
         saveDate.CurrentLevelIndex = Global.Levels.IndexOf(Global.CurrentLevel);
@@ -76,9 +76,15 @@ public class PlayerDate :MonoBehaviour
         Global.Armor.Value = saveDate.Armor;
         Global.Key.Value = saveDate.Key;
 
-        // 加载面板状态
-        if (Default.ContinuePanel != null)
+        // 修复：添加 Default 的 null 检查
+        if (Default != null && Default.ContinuePanel != null)
+        {
             Default.ContinuePanel.SetActive(saveDate.IsPanelActive);
+        }
+        else
+        {
+            Debug.LogWarning("ContinuePanel 或 PlayerDate 实例未初始化，无法恢复面板状态");
+        }
 
         // 关卡进度
         if (saveDate.CurrentLevelIndex >= 0 &&
@@ -152,9 +158,12 @@ public class PlayerDate :MonoBehaviour
     }
 
     public static bool DoesSaveFileExist()
-{
-    string filePath = Path.Combine(Application.persistentDataPath, PLAYER_DATA_FILE_NAME);
-    return File.Exists(filePath);
-}
-    
+    {
+
+        string filePath = Path.Combine(Application.persistentDataPath, PLAYER_DATA_FILE_NAME);
+        return File.Exists(filePath);
+
+       
+    }
+
 }

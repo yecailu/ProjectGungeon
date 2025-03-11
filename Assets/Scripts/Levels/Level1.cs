@@ -34,12 +34,15 @@ namespace QFramework.ProjectGungeon
             .Self(self =>
             {
                 //测试用
-                //self.InitRoom
-                ////.Next(RoomTypes.Chest)
-                ////.Next(RoomTypes.Shop);
+                self.InitRoom
+                //.Next(RoomTypes.Chest)
                 //.Next(RoomTypes.Shop)
-                //.Next(RoomTypes.Next);
-                //return;
+                .Next(RoomTypes.Normal)
+                //.Next(RoomTypes.Final)
+                .Next(RoomTypes.Next);
+                ////.Next(RoomTypes.Shop)
+                ////.Next(RoomTypes.Next);
+                return;
                 //.Next(RoomTypes.Chest)
                 //.Next(RoomTypes.Chest)
                 //.Next(RoomTypes.Chest)
